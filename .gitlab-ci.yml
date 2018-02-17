@@ -1,18 +1,28 @@
 image: node:9.4.0
 
 cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
   paths:
     - node_modules/
-    - yarn.lock
+
+stages:
+  - setup
+  - build
+  - test
+
+setup:
+  stage: setup
+  script:
+    - yarn
 
 build:
   stage: build
-  before_script:
-    - yarn
   script:
     - yarn build
 
 test:
   stage: test
   script:
+    - ls -l
     - CI=true yarn test
