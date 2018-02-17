@@ -1,4 +1,4 @@
-image: node:9.1.0
+image: node:9.4.0
 
 cache:
   paths:
@@ -14,17 +14,5 @@ build:
 
 test:
   stage: test
-gi  script:
-    - CI=true yarn test
-
-pages:
-  stage: deploy
   script:
-    - CI=true yarn build
-    - rm -rf public
-    - mv build public
-  artifacts:
-    paths:
-      - public
-  only:
-    - master
+    - CI=true yarn test
