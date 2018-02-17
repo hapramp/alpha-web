@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {compose, createStore, applyMiddleware} from 'redux';
-import {thunk} from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 import registerServiceWorker from './registerServiceWorker';
