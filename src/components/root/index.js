@@ -1,14 +1,30 @@
 import React from 'react';
-import {Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Header from '../header';
 
 class Root extends React.Component {
+
+	componentDidMount() {
+
+	}
+
   render() {
     return <div>
-      <Header/>
+      <Header />
+			<Switch>
+				<Route exact path={'/'} />
+				<Route exact path={'*'} render={() => <div>Not found</div>} />
+			</Switch>
     </div>
   }
 }
 
-export default Root;
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: false
+	}
+};
+
+export default connect(mapStateToProps)(Root);

@@ -18,3 +18,18 @@
   width: 55px;
   padding: 0 5px 0 0;
 }
+
+.signIn {
+  -webkit-border-radius: 10px 50% 50% 50%;
+  -moz-border-radius: 10px 50% 50% 50%;
+  border-radius: 30px;
+  padding: 0 20px;
+  background-color: white;
+  color: $primary-color;
+}
+
+.signIn:hover {
+  background-color: white;
+  color: $primary-color;
+  font-weight: 800;
+}
