@@ -1,0 +1,41 @@
+@import '../../index.scss';
+
+.loginCard {
+  background: white;
+  width: 500px;
+  padding: 50px;
+  margin: 50px 0 0 0;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}
+
+.logo {
+  padding: 0 20px 20px 20px;
+  height: 200px;
+}
+
+.formInput {
+  margin-bottom: 10px;
+}
+
+.loginButton {
+  margin-top: 10px;
+  background-color: $primary-color;
+  color: white;
+  width: 100%;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.createAccount {
+  background-color: white;
+  color: $primary-color;
+  width: 100%;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  border: 2px solid $primary-color;
+}

@@ -1,6 +1,7 @@
 @import '../../index.scss';
 
 .header {
+  height: 80px;
   background-color: $primary-color;
 }
 
@@ -13,6 +14,12 @@
   text-decoration: none;
 }
 
+.header * a:focus {
+  color: white;
+  text-decoration: none;
+}
+
+
 .logo {
   height: 50px;
   width: 55px;
@@ -20,8 +27,8 @@
 }
 
 .signIn {
-  -webkit-border-radius: 10px 50% 50% 50%;
-  -moz-border-radius: 10px 50% 50% 50%;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
   border-radius: 30px;
   padding: 0 20px;
   background-color: white;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import styles from './styles.scss';
@@ -7,12 +7,17 @@ import logo from './logo.png';
 
 class Header extends React.Component {
 
+	navigateToSignIn(e) {
+		this.props.history.push('/signin');
+	}
+
 	getNavbarRight() {
 		if (this.props.isLoggedIn) {
 			return <div>You have logged in</div>
 		} else {
 			return <div className={'uk-navbar-item'}>
-				<button className={["uk-button uk-button-primary uk-button-small", styles.signIn].join(' ')}>SIGN IN</button>
+				<button className={["uk-button uk-button-small", styles.signIn].join(' ')}
+								onClick={this.navigateToSignIn.bind(this)}>SIGN IN</button>
 			</div>
 		}
 	}
@@ -41,4 +46,4 @@ const mapStateToProps = state => {
 	}
 };
 
-export default connect()(Header);
+export default withRouter(connect(mapStateToProps)(Header));
