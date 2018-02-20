@@ -1,3 +1,25 @@
+@import '../../index.scss';
+
+.addContent {
+  position: absolute !important;
+  right: 15%;
+  bottom: 0;
+  width: 100px;
+}
+
 .addButton {
-  left: auto;
+  background-color: $primary-dark-color;
+  color: white;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.contentType {
+  background-color: $primary-light-color;
+  padding: 8px 24px;
+  border-radius: 24px;
+  cursor: pointer;
 }

@@ -22,3 +22,7 @@ body {
   -moz-box-shadow: 0 5px 5px 0 $primary-dark-color;
   box-shadow: 0 5px 5px 0 $primary-dark-color;
 }
+
+.transparent {
+  opacity: 0;
+}
