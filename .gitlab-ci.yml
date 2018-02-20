@@ -18,11 +18,15 @@ setup:
 
 build:
   stage: build
+  before_script:
+    - yarn
   script:
     - yarn build
 
 test:
   stage: test
+  before_script:
+    - yarn
   script:
     - ls -l
     - CI=true yarn test
