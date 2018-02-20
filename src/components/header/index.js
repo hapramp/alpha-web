@@ -24,7 +24,8 @@ class Header extends React.Component {
 
 	render() {
 		return <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-			<nav className={["uk-navbar-container", "uk-navbar-transparent", "uk-margin", styles.header].join(' ')}
+			<nav className={["uk-navbar-container", "uk-navbar-transparent", "uk-margin", "uk-padding",
+				"uk-padding-remove-vertical", styles.header].join(' ')}
 					 uk-navbar="true" style={{position: 'relative', zIndex: 980}}>
 				<div className={"uk-navbar-left"}>
 					<Link className={['uk-navbar-item', 'uk-logo'].join(' ')} to="/">
