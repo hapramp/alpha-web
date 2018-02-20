@@ -1,8 +1,11 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 
+import getStore from '../../utils/storeUtils';
 import Header from '../header';
 import SignIn from '../signin';
+import Feed from '../feed';
+
 
 class Root extends React.Component {
 
@@ -10,7 +13,14 @@ class Root extends React.Component {
 		return <div>
 			<Header/>
 			<Switch>
-				<Route exact path={'/'} render={() => <div>This is index route </div>}/>
+				<Route exact path={'/'} render={() => {
+					if (getStore().getState().login.loggedIn) {
+						return <Redirect to={'/feed'}/>
+					} else {
+						return <Redirect to={'/browse'}/>
+					}
+				}}/>
+				<Route exact path={'/feed'} component={Feed}/>
 				<Route exact path={'/signin'} component={SignIn}/>
 				<Route exact path={'/browse/:filter'} render={() => <div>This is browse view</div>}/>
 				<Redirect path={'/browse'} to={'/browse/hot'}/>
