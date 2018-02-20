@@ -22,6 +22,9 @@ export const loginReducer = (state = initialState, action) => {
 				localStorage.setItem('username', action.username);
 				localStorage.setItem('posting_key', action.postingKey);
 				localStorage.setItem('ppk_hash', action.ppkHash);
+				break;
+			default:
+				// No problem
 		}
 		return newState;
 	}

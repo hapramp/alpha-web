@@ -23,12 +23,12 @@ class SignIn extends React.Component {
 		this.props.initLogin(username, postingKey);
 		/**
 		 * Flow -
-		 * 1. Verify Posting Key
-		 * 2. Check if user already exists
-		 * 3. Get random key from the backend
+		 * 1. [Not needed] [Not implemented] Verify Posting Key
+		 * 2. Check if user already exists. If valid, sign in complete. Otherwise follow next steps
+		 * 3. Get the random key from the backend
 		 * 4. Post a comment on predefined location with the random key
 		 * 5. Notify backend about the comment with hash of private posting key
-		 * 6. Set the required variables
+		 * 6. Sign in done. Set the required variables
 		 */
 	}
 
