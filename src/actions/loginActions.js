@@ -22,7 +22,7 @@ export const login = (username, postingKey) => {
 		haprampAPI.v2.login(username, ppkHash)
 			.then(json => {
 				console.log('Logged in: ', json);
-				dispatch({type: actionTypes.LOGIN_DONE, username, postingKey});
+				dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
 			})
 			.catch(e => {
 				if (e.reason === constants.MESSAGES.AUTH.INVALID_CREDENTIALS) {
@@ -40,7 +40,7 @@ export const login = (username, postingKey) => {
 									console.log(result);
 									haprampAPI.v2.signupDone(username, ppkHash)
 										.then(json => {
-											dispatch({type: actionTypes.LOGIN_DONE, username, postingKey});
+											dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
 												steemAPI.deleteComment(postingKey, username, result.comment.permlink);
 										})
 										.catch(e => dispatch({type: actionTypes.LOGIN_UNAUTHORIZED, reason: e.reason}))
