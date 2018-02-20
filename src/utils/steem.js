@@ -94,7 +94,7 @@ class SteemAPI {
 		this.preCompileTransactionComment(message, postingKey)
 			.then((response) => {
 				console.log(response);
-				if(response.ok) {
+				if (response.ok) {
 					let beneficiaries = getCommentBeneficiaries(message[1].permlink, username);
 					const operations = [message, beneficiaries];
 					steem.broadcast.sendAsync(
@@ -122,6 +122,20 @@ class SteemAPI {
 			.spread((transaction, signedTransaction) => {
 				return fetch('http://api.github.com');  // TODO: Send the post to backend
 			});
+	}
+
+	getUserAccount(username) {
+		return new Promise((resolve, reject) => {
+			steem.api.getAccounts([username], (err, result) => {
+				if (err) {
+					reject(err);
+				} else if (result.length === 0) {
+					reject(err);
+				} else {
+					resolve(result[0]);
+				}
+			})
+		})
 	}
 }
 

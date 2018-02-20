@@ -24,7 +24,7 @@ export const loginReducer = (state = initialState, action) => {
 				localStorage.setItem('ppk_hash', action.ppkHash);
 				break;
 			default:
-				// No problem
+			// No problem
 		}
 		return newState;
 	}

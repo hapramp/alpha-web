@@ -19,11 +19,10 @@
   text-decoration: none;
 }
 
-
 .logo {
-  height: 50px;
-  width: 55px;
-  padding: 0 5px 0 0;
+  height: 48px;
+  width: 56px;
+  padding: 0 8px 0 0;
 }
 
 .signIn {
@@ -38,4 +37,9 @@
 .signIn:hover {
   background-color: white;
   color: $primary-color;
+}
+
+.userImage {
+  width: 32px;
+  height: 32px;
 }

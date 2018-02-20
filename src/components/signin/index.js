@@ -37,15 +37,15 @@ class SignIn extends React.Component {
 			<div className={[styles.loginCard, 'uk-card-default', 'uk-card-hover', 'uk-text-center'].join(' ')}>
 				<img src={logo} className={styles.logo} alt={'Hapramp'}/>
 				<fieldset className={'uk-fieldset'}>
-						<div className={'uk-margin'}>
-							<input id={'sign-in-username'} className={['uk-input', styles.formInput].join(' ')} type={'text'}
-										 placeholder={'Steem username'}/>
-							<input id={'sign-in-posting-key'} className={['uk-input', styles.formInput].join(' ')} type={'password'}
-										 placeholder={'Posting Key'}/>
-							<button  disabled={this.props.login.loggingIn} onClick={this.initSignIn.bind(this)}
-								className={['uk-button', styles.loginButton].join(' ')}>
-								{this.props.loggingIn ? 'SIGNING IN' : 'SIGN IN'}</button>
-						</div>
+					<div className={'uk-margin'}>
+						<input id={'sign-in-username'} className={['uk-input', styles.formInput].join(' ')} type={'text'}
+									 placeholder={'Steem username'}/>
+						<input id={'sign-in-posting-key'} className={['uk-input', styles.formInput].join(' ')} type={'password'}
+									 placeholder={'Posting Key'}/>
+						<button disabled={this.props.login.loggingIn} onClick={this.initSignIn.bind(this)}
+										className={['uk-button', styles.loginButton].join(' ')}>
+							{this.props.loggingIn ? 'SIGNING IN' : 'SIGN IN'}</button>
+					</div>
 				</fieldset>
 				<div style={{marginBottom: '10px'}}>OR</div>
 				<button className={['uk-button', styles.createAccount].join(' ')}>CREATE STEEM ACCOUNT</button>
