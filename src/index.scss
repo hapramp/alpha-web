@@ -8,3 +8,17 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: $background-color;
 }
+
+.transition {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.hoverEffect:hover {
+    -webkit-box-shadow: 0 5px 5px 0 $primary-dark-color;
+    -moz-box-shadow: 0 5px 5px 0 $primary-dark-color;
+    box-shadow: 0 5px 5px 0 $primary-dark-color;
+}

@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import styles from './styles.scss';
+import baseStyles from '../../index.scss';
 import logo from './logo.png';
 
 class Header extends React.Component {
@@ -13,11 +14,13 @@ class Header extends React.Component {
 
 	getNavbarRight() {
 		if (this.props.isLoggedIn) {
-			return <div>You have logged in</div>
+			return <div className={'uk-navbar-item'}>
+					<Link to={'/notifications'} uk-icon={'icon: bell'} />
+				</div>
 		} else {
 			return <div className={'uk-navbar-item'}>
-				<button className={["uk-button uk-button-small", styles.signIn].join(' ')}
-								onClick={this.navigateToSignIn.bind(this)}>SIGN IN</button>
+				<button className={["uk-button uk-button-small", styles.signIn, baseStyles.hoverEffect,
+					baseStyles.transition].join(' ')} onClick={this.navigateToSignIn.bind(this)}>SIGN IN</button>
 			</div>
 		}
 	}
@@ -34,6 +37,9 @@ class Header extends React.Component {
 					</Link>
 				</div>
 				<div className={'uk-navbar-right'}>
+					<div className={'uk-navbar-item'}>
+						<Link to={'/search'} uk-icon={'icon: search'} />
+					</div>
 					{this.getNavbarRight()}
 				</div>
 			</nav>
@@ -43,7 +49,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		isLoggedIn: false
+		isLoggedIn: state.login.loggedIn
 	}
 };
 
