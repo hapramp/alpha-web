@@ -4,7 +4,7 @@ $primary-dark-color: #112D4E;
 
 $background-color: #FAFAFA;
 
-body {
+html {
   font-family: 'Roboto', sans-serif;
   background-color: $background-color;
 }
@@ -30,4 +30,13 @@ body {
 a, a:hover {
   color: unset;
   text-decoration: none;
+}
+
+.separator {
+  padding: 1px 10%;
+  background-color: $primary-light-color;
+}
+
+.marginRightSmall {
+  margin-right: 8px;
 }

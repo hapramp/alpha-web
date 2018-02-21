@@ -11,7 +11,7 @@ import CreatePost from '../createPost';
 class Root extends React.Component {
 
 	render() {
-		return <div>
+		return <div style={{backgroundColor: '#FAFAFA'}}>
 			<Header/>
 			<Switch>
 				<Route exact path={'/'} render={() => {

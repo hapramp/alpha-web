@@ -1,3 +1,5 @@
+@import "../../index";
+
 .createPostModal {
   background: white;
   width: 500px;
@@ -11,4 +13,53 @@
 
 .userAvatar {
   width: 72px;
+  height: 72px;
+}
+
+.publishButton {
+  background-color: $primary-color;
+  color: white;
+  padding: 8px 24px;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  border-radius: 24px;
+}
+
+.textArea {
+  border: 0 none;
+  resize: none;
+}
+
+.communitySingle {
+  margin-right: 12px;
+  font-size: 11px;
+  background-color: $primary-light-color;
+  padding: 4px 8px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: $primary-color;
+  color: #fff;
+}
+
+.mediaUpload {
+  font-size: 12px;
+}
+
+.upload {
+  padding: 4px 8px;
+  background-color: $primary-light-color;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.communityHeading {
+  font-size: 12px;
 }
