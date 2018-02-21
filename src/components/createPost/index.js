@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
+import {changeCommunity} from "../../actions/createPostActions";
 
 class CreatePost extends React.Component {
 
@@ -35,7 +36,7 @@ class CreatePost extends React.Component {
 			<div className={['uk-margin-bottom', styles.communityHeading].join(' ')}>Community</div>
 			<div uk-grid="true" className={'uk-margin-remove'}>
 				{this.props.communities.map(community =>
-					<div key={community} className={[styles.communitySingle,
+					<div key={community} onClick={() => this.props.changeCommunity(community)} className={[styles.communitySingle,
 						this.props.activeCommunity === community ? styles.active : ''].join(' ')}>{community}</div>)}
 			</div>
 		</div>
@@ -92,8 +93,10 @@ const mapStateToProps = state => {
 	return {
 		userFullName: state.authUser.name,
 		communities: ['Art & Craft', 'Photography', 'Dance', 'Writing', 'Poetry', 'Music'],
-		activeCommunity: 'Dance'
+		activeCommunity: state.createPost.community.active
 	}
 };
 
-export default withRouter(connect(mapStateToProps)(CreatePost));
+export default withRouter(connect(mapStateToProps, {
+	changeCommunity
+})(CreatePost));
