@@ -6,15 +6,13 @@ import styles from './styles.scss';
 import baseStyles from '../../index.scss';
 import logo from './logo.png';
 import {fakeLogin} from "../../actions/loginActions";
+import {getLocalUser} from "../../utils/localStoreUtils";
 
 class Header extends React.Component {
 
 	componentWillMount() {
-		let username = localStorage.getItem('username');
-		let postingKey = localStorage.getItem('posting_key');
-		let ppkHash = localStorage.getItem('ppk_hash');
-		let avatar = localStorage.getItem('avatar');
-		username && postingKey && ppkHash && this.props.fakeLogin({username, postingKey, ppkHash, avatar});
+		let data = getLocalUser();
+		data.username && data.postingKey && data.ppkHash && this.props.fakeLogin(data);
 	}
 
 	navigateToSignIn(e) {
@@ -29,7 +27,7 @@ class Header extends React.Component {
 				</div>
 				<div className={'uk-navbar-item'}>
 					{localStorage.getItem('avatar') ?
-						<Link to={'/profile'}><img src={localStorage.getItem('avatar')} className={['uk-border-circle',
+						<Link to={'/profile'}><img src={this.props.avatar} className={['uk-border-circle',
 							styles.userImage].join(' ')} alt={'You'}/></Link> :
 						<Link to={'/profile'} uk-icon={'user'}/>}
 				</div>
@@ -68,7 +66,8 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		isLoggedIn: state.login.loggedIn
+		isLoggedIn: state.login.loggedIn,
+		avatar: state.authUser.avatar
 	}
 };
 

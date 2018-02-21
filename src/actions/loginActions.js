@@ -2,7 +2,7 @@ import {sha256} from "../utils/crypto";
 import constants from '../utils/constants';
 import haprampAPI from '../utils/haprampAPI';
 import steemAPI from '../utils/steem';
-import {setLocalUser} from "../utils/localStoreUtils";
+import {getLocalUser, setLocalUser} from "../utils/localStoreUtils";
 
 export const actionTypes = {
 	LOGIN_INIT: 'LOGIN.INIT',
@@ -12,7 +12,8 @@ export const actionTypes = {
 	SIGNUP_INIT: 'LOGIN.SIGNUP.INIT',
 	SIGNUP_POST_COMMENT_INIT: 'LOGIN.SIGNUP.COMMENT.INIT',
 	SIGNUP_POST_COMMENT_DONE: 'LOGIN.SIGNUP.CONNENT.DONE',
-	SIGNUP_POST_COMMENT_ERROR: 'LOGIN.SIGNUP.COMMENT.ERROR'
+	SIGNUP_POST_COMMENT_ERROR: 'LOGIN.SIGNUP.COMMENT.ERROR',
+	SET_AUTH_USER: 'LOGIN.DONE.USER.SET'
 };
 
 export const login = (username, postingKey) => {
@@ -22,7 +23,7 @@ export const login = (username, postingKey) => {
 		dispatch({type: actionTypes.LOGIN_CHECK, message: constants.MESSAGES.AUTH.USER_CHECK});
 		haprampAPI.v2.login(username, ppkHash)
 			.then(json => {
-				steemAPI.getUserAccount(username).then(result => setLocalUser(result));
+				steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 				dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
 			})
 			.catch(e => {
@@ -46,7 +47,7 @@ export const login = (username, postingKey) => {
 									console.log(result);
 									haprampAPI.v2.signupDone(username, ppkHash)
 										.then(json => {
-											steemAPI.getUserAccount(username).then(result => setLocalUser(result));
+											steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 											steemAPI.deleteComment(postingKey, username, result.comment.permlink);
 											dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
 										})
@@ -66,8 +67,27 @@ export const login = (username, postingKey) => {
 };
 
 export const fakeLogin = data => {
-	return dispatch => dispatch({
-		type: actionTypes.LOGIN_DONE, username: data.username,
-		postingKey: data.postingKey, ppkHash: data.ppkHash
+	return dispatch => {
+		dispatch({
+			type: actionTypes.LOGIN_DONE, username: data.username,
+			postingKey: data.postingKey, ppkHash: data.ppkHash
+		});
+		// Update authUser state
+		updateUser(data, dispatch);
+		// Update profile changes
+		steemAPI.getUserAccount(data.username).then(result => setAuthUser(result, dispatch));
+	}
+};
+
+const setAuthUser = (result, dispatch) => {
+	setLocalUser(result);
+	let data = getLocalUser();
+	updateUser(data, dispatch);
+};
+
+const updateUser = (data, dispatch) => {
+	dispatch({
+		type: actionTypes.SET_AUTH_USER, username: data.username, name: data.name, avatar: data.avatar,
+		location: data.location, website: data.website, cover: data.cover,
 	});
 };
