@@ -26,3 +26,8 @@ body {
 .transparent {
   opacity: 0;
 }
+
+a, a:hover {
+  color: unset;
+  text-decoration: none;
+}
