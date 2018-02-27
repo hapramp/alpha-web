@@ -54,6 +54,38 @@ export default {
 					}
 				}).catch(e => reject(e))
 			})
+		},
+		post: {
+			prepare: (content, full_permlink) => {
+				return new Promise((resolve, reject) => {
+					fetch(constants.BACKEND_URL.V2 + '/posts', {
+						method: 'POST',
+						headers: {'Content-Type': 'application/json'},
+						body: JSON.stringify({content, full_permlink})
+					}).then(response => {
+						if (response.ok) {
+							response.json().then(json => resolve(json.body))
+						} else {
+							reject({message: constants.MESSAGES.POST.CREATE.FAILED_BODY});
+						}
+					}).catch(e => reject(e))
+				})
+			},
+			confirm: permlink => {
+				return new Promise((resolve, reject) => {
+					fetch(constants.BACKEND_URL.V2 + '/posts/_confirm', {
+						method: 'POST',
+						headers: {'Content-Type': 'application/json'},
+						body: JSON.stringify({full_permlink: permlink})
+					}).then(response => {
+						if (response.ok) {
+							response.json().then(json => resolve(json))
+						} else {
+							reject();  // TODO: Give some reason
+						}
+					}).catch(e => reject(e))
+				})
+			}
 		}
 	}
 };

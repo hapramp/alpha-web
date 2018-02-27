@@ -1,5 +1,4 @@
 export const setLocalUser = user => {
-	console.log(user);
 	if (user.json_metadata) {
 		let metadata = JSON.parse(user.json_metadata);
 		if (metadata.profile) {

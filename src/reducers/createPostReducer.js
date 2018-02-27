@@ -1,6 +1,8 @@
+import _ from 'lodash';
+
 import {actionTypes} from "../actions/createPostActions";
 
-const initialState = {community: {active: null}, media: null};
+const initialState = {community: {active: null}, media: null, errors: [], hashtags: []};
 
 export const createPostReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -12,6 +14,17 @@ export const createPostReducer = (state = initialState, action) => {
 
 		case actionTypes.REMOVE_MEDIA:
 			return {...state, media: null};
+
+		case actionTypes.CREATE_ERROR:
+			let errors = state.errors.slice();
+			errors.push({element: action.element, message: action.message});
+			return {...state, errors};
+
+		case actionTypes.CLEAR_ERROR:
+			return {...state, errors: []};
+
+		case actionTypes.SET_HASHTAGS:
+			return {...state, hashtags: _.uniqBy(action.hashtags, i => i)};
 
 		default:
 			return state;

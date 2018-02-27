@@ -14,6 +14,11 @@ export default {
 			SIGNUP_COMMENT_INIT: 'Commenting the special token to the special post...',
 			SIGNUP_COMMENT_DONE: 'Posted comment, notifying backend...',
 			SIGNUP_COMMENT_ERROR: 'Failed to create comment, please try again later...'
+		},
+		POST: {
+			CREATE: {
+				FAILED_BODY: 'Failed to get body from backend'
+			}
 		}
 	}
 }

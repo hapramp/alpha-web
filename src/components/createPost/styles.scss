@@ -31,7 +31,7 @@
 }
 
 .communitySingle {
-  margin-right: 12px;
+  margin: 5px 12px 0 0!important;
   font-size: 11px;
   background-color: $primary-light-color;
   padding: 4px 8px;
@@ -58,6 +58,7 @@
   border-radius: 2px;
   margin-right: 16px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .communityHeading {
@@ -70,4 +71,9 @@
 
 .topOverlay {
   cursor: pointer;
+}
+
+.hashtagInfo {
+  font-size: 12px;
+  padding: 0;
 }

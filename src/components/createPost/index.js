@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import twitter from 'twitter-text';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {changeCommunity, changeMedia, removeMedia} from "../../actions/createPostActions";
+import {changeCommunity, changeMedia, removeMedia, postCreateError, clearError, setHashtags, createPost} from "../../actions/createPostActions";
 
 class CreatePost extends React.Component {
 
@@ -23,15 +24,53 @@ class CreatePost extends React.Component {
 		input.click();
 	}
 
+	handlePostCreate() {
+		// Clear error messages
+		// this.props.clearError();
+
+		// Content
+		let content = document.getElementById('post-create-text').value;
+		// TODO: Validation?
+
+		// Community
+		let community = this.props.activeCommunity;
+		if (!community) {
+			this.props.postCreateError({element: 'community', 'message': 'Please select a community'});
+			return;
+		}
+
+		// Structure to build response
+		let post = {
+			type: 'post',
+			data: [
+				{
+					type: 'text',
+					content
+				}
+			]
+		};
+
+		// Create
+		this.props.createPost({post, tags: this.props.hashtags, community});
+	}
+
+	parseHashTags() {
+		let content = document.getElementById('post-create-text').value;
+		let hashtags = twitter.extractHashtags(content);
+		this.props.setHashtags(hashtags);
+	}
+
 	getUserSection() {
 		return <div className={['uk-flex', 'uk-flex-between', 'uk-margin-bottom'].join(' ')}>
 			<div>
-				<img src={localStorage.getItem('avatar')} className={['uk-border-circle', styles.userAvatar].join(' ')}
-						 alt={'You'}/>
+				{this.props.userAvatar ?
+					<img src={this.props.userAvatar} className={['uk-border-circle', styles.userAvatar].join(' ')}
+							 alt={'You'}/> : <span uk-icon="icon: user" />}
 				<span className={['uk-margin-left'].join(' ')} style={{opacity: 0.87}}>{this.props.userFullName}</span>
 			</div>
 			<div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
-				<span className={[styles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}>
+				<span className={[styles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}
+							onClick={this.handlePostCreate.bind(this)}>
 					Publish
 				</span>
 			</div>
@@ -41,7 +80,8 @@ class CreatePost extends React.Component {
 	getTextView() {
 		return <div className={['uk-margin-top'].join(' ')}>
 			<textarea autoComplete={'false'} rows={5} placeholder={'Share photos, videos, music or anything you like...'}
-								className={['uk-textarea', styles.textArea].join(' ')}>
+								className={['uk-textarea', styles.textArea].join(' ')} id={'post-create-text'}
+								onChange={this.parseHashTags.bind(this)}>
 			</textarea>
 		</div>
 	}
@@ -103,6 +143,14 @@ class CreatePost extends React.Component {
 		</div>
 	}
 
+	showHashtags() {
+		return <div uk-grid="true" className={['uk-margin-remove'].join(' ')}>
+			{this.props.hashtags.length ?
+				this.props.hashtags.map(i => <span key={i} className={['uk-margin-remove', styles.communitySingle].join(' ')}>#{i}</span>) :
+				<span className={styles.hashtagInfo}>Your tags will appear here.</span>}
+		</div>
+	}
+
 	render() {
 		return <div className={['uk-flex', 'uk-flex-center'].join(' ')}>
 			<div className={styles.createPostModal}>
@@ -110,6 +158,7 @@ class CreatePost extends React.Component {
 				<div className={indexStyles.separator}/>
 				{this.getTextView()}
 				{this.props.media && this.getMediaViewer()}
+				{this.showHashtags()}
 				<div className={['uk-margin-top', indexStyles.separator].join(' ')}/>
 				{this.getCommunitySelector()}
 				{this.getMediaUploader()}
@@ -121,12 +170,16 @@ class CreatePost extends React.Component {
 const mapStateToProps = state => {
 	return {
 		userFullName: state.authUser.name,
+		userAvatar: state.authUser.avatar,
 		communities: ['Art & Craft', 'Photography', 'Dance', 'Writing', 'Poetry', 'Music'],
 		activeCommunity: state.createPost.community.active,
-		media: state.createPost.media
+		media: state.createPost.media,
+		hashtags: state.createPost.hashtags,
 	}
 };
 
 export default withRouter(connect(mapStateToProps, {
-	changeCommunity, changeMedia, removeMedia
+	changeCommunity, changeMedia, removeMedia,
+	postCreateError, clearError, setHashtags,
+	createPost
 })(CreatePost));

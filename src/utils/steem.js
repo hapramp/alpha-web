@@ -135,6 +135,40 @@ class SteemAPI {
 			})
 		})
 	}
+
+	createPost(wif, author, body, tags, content, permlink, community) {
+		return new Promise((resolve, reject) => {
+			tags.push('hapramp-' + community.toLowerCase());
+			let commentObj = {
+				parent_author: '',
+				parent_permlink: 'hapramp',
+				author: author,
+				permlink,
+				title: '',
+				body,
+				json_metadata: JSON.stringify({
+					tags, app: 'hapramp/0.0.1',
+					content
+				})
+			};
+			let benef = getCommentBeneficiaries(permlink, author);
+			let operations = [
+				['comment', commentObj],
+				benef
+			];
+			const callback = (error, success) => {
+				if (success) {
+					resolve(success)
+				} else {
+					reject(error)
+				}
+			};
+			steem.broadcast.sendAsync(
+				{operations, extensions : []},
+				{posting: wif}, callback
+			);
+		})
+	}
 }
 
 export default new SteemAPI();
