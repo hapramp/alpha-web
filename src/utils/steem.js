@@ -93,7 +93,6 @@ class SteemAPI {
 	handleBroadcastMessagesComment(message, extetion, postingKey, username, callback) {
 		this.preCompileTransactionComment(message, postingKey)
 			.then((response) => {
-				console.log(response);
 				if (response.ok) {
 					let beneficiaries = getCommentBeneficiaries(message[1].permlink, username);
 					const operations = [message, beneficiaries];
@@ -118,10 +117,9 @@ class SteemAPI {
 				transaction,
 				steem.auth.signTransaction(transaction, [postingKey])
 			)
-		})
-			.spread((transaction, signedTransaction) => {
-				return fetch('http://api.github.com');  // TODO: Send the post to backend
-			});
+		}).spread((transaction, signedTransaction) => {
+			return fetch('http://api.github.com');  // TODO: Send the post to backend
+		});
 	}
 
 	getUserAccount(username) {
