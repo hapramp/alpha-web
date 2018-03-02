@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import {actionTypes} from "../actions/createPostActions";
 
-const initialState = {community: {active: null}, media: null, errors: [], hashtags: []};
+const initialState = {community: {active: null}, media: null, errors: [], hashtags: [],
+	created: false, fullPermlink: null};
 
 export const createPostReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -25,6 +26,9 @@ export const createPostReducer = (state = initialState, action) => {
 
 		case actionTypes.SET_HASHTAGS:
 			return {...state, hashtags: _.uniqBy(action.hashtags, i => i)};
+
+		case actionTypes.POST_CREATED:
+			return {...state, created: true, fullPermlink: action.fullPermlink};
 
 		default:
 			return state;

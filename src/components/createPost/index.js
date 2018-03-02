@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import twitter from 'twitter-text';
 
 import styles from './styles.scss';
@@ -152,6 +152,12 @@ class CreatePost extends React.Component {
 	}
 
 	render() {
+
+		// The post is created, go to the post
+		if (this.props.postCreated) {
+			return <Redirect to={'/@' + this.props.fullPermlink}/>;
+		}
+
 		return <div className={['uk-flex', 'uk-flex-center'].join(' ')}>
 			<div className={styles.createPostModal}>
 				{this.getUserSection()}
@@ -175,6 +181,8 @@ const mapStateToProps = state => {
 		activeCommunity: state.createPost.community.active,
 		media: state.createPost.media,
 		hashtags: state.createPost.hashtags,
+		postCreated: state.createPost.created,
+		fullPermlink: state.createPost.fullPermlink,
 	}
 };
 

@@ -141,7 +141,7 @@ class SteemAPI {
 			tags.push('hapramp-' + community.toLowerCase());
 			let commentObj = {
 				parent_author: '',
-				parent_permlink: 'hapramp',
+				parent_permlink: 'hapramp-test',
 				author: author,
 				permlink,
 				title: '',

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import getStore from '../utils/storeUtils';
 import haprampAPI from "../utils/haprampAPI";
 import Steem from "../utils/steem";
@@ -29,19 +31,22 @@ export const clearError = () => dispatch => dispatch({type: actionTypes.CLEAR_ER
 export const setHashtags = hashtags => dispatch => dispatch({type: actionTypes.SET_HASHTAGS, hashtags});
 
 export const createPost = data => dispatch => {
+	// Deep copy
+	data = _.clone(data);
+
 	let {tags, post, community} = data;
 	let author = getStore().getState().authUser.username;
 	let permlink = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase() + '-post';
 
-	let full_permlink = author + '/' + permlink;
+	let fullPermlink = author + '/' + permlink;
 	let wif = localStorage.getItem('posting_key');
-	haprampAPI.v2.post.prepare(post, full_permlink)
+	haprampAPI.v2.post.prepare(post, fullPermlink)
 		.then(body => {
 			Steem.createPost(wif, author, body, tags, post, permlink, community)
 				.then(response => {
 					console.log(response);
-					haprampAPI.v2.post.confirm(full_permlink)
-						.then(response => dispatch({type: actionTypes.POST_CREATED}))
+					haprampAPI.v2.post.confirm(fullPermlink)
+						.then(response => dispatch({type: actionTypes.POST_CREATED, fullPermlink: fullPermlink}))
 						.catch(e => dispatch({type: actionTypes.POST_CREATE_FAILED, reason: e}))
 				})
 				.catch(e => {
