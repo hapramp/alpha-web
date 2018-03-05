@@ -5,7 +5,8 @@ import twitter from 'twitter-text';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {changeCommunity, changeMedia, removeMedia, postCreateError, clearError, setHashtags, createPost} from "../../actions/createPostActions";
+import {changeCommunity, changeMedia, removeMedia, postCreateError,
+	clearError, setHashtags, createPost, resetPostCreate} from "../../actions/createPostActions";
 
 class CreatePost extends React.Component {
 
@@ -26,7 +27,7 @@ class CreatePost extends React.Component {
 
 	handlePostCreate() {
 		// Clear error messages
-		// this.props.clearError();
+		this.props.clearError();
 
 		// Content
 		let content = document.getElementById('post-create-text').value;
@@ -57,7 +58,9 @@ class CreatePost extends React.Component {
 	parseHashTags() {
 		let content = document.getElementById('post-create-text').value;
 		let hashtags = twitter.extractHashtags(content);
-		this.props.setHashtags(hashtags);
+		if (hashtags.length > 0) {
+			this.props.setHashtags(hashtags);
+		}
 	}
 
 	getUserSection() {
@@ -151,10 +154,19 @@ class CreatePost extends React.Component {
 		</div>
 	}
 
+	getErrors() {
+		return <div className={['uk-margin-top', styles.errorContainer].join(' ')}>
+			{this.props.errors.map(err => <div className={['uk-alert', 'uk-alert-danger'].join(' ')}>
+					{(typeof err.message === 'string') ? err.message : 'An error occurred, check console!'}
+				</div>)}
+		</div>
+	}
+
 	render() {
 
 		// The post is created, go to the post
 		if (this.props.postCreated) {
+			this.props.resetPostCreate();
 			return <Redirect to={'/@' + this.props.fullPermlink}/>;
 		}
 
@@ -168,6 +180,7 @@ class CreatePost extends React.Component {
 				<div className={['uk-margin-top', indexStyles.separator].join(' ')}/>
 				{this.getCommunitySelector()}
 				{this.getMediaUploader()}
+				{this.getErrors()}
 			</div>
 		</div>
 	}
@@ -183,11 +196,13 @@ const mapStateToProps = state => {
 		hashtags: state.createPost.hashtags,
 		postCreated: state.createPost.created,
 		fullPermlink: state.createPost.fullPermlink,
+		postCreating: state.createPost.creating,
+		errors: state.createPost.errors,
 	}
 };
 
 export default withRouter(connect(mapStateToProps, {
 	changeCommunity, changeMedia, removeMedia,
 	postCreateError, clearError, setHashtags,
-	createPost
+	createPost, resetPostCreate
 })(CreatePost));

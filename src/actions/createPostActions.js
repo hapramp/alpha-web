@@ -12,7 +12,8 @@ export const actionTypes = {
 	CLEAR_ERROR: 'POST.CREATE.ERROR.CLEAR',
 	SET_HASHTAGS: 'POST.CREATE.HASHTAGS.SET',
 	POST_CREATED: 'POST.CREATE.DONE',
-	POST_CREATE_FAILED: 'POST.CREATE.FAILED',
+	POST_CREATE_RESET: 'POST.CREATE.RESET',
+	POST_CREATE_INIT: 'POST.CREATE.INIT',
 };
 
 export const changeCommunity = community => dispatch => dispatch({type: actionTypes.CHANGE_COMMUNITY, community});
@@ -32,9 +33,11 @@ export const setHashtags = hashtags => dispatch => dispatch({type: actionTypes.S
 
 export const createPost = data => dispatch => {
 	// Deep copy
-	data = _.clone(data);
-
+	data = _.cloneDeep(data);
 	let {tags, post, community} = data;
+
+	dispatch({type: actionTypes.POST_CREATE_INIT});
+
 	let author = getStore().getState().authUser.username;
 	let permlink = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase() + '-post';
 
@@ -47,15 +50,17 @@ export const createPost = data => dispatch => {
 					console.log(response);
 					haprampAPI.v2.post.confirm(fullPermlink)
 						.then(response => dispatch({type: actionTypes.POST_CREATED, fullPermlink: fullPermlink}))
-						.catch(e => dispatch({type: actionTypes.POST_CREATE_FAILED, reason: e}))
+						.catch(e => dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'}))
 				})
 				.catch(e => {
-					console.log(e);
-					dispatch({type: actionTypes.POST_CREATE_FAILED, reason: e});
+					console.log('Steem error', e);
+					dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'});
 				})
 		})
 		.catch(e => {
-			console.log(e);
-			dispatch({type: actionTypes.POST_CREATE_FAILED, reason: e})
+			console.log('Hapramp API Error', e);
+			dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'})
 		})
 };
+
+export const resetPostCreate = () => dispatch => dispatch({type: actionTypes.POST_CREATE_RESET});
