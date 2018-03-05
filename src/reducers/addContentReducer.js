@@ -10,6 +10,10 @@ export const addContentReducer = (state = initialState, action) => {
 		case actionTypes.TOGGLE_CONTENT_TYPE:
 			newState.isClicked = !newState.isClicked;
 			return newState;
+
+		case actionTypes.RESET_CONTENT_TYPE:
+			return initialState;
+
 		default:
 			return state;
 	}

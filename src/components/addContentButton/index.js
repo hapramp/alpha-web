@@ -4,9 +4,13 @@ import {withRouter, Link} from 'react-router-dom';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {toggleClicked} from "../../actions/addContentActions";
+import {toggleClicked, resetClicked} from "../../actions/addContentActions";
 
 class AddContentButton extends React.Component {
+	componentWillUnmount() {
+		this.props.resetClicked();
+	}
+
 	render() {
 		let rotation = this.props.isClicked ? 'rotate(135deg)' : '';
 		return <div className={['uk-align-right', 'uk-margin-right', 'uk-margin-bottom', 'uk-text-center',
@@ -32,5 +36,5 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(connect(mapStateToProps, {
-	toggleClicked
+	toggleClicked, resetClicked
 })(AddContentButton))
