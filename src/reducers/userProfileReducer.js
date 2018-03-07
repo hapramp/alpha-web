@@ -17,6 +17,10 @@ export const userProfileReducer = (state = initialState, action) => {
 		case actionTypes.RESET_USER_INFO:
 			return initialState;
 
+		case actionTypes.FOLLOW_COUNT_DONE:
+			return {...state, follower: {...state.follower, count: action.result.follower_count},
+				following: {...state.following, count: action.result.following_count}};
+
 		default:
 			return state;
 	}

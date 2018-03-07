@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 
 import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
-import {loadUserProfileInfo, resetUserProfileInfo} from '../../actions/userProfileReducer';
+import {loadUserProfileInfo, resetUserProfileInfo, getFollowCount} from '../../actions/userProfileReducer';
 
 // TODO: Get follower/following
 class UserProfile extends React.Component {
 	constructor(props) {
 		super(props);
 		props.loadUserProfileInfo(props.match.params.username);
+		props.getFollowCount(props.match.params.username);
 	}
 
 	componentWillUnmount() {
@@ -122,5 +123,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-	loadUserProfileInfo, resetUserProfileInfo
+	loadUserProfileInfo, resetUserProfileInfo,
+	getFollowCount
 })(UserProfile);
