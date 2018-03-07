@@ -64,7 +64,7 @@ class Post extends React.Component {
 				<img src={userPlaceholder} className={['uk-border-circle', styles.userImage].join(' ')}/>
 				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-center'].join(' ')}>
 					<div><span className={styles.userName}>Dummy User </span> | {this.props.post.created}</div>
-					<div>{communities.map(community => <span key={community}>{community}</span>)}</div>
+					<div>{communities.map((community, idx) => <span key={idx}>{community}</span>)}</div>
 				</div>
 			</div>
 			{/* Actual post */}
