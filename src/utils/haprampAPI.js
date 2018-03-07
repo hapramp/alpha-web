@@ -88,16 +88,19 @@ export default {
 			}
 		},
 		feed: {
-			getUserFeed: username => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/user/' + username),
-			getFeedsByCreated: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/created/' + category),
-			getFeedsByTrending: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/trending/' + category),
-			getFeedsByHot: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/hot/' + category),
-			getFeedsByBlog: blog => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/blog/' + blog),
+			getUserFeed: username => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/user/' + username),
+			getFeedsByCreated: category => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/created/' + category),
+			getFeedsByTrending: category => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/trending/' + category),
+			getFeedsByHot: category => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/hot/' + category),
+			getFeedsByBlog: blog => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/blog/' + blog),
+		},
+		communities: {
+			getAllCommunities: () => getPromiseForUrl(constants.BACKEND_URL.V2 + '/communities')
 		}
 	}
 };
 
-const getPromiseForFeed = url => {
+const getPromiseForUrl = url => {
 	return new Promise((resolve, reject) => {
 		fetch(url)
 			.then(response => {
