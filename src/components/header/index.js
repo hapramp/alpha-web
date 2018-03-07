@@ -7,12 +7,14 @@ import baseStyles from '../../index.scss';
 import logo from './logo.png';
 import {fakeLogin} from "../../actions/loginActions";
 import {getLocalUser} from "../../utils/localStoreUtils";
+import {loadCommunities} from "../../actions/communityActions";
 
 class Header extends React.Component {
 
 	componentWillMount() {
 		let data = getLocalUser();
 		data.username && data.postingKey && data.ppkHash && this.props.fakeLogin(data);
+		this.props.loadCommunities();
 	}
 
 	navigateToSignIn(e) {
@@ -72,5 +74,5 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(connect(mapStateToProps, {
-	fakeLogin
+	fakeLogin, loadCommunities
 })(Header));
