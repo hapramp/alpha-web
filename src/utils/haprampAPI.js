@@ -86,6 +86,26 @@ export default {
 					}).catch(e => reject(e))
 				})
 			}
+		},
+		feed: {
+			getUserFeed: username => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/user/' + username),
+			getFeedsByCreated: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/created/' + category),
+			getFeedsByTrending: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/trending/' + category),
+			getFeedsByHot: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/hot/' + category),
 		}
 	}
+};
+
+const getPromiseForFeed = url => {
+	return new Promise((resolve, reject) => {
+		fetch(url)
+			.then(response => {
+				if (response.ok) {
+					response.json().then(json => resolve(json));
+				} else {
+					reject();
+				}
+			})
+			.catch(e => reject(e))
+	})
 };
