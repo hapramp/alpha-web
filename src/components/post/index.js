@@ -69,7 +69,7 @@ class Post extends React.Component {
 			</div>
 			{/* Actual post */}
 			<div className={['uk-margin-top'].join(' ')}>
-				{content.data.map((data, idx) => <PostData key={idx} data={data} />)}
+				{content && content.data.map((data, idx) => <PostData key={idx} data={data} />)}
 			</div>
 			{/* Action bar */}
 			<div className={['uk-margin-top'].join(' ')}>
