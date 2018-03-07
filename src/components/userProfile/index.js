@@ -4,7 +4,11 @@ import {connect} from 'react-redux';
 import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {loadUserProfileInfo, resetUserProfileInfo, getFollowCount} from '../../actions/userProfileReducer';
+import Post from '../post';
+import {
+	getFollowCount, getUserFeeds, loadUserProfileInfo,
+	resetUserProfileInfo
+} from '../../actions/userProfileReducer';
 
 // TODO: Get follower/following
 class UserProfile extends React.Component {
@@ -12,6 +16,7 @@ class UserProfile extends React.Component {
 		super(props);
 		props.loadUserProfileInfo(props.match.params.username);
 		props.getFollowCount(props.match.params.username);
+		props.getUserFeeds(props.match.params.username);
 	}
 
 	componentWillUnmount() {
@@ -19,8 +24,11 @@ class UserProfile extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		newProps.match.params.username !== this.props.match.params.username && !newProps.userProfile.loading &&
-		this.props.loadUserProfileInfo(newProps.match.params.username);
+		if (newProps.match.params.username !== this.props.match.params.username && !newProps.userProfile.loading) {
+			this.props.loadUserProfileInfo(newProps.match.params.username);
+			this.props.getFollowCount(newProps.match.params.username);
+			this.props.getUserFeeds(newProps.match.params.username);
+		}
 	}
 
 	render() {
@@ -96,6 +104,7 @@ class UserProfile extends React.Component {
 
 		return <div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top',
 			indexStyles.white].join(' ')}>
+			{/* User details */}
 			<div className={['uk-cover-container', styles.profileCoverContainer].join(' ')}>
 				<img src={jsonMetadata.profile.cover_image}/>
 			</div>
@@ -111,8 +120,17 @@ class UserProfile extends React.Component {
 			</div>
 			<div className={['uk-margin-top', 'uk-text-center'].join(' ')}>
 				<span>{this.props.userProfile.user.post_count} Post{this.props.userProfile.user.post_count === 1 ? '' : 's'}</span>
-				<span className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.follower.count} Follower{this.props.userProfile.follower.count === 1 ? '' : 's'}</span>
+				<span
+					className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.follower.count} Follower{this.props.userProfile.follower.count === 1 ? '' : 's'}</span>
 				<span className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.following.count} Following</span>
+			</div>
+
+			{/* User posts */}
+			<div className={['uk-text-center', 'uk-margin-large-top', styles.blogHeader].join(' ')}>LATEST HAPS</div>
+			<div className={['uk-margin-top', 'uk-flex', 'uk-flex-center'].join(' ')}>
+				<div className={[styles.blogContainer].join(' ')}>
+					{this.props.userProfile.blog.posts.map(item => <Post key={item.id} post={item}/>)}
+				</div>
 			</div>
 		</div>
 	}
@@ -126,5 +144,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
 	loadUserProfileInfo, resetUserProfileInfo,
-	getFollowCount
+	getFollowCount, getUserFeeds
 })(UserProfile);

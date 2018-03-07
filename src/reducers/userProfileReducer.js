@@ -1,6 +1,6 @@
 import {actionTypes} from "../actions/userProfileReducer";
 
-const initialState = {loading: false, user: null, error: null,
+const initialState = {loading: false, user: null, error: null, blog: {count: 0, posts: []},
 	follower: {count: 0, accounts: []}, following: {count: 0, accounts: []}};
 
 export const userProfileReducer = (state = initialState, action) => {
@@ -21,6 +21,9 @@ export const userProfileReducer = (state = initialState, action) => {
 		case actionTypes.FOLLOW_COUNT_DONE:
 			return {...state, follower: {...state.follower, count: action.result.follower_count},
 				following: {...state.following, count: action.result.following_count}};
+
+		case actionTypes.USER_BLOG_LOADED:
+			return {...state, blog: {count: action.results.length, posts: action.results}};
 
 		default:
 			return state;

@@ -1,4 +1,5 @@
 import SteemAPI from '../utils/steem';
+import haprampAPI from "../utils/haprampAPI";
 
 export const actionTypes = {
 	LOAD_USER_INFO: 'USER_PROFILE.LOAD.INIT',
@@ -7,6 +8,9 @@ export const actionTypes = {
 	RESET_USER_INFO: 'USER_PROFILE.RESET',
 	FOLLOW_COUNT_DONE: 'USER_PROFILE.FOLLOW.COUNT.DONE',
 	FOLLOW_COUNT_FAILED: 'USER_PROFILE.FOLLOW.COUNT.FAILED',
+	USER_BLOG_LOADING: 'USER_PROFILE.BLOG.LOAD.INIT',
+	USER_BLOG_LOADED: 'USER_PROFILE.BLOG.LOAD.DONE',
+	USER_BLOG_LOAD_FAILED: 'USER_PROFILE.BLOG.LOAD.FAILED',
 };
 
 export const loadUserProfileInfo = username => dispatch => {
@@ -22,4 +26,11 @@ export const getFollowCount = username => dispatch => {
 	SteemAPI.getFollowCount(username)
 		.then(result => dispatch({type: actionTypes.FOLLOW_COUNT_DONE, result}))
 		.catch(reason => dispatch({type: actionTypes.FOLLOW_COUNT_FAILED, reason}))
+};
+
+export const getUserFeeds = username => dispatch => {
+	dispatch({type: actionTypes.USER_BLOG_LOADING, username});
+	haprampAPI.v2.feed.getFeedsByBlog(username)
+		.then(results => dispatch({type: actionTypes.USER_BLOG_LOADED, results, username}))
+		.catch(reason => dispatch({type: actionTypes.USER_BLOG_LOAD_FAILED, reason}));
 };

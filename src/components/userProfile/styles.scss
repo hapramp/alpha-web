@@ -1,3 +1,5 @@
+@import "../../index.scss";
+
 .profileCoverContainer {
   margin: 0 -40px;
 }
@@ -15,4 +17,17 @@
 
 .userName {
   font-weight: 800;
+}
+
+.blogContainer {
+  width: 560px;
+
+  @media screen and (max-width: 560px){
+    width: 100%;
+  }
+}
+
+.blogHeader {
+  color: $primary-color;
+  font-size: 22px;
 }
