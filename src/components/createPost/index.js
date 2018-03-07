@@ -40,6 +40,8 @@ class CreatePost extends React.Component {
 			return;
 		}
 
+		community = this.props.communities.filter(i => i.id === community)[0].tag;
+
 		// Structure to build response
 		let post = {
 			type: 'post',
@@ -94,8 +96,8 @@ class CreatePost extends React.Component {
 			<div className={['uk-margin-bottom', styles.communityHeading].join(' ')}>Community</div>
 			<div uk-grid="true" className={'uk-margin-remove'}>
 				{this.props.communities.map(community =>
-					<div key={community} onClick={() => this.props.changeCommunity(community)} className={[styles.communitySingle,
-						this.props.activeCommunity === community ? styles.active : ''].join(' ')}>{community}</div>)}
+					<div key={community.id} onClick={() => this.props.changeCommunity(community.id)} className={[styles.communitySingle,
+						this.props.activeCommunity === community.id ? styles.active : ''].join(' ')}>{community.name}</div>)}
 			</div>
 		</div>
 	}
@@ -190,7 +192,7 @@ const mapStateToProps = state => {
 	return {
 		userFullName: state.authUser.name,
 		userAvatar: state.authUser.avatar,
-		communities: ['Art & Craft', 'Photography', 'Dance', 'Writing', 'Poetry', 'Music'],
+		communities: state.communities.communities,
 		activeCommunity: state.createPost.community.active,
 		media: state.createPost.media,
 		hashtags: state.createPost.hashtags,

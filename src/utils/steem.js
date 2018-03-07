@@ -138,7 +138,7 @@ class SteemAPI {
 
 	createPost(wif, author, body, tags, content, permlink, community) {
 		return new Promise((resolve, reject) => {
-			tags.push('hapramp-' + community.toLowerCase());
+			tags.push(community.toLowerCase());
 			let commentObj = {
 				parent_author: '',
 				parent_permlink: 'hapramp-test',
