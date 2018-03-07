@@ -92,6 +92,7 @@ export default {
 			getFeedsByCreated: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/created/' + category),
 			getFeedsByTrending: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/trending/' + category),
 			getFeedsByHot: category => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/hot/' + category),
+			getFeedsByBlog: blog => getPromiseForFeed(constants.BACKEND_URL.V2 + '/feeds/blog/' + blog),
 		}
 	}
 };
