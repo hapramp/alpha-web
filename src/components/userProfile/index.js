@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
+import indexStyles from '../../index.scss';
 import {loadUserProfileInfo, resetUserProfileInfo, getFollowCount} from '../../actions/userProfileReducer';
 
 // TODO: Get follower/following
@@ -24,7 +25,7 @@ class UserProfile extends React.Component {
 
 	render() {
 		if (!this.props.userProfile.user) {
-			return <div className={['uk-container', 'uk-margin-top'].join(' ')}>
+			return <div className={['uk-position-center'].join(' ')}>
 				LOADING
 			</div>
 		}
@@ -93,8 +94,9 @@ class UserProfile extends React.Component {
 		jsonMetadata.profile.profile_image = jsonMetadata.profile.profile_image ? jsonMetadata.profile.profile_image : userPlaceholder;
 
 
-		return <div className={['uk-container', 'uk-margin-top'].join(' ')}>
-			<div className={['uk-cover-container'].join(' ')}>
+		return <div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top',
+			indexStyles.white].join(' ')}>
+			<div className={['uk-cover-container', styles.profileCoverContainer].join(' ')}>
 				<img src={jsonMetadata.profile.cover_image}/>
 			</div>
 			<div className={['uk-text-center'].join(' ')}>

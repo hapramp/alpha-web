@@ -1,6 +1,7 @@
 import {actionTypes} from "../actions/userProfileReducer";
 
-const initialState = {loading: false, user: null, error: null, follower: {}, following: {}};
+const initialState = {loading: false, user: null, error: null,
+	follower: {count: 0, accounts: []}, following: {count: 0, accounts: []}};
 
 export const userProfileReducer = (state = initialState, action) => {
 	switch (action.type) {
