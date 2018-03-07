@@ -6,7 +6,7 @@ import Header from '../header';
 import SignIn from '../signin';
 import Feed from '../feed';
 import CreatePost from '../createPost';
-
+import UserProfile from '../userProfile';
 
 class Root extends React.Component {
 
@@ -28,6 +28,11 @@ class Root extends React.Component {
 				<Route exact path={'/create/post'} component={CreatePost}/>
 				<Route exact path={'/create/article'} render={() => <div>You can create article here</div>}/>
 				<Redirect path={'/create'} to={'/create/post'}/>
+				<Route exact path={'/profile'} render={() => getStore().getState().login.loggedIn ?
+					<Redirect to={'/@' + getStore().getState().authUser.username}/> :
+					<Redirect to={'/signin'}/>
+				}/>
+				<Route exact path={'/@:username'} component={UserProfile}/>
 				<Route exact path={'*'} render={() => <div>Not found</div>}/>
 			</Switch>
 		</div>
