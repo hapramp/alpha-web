@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 
 import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
@@ -50,11 +51,9 @@ class Post extends React.Component {
 	reblogged_by(pin): []
 	 */
 	render() {
-		let communities = this.props.post.json_metadata.tags.map(tag => {
-			if (tag.startsWith('hapramp-')) {
-				return tag.replace('hapramp-', '')
-			}
-		});
+
+		let communities = this.props.communities.filter(community =>
+			_.some(this.props.post.json_metadata.tags, i => i === community.tag));
 
 		let content = this.props.post.json_metadata.content;
 
@@ -64,7 +63,8 @@ class Post extends React.Component {
 				<img src={userPlaceholder} className={['uk-border-circle', styles.userImage].join(' ')}/>
 				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-center'].join(' ')}>
 					<div><span className={styles.userName}>Dummy User </span> | {this.props.post.created}</div>
-					<div>{communities.map((community, idx) => <span key={idx}>{community}</span>)}</div>
+					<div>{communities.map((community, idx) => <span
+						key={idx} className={[idx !==  0 ? 'uk-margin-left' : '', 'uk-label'].join(' ')} style={{backgroundColor: community.color}}>{community.name}</span>)}</div>
 				</div>
 			</div>
 			{/* Actual post */}
@@ -82,4 +82,10 @@ class Post extends React.Component {
 	}
 }
 
-export default connect()(Post);
+const mapStateToProps = state => {
+	return {
+		communities: state.communities.communities,
+	}
+};
+
+export default connect(mapStateToProps)(Post);
