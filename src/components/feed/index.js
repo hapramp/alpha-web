@@ -2,16 +2,25 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
+import {loadFeedsForUser} from "../../actions/userFeedActions";
+import Post from '../post';
 import AddContentButton from '../addContentButton';
 
 class Feed extends React.Component {
+	constructor(props) {
+		super(props);
+		props.loadFeedsForUser(this.props.username);
+	}
+
 	render() {
 		return <div uk-grid="true" className={['uk-margin-left', 'uk-margin-right'].join(' ')}>
 			<div className={'uk-width-1-6'}>
 				Categories
 			</div>
 			<div className={'uk-width-2-3'}>
-				<div>This is the feed.</div>
+				<div>
+					{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
+				</div>
 				<AddContentButton />
 			</div>
 			<div className={'uk-width-1-6'}>
@@ -21,4 +30,13 @@ class Feed extends React.Component {
 	}
 }
 
-export default withRouter(connect()(Feed));
+const mapStateToProps = state => {
+	return {
+		userFeed: state.userFeed.user,
+		username: state.authUser.username,
+	}
+};
+
+export default withRouter(connect(mapStateToProps, {
+	loadFeedsForUser
+})(Feed));
