@@ -6,6 +6,7 @@ import {loadFeedsForUser} from "../../actions/userFeedActions";
 import Post from '../post';
 import AddContentButton from '../addContentButton';
 import Sidebar from '../sidebar';
+import indexStyles from '../../index.scss';
 
 class Feed extends React.Component {
 	constructor(props) {
@@ -19,8 +20,8 @@ class Feed extends React.Component {
 				<div className={'uk-width-1-4'}>
 					<Sidebar/>
 				</div>
-				<div className={'uk-width-3-4'}>
-					<div>
+				<div className={['uk-width-3-4', 'uk-margin-top', indexStyles.white].join(' ')}>
+					<div className={'uk-padding'}>
 						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
 					</div>
 					<AddContentButton />
