@@ -57,14 +57,24 @@ class Post extends React.Component {
 
 		let content = this.props.post.json_metadata.content;
 
+		let organic_vote_count = this.props.post.hapramp_votes;
+		let organic_vote_sum = organic_vote_count * this.props.post.hapramp_rating;
+
+		let inorganic_vote_sum = 4 * (this.props.post.net_votes - organic_vote_count);
+
+		let final_vote_sum = inorganic_vote_sum + organic_vote_sum;
+		let final_rating = (final_vote_sum / this.props.post.net_votes).toFixed(2);
+
+		final_rating = this.props.post.net_votes ? final_rating : 0.0.toFixed(2);
+
 		return <div className={['uk-margin-top', 'uk-padding', styles.postContainer].join(' ')}>
 			{/* Top section */}
-			<div className={['uk-flex'].join(' ')}>
+			<div className={['uk-flex', styles.topSection].join(' ')}>
 				<img src={userPlaceholder} className={['uk-border-circle', styles.userImage].join(' ')}/>
-				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-center'].join(' ')}>
+				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-between'].join(' ')}>
 					<div><span className={styles.userName}>Dummy User </span> | {this.props.post.created}</div>
 					<div>{communities.map((community, idx) => <span
-						key={idx} className={[idx !==  0 ? 'uk-margin-left' : '', 'uk-label'].join(' ')} style={{backgroundColor: community.color}}>{community.name}</span>)}</div>
+						key={idx} className={[idx !==  0 ? 'uk-margin-left' : '', styles.communityLabel].join(' ')} style={{backgroundColor: community.color}}>{community.name}</span>)}</div>
 				</div>
 			</div>
 			{/* Actual post */}
@@ -73,7 +83,7 @@ class Post extends React.Component {
 			</div>
 			{/* Action bar */}
 			<div className={['uk-margin-top'].join(' ')}>
-				<span><span uk-icon="icon: star"/> {this.props.post.net_votes} </span>
+				<span><span uk-icon="icon: star"/> {final_rating} of {this.props.post.net_votes} </span>
 				<span className={['uk-margin-left'].join(' ')}>
 					<span uk-icon="icon: comment"/> {this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}</span>
 				<span className={['uk-margin-left'].join(' ')}><span uk-icon="icon: credit-card"/> {this.props.post.total_payout_value}</span>

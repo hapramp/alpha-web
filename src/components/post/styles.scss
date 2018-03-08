@@ -2,11 +2,26 @@
   box-shadow: #afafaf 0 0 0 1px;
 }
 
+.topSection {
+  font-size: 12px;
+}
+
 .userImage {
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
 }
 
 .userName {
+  font-weight: 800;
+}
+
+.communityLabel {
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  padding: 4px 8px;
+  height: 16px;
+  font-size: 12px;
+  color: white;
   font-weight: 800;
 }
