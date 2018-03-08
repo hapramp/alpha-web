@@ -1,0 +1,10 @@
+@import "../../index.scss";
+
+.communityImage {
+  width: 48px;
+  height: 48px;
+}
+
+.active {
+  border-right: 4px solid $primary-color;
+}

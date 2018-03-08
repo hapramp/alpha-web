@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import {loadFeedsForUser} from "../../actions/userFeedActions";
 import Post from '../post';
 import AddContentButton from '../addContentButton';
+import Sidebar from '../sidebar';
 
 class Feed extends React.Component {
 	constructor(props) {
@@ -15,17 +16,14 @@ class Feed extends React.Component {
 	render() {
 		return <div className={['uk-container'].join(' ')}>
 			<div uk-grid="true">
-				<div className={'uk-width-1-6'}>
-					Categories
+				<div className={'uk-width-1-4'}>
+					<Sidebar/>
 				</div>
-				<div className={'uk-width-2-3'}>
+				<div className={'uk-width-3-4'}>
 					<div>
 						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
 					</div>
 					<AddContentButton />
-				</div>
-				<div className={'uk-width-1-6'}>
-					Tags
 				</div>
 			</div>
 		</div>
