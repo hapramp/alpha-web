@@ -8,6 +8,7 @@ import Feed from '../feed';
 import CreatePost from '../createPost';
 import UserProfile from '../userProfile';
 import Browse from '../browse';
+import BrowseCommunity from '../browseCommunity';
 
 class Root extends React.Component {
 
@@ -32,7 +33,11 @@ class Root extends React.Component {
 
 				{/* Browse views */}
 				<Route exact path={'/browse'} component={Browse}/>
-				<Route exact path={'/browse/:filter'} render={() => <div>This is browse view</div>}/>
+				<Route exact path={'/browse/:community'} render={({ match }) =>
+					<Redirect to={`/browse/${match.params.community}/hot`} />}/>
+				<Route exact path={'/browse/:community/:filter'} component={BrowseCommunity}/>
+
+
 				<Route exact path={'/create/post'} component={CreatePost}/>
 				<Route exact path={'/create/article'} render={() => <div>You can create article here</div>}/>
 				<Redirect path={'/create'} to={'/create/post'}/>

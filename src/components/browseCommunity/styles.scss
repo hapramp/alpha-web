@@ -1,0 +1,16 @@
+@import "../../index.scss";
+
+.filter {
+  padding: 8px 16px;
+  font-size: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  height: 24px;
+  background-color: $background-color;
+}
+
+.activeFilter {
+  background-color: $primary-color;
+  color: white;
+}
