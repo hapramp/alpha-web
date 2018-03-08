@@ -13,18 +13,20 @@ class Feed extends React.Component {
 	}
 
 	render() {
-		return <div uk-grid="true" className={['uk-margin-left', 'uk-margin-right'].join(' ')}>
-			<div className={'uk-width-1-6'}>
-				Categories
-			</div>
-			<div className={'uk-width-2-3'}>
-				<div>
-					{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
+		return <div className={['uk-container'].join(' ')}>
+			<div uk-grid="true">
+				<div className={'uk-width-1-6'}>
+					Categories
 				</div>
-				<AddContentButton />
-			</div>
-			<div className={'uk-width-1-6'}>
-				Tags
+				<div className={'uk-width-2-3'}>
+					<div>
+						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
+					</div>
+					<AddContentButton />
+				</div>
+				<div className={'uk-width-1-6'}>
+					Tags
+				</div>
 			</div>
 		</div>
 	}
