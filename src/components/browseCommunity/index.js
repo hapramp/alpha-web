@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 import Sidebar from '../sidebar';
 import Post from '../post';
-import {loadFeedsByHot, loadFeedsByCreated, loadFeedsByTrending} from "../../actions/userFeedActions";
+import {loadFeedsByCreated, loadFeedsByHot, loadFeedsByTrending} from "../../actions/userFeedActions";
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
 
@@ -34,7 +34,7 @@ class BrowseCommunity extends React.Component {
 				props.loadFeedsByCreated(community);
 				break;
 			default:
-				// No problem
+			// No problem
 		}
 	}
 
@@ -44,21 +44,23 @@ class BrowseCommunity extends React.Component {
 				<div className={'uk-width-1-4'}>
 					<Sidebar/>
 				</div>
-				<div className={['uk-width-3-4', 'uk-margin-top', indexStyles.white].join(' ')}>
-					<div className={['uk-margin-top', 'uk-margin-bottom'].join(' ')}>
-						<Link to={`/browse/${this.props.match.params.community}/hot`}>
+				<div className={['uk-width-1-2', 'uk-margin-top'].join(' ')}>
+					<div className={['uk-padding', indexStyles.white].join(' ')}>
+						<div className={['uk-margin-top', 'uk-margin-large-bottom'].join(' ')}>
+							<Link to={`/browse/${this.props.match.params.community}/hot`}>
 							<span className={[this.props.match.params.filter === 'hot' ? styles.activeFilter : '', styles.filter].join(' ')}>
 								HOT</span></Link>
-						<Link to={`/browse/${this.props.match.params.community}/trending`}>
+							<Link to={`/browse/${this.props.match.params.community}/trending`}>
 						<span className={[this.props.match.params.filter === 'trending' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
 							TRENDING</span></Link>
-						<Link to={`/browse/${this.props.match.params.community}/created`}>
+							<Link to={`/browse/${this.props.match.params.community}/created`}>
 						<span className={[this.props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
 							CREATED</span></Link>
-					</div>
-					<div>
-						{this.props.userFeed[this.props.match.params.filter].posts && this.props.userFeed[this.props.match.params.filter].posts.map(post =>
-							<Post key={post.id} post={post}/>)}
+						</div>
+						<div>
+							{this.props.userFeed[this.props.match.params.filter].posts && this.props.userFeed[this.props.match.params.filter].posts.map(post =>
+								<Post key={post.id} post={post}/>)}
+						</div>
 					</div>
 				</div>
 			</div>

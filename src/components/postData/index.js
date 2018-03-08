@@ -4,11 +4,11 @@ class PostData extends React.Component {
 	render() {
 		switch (this.props.data.type) {
 			case 'text':
-				return <div>{this.props.data.content}</div>;
+				return <div className={['uk-margin-top'].join(' ')}>{this.props.data.content}</div>;
 			case 'image':
-				return <div><img src={this.props.data.content}/></div>;
+				return <div className={['uk-margin-top'].join(' ')}><img src={this.props.data.content}/></div>;
 			default:
-				return <div>??</div>;
+				return <div className={['uk-margin-top'].join(' ')}>??</div>;
 		}
 	}
 }

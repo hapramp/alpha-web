@@ -20,8 +20,8 @@ class Feed extends React.Component {
 				<div className={'uk-width-1-4'}>
 					<Sidebar/>
 				</div>
-				<div className={['uk-width-3-4', 'uk-margin-top', indexStyles.white].join(' ')}>
-					<div className={'uk-padding'}>
+				<div className={['uk-width-1-2', 'uk-margin-top'].join(' ')}>
+					<div className={['uk-padding', indexStyles.white].join(' ')}>
 						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
 					</div>
 					<AddContentButton />
