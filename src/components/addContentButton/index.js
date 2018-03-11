@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {toggleClicked, resetClicked} from "../../actions/addContentActions";
+import {resetClicked, toggleClicked} from "../../actions/addContentActions";
 
 class AddContentButton extends React.Component {
 	componentWillUnmount() {

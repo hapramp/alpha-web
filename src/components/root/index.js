@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
@@ -33,8 +33,8 @@ class Root extends React.Component {
 
 				{/* Browse views */}
 				<Route exact path={'/browse'} component={Browse}/>
-				<Route exact path={'/browse/:community'} render={({ match }) =>
-					<Redirect to={`/browse/${match.params.community}/hot`} />}/>
+				<Route exact path={'/browse/:community'} render={({match}) =>
+					<Redirect to={`/browse/${match.params.community}/hot`}/>}/>
 				<Route exact path={'/browse/:community/:filter'} component={BrowseCommunity}/>
 
 

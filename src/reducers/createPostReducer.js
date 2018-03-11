@@ -2,8 +2,10 @@ import _ from 'lodash';
 
 import {actionTypes} from "../actions/createPostActions";
 
-const initialState = {community: {active: null}, media: null, errors: [], hashtags: [],
-	created: false, fullPermlink: null, creating: false};
+const initialState = {
+	community: {active: null}, media: null, errors: [], hashtags: [],
+	created: false, fullPermlink: null, creating: false
+};
 
 export const createPostReducer = (state = initialState, action) => {
 	switch (action.type) {

@@ -48,13 +48,16 @@ class BrowseCommunity extends React.Component {
 					<div className={['uk-padding', indexStyles.white].join(' ')}>
 						<div className={['uk-margin-top', 'uk-margin-large-bottom'].join(' ')}>
 							<Link to={`/browse/${this.props.match.params.community}/hot`}>
-							<span className={[this.props.match.params.filter === 'hot' ? styles.activeFilter : '', styles.filter].join(' ')}>
+							<span
+								className={[this.props.match.params.filter === 'hot' ? styles.activeFilter : '', styles.filter].join(' ')}>
 								HOT</span></Link>
 							<Link to={`/browse/${this.props.match.params.community}/trending`}>
-						<span className={[this.props.match.params.filter === 'trending' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
+						<span
+							className={[this.props.match.params.filter === 'trending' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
 							TRENDING</span></Link>
 							<Link to={`/browse/${this.props.match.params.community}/created`}>
-						<span className={[this.props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
+						<span
+							className={[this.props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
 							CREATED</span></Link>
 						</div>
 						<div>

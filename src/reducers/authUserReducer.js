@@ -5,8 +5,10 @@ const initialState = {name: null, avatar: null, location: null, cover: null, web
 export const authUserReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case loginActionTypes.SET_AUTH_USER:
-			return {...state, name: action.name, avatar: action.avatar, username: action.username,
-				location: action.location, cover: action.cover, website: action.website};
+			return {
+				...state, name: action.name, avatar: action.avatar, username: action.username,
+				location: action.location, cover: action.cover, website: action.website
+			};
 		default:
 			return state;
 	}

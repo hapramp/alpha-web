@@ -15,7 +15,7 @@ export const userFeedReducer = (state = initialState, action) => {
 				return {...state, created: {posts: action.results}};
 			}
 		default:
-			// No problem
+		// No problem
 	}
 	return state;
 };

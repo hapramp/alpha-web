@@ -7,4 +7,4 @@ export const toggleClicked = () => {
 	return dispatch => dispatch({type: actionTypes.TOGGLE_CONTENT_TYPE});
 };
 
-export const resetClicked = () => dispatch => dispatch({type:  actionTypes.RESET_CONTENT_TYPE});
+export const resetClicked = () => dispatch => dispatch({type: actionTypes.RESET_CONTENT_TYPE});

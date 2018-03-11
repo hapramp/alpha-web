@@ -164,7 +164,7 @@ class SteemAPI {
 				}
 			};
 			steem.broadcast.sendAsync(
-				{operations, extensions : []},
+				{operations, extensions: []},
 				{posting: wif}, callback
 			);
 		})

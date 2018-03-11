@@ -1,13 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Redirect} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import twitter from 'twitter-text';
 import * as firebase from 'firebase';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {changeCommunity, changeMedia, removeMedia, postCreateError,
-	clearError, setHashtags, createPost, resetPostCreate} from "../../actions/createPostActions";
+import {
+	changeCommunity, changeMedia, clearError, createPost, postCreateError, removeMedia, resetPostCreate,
+	setHashtags
+} from "../../actions/createPostActions";
 
 class CreatePost extends React.Component {
 
@@ -61,16 +63,9 @@ class CreatePost extends React.Component {
 				let downloadURL = uploadTask.snapshot.downloadURL;
 				console.log('Image uploaded', downloadURL);
 				post = {
-					type: 'post',
-					data: [
-						{
-							type: 'image',
-							content: downloadURL
-						},
-						{
-							type: 'text',
-							content
-						},
+					type: 'post', data: [
+						{type: 'image', content: downloadURL},
+						{type: 'text', content},
 					]
 				};
 				this.props.createPost({post, tags: this.props.hashtags, community});
@@ -78,12 +73,8 @@ class CreatePost extends React.Component {
 			uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, onUploadProgress, onUploadError, onUploadComplete);
 		} else {
 			post = {
-				type: 'post',
-				data: [
-					{
-						type: 'text',
-						content
-					}
+				type: 'post', data: [
+					{type: 'text', content}
 				]
 			};
 			this.props.createPost({post, tags: this.props.hashtags, community});
@@ -103,7 +94,7 @@ class CreatePost extends React.Component {
 			<div>
 				{this.props.userAvatar ?
 					<img src={this.props.userAvatar} className={['uk-border-circle', styles.userAvatar].join(' ')}
-							 alt={'You'}/> : <span uk-icon="icon: user" />}
+							 alt={'You'}/> : <span uk-icon="icon: user"/>}
 				<span className={['uk-margin-left'].join(' ')} style={{opacity: 0.87}}>{this.props.userFullName}</span>
 			</div>
 			<div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
@@ -129,8 +120,9 @@ class CreatePost extends React.Component {
 			<div className={['uk-margin-bottom', styles.communityHeading].join(' ')}>Community</div>
 			<div uk-grid="true" className={'uk-margin-remove'}>
 				{this.props.communities.map(community =>
-					<div key={community.id} onClick={() => this.props.changeCommunity(community.id)} className={[styles.communitySingle,
-						this.props.activeCommunity === community.id ? styles.active : ''].join(' ')}>{community.name}</div>)}
+					<div key={community.id} onClick={() => this.props.changeCommunity(community.id)}
+							 className={[styles.communitySingle,
+								 this.props.activeCommunity === community.id ? styles.active : ''].join(' ')}>{community.name}</div>)}
 			</div>
 		</div>
 	}
@@ -141,7 +133,8 @@ class CreatePost extends React.Component {
 				<div className={[styles.upload].join(' ')} onClick={this.handleUploadImageClick.bind(this)}>
 					<span className={[indexStyles.marginRightSmall].join(' ')}>
 						<svg fill="#444" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-							<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+							<path
+								d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
 							<path d="M0 0h24v24H0z" fill="none"/>
 						</svg>
 					</span>
@@ -160,7 +153,8 @@ class CreatePost extends React.Component {
 				<span className={[indexStyles.marginRightSmall].join(' ')}>
 					<svg fill="#444" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none"/>
-						<path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+						<path
+							d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
 					</svg>
 				</span>
 					<span>Video</span>
@@ -170,9 +164,10 @@ class CreatePost extends React.Component {
 	}
 
 	getMediaViewer() {
-		return <div className={['uk-flex', 'uk-flex-center'].join(' ')}>
+		return <div className={['uk-flex', 'uk-flex-center', 'uk-margin-bottom'].join(' ')}>
 			<div className={'uk-inline'}>
-				<img className={[styles.mediaViewer].join(' ')} src={window.URL.createObjectURL(this.props.media)} alt={'Media'}/>
+				<img className={[styles.mediaViewer].join(' ')} src={window.URL.createObjectURL(this.props.media)}
+						 alt={'Media'}/>
 				<div className={['uk-overlay', 'uk-overlay-default', 'uk-position-top-right', styles.topOverlay].join(' ')}
 						 onClick={this.props.removeMedia}>
 					<p><span uk-icon="icon: close"/></p>
@@ -184,16 +179,17 @@ class CreatePost extends React.Component {
 	showHashtags() {
 		return <div uk-grid="true" className={['uk-margin-remove'].join(' ')}>
 			{this.props.hashtags.length ?
-				this.props.hashtags.map(i => <span key={i} className={['uk-margin-remove', styles.communitySingle].join(' ')}>#{i}</span>) :
-				<span className={styles.hashtagInfo}>Your tags will appear here.</span>}
+				this.props.hashtags.map(i => <span key={i}
+																					 className={['uk-margin-remove', styles.communitySingle].join(' ')}>#{i}</span>) :
+				<span className={[styles.hashtagInfo].join(' ')}>Your tags will appear here.</span>}
 		</div>
 	}
 
 	getErrors() {
 		return <div className={['uk-margin-top', styles.errorContainer].join(' ')}>
 			{this.props.errors.map((err, idx) => <div key={idx} className={['uk-alert', 'uk-alert-danger'].join(' ')}>
-					{(typeof err.message === 'string') ? err.message : 'An error occurred, check console!'}
-				</div>)}
+				{(typeof err.message === 'string') ? err.message : 'An error occurred, check console!'}
+			</div>)}
 		</div>
 	}
 

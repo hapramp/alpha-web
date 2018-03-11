@@ -24,7 +24,7 @@ class Feed extends React.Component {
 					<div className={['uk-padding', indexStyles.white].join(' ')}>
 						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
 					</div>
-					<AddContentButton />
+					<AddContentButton/>
 				</div>
 			</div>
 		</div>
