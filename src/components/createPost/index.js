@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Redirect} from 'react-router-dom';
 import twitter from 'twitter-text';
+import * as firebase from 'firebase';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
@@ -46,25 +47,35 @@ class CreatePost extends React.Component {
 
 		if (this.props.media) {
 			let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.name)
-				.put(this.props.media)
-				.then(snapshot => {
-					console.log('Image uploaded', snapshot);
-					let downloadURL = snapshot.downloadURL;
-					post = {
-						type: 'post',
-						data: [
-							{
-								type: 'image',
-								content: downloadURL
-							},
-							{
-								type: 'text',
-								content
-							},
-						]
-					};
-					this.props.createPost({post, tags: this.props.hashtags, community});
-				});
+				.put(this.props.media);
+
+			let onUploadProgress = snapshot => {
+				console.log('Progress - ', snapshot)
+				// TODO: Show an indicator
+			};
+			let onUploadError = error => {
+				console.log(error)
+				// TODO: Show some error
+			};
+			let onUploadComplete = () => {
+				let downloadURL = uploadTask.snapshot.downloadURL;
+				console.log('Image uploaded', downloadURL);
+				post = {
+					type: 'post',
+					data: [
+						{
+							type: 'image',
+							content: downloadURL
+						},
+						{
+							type: 'text',
+							content
+						},
+					]
+				};
+				this.props.createPost({post, tags: this.props.hashtags, community});
+			};
+			uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, onUploadProgress, onUploadError, onUploadComplete);
 		} else {
 			post = {
 				type: 'post',
