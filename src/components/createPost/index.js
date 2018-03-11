@@ -42,19 +42,41 @@ class CreatePost extends React.Component {
 
 		community = this.props.communities.filter(i => i.id === community)[0].tag;
 
-		// Structure to build response
-		let post = {
-			type: 'post',
-			data: [
-				{
-					type: 'text',
-					content
-				}
-			]
-		};
+		let post;
 
-		// Create
-		this.props.createPost({post, tags: this.props.hashtags, community});
+		if (this.props.media) {
+			let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.name)
+				.put(this.props.media)
+				.then(snapshot => {
+					console.log('Image uploaded', snapshot);
+					let downloadURL = snapshot.downloadURL;
+					post = {
+						type: 'post',
+						data: [
+							{
+								type: 'image',
+								content: downloadURL
+							},
+							{
+								type: 'text',
+								content
+							},
+						]
+					};
+					this.props.createPost({post, tags: this.props.hashtags, community});
+				});
+		} else {
+			post = {
+				type: 'post',
+				data: [
+					{
+						type: 'text',
+						content
+					}
+				]
+			};
+			this.props.createPost({post, tags: this.props.hashtags, community});
+		}
 	}
 
 	parseHashTags() {
@@ -158,7 +180,7 @@ class CreatePost extends React.Component {
 
 	getErrors() {
 		return <div className={['uk-margin-top', styles.errorContainer].join(' ')}>
-			{this.props.errors.map(err => <div className={['uk-alert', 'uk-alert-danger'].join(' ')}>
+			{this.props.errors.map((err, idx) => <div key={idx} className={['uk-alert', 'uk-alert-danger'].join(' ')}>
 					{(typeof err.message === 'string') ? err.message : 'An error occurred, check console!'}
 				</div>)}
 		</div>

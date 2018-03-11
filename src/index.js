@@ -14,6 +14,7 @@ UIKit.use(Icons);
 
 const store = getStore();
 
+// Initialize firebase
 let config = {
 	apiKey: "AIzaSyBVUoUB41eL2GS_ERrG5bAfrjr1bukCu2g",
 	authDomain: "hapramp-625c8.firebaseapp.com",
@@ -23,6 +24,7 @@ let config = {
 	messagingSenderId: "574002232827"
 };
 firebase.initializeApp(config);
+window.firebaseStorage = firebase.storage();
 
 ReactDOM.render(
 	<Provider store={store}>
