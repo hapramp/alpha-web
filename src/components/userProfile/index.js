@@ -106,10 +106,10 @@ class UserProfile extends React.Component {
 			indexStyles.white].join(' ')}>
 			{/* User details */}
 			<div className={['uk-cover-container', styles.profileCoverContainer].join(' ')}>
-				<img src={jsonMetadata.profile.cover_image}/>
+				<img src={jsonMetadata.profile.cover_image} alt={""}/>
 			</div>
 			<div className={['uk-text-center'].join(' ')}>
-				<img src={jsonMetadata.profile.profile_image}
+				<img src={jsonMetadata.profile.profile_image} alt={""}
 						 className={['uk-border-circle', jsonMetadata.profile.cover_image ? styles.profileImage : styles.profileImageNoCover].join(' ')}/>
 			</div>
 			<div className={['uk-text-center', 'uk-margin-top'].join(' ')}>

@@ -24,7 +24,7 @@ class CommunityCard extends React.Component {
 			<div className={['uk-card', 'uk-card-default', 'uk-padding', 'uk-padding-remove-bottom',
 				'uk-padding-remove-horizontal'].join(' ')}>
 				<div className={['uk-card-media-top uk-text-center'].join(' ')}>
-					<img src={this.props.community.image_uri}/>
+					<img src={this.props.community.image_uri} alt={""}/>
 				</div>
 				<div className={['uk-card-body'].join(' ')}>
 					<div className={['uk-text-uppercase', styles.communityName].join(' ')}>{this.props.community.name}</div>

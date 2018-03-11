@@ -70,7 +70,7 @@ class Post extends React.Component {
 		return <div className={['uk-margin-top', 'uk-padding', styles.postContainer].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.topSection].join(' ')}>
-				<img src={userPlaceholder} className={['uk-border-circle', styles.userImage].join(' ')}/>
+				<img src={userPlaceholder} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-between'].join(' ')}>
 					<div><span className={styles.userName}>Dummy User </span> | {this.props.post.created}</div>
 					<div>{communities.map((community, idx) => <span

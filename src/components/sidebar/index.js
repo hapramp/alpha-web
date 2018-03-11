@@ -12,7 +12,7 @@ class Sidebar extends React.Component {
 			<div>
 				{this.props.communities.map(community => <div className={['uk-margin-top', this.props.match.params.community === community.tag ? styles.active : ''].join(' ')}>
 					<Link to={'/browse/' + community.tag}>
-						<img src={community.image_uri} className={['uk-border-circle', styles.communityImage].join(' ')}/>
+						<img src={community.image_uri} className={['uk-border-circle', styles.communityImage].join(' ')} alt={""}/>
 						<span className={['uk-margin-left'].join(' ')}>{community.name}</span></Link>
 				</div>)}
 			</div>
