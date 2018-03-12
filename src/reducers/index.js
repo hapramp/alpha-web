@@ -7,6 +7,7 @@ import {createPostReducer} from "./createPostReducer";
 import {userProfileReducer} from "./userProfileReducer";
 import {communitiesReducer} from "./communitiesReducer";
 import {userFeedReducer} from "./userFeedReducer";
+import {allUserReducer} from "./allUsersReducer";
 
 export default combineReducers({
 	login: loginReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
 	userProfile: userProfileReducer,
 	communities: communitiesReducer,
 	userFeed: userFeedReducer,
+	allUsers: allUserReducer
 });

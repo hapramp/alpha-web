@@ -136,6 +136,20 @@ class SteemAPI {
 		})
 	}
 
+	getUserAccounts(usernames) {
+		return new Promise((resolve, reject) => {
+			steem.api.getAccounts(usernames, (err, result) => {
+				if (err) {
+					reject(err);
+				} else if (result.length === 0) {
+					reject(err);
+				} else {
+					resolve(result);
+				}
+			})
+		})
+	}
+
 	createPost(wif, author, body, tags, content, permlink, community) {
 		return new Promise((resolve, reject) => {
 			tags.push(community.toLowerCase());
