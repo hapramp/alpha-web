@@ -6,5 +6,9 @@
 }
 
 .active {
-  border-right: 4px solid $primary-color;
+  border-right: 4px solid $primary-color !important;
+}
+
+.communityContainer:hover {
+  border-right: 4px solid $primary-light-color;
 }

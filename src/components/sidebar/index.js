@@ -10,14 +10,15 @@ class Sidebar extends React.Component {
 		return <div className={['uk-margin-top', 'uk-padding', 'uk-padding-remove-right', indexStyles.white].join(' ')}>
 			<div>COMMUNITIES</div>
 			<div>
-				{this.props.communities.map(community =>
-					<div key={community.id}
-							 className={['uk-margin-top', this.props.match.params.community === community.tag ? styles.active : ''].join(' ')}>
-						<Link to={'/browse/' + community.tag}>
-							<img src={community.image_uri} className={['uk-border-circle', styles.communityImage].join(' ')}
-									 alt={""}/>
-							<span className={['uk-margin-left'].join(' ')}>{community.name}</span></Link>
-					</div>)}
+				{this.props.communities.map(community => <Link key={community.id} to={'/browse/' + community.tag}>
+					<div
+						className={['uk-margin-top', styles.communityContainer,
+							this.props.match.params.community === community.tag ? styles.active : ''].join(' ')}>
+						<img src={community.image_uri} className={['uk-border-circle', styles.communityImage].join(' ')}
+								 alt={""}/>
+						<span className={['uk-margin-left'].join(' ')}>{community.name}</span>
+					</div>
+				</Link>)}
 			</div>
 		</div>
 	}
