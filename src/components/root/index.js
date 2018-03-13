@@ -9,6 +9,7 @@ import CreatePost from '../createPost';
 import UserProfile from '../userProfile';
 import Browse from '../browse';
 import BrowseCommunity from '../browseCommunity';
+import CreateArticle from '../createArticle';
 
 class Root extends React.Component {
 
@@ -37,15 +38,21 @@ class Root extends React.Component {
 					<Redirect to={`/browse/${match.params.community}/hot`}/>}/>
 				<Route exact path={'/browse/:community/:filter'} component={BrowseCommunity}/>
 
-
+				{/* Content Creation Views */}
 				<Route exact path={'/create/post'} component={CreatePost}/>
-				<Route exact path={'/create/article'} render={() => <div>You can create article here</div>}/>
+				<Route exact path={'/create/article'} component={CreateArticle}/>
 				<Redirect path={'/create'} to={'/create/post'}/>
+
+				{/* Profile redirect logic */}
 				<Route exact path={'/profile'} render={() => getStore().getState().login.loggedIn ?
 					<Redirect to={'/@' + getStore().getState().authUser.username}/> :
 					<Redirect to={'/signin'}/>
 				}/>
+
+				{/* Profile section */}
 				<Route exact path={'/@:username'} component={UserProfile}/>
+
+				{/* Unknown route - 404 */}
 				<Route exact path={'*'} render={() => <div>Not found</div>}/>
 			</Switch>
 		</div>
