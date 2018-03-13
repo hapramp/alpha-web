@@ -7,9 +7,24 @@ import styles from './styles.scss';
 import createPostStyles from '../createPost/styles.scss';
 import userProfilePlaceholder from '../userProfile/user-placeholder.jpg';
 import indexStyles from '../../index.scss';
+import {setTitle, setContent} from "../../actions/createArticleActions";
 
+/*
+TODO:
+ - Connect editor state to store
+ - Convert editor state to article object
+ - Implement draft saving
+ */
 
 class CreateArticle extends React.Component {
+	handleContentChange(content) {
+		this.props.setContent(content);
+	}
+
+	handleTitleChange(e) {
+		this.props.setTitle(e.target.value);
+	}
+
 	render() {
 		/* User details */
 		let name, image;
@@ -43,9 +58,10 @@ class CreateArticle extends React.Component {
 				{/* Editor section */}
 				<div>
 					<input placeholder={'Title'} className={['uk-input', 'uk-form-large', styles.titleInput].join(' ')}
-								 type={'text'}/>
+								 type={'text'} onChange={this.handleTitleChange.bind(this)} value={this.props.createArticle.title}/>
 					<div className={['uk-margin-large-top'].join(' ')}>
-						<Editor/>
+						<Editor placeholder={'Write your story here...'}
+										onChange={this.handleContentChange.bind(this)}/>
 					</div>
 				</div>
 			</div>
@@ -55,8 +71,11 @@ class CreateArticle extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		authUser: state.authUser
+		authUser: state.authUser,
+		createArticle: state.createArticle,
 	}
 };
 
-export default connect(mapStateToProps)(CreateArticle);
+export default connect(mapStateToProps, {
+	setTitle, setContent
+})(CreateArticle);
