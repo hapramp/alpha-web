@@ -1,5 +1,3 @@
-import {EditorState} from 'draft-js';
-
 import {actionTypes} from "../actions/createArticleActions";
 
 const initialState = {title: '', content: ''};
