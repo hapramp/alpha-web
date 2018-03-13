@@ -1,0 +1,17 @@
+@import "../../index.scss";
+
+.userSection {
+  height: 72px;
+  padding-right: 16px;
+  border-right: 2px solid $background-color;
+}
+
+.topSection {
+  border-bottom: 2px solid $background-color;
+}
+
+.titleInput {
+  border: none;
+  padding-left: 16px;
+  border-left: 4px solid $background-color;
+}
