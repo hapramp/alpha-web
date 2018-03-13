@@ -57,6 +57,7 @@ class Post extends React.Component {
 
 		let content = this.props.post.json_metadata.content;
 
+		/* Rating related calculations */
 		let organic_vote_count = this.props.post.hapramp_votes;
 		let organic_vote_sum = organic_vote_count * this.props.post.hapramp_rating;
 
@@ -66,15 +67,20 @@ class Post extends React.Component {
 		let final_rating = (final_vote_sum / this.props.post.net_votes).toFixed(2);
 
 		final_rating = this.props.post.net_votes ? final_rating : 0.0.toFixed(2);
+
+		/* Author details */
 		let user = this.props.allUsers[this.props.post.author];
 		if (!user || !user.json_metadata) {
-			user = {};
+			!user && (user = {});
 			user.json_metadata = {name: this.props.post.author , profile_image: userPlaceholder};
 		} else {
-			user.json_metadata && (user.json_metadata = JSON.parse(this.props.allUsers[this.props.post.author].json_metadata));
-			!user.json_metadata.name && (user.json_metadata.name = this.props.psot.author);
+			user = _.clone(user);
+			user.json_metadata = JSON.parse(this.props.allUsers[this.props.post.author].json_metadata);
+			!user.json_metadata.name && (user.json_metadata.name = this.props.post.author);
 			!user.json_metadata.profile_image && (user.json_metadata.profile_image = userPlaceholder);
 		}
+
+		/* Render */
 		return <div className={['uk-margin-top', 'uk-padding', styles.postContainer].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.topSection].join(' ')}>

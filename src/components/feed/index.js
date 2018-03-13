@@ -17,7 +17,8 @@ class Feed extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		let usersRequired = newProps.userFeed.posts.map(i => i.author).filter(username => !_.some(Object.keys(newProps.allUsers), i => username === i));
+		let usersRequired = newProps.userFeed.posts.map(i => i.author)
+			.filter(username => !_.some(Object.keys(newProps.allUsers), j => username === j));
 		usersRequired.length && newProps.loadUserAccounts(usersRequired);
 	}
 

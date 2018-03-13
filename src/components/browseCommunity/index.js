@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import _ from 'lodash';
 
 import Sidebar from '../sidebar';
 import Post from '../post';
 import {loadFeedsByCreated, loadFeedsByHot, loadFeedsByTrending} from "../../actions/userFeedActions";
+import {loadUserAccounts} from "../../actions/allUserActions";
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
 
@@ -18,6 +20,9 @@ class BrowseCommunity extends React.Component {
 		if (newProps.match.params.filter !== this.props.match.params.filter) {
 			this.loadFeeds(newProps);
 		}
+		let usersRequired = newProps.userFeed[this.props.match.params.filter].posts
+			.map(i => i.author).filter(username => !_.some(Object.keys(newProps.allUsers), j => username === j));
+		usersRequired.length && newProps.loadUserAccounts(usersRequired);
 	}
 
 	loadFeeds(props) {
@@ -73,10 +78,12 @@ class BrowseCommunity extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		userFeed: state.userFeed
+		userFeed: state.userFeed,
+		allUsers: state.allUsers.users,
 	}
 };
 
 export default connect(mapStateToProps, {
-	loadFeedsByHot, loadFeedsByCreated, loadFeedsByTrending
+	loadFeedsByHot, loadFeedsByCreated, loadFeedsByTrending,
+	loadUserAccounts
 })(BrowseCommunity);
