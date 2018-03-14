@@ -11,8 +11,6 @@ import {setTitle, setContent} from "../../actions/createArticleActions";
 
 /*
 TODO:
- - Connect editor state to store
- - Convert editor state to article object
  - Implement draft saving
  */
 
@@ -25,45 +23,56 @@ class CreateArticle extends React.Component {
 		this.props.setTitle(e.target.value);
 	}
 
-	render() {
+	getUserSection() {
 		/* User details */
 		let name, image;
 		name = this.props.authUser.name ? this.props.authUser.name : this.props.authUser.username;
 		image = this.props.authUser.avatar;
 		image = userProfilePlaceholder;
 
+		return <div className={['uk-flex', 'uk-flex-center', 'uk-margin', styles.userSection].join(' ')}>
+			<div className={['uk-margin-right'].join(' ')}>{ image ?
+				<img src={image} alt={""} className={['uk-border-circle', createPostStyles.userAvatar].join(' ')}/> :
+				<span uk-icon="icon: user"/>
+			}</div>
+			<div className={['uk-align-center'].join(' ')}>{name}</div>
+		</div>
+	}
+
+	getContinueSection() {
+		return <div className={['uk-flex'].join(' ')}>
+			<div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
+				<span className={[createPostStyles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}>
+					CONTINUE
+				</span>
+			</div>
+		</div>
+	}
+
+	getTopSection() {
+		return <div className={['uk-flex', 'uk-flex-between', 'uk-margin-bottom', styles.topSection].join(' ')}>
+			{this.getUserSection()}
+			{this.getContinueSection()}
+		</div>
+	}
+
+	getEditorSection() {
+		return <div>
+			<input placeholder={'Title'} className={['uk-input', 'uk-form-large', styles.titleInput].join(' ')}
+						 type={'text'} onChange={this.handleTitleChange.bind(this)} value={this.props.createArticle.title}/>
+			<div className={['uk-margin-large-top'].join(' ')}>
+				<Editor placeholder={'Write your story here...'}
+								onChange={this.handleContentChange.bind(this)}/>
+			</div>
+		</div>
+
+	}
+
+	render() {
 		return <div className={['uk-container', 'uk-margin-large-top'].join(' ')}>
 			<div className={['uk-padding', indexStyles.white].join(' ')}>
-				{/* Top section */}
-				<div className={['uk-flex', 'uk-flex-between', 'uk-margin-bottom', styles.topSection].join(' ')}>
-					{/* User section */}
-					<div className={['uk-flex', 'uk-flex-center', 'uk-margin', styles.userSection].join(' ')}>
-						<div className={['uk-margin-right'].join(' ')}>{ image ?
-							<img src={image} alt={""} className={['uk-border-circle', createPostStyles.userAvatar].join(' ')}/> :
-							<span uk-icon="icon: user"/>
-						}</div>
-						<div className={['uk-align-center'].join(' ')}>{name}</div>
-					</div>
-
-					{/* Continue section */}
-					<div className={['uk-flex'].join(' ')}>
-						<div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
-							<span className={[createPostStyles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}>
-								CONTINUE
-							</span>
-						</div>
-					</div>
-				</div>
-
-				{/* Editor section */}
-				<div>
-					<input placeholder={'Title'} className={['uk-input', 'uk-form-large', styles.titleInput].join(' ')}
-								 type={'text'} onChange={this.handleTitleChange.bind(this)} value={this.props.createArticle.title}/>
-					<div className={['uk-margin-large-top'].join(' ')}>
-						<Editor placeholder={'Write your story here...'}
-										onChange={this.handleContentChange.bind(this)}/>
-					</div>
-				</div>
+				{this.getTopSection()}
+				{this.getEditorSection()}
 			</div>
 		</div>
 	}
