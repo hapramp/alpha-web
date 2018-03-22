@@ -9,6 +9,7 @@ import {loadFeedsByCreated, loadFeedsByHot, loadFeedsByTrending} from "../../act
 import {loadUserAccounts} from "../../actions/allUserActions";
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
+import feedStyles from '../feed/styles.scss';
 
 class BrowseCommunity extends React.Component {
 	constructor(props) {
@@ -46,10 +47,10 @@ class BrowseCommunity extends React.Component {
 	render() {
 		return <div className={['uk-container'].join(' ')}>
 			<div uk-grid="true">
-				<div className={'uk-width-1-4'}>
+				<div className={feedStyles.sidebarContainer}>
 					<Sidebar/>
 				</div>
-				<div className={['uk-width-1-2', 'uk-margin-top'].join(' ')}>
+				<div className={['uk-margin-top', feedStyles.feedPosts].join(' ')}>
 					<div className={['uk-padding', indexStyles.white].join(' ')}>
 						<div className={['uk-margin-top', 'uk-margin-large-bottom'].join(' ')}>
 							<Link to={`/browse/${this.props.match.params.community}/hot`}>
