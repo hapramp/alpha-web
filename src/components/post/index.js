@@ -86,7 +86,7 @@ class Post extends React.Component {
 		}
 
 		/* Render */
-		return <div className={['uk-margin-top', 'uk-padding', styles.postContainer, indexStyles.white].join(' ')}>
+		return <div className={['uk-margin-bottom', 'uk-padding', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.topSection].join(' ')}>
 				<img src={user.json_metadata.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>

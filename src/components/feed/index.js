@@ -30,7 +30,7 @@ class Feed extends React.Component {
 					<Sidebar/>
 				</div>
 				<div className={['uk-margin-top', styles.feedPosts].join(' ')}>
-					<div className={['uk-padding'].join(' ')}>
+					<div className={[].join(' ')}>
 						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
 					</div>
 					<AddContentButton/>
