@@ -1,0 +1,26 @@
+@import '../../index.scss';
+
+.filter {
+	padding: 8px 16px;
+	font-size: 16px;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+	height: 24px;
+	background-color: $background-color;
+	transition: 0.3s all;
+}
+
+.filter:hover:not(.activeFilter) {
+	background-color: $primary-light-color;
+	transition: 0.3s all;
+}
+
+.filterContainer {
+	padding: 30px 35px;
+}
+
+.activeFilter {
+  background-color: $primary-color;
+  color: white;
+}

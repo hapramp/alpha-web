@@ -10,6 +10,7 @@ import {loadUserAccounts} from "../../actions/allUserActions";
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
 import feedStyles from '../feed/styles.scss';
+import CommunitySortFilter from '../communitySortFilter';
 
 class BrowseCommunity extends React.Component {
 	constructor(props) {
@@ -51,21 +52,8 @@ class BrowseCommunity extends React.Component {
 					<Sidebar/>
 				</div>
 				<div className={['uk-margin-top', feedStyles.feedPosts].join(' ')}>
-					<div className={['uk-padding', indexStyles.white].join(' ')}>
-						<div className={['uk-margin-top', 'uk-margin-large-bottom'].join(' ')}>
-							<Link to={`/browse/${this.props.match.params.community}/hot`}>
-							<span
-								className={[this.props.match.params.filter === 'hot' ? styles.activeFilter : '', styles.filter].join(' ')}>
-								HOT</span></Link>
-							<Link to={`/browse/${this.props.match.params.community}/trending`}>
-						<span
-							className={[this.props.match.params.filter === 'trending' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
-							TRENDING</span></Link>
-							<Link to={`/browse/${this.props.match.params.community}/created`}>
-						<span
-							className={[this.props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
-							CREATED</span></Link>
-						</div>
+					<div className={[].join(' ')}>
+						<CommunitySortFilter/>
 						<div>
 							{this.props.userFeed[this.props.match.params.filter].posts && this.props.userFeed[this.props.match.params.filter].posts.map(post =>
 								<Post key={post.id} post={post}/>)}
