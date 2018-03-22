@@ -8,9 +8,9 @@ import indexStyles from '../../index.scss';
 class Sidebar extends React.Component {
 	render() {
 		return <div className={['uk-margin-top', 'uk-padding', 'uk-padding-remove-right', indexStyles.white].join(' ')}>
-			<div>COMMUNITIES</div>
+			<div className={[styles.communitiesHeader].join(' ')}>COMMUNITIES</div>
 			<div>
-				{this.props.communities.map(community => <Link key={community.id} to={'/browse/' + community.tag}>
+				{this.props.communities.map(community => <Link key={community.id} to={'/browse/' + community.tag} className={[].join(' ')}>
 					<div
 						className={['uk-margin-top', styles.communityContainer, indexStyles.transition,
 							this.props.match.params.community === community.tag ? styles.active : ''].join(' ')}>
