@@ -5,6 +5,7 @@ import _ from 'lodash';
 import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
 import styles from './styles.scss';
+import indexStyles from '../../index.scss';
 
 class Post extends React.Component {
 	/*
@@ -85,7 +86,7 @@ class Post extends React.Component {
 		}
 
 		/* Render */
-		return <div className={['uk-margin-top', 'uk-padding', styles.postContainer].join(' ')}>
+		return <div className={['uk-margin-top', 'uk-padding', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.topSection].join(' ')}>
 				<img src={user.json_metadata.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
