@@ -85,7 +85,7 @@ class Post extends React.Component {
 			!user.json_metadata.profile_image && (user.json_metadata.profile_image = userPlaceholder);
 		}
 
-		/* Render */
+	/* Render */
 		return <div className={['uk-margin-bottom', 'uk-padding', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.topSection].join(' ')}>
@@ -110,7 +110,7 @@ class Post extends React.Component {
 							<path d="M0 0h18v18H0z" fill="none"/>
 						</svg>
 					</span>
-					{final_rating} of {this.props.post.net_votes}
+					{final_rating} from {this.props.post.net_votes}
 					</span>
 				<span className={[styles.action].join(' ')}>
 					<span className={['uk-margin-small-right'].join(' ')}>
