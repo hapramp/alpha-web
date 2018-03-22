@@ -101,13 +101,11 @@ class UserProfile extends React.Component {
 		jsonMetadata.profile = jsonMetadata.profile ? jsonMetadata.profile : {};
 		jsonMetadata.profile.profile_image = jsonMetadata.profile.profile_image ? jsonMetadata.profile.profile_image : userPlaceholder;
 
-
-		return <div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top',
-			indexStyles.white].join(' ')}>
+		return <div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top', indexStyles.white].join(' ')}>
 			{/* User details */}
-			<div className={['uk-cover-container', styles.profileCoverContainer].join(' ')}>
-				<img src={jsonMetadata.profile.cover_image} alt={""}/>
-			</div>
+			{jsonMetadata.profile.cover_image &&
+			<div className={['uk-cover-container', styles.profileCoverContainer].join(' ')}
+				style={{backgroundImage: `url(${jsonMetadata.profile.cover_image})`}}/>}
 			<div className={['uk-text-center'].join(' ')}>
 				<img src={jsonMetadata.profile.profile_image} alt={""}
 						 className={['uk-border-circle', jsonMetadata.profile.cover_image ? styles.profileImage : styles.profileImageNoCover].join(' ')}/>
@@ -118,6 +116,7 @@ class UserProfile extends React.Component {
 					<span className={'uk-margin-small-left'}>@{this.props.userProfile.user.name}</span>
 				</div>
 			</div>
+
 			<div className={['uk-margin-top', 'uk-text-center'].join(' ')}>
 				<span>{this.props.userProfile.user.post_count} Post{this.props.userProfile.user.post_count === 1 ? '' : 's'}</span>
 				<span
@@ -125,10 +124,21 @@ class UserProfile extends React.Component {
 				<span className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.following.count} Following</span>
 			</div>
 
+			<div className={['uk-margin-top', 'uk-margin-bottom', 'uk-flex', 'uk-flex-center'].join(' ')}>
+				<div className={['uk-text-center', styles.bio].join(' ')}>
+					{jsonMetadata.profile.about || 'No bio provided.'}
+				</div>
+			</div>
+
+			<div className={[].join(' ')}>
+				<div>Interests</div>
+				<div></div>
+			</div>
+
 			{/* User posts */}
-			<div className={['uk-text-center', 'uk-margin-large-top', styles.blogHeader].join(' ')}>LATEST HAPS</div>
-			<div className={['uk-margin-top', 'uk-flex', 'uk-flex-center'].join(' ')}>
+			<div className={['uk-flex', 'uk-flex-center', indexStyles.white, styles.userPostsContainer].join(' ')}>
 				<div className={[styles.blogContainer].join(' ')}>
+				<div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST HAPS</div>
 					{this.props.userProfile.blog.posts.map(item => <Post key={item.id} post={item}/>)}
 				</div>
 			</div>

@@ -86,9 +86,9 @@ class Post extends React.Component {
 		}
 
 	/* Render */
-		return <div className={['uk-margin-bottom', 'uk-padding', styles.postContainer, indexStyles.white].join(' ')}>
+		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
-			<div className={['uk-flex', styles.topSection].join(' ')}>
+			<div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
 				<img src={user.json_metadata.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-between'].join(' ')}>
 					<div><span className={styles.userName}>{user.json_metadata.name}</span> | {this.props.post.created}</div>
@@ -102,7 +102,7 @@ class Post extends React.Component {
 				{content && content.data.map((data, idx) => <PostData key={idx} data={data}/>)}
 			</div>
 			{/* Action bar */}
-			<div className={['uk-margin-top', 'uk-flex', 'uk-flex-around'].join(' ')}>
+			<div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
 				<span>
 					<span className={[styles.action].join(' ')}>
 						<svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">

@@ -1,7 +1,7 @@
 @import '../../index.scss';
 
 .postContainer {
-
+	border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .topSection {
@@ -31,4 +31,8 @@
 .action svg {
   height: 24px;
   width: 24px;
+}
+
+.paddingModerate {
+	padding: 25px;
 }
