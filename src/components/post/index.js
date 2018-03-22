@@ -75,7 +75,11 @@ class Post extends React.Component {
 			user.json_metadata = {name: this.props.post.author , profile_image: userPlaceholder};
 		} else {
 			user = _.clone(user);
-			user.json_metadata = JSON.parse(this.props.allUsers[this.props.post.author].json_metadata);
+			try {
+				user.json_metadata = JSON.parse(this.props.allUsers[this.props.post.author].json_metadata);
+			} catch (error) {
+				user.json_metadata = {};
+			}
 			!user.json_metadata.name && (user.json_metadata.name = this.props.post.author);
 			!user.json_metadata.profile_image && (user.json_metadata.profile_image = userPlaceholder);
 		}

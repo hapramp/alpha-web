@@ -1,6 +1,6 @@
 import {actionTypes} from "../actions/userFeedActions";
 
-const initialState = {user: {}, hot: {}, trending: {}, created: {}};
+const initialState = {user: {posts: []}, hot: {posts: []}, trending: {posts: []}, created: {posts: []}};
 
 export const userFeedReducer = (state = initialState, action) => {
 	switch (action.type) {

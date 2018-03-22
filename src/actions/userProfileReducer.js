@@ -1,5 +1,6 @@
 import SteemAPI from '../utils/steem';
 import haprampAPI from "../utils/haprampAPI";
+import {actionTypes as allUserActionTypes} from './allUserActions';
 
 export const actionTypes = {
 	LOAD_USER_INFO: 'USER_PROFILE.LOAD.INIT',
@@ -16,7 +17,10 @@ export const actionTypes = {
 export const loadUserProfileInfo = username => dispatch => {
 	dispatch({type: actionTypes.LOAD_USER_INFO, username});
 	SteemAPI.getUserAccount(username)
-		.then(result => dispatch({type: actionTypes.LOADED_USER_INFO, username, result}))
+		.then(result => {
+			dispatch({type: actionTypes.LOADED_USER_INFO, username, result});
+			dispatch({type: allUserActionTypes.LOAD_USERS_DONE, results: [result]})
+		})
 		.catch(e => dispatch({type: actionTypes.LOAD_USER_INFO_FAILED, username, reason: e}))
 };
 
