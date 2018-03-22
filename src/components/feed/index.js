@@ -26,7 +26,7 @@ class Feed extends React.Component {
 	render() {
 		return <div className={['uk-container'].join(' ')}>
 			<div uk-grid="true">
-				<div className={'uk-width-1-4'}>
+				<div className={[styles.sidebarContainer].join(' ')}>
 					<Sidebar/>
 				</div>
 				<div className={['uk-margin-top', styles.feedPosts].join(' ')}>
