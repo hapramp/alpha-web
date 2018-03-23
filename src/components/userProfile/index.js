@@ -139,7 +139,7 @@ class UserProfile extends React.Component {
 				<div className={['uk-flex'].join(' ')}>
 					{this.props.allUsers.haprampUsers[this.props.match.params.username] &&
 						this.props.allUsers.haprampUsers[this.props.match.params.username].communities.map(community =>
-						<div className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
+						<div key={community.id} className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
 							<div><img className={[styles.communityImage].join(' ')} src={community.image_uri}/></div>
 							<div className={['uk-margin-small-top'].join(' ')}>{community.name}</div>
 						</div>)}
