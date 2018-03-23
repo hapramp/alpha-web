@@ -3,14 +3,20 @@ import _ from 'lodash';
 import {actionTypes} from "../actions/createPostActions";
 
 const initialState = {
-	community: {active: null}, media: null, errors: [], hashtags: [],
+	community: [], media: null, errors: [], hashtags: [],
 	created: false, fullPermlink: null, creating: false
 };
 
 export const createPostReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.CHANGE_COMMUNITY:
-			return {...state, community: {active: action.community}};
+			let community = state.community.slice();
+			if (_.some(community, i => i === action.community)) {
+				community = community.filter(i => i !== action.community);
+			} else if (community.length < 3) {
+				community.push(action.community);
+			}
+			return {...state, community};
 
 		case actionTypes.CHANGE_MEDIA:
 			return {...state, media: action.file};

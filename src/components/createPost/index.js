@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import twitter from 'twitter-text';
 import * as firebase from 'firebase';
+import _ from 'lodash';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
@@ -38,12 +39,12 @@ class CreatePost extends React.Component {
 
 		// Community
 		let community = this.props.activeCommunity;
-		if (!community) {
-			this.props.postCreateError({element: 'community', 'message': 'Please select a community'});
+		if (!community.length) {
+			this.props.postCreateError({element: 'community', 'message': 'Please select at least one community'});
 			return;
 		}
 
-		community = this.props.communities.filter(i => i.id === community)[0].tag;
+		community = this.props.communities.filter(i => _.some(community, j => j === i.id)).map(i => i.tag);
 
 		let post;
 
@@ -117,12 +118,12 @@ class CreatePost extends React.Component {
 
 	getCommunitySelector() {
 		return <div className={['uk-margin-top'].join(' ')}>
-			<div className={['uk-margin-bottom', styles.communityHeading].join(' ')}>Community</div>
+			<div className={['uk-margin-bottom', styles.communityHeading].join(' ')}>Select Communities (max 3)</div>
 			<div uk-grid="true" className={'uk-margin-remove'}>
 				{this.props.communities.map(community =>
 					<div key={community.id} onClick={() => this.props.changeCommunity(community.id)}
 							 className={[styles.communitySingle,
-								 this.props.activeCommunity === community.id ? styles.active : ''].join(' ')}>{community.name}</div>)}
+								 _.some(this.props.activeCommunity, i => i === community.id) ? styles.active : ''].join(' ')}>{community.name}</div>)}
 			</div>
 		</div>
 	}
@@ -210,6 +211,7 @@ class CreatePost extends React.Component {
 				{this.showHashtags()}
 				<div className={['uk-margin-top', indexStyles.separator].join(' ')}/>
 				{this.getCommunitySelector()}
+				<div className={['uk-margin-top', indexStyles.separator].join(' ')}/>
 				{this.getMediaUploader()}
 				{this.getErrors()}
 			</div>
@@ -222,7 +224,7 @@ const mapStateToProps = state => {
 		userFullName: state.authUser.name,
 		userAvatar: state.authUser.avatar,
 		communities: state.communities.communities,
-		activeCommunity: state.createPost.community.active,
+		activeCommunity: state.createPost.community,
 		media: state.createPost.media,
 		hashtags: state.createPost.hashtags,
 		postCreated: state.createPost.created,
