@@ -96,13 +96,18 @@ export default {
 		},
 		communities: {
 			getAllCommunities: () => getPromiseForUrl(constants.BACKEND_URL.V2 + '/communities')
-		}
+		},
+		users: {
+			getUserDetailsByUsername: username => {
+				return getPromiseForUrl(constants.BACKEND_URL.V2 + '/users/usernames/' + username);
+			}
+		},
 	}
 };
 
-const getPromiseForUrl = url => {
+const getPromiseForUrl = (url, options = {}) => {
 	return new Promise((resolve, reject) => {
-		fetch(url)
+		fetch(url, ...options)
 			.then(response => {
 				if (response.ok) {
 					response.json().then(json => resolve(json));

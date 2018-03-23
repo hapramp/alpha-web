@@ -9,6 +9,7 @@ import {
 	getFollowCount, getUserFeeds, loadUserProfileInfo,
 	resetUserProfileInfo
 } from '../../actions/userProfileReducer';
+import {loadHaprampUserDetails} from '../../actions/allUserActions';
 
 // TODO: Get follower/following
 class UserProfile extends React.Component {
@@ -17,6 +18,7 @@ class UserProfile extends React.Component {
 		props.loadUserProfileInfo(props.match.params.username);
 		props.getFollowCount(props.match.params.username);
 		props.getUserFeeds(props.match.params.username);
+		this.props.loadHaprampUserDetails(this.props.match.params.username);
 	}
 
 	componentWillUnmount() {
@@ -26,6 +28,7 @@ class UserProfile extends React.Component {
 	componentWillReceiveProps(newProps) {
 		if (newProps.match.params.username !== this.props.match.params.username && !newProps.userProfile.loading) {
 			this.props.loadUserProfileInfo(newProps.match.params.username);
+			this.props.loadHaprampUserDetails(newProps.match.params.username);
 			this.props.getFollowCount(newProps.match.params.username);
 			this.props.getUserFeeds(newProps.match.params.username);
 		}
@@ -130,15 +133,24 @@ class UserProfile extends React.Component {
 				</div>
 			</div>
 
+			<div className={['uk-flex', 'uk-flex-center', 'uk-margin-large-bottom'].join(' ')}>
 			<div className={[].join(' ')}>
-				<div>Interests</div>
-				<div></div>
+				<div className={['uk-margin-top', 'uk-margin-bottom', styles.interestsHeader].join(' ')}>INTERESTS</div>
+				<div className={['uk-flex'].join(' ')}>
+					{this.props.allUsers.haprampUsers[this.props.match.params.username] &&
+						this.props.allUsers.haprampUsers[this.props.match.params.username].communities.map(community =>
+						<div className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
+							<div><img className={[styles.communityImage].join(' ')} src={community.image_uri}/></div>
+							<div className={['uk-margin-small-top'].join(' ')}>{community.name}</div>
+						</div>)}
+				</div>
+			</div>
 			</div>
 
 			{/* User posts */}
 			<div className={['uk-flex', 'uk-flex-center', indexStyles.white, styles.userPostsContainer].join(' ')}>
 				<div className={[styles.blogContainer].join(' ')}>
-				<div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST HAPS</div>
+				<div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST</div>
 					{this.props.userProfile.blog.posts.map(item => <Post key={item.id} post={item}/>)}
 				</div>
 			</div>
@@ -148,11 +160,12 @@ class UserProfile extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		userProfile: state.userProfile
+		userProfile: state.userProfile,
+		allUsers: state.allUsers
 	}
 };
 
 export default connect(mapStateToProps, {
 	loadUserProfileInfo, resetUserProfileInfo,
-	getFollowCount, getUserFeeds
+	getFollowCount, getUserFeeds, loadHaprampUserDetails
 })(UserProfile);

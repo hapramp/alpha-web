@@ -9,19 +9,30 @@
 	background-size: cover;
 }
 
-.bio {
-	max-width: 600px;
-}
-
 .profileImage {
-  width: 200px;
-  margin-top: -100px;
+	width: 150px;
+	height: 150px;
+  margin-top: -75px;
   position: relative;
 }
 
 .profileImageNoCover {
-  width: 200px;
+  width: 150px;
   position: relative;
+}
+
+.interestsHeader {
+	font-size: 18px;
+	color: $primary-color;
+}
+
+.communityImage {
+	width: 80px;
+	height: 80px;
+}
+
+.bio {
+	max-width: 600px;
 }
 
 .userName {
