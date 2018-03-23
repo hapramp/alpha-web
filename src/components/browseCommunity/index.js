@@ -1,14 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import _ from 'lodash';
 
 import Sidebar from '../sidebar';
 import Post from '../post';
 import {loadFeedsByCreated, loadFeedsByHot, loadFeedsByTrending} from "../../actions/userFeedActions";
 import {loadUserAccounts} from "../../actions/allUserActions";
-import indexStyles from '../../index.scss';
-import styles from './styles.scss';
 import feedStyles from '../feed/styles.scss';
 import CommunitySortFilter from '../communitySortFilter';
 

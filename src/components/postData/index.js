@@ -1,7 +1,5 @@
 import React from 'react';
 
-import styles from './styles.scss';
-
 class PostData extends React.Component {
 	render() {
 		switch (this.props.data.type) {

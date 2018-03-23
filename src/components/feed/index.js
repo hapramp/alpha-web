@@ -8,7 +8,6 @@ import {loadUserAccounts} from "../../actions/allUserActions";
 import Post from '../post';
 import AddContentButton from '../addContentButton';
 import Sidebar from '../sidebar';
-import indexStyles from '../../index.scss';
 import styles from './styles.scss';
 
 class Feed extends React.Component {
