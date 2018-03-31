@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import TimeAgo from 'react-time-ago'
 
 import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
@@ -91,7 +92,7 @@ class Post extends React.Component {
 			<div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
 				<img src={user.json_metadata.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-between'].join(' ')}>
-					<div><span className={styles.userName}>{user.json_metadata.name}</span> | {this.props.post.created}</div>
+					<div><span className={styles.userName}>{user.json_metadata.name}</span> | <TimeAgo>{new Date(this.props.post.created)}</TimeAgo></div>
 					<div>{communities.map((community, idx) => <span
 						key={idx} className={[idx !== 0 ? 'uk-margin-left' : '', styles.communityLabel].join(' ')}
 						style={{backgroundColor: community.color}}>{community.name}</span>)}</div>
