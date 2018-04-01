@@ -22,10 +22,10 @@ class Post extends React.Component {
 		setTimeout(() => this.setState({...this.state, ratingActive: false}), 300);
 	}
 
-	getCollapsedActionSection(final_rating) {
+	getCollapsedActionSection(final_rating, userRating) {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
 			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView.bind(this)}>
-				<i className={['uk-margin-small-right', 'far', 'fa-star'].join(' ')}></i>
+				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
 				{final_rating} from {this.props.post.net_votes}
 			</span>
 			<span className={['uk-flex', styles.action].join(' ')}>
@@ -39,14 +39,16 @@ class Post extends React.Component {
 		</div>
 	}
 
-	getRatingView() {
-		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-center'].join(' ')} onMouseLeave={this.disableRatingView.bind(this)}>
-			{[1, 2, 3, 4, 5].map((i, idx) => <span key={i} className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')}>
-				<i className={['uk-margin-small-right', 'far', 'fa-star'].join(' ')}></i>
-			</span>)}
-			<span className={['uk-margin-medium-left', indexStyles.pointer, styles.action].join(' ')}>
-				<i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')}></i>
+	getRatingView(userRating) {
+		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-between'].join(' ')} onMouseLeave={this.disableRatingView.bind(this)}>
+			<span className={['uk-margin-left'].join(' ')}>
+				{[1, 2, 3, 4, 5].map((i, idx) => <span key={i} className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')}>
+					<i className={['uk-margin-small-right', i < userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
+				</span>)}
 			</span>
+			{userRating && <span className={['uk-margin-medium-left', 'uk-margin-right', indexStyles.pointer, styles.action].join(' ')}>
+				<i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')}></i>
+			</span>}
 		</div>
 	}
 
@@ -61,10 +63,13 @@ class Post extends React.Component {
 		let final_rating = (final_vote_sum / this.props.post.net_votes).toFixed(2);
 
 		final_rating = this.props.post.net_votes ? final_rating : 0.0.toFixed(2);
+
+		let userRating = this.props.post['hapramp_cu_vote'];
+
 		if (this.state.ratingActive) {
-			return this.getRatingView();
+			return this.getRatingView(userRating);
 		} else {
-			return this.getCollapsedActionSection(final_rating);
+			return this.getCollapsedActionSection(final_rating, userRating);
 		}
 	}
 
