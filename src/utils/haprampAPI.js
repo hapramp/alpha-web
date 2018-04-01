@@ -85,7 +85,13 @@ export default {
 						}
 					}).catch(e => reject(e))
 				})
-			}
+			},
+			rate: (permlink, vote) => {
+				let options = {headers: {Authorization: 'Token ' + localStorage.getItem('ppk_hash')},
+					method: 'POST', body: JSON.stringify({vote})};
+				let url = constants.BACKEND_URL.V2 + '/posts/votes?permlink=' + permlink;
+				return getPromiseForUrl(url, options);
+			},
 		},
 		feed: {
 			getUserFeed: username => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/user/' + username
