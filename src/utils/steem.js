@@ -196,6 +196,14 @@ class SteemAPI {
 			steem.api.getFollowCount(username, callback);
 		})
 	}
+
+	vote(username, author, permlink, voteStatus) {
+		// TODO: Chosing the vote power feature
+		return new Promise((resolve, reject) => {
+			let callback = (err, result) => err ? reject(err) : resolve(result);
+			steem.api.vote(localStorage.getItem('posting_key'), username, author, permlink, voteStatus ? 100*100 : 0, callback);
+		})
+	}
 }
 
 export default new SteemAPI();
