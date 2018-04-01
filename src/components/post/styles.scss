@@ -28,9 +28,8 @@
   font-weight: 800;
 }
 
-.action svg {
-  height: 24px;
-  width: 24px;
+.action i {
+	font-size: 1.5em;
 }
 
 .paddingModerate {
@@ -39,4 +38,9 @@
 
 .largeIcon {
 	font-size: 35px;
+}
+
+.cancelRatingButton {
+	text-decoration: line-through;
+	transform: rotate(288deg);
 }
