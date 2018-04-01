@@ -197,11 +197,10 @@ class SteemAPI {
 		})
 	}
 
-	vote(username, author, permlink, voteStatus) {
-		// TODO: Chosing the vote power feature
+	vote(username, author, permlink, power, voteStatus) {
 		return new Promise((resolve, reject) => {
 			let callback = (err, result) => err ? reject(err) : resolve(result);
-			steem.api.vote(localStorage.getItem('posting_key'), username, author, permlink, voteStatus ? 100*100 : 0, callback);
+			steem.api.vote(localStorage.getItem('posting_key'), username, author, permlink, voteStatus ? power * 100 : 0, callback);
 		})
 	}
 }
