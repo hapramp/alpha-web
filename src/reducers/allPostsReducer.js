@@ -13,7 +13,7 @@ export const allPostsReducer = (state = initialState, action) => {
 			return {...state, posts};
 
 		case actionTypes.VOTE_POST_INIT:
-			posts = _.cloneDeep(state.posts);
+			posts = _.cloneDeep(state.posts);  // TODO: Reduce clone depth
 			current_vote = posts[action.permlink].hapramp_cu_vote;
 			if (action.vote === 0) {  // Remove vote
 				posts[action.permlink].hapramp_cu_vote = null;
@@ -29,6 +29,8 @@ export const allPostsReducer = (state = initialState, action) => {
 					posts[action.permlink].hapramp_votes++;
 			}
 			return {...state, posts};
+
+		// TODO: Handle post upvote error case
 
 		default:
 			return state;
