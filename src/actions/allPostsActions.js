@@ -14,7 +14,7 @@ export const addPosts = posts => dispatch => dispatch({type: actionTypes.ADD_POS
 export const deletePosts = posts => dispatch => dispatch({type: actionTypes.DELETE_POSTS, posts});
 
 export const ratePost = (author, permlink, currentVote, vote, power = 100) => dispatch => {
-	dispatch({type: VOTE_POST_INIT, permlink, vote});
+	dispatch({type: actionTypes.VOTE_POST_INIT, permlink, vote});
 	HaprampAPI.v2.post.rate(permlink, vote)
 		.then(response => {
 			vote >= 3 && steemAPI.vote(localStorage.getItem('username'), author, permlink, power, currentVote)

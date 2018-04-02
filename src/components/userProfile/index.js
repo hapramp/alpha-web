@@ -8,7 +8,7 @@ import Post from '../post';
 import {
 	getFollowCount, getUserFeeds, loadUserProfileInfo,
 	resetUserProfileInfo
-} from '../../actions/userProfileReducer';
+} from '../../actions/userProfileActions';
 import {loadHaprampUserDetails} from '../../actions/allUserActions';
 
 // TODO: Get follower/following

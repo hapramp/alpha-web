@@ -1,4 +1,4 @@
-import {actionTypes} from '../actions/allPostsReducer';
+import {actionTypes} from '../actions/allPostsActions';
 import _ from 'lodash';
 
 const initialState = {posts: {}};

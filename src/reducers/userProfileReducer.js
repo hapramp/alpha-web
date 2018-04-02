@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/userProfileReducer";
+import {actionTypes} from "../actions/userProfileActions";
 
 const initialState = {
 	loading: false, user: null, error: null, blog: {count: 0, posts: []},
