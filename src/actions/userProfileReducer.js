@@ -35,6 +35,9 @@ export const getFollowCount = username => dispatch => {
 export const getUserFeeds = username => dispatch => {
 	dispatch({type: actionTypes.USER_BLOG_LOADING, username});
 	haprampAPI.v2.feed.getFeedsByBlog(username)
-		.then(results => dispatch({type: actionTypes.USER_BLOG_LOADED, results, username}))
+		.then(results => {
+			dispatch({type: actionTypes.USER_BLOG_LOADED, results, username});
+			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: results});
+		})
 		.catch(reason => dispatch({type: actionTypes.USER_BLOG_LOAD_FAILED, reason}));
 };
