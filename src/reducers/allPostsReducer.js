@@ -4,7 +4,7 @@ import _ from 'lodash';
 const initialState = {posts: {}};
 
 export const allPostsReducer = (state = initialState, action) => {
-	let posts, current_vote;
+	let posts, current_vote, key;
 
 	switch (action.type) {
 		case actionTypes.ADD_POSTS:
@@ -14,19 +14,20 @@ export const allPostsReducer = (state = initialState, action) => {
 
 		case actionTypes.VOTE_POST_INIT:
 			posts = _.cloneDeep(state.posts);  // TODO: Reduce clone depth
-			current_vote = posts[action.permlink].hapramp_cu_vote;
+			key = action.author + '/' + action.permlink;
+			current_vote = posts[key].hapramp_cu_vote;
 			if (action.vote === 0) {  // Remove vote
-				posts[action.permlink].hapramp_cu_vote = null;
-				current_vote && posts[action.permlink].net_votes--;
-				current_vote && (posts[action.permlink].hapramp_rating = (posts[action.permlink].hapramp_rating * posts[action.permlink].hapramp_votes - current_vote)
-					/ (posts[action.permlink].hapramp_votes - 1));
-				current_vote && posts[action.permlink].hapramp_votes--;
+				posts[key].hapramp_cu_vote = null;
+				current_vote && posts[key].net_votes--;
+				current_vote && (posts[key].hapramp_rating = (posts[key].hapramp_rating * posts[key].hapramp_votes - current_vote)
+					/ (posts[key].hapramp_votes - 1));
+				current_vote && posts[key].hapramp_votes--;
 			} else {
-				posts[action.permlink].hapramp_cu_vote = action.vote;
-				posts[action.permlink].net_votes++;
-				posts[action.permlink].hapramp_rating = (posts[action.permlink].hapramp_rating * posts[action.permlink].hapramp_votes + action.vote)
-					/ (posts[action.permlink].hapramp_votes + 1);
-					posts[action.permlink].hapramp_votes++;
+				posts[key].hapramp_cu_vote = action.vote;
+				posts[key].net_votes++;
+				posts[key].hapramp_rating = (posts[key].hapramp_rating * posts[key].hapramp_votes + action.vote)
+					/ (posts[key].hapramp_votes + 1);
+				posts[key].hapramp_votes++;
 			}
 			return {...state, posts};
 

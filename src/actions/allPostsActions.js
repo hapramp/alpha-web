@@ -18,7 +18,7 @@ export const ratePost = (author, permlink, currentVote, vote, power = 100) => di
 	HaprampAPI.v2.post.rate(permlink, vote)
 		.then(response => {
 			vote >= 3 && steemAPI.vote(localStorage.getItem('username'), author, permlink, power, currentVote)
-				.then(response => dispatch({type: actionTypes.VOTE_POST_DONE, permlink}))
+				.then(response => dispatch({type: actionTypes.VOTE_POST_DONE, author, permlink}))
 				.catch(reason => dispatch({type: actionTypes.VOTE_POST_ERROR, reason, permlink}));
 		})
 		.catch(reason => dispatch({type: actionTypes.VOTE_POST_ERROR, permlink, reason}));
