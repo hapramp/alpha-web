@@ -29,6 +29,9 @@ export const userProfileReducer = (state = initialState, action) => {
 		case actionTypes.USER_BLOG_LOADED:
 			return {...state, blog: {count: action.results.length, posts: action.results}};
 
+		case actionTypes.USER_BLOG_LOAD_FAILED:
+			return {...state, error: action.reason};
+
 		default:
 			return state;
 	}

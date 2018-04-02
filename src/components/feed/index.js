@@ -17,7 +17,7 @@ class Feed extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		let usersRequired = newProps.userFeed.posts.map(i => i.author)
+		let usersRequired = newProps.userFeed.posts.map(i => this.props.allPosts[i].author)
 			.filter(username => !_.some(Object.keys(newProps.allUsers), j => username === j));
 		usersRequired.length && newProps.loadUserAccounts(usersRequired);
 	}
@@ -29,11 +29,9 @@ class Feed extends React.Component {
 					<Sidebar/>
 				</div>
 				<div className={['uk-margin-top', styles.feedPosts].join(' ')}>
-					<div className={[].join(' ')}>
-						{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post.id} post={post}/>)}
-					</div>
-					<AddContentButton/>
+					{this.props.userFeed.posts && this.props.userFeed.posts.map(post => <Post key={post} postPermlink={post}/>)}
 				</div>
+				<AddContentButton/>
 			</div>
 		</div>
 	}
@@ -44,6 +42,7 @@ const mapStateToProps = state => {
 		userFeed: state.userFeed.user,
 		username: state.authUser.username,
 		allUsers: state.allUsers.users,
+		allPosts: state.allPosts.posts
 	}
 };
 

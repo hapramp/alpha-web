@@ -117,6 +117,9 @@ class Post extends React.Component {
 	reblogged_by(pin): []
 	 */
 	render() {
+		if (!this.props.post) {
+			return <div>Loading...</div>
+		}
 
 		let communities = this.props.communities.filter(community =>
 			_.some(this.props.post.json_metadata.tags, i => i === community.tag));
@@ -163,10 +166,11 @@ class Post extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
 	return {
 		communities: state.communities.communities,
 		allUsers: state.allUsers.users,
+		post: state.allPosts.posts[ownProps.postPermlink],
 	}
 };
 

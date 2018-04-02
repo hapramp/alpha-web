@@ -142,7 +142,7 @@ class SteemAPI {
 				if (err) {
 					reject(err);
 				} else if (result.length === 0) {
-					reject(err);
+					reject();
 				} else {
 					resolve(result);
 				}

@@ -151,7 +151,7 @@ class UserProfile extends React.Component {
 			<div className={['uk-flex', 'uk-flex-center', indexStyles.white, styles.userPostsContainer].join(' ')}>
 				<div className={[styles.blogContainer].join(' ')}>
 				<div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST</div>
-					{this.props.userProfile.blog.posts.map(item => <Post key={item.id} post={item}/>)}
+					{this.props.userProfile.blog.posts.map(item => <Post key={item} postPermlink={item}/>)}
 				</div>
 			</div>
 		</div>

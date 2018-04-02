@@ -1,6 +1,7 @@
 import SteemAPI from '../utils/steem';
 import haprampAPI from "../utils/haprampAPI";
 import {actionTypes as allUserActionTypes} from './allUserActions';
+import {actionTypes as allPostsActionTypes} from './allPostsActions';
 
 export const actionTypes = {
 	LOAD_USER_INFO: 'USER_PROFILE.LOAD.INIT',
@@ -18,8 +19,8 @@ export const loadUserProfileInfo = username => dispatch => {
 	dispatch({type: actionTypes.LOAD_USER_INFO, username});
 	SteemAPI.getUserAccount(username)
 		.then(result => {
-			dispatch({type: actionTypes.LOADED_USER_INFO, username, result});
 			dispatch({type: allUserActionTypes.LOAD_USERS_DONE, results: [result]})
+			dispatch({type: actionTypes.LOADED_USER_INFO, username, result});
 		})
 		.catch(e => dispatch({type: actionTypes.LOAD_USER_INFO_FAILED, username, reason: e}))
 };
@@ -36,8 +37,8 @@ export const getUserFeeds = username => dispatch => {
 	dispatch({type: actionTypes.USER_BLOG_LOADING, username});
 	haprampAPI.v2.feed.getFeedsByBlog(username)
 		.then(results => {
-			dispatch({type: actionTypes.USER_BLOG_LOADED, results, username});
-			dispatch({type: allUserActionTypes.ADD_POSTS, posts: results});
+			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: results});
+			dispatch({type: actionTypes.USER_BLOG_LOADED, results: results.map(post => post.author + '/' + post.permlink), username});
 		})
 		.catch(reason => dispatch({type: actionTypes.USER_BLOG_LOAD_FAILED, reason}));
 };
