@@ -159,18 +159,18 @@ class Post extends React.Component {
 			{/* Top section */}
 			<div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
 				<img src={user.json_metadata.profile.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
-				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-between'].join(' ')}>
-					<div><span className={styles.userName}>{user.json_metadata.profile.name}</span> | <TimeAgo>{new Date(this.props.post.created)}</TimeAgo></div>
+				<div className={['uk-margin-left'].join(' ')}>
+					<div className={[styles.userNameContainer].join(' ')}><span className={styles.userName}>{user.json_metadata.profile.name}</span> | <TimeAgo>{new Date(this.props.post.created)}</TimeAgo></div>
 					<div>{communities.map((community, idx) => <span key={idx} style={{backgroundColor: community.color}}
-							className={[idx !== 0 ? 'uk-margin-small-left' : '', styles.communityLabel].join(' ')}>
+							className={[styles.communityLabel].join(' ')}>
 							{community.name}
 						</span>)}
 					</div>
 				</div>
 			</div>
 			{/* Actual post */}
-			<div className={['uk-margin-top'].join(' ')}>
-				{content && content.data.map((data, idx) => <PostData key={idx} data={data}/>)}
+			<div className={[styles.postSection].join(' ')}>
+				{content && content.data.map((data, idx) => <PostData applyTopMargin={idx !== 0} key={idx} data={data}/>)}
 			</div>
 			{/* Action bar */}
 			{this.getActionSection()}

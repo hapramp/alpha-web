@@ -18,19 +18,19 @@ class PostData extends React.Component {
 	render() {
 		switch (this.props.data.type) {
 			case 'text':
-				return <div className={['uk-margin-top', 'uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>{this.props.data.content}</div>;
+				return <div className={[this.props.applyTopMargin ? 'uk-margin-top' : '', 'uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>{this.props.data.content}</div>;
 			case 'image':
 				!this.props.data.height && (this.props.data.height = 16);
 				!this.props.data.width && (this.props.data.width = 9);
 				let aspectRatio = (this.props.data.width / this.props.data.height) * 100 + '%';
 				let paddingTop = this.state.paddingTop ? this.state.paddingTop : aspectRatio;
 				return <LazyLoad height={100}>
-					<div className={['uk-margin-top', styles.imageDiv].join(' ')} style={{paddingTop}}>
+					<div className={[this.props.applyTopMargin ? 'uk-margin-top' : '', styles.imageDiv].join(' ')} style={{paddingTop}}>
 						<img src={this.props.data.content} alt={""} onLoad={this.resizeDiv}/>
 					</div>
 				</LazyLoad>;
 			default:
-				return <div className={['uk-margin-top', 'uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>??</div>;
+				return <div className={[this.props.applyTopMargin ? 'uk-margin-top' : '', 'uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>??</div>;
 		}
 	}
 }
