@@ -49,6 +49,7 @@ class CreatePost extends React.Component {
 		let post;
 
 		if (this.props.media) {
+			let imageElement = document.getElementById('media-image');
 			let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.name)
 				.put(this.props.media);
 
@@ -65,7 +66,7 @@ class CreatePost extends React.Component {
 				console.log('Image uploaded', downloadURL);
 				post = {
 					type: 'post', data: [
-						{type: 'image', content: downloadURL},
+						{type: 'image', content: downloadURL, height: imageElement.height, width: imageElement.width},
 						{type: 'text', content},
 					]
 				};
@@ -168,7 +169,7 @@ class CreatePost extends React.Component {
 		return <div className={['uk-flex', 'uk-flex-center', 'uk-margin-bottom'].join(' ')}>
 			<div className={'uk-inline'}>
 				<img className={[styles.mediaViewer].join(' ')} src={window.URL.createObjectURL(this.props.media)}
-						 alt={'Media'}/>
+						 alt={'Media'} id='media-image'/>
 				<div className={['uk-overlay', 'uk-overlay-default', 'uk-position-top-right', styles.topOverlay].join(' ')}
 						 onClick={this.props.removeMedia}>
 					<p><span uk-icon="icon: close"/></p>
