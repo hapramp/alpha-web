@@ -1,15 +1,32 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 
+import styles from './styles.scss';
+
 class PostData extends React.Component {
+	constructor(props) {
+		super(props);
+		this.resizeDiv = this.resizeDiv.bind(this);
+		this.state = {paddingTop: null};
+	}
+
+	resizeDiv(event) {
+		let aspectRatio = (event.target.height / event.target.width) * 100 + '%';
+		this.setState({...this.state, paddingTop: aspectRatio});
+	}
+
 	render() {
 		switch (this.props.data.type) {
 			case 'text':
 				return <div className={['uk-margin-top', 'uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>{this.props.data.content}</div>;
 			case 'image':
-				return <LazyLoad height={200}>
-					<div className={['uk-margin-top'].join(' ')}>
-	  				<img src={this.props.data.content} alt={""}/>
+				!this.props.data.height && (this.props.data.height = 16);
+				!this.props.data.width && (this.props.data.width = 9);
+				let aspectRatio = (this.props.data.width / this.props.data.height) * 100 + '%';
+				let paddingTop = this.state.paddingTop ? this.state.paddingTop : aspectRatio;
+				return <LazyLoad height={100}>
+					<div className={['uk-margin-top', styles.imageDiv].join(' ')} style={{paddingTop}}>
+						<img src={this.props.data.content} alt={""} onLoad={this.resizeDiv}/>
 					</div>
 				</LazyLoad>;
 			default:

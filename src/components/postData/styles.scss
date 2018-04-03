@@ -1,4 +1,12 @@
-.postImage {
-	margin-left:-30px;
-	margin-right: -30px;
+.imageDiv {
+	width: 100%;
+	position: relative;
+}
+
+.imageDiv img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 }
