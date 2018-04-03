@@ -148,17 +148,18 @@ class Post extends React.Component {
 			} catch (error) {
 				user.json_metadata = {};
 			}
-			!user.json_metadata.name && (user.json_metadata.name = this.props.post.author);
-			!user.json_metadata.profile_image && (user.json_metadata.profile_image = userPlaceholder);
+			console.log('Final user: ', user);
+			!user.json_metadata.profile.name && (user.json_metadata.profile.name = this.props.post.author);
+			!user.json_metadata.profile.profile_image && (user.json_metadata.profile.profile_image = userPlaceholder);
 		}
 
 	/* Render */
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
-				<img src={user.json_metadata.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
+				<img src={user.json_metadata.profile.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 				<div className={['uk-margin-left', 'uk-flex', 'uk-flex-column', 'uk-flex-between'].join(' ')}>
-					<div><span className={styles.userName}>{user.json_metadata.name}</span> | <TimeAgo>{new Date(this.props.post.created)}</TimeAgo></div>
+					<div><span className={styles.userName}>{user.json_metadata.profile.name}</span> | <TimeAgo>{new Date(this.props.post.created)}</TimeAgo></div>
 					<div>{communities.map((community, idx) => <span key={idx} style={{backgroundColor: community.color}}
 							className={[idx !== 0 ? 'uk-margin-small-left' : '', styles.communityLabel].join(' ')}>
 							{community.name}
