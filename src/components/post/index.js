@@ -148,8 +148,8 @@ class Post extends React.Component {
 				user.json_metadata = JSON.parse(this.props.allUsers[this.props.post.author].json_metadata);
 			} catch (error) {
 				user.json_metadata = {};
+				user.json_metadata.profile = {};
 			}
-			console.log('Final user: ', user);
 			!user.json_metadata.profile.name && (user.json_metadata.profile.name = this.props.post.author);
 			!user.json_metadata.profile.profile_image && (user.json_metadata.profile.profile_image = userPlaceholder);
 		}
