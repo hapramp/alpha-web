@@ -140,7 +140,8 @@ class Post extends React.Component {
 		let user = this.props.allUsers[this.props.post.author];
 		if (!user || !user.json_metadata) {
 			!user && (user = {});
-			user.json_metadata = {name: this.props.post.author , profile_image: userPlaceholder};
+			!user.json_metadata && (user.json_metadata = {});
+			user.json_metadata.profile = {name: this.props.post.author , profile_image: userPlaceholder};
 		} else {
 			user = _.clone(user);
 			try {
