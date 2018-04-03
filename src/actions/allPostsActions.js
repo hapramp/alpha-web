@@ -15,11 +15,11 @@ export const deletePosts = posts => dispatch => dispatch({type: actionTypes.DELE
 
 export const ratePost = (author, permlink, currentVote, vote, power = 100) => dispatch => {
 	dispatch({type: actionTypes.VOTE_POST_INIT, author, permlink, vote});
-	HaprampAPI.v2.post.rate(permlink, vote)
+	HaprampAPI.v2.post.rate(author + '/' + permlink, vote)
 		.then(response => {
-			vote >= 3 && steemAPI.vote(localStorage.getItem('username'), author, permlink, power, currentVote)
+			steemAPI.vote(localStorage.getItem('username'), author, permlink, power, vote)
 				.then(response => dispatch({type: actionTypes.VOTE_POST_DONE, author, permlink}))
-				.catch(reason => dispatch({type: actionTypes.VOTE_POST_ERROR, reason, author, permlink}));
+				.catch(reason => {console.log(reason); dispatch({type: actionTypes.VOTE_POST_ERROR, reason, author, permlink})});
 		})
 		.catch(reason => dispatch({type: actionTypes.VOTE_POST_ERROR, author, permlink, reason}));
 }

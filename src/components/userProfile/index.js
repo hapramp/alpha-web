@@ -11,7 +11,6 @@ import {
 } from '../../actions/userProfileActions';
 import {loadHaprampUserDetails} from '../../actions/allUserActions';
 
-// TODO: Get follower/following
 class UserProfile extends React.Component {
 	constructor(props) {
 		super(props);

@@ -7,11 +7,15 @@ import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
+import {ratePost} from '../../actions/allPostsActions';
 
 class Post extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {ratingActive: false};
+		this.enableRatingView = this.enableRatingView.bind(this);
+		this.disableRatingView = this.disableRatingView.bind(this);
+		this.onRateClick = this.onRateClick.bind(this);
 	}
 
 	enableRatingView() {
@@ -22,9 +26,15 @@ class Post extends React.Component {
 		setTimeout(() => this.setState({...this.state, ratingActive: false}), 300);
 	}
 
+	onRateClick(event) {
+		let rating = parseInt(event.target.getAttribute('data-rating'), 10);
+		this.props.ratePost(this.props.post.author, this.props.post.permlink, this.props.post.hapramp_cu_vote, rating);
+		this.disableRatingView();
+	}
+
 	getCollapsedActionSection(final_rating, userRating) {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
-			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView.bind(this)}>
+			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView}>
 				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
 				{final_rating} from {this.props.post.net_votes}
 			</span>
@@ -40,14 +50,14 @@ class Post extends React.Component {
 	}
 
 	getRatingView(userRating) {
-		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-between'].join(' ')} onMouseLeave={this.disableRatingView.bind(this)}>
+		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-between'].join(' ')} onMouseLeave={this.disableRatingView}>
 			<span className={['uk-margin-left'].join(' ')}>
-				{[1, 2, 3, 4, 5].map((i, idx) => <span key={i} className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')}>
-					<i className={['uk-margin-small-right', i < userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
+				{[1, 2, 3, 4, 5].map((i, idx) => <span key={i} className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')} onClick={this.onRateClick}>
+					<i className={['uk-margin-small-right', i <= userRating ? 'fas' : 'far', 'fa-star'].join(' ')} data-rating={i}></i>
 				</span>)}
 			</span>
-			{userRating && <span className={['uk-margin-medium-left', 'uk-margin-right', indexStyles.pointer, styles.action].join(' ')}>
-				<i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')}></i>
+			{userRating && <span className={['uk-margin-medium-left', 'uk-margin-right', indexStyles.pointer, styles.action].join(' ')} onClick={this.onRateClick}>
+				<i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')} data-rating='0'></i>
 			</span>}
 		</div>
 	}
@@ -174,4 +184,4 @@ const mapStateToProps = (state, ownProps) => {
 	}
 };
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, {ratePost})(Post);

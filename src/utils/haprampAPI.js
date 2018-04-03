@@ -79,7 +79,7 @@ export default {
 						body: JSON.stringify({full_permlink: permlink})
 					}).then(response => {
 						if (response.ok) {
-							response.json().then(json => resolve(json))
+							response.json().then(json => resolve(json));
 						} else {
 							reject();  // TODO: Give some reason
 						}
@@ -87,9 +87,13 @@ export default {
 				})
 			},
 			rate: (permlink, vote) => {
-				let options = {headers: {Authorization: 'Token ' + localStorage.getItem('ppk_hash')},
-					method: 'POST', body: JSON.stringify({vote})};
-				let url = constants.BACKEND_URL.V2 + '/posts/votes?permlink=' + permlink;
+				let options = {
+					headers: {Authorization: 'Token ' + localStorage.getItem('ppk_hash'), 'Content-Type': 'application/json'},
+					method: 'POST',
+					body: JSON.stringify({vote})
+				};
+				vote === 0 && (options.method = 'DELETE');
+				let url = constants.BACKEND_URL.V2 + '/posts/votes?permlink=' + encodeURIComponent(permlink);
 				return getPromiseForUrl(url, options);
 			},
 		},
@@ -118,7 +122,7 @@ export default {
 
 const getPromiseForUrl = (url, options = {}) => {
 	return new Promise((resolve, reject) => {
-		fetch(url, ...options)
+		fetch(url, options)
 			.then(response => {
 				if (response.ok) {
 					response.json().then(json => resolve(json));

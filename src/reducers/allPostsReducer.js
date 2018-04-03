@@ -22,12 +22,17 @@ export const allPostsReducer = (state = initialState, action) => {
 				current_vote && (posts[key].hapramp_rating = (posts[key].hapramp_rating * posts[key].hapramp_votes - current_vote)
 					/ (posts[key].hapramp_votes - 1));
 				current_vote && posts[key].hapramp_votes--;
-			} else {
+			} else if (posts[key].hapramp_cu_vote == null) {  // Not voted earlier
 				posts[key].hapramp_cu_vote = action.vote;
 				posts[key].net_votes++;
 				posts[key].hapramp_rating = (posts[key].hapramp_rating * posts[key].hapramp_votes + action.vote)
 					/ (posts[key].hapramp_votes + 1);
 				posts[key].hapramp_votes++;
+			} else {  // Updating vote
+				let vote_to_deduct = posts[key].hapramp_cu_vote;
+				posts[key].hapramp_cu_vote = action.vote;
+				posts[key].hapramp_rating = (posts[key].hapramp_rating * posts[key].hapramp_votes + action.vote - vote_to_deduct)
+					/ (posts[key].hapramp_votes);
 			}
 			return {...state, posts};
 
