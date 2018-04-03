@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import TimeAgo from 'react-time-ago'
+import TimeAgo from 'timeago-react'
 
 import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
@@ -154,13 +154,13 @@ class Post extends React.Component {
 			!user.json_metadata.profile.profile_image && (user.json_metadata.profile.profile_image = userPlaceholder);
 		}
 
-	/* Render */
+		/* Render */
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
 				<img src={user.json_metadata.profile.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 				<div className={['uk-margin-left'].join(' ')}>
-					<div className={[styles.userNameContainer].join(' ')}><span className={styles.userName}>{user.json_metadata.profile.name}</span> | <TimeAgo>{new Date(this.props.post.created)}</TimeAgo></div>
+					<div className={[styles.userNameContainer].join(' ')}><span className={styles.userName}>{user.json_metadata.profile.name}</span> | <TimeAgo datetime={this.props.post.created + 'Z'} locale='en_US'/></div>
 					<div>{communities.map((community, idx) => <span key={idx} style={{backgroundColor: community.color}}
 							className={[styles.communityLabel].join(' ')}>
 							{community.name}
