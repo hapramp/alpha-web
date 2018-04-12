@@ -64,17 +64,10 @@ class Post extends React.Component {
 
 	getActionSection() {
 		/* Rating related calculations */
-		let organic_vote_count = this.props.post.hapramp_votes;
-		let organic_vote_sum = organic_vote_count * this.props.post.hapramp_rating;
+		let final_rating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.length;
+		final_rating = final_rating.toFixed(2);
 
-		let inorganic_vote_sum = 4 * (this.props.post.net_votes - organic_vote_count);
-
-		let final_vote_sum = inorganic_vote_sum + organic_vote_sum;
-		let final_rating = (final_vote_sum / this.props.post.net_votes).toFixed(2);
-
-		final_rating = this.props.post.net_votes ? final_rating : 0.0.toFixed(2);
-
-		let userRating = this.props.post['hapramp_cu_vote'];
+		let userRating = this.props.post.active_votes.reduce((prev, vote) => vote.voter === localStorage.getItem('username') ? prev + vote.percent / 2000 : 0);
 
 		if (this.state.ratingActive) {
 			return this.getRatingView(userRating);

@@ -197,10 +197,10 @@ class SteemAPI {
 		})
 	}
 
-	vote(username, author, permlink, power, vote) {
+	vote(username, author, permlink, power) {
 		return new Promise((resolve, reject) => {
 			let callback = (err, result) => err ? reject(err) : resolve(result);
-			steem.broadcast.vote(localStorage.getItem('posting_key'), username, author, permlink, vote >= 3 ? power * 100 : 0, callback);
+			steem.broadcast.vote(localStorage.getItem('posting_key'), username, author, permlink, power * 100, callback);
 		})
 	}
 }
