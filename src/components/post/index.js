@@ -64,10 +64,11 @@ class Post extends React.Component {
 
 	getActionSection() {
 		/* Rating related calculations */
-		let final_rating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.length;
+		let final_rating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.filter(vote => vote.percent > 0).length;
 		final_rating = final_rating.toFixed(2);
 
-		let userRating = this.props.post.active_votes.reduce((prev, vote) => vote.voter === localStorage.getItem('username') ? prev + vote.percent / 2000 : 0);
+		let userRating = null;
+		this.props.post.active_votes.forEach(element => element.voter === localStorage.getItem('username') && (userRating = element.percent / 2000));
 
 		if (this.state.ratingActive) {
 			return this.getRatingView(userRating);
