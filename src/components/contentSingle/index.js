@@ -6,9 +6,6 @@ import {loadPost} from '../../actions/allPostsActions';
 class ContentSingle extends React.Component {
 	constructor(props) {
 		super(props);
-	}
-
-	componentDidMount() {
 		this.props.loadPost(this.props.match.params.username, this.props.match.params.permlink);
 	}
 
