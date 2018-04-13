@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {loadPost} from '../../actions/allPostsActions';
+
 class ContentSingle extends React.Component {
 	constructor(props) {
 		super(props);
-		// TODO: Load post using actions
+		this.props.loadPost(this.props.match.params.username, this.props.match.params.permlink);
 	}
 
 	render() {
@@ -20,4 +22,6 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
-export default connect(mapStateToProps)(ContentSingle);
+export default connect(mapStateToProps, {
+	loadPost
+})(ContentSingle);
