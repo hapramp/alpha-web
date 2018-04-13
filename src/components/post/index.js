@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import TimeAgo from 'react-time-ago'
+import {withRouter} from 'react-router-dom';
 
 import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
@@ -32,13 +33,17 @@ class Post extends React.Component {
 		this.disableRatingView();
 	}
 
+	redirectToPost() {
+		this.props.history.push(`/@${this.props.post.author}/${this.props.post.permlink}`);
+	}
+
 	getCollapsedActionSection(final_rating, userRating) {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
 			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView}>
 				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
 				{final_rating} from {this.props.post.net_votes}
 			</span>
-			<span className={['uk-flex', styles.action].join(' ')}>
+			<span className={['uk-flex', styles.action, indexStyles.pointer].join(' ')} onClick={this.redirectToPost.bind(this)}>
 				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
 				{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
 			</span>
@@ -187,4 +192,4 @@ const mapStateToProps = (state, ownProps) => {
 	}
 };
 
-export default connect(mapStateToProps, {ratePost})(Post);
+export default withRouter(connect(mapStateToProps, {ratePost})(Post));
