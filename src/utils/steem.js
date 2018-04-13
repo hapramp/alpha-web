@@ -203,6 +203,13 @@ class SteemAPI {
 			steem.broadcast.vote(localStorage.getItem('posting_key'), username, author, permlink, power * 100, callback);
 		})
 	}
+
+	loadPost(parentPermlink, fullPermlink) {
+		return new Promise((resolve, reject) => {
+			let callback = (err, result) => err ? reject(err) : resolve({user: result.result.account, post: result.result.content});
+			steem.api.getState(`${parentPermlink}/${fullPermlink}`, callback);
+		})
+	}
 }
 
 export default new SteemAPI();
