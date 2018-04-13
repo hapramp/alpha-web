@@ -20,7 +20,7 @@ class BrowseCommunity extends React.Component {
 			this.loadFeeds(newProps);
 		}
 		let usersRequired = newProps.userFeed[this.props.match.params.filter].posts
-			.map(i => i.author).filter(username => !_.some(Object.keys(newProps.allUsers), j => username === j));
+			.map(i => newProps.allPosts[i].author).filter(username => !_.some(Object.keys(newProps.allUsers), j => username === j));
 		usersRequired.length && newProps.loadUserAccounts(usersRequired);
 	}
 
@@ -53,7 +53,7 @@ class BrowseCommunity extends React.Component {
 						<CommunitySortFilter/>
 						<div>
 							{this.props.userFeed[this.props.match.params.filter].posts && this.props.userFeed[this.props.match.params.filter].posts.map(post =>
-								<Post key={post.id} post={post}/>)}
+								<Post key={post} postPermlink={post}/>)}
 						</div>
 					</div>
 				</div>
@@ -66,6 +66,7 @@ const mapStateToProps = state => {
 	return {
 		userFeed: state.userFeed,
 		allUsers: state.allUsers.users,
+		allPosts: state.allPosts.posts
 	}
 };
 
