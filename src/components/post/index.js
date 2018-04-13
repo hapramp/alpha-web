@@ -50,15 +50,17 @@ class Post extends React.Component {
 	}
 
 	getRatingView(userRating) {
+		let ratingSection = <span></span>;
+		userRating && (ratingSection = <span className={['uk-margin-medium-left', 'uk-margin-right', indexStyles.pointer, styles.action].join(' ')} onClick={this.onRateClick}>
+			<i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')} data-rating='0'></i>
+		</span>)
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-between'].join(' ')} onMouseLeave={this.disableRatingView}>
 			<span className={['uk-margin-left'].join(' ')}>
 				{[1, 2, 3, 4, 5].map((i, idx) => <span key={i} className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')} onClick={this.onRateClick}>
 					<i className={['uk-margin-small-right', i <= userRating ? 'fas' : 'far', 'fa-star'].join(' ')} data-rating={i}></i>
 				</span>)}
 			</span>
-			{userRating && <span className={['uk-margin-medium-left', 'uk-margin-right', indexStyles.pointer, styles.action].join(' ')} onClick={this.onRateClick}>
-				<i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')} data-rating='0'></i>
-			</span>}
+			{ratingSection}
 		</div>
 	}
 
