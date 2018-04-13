@@ -28,7 +28,7 @@ export const ratePost = (author, permlink, currentVote, vote) => dispatch => {
 export const loadPost = (username, permlink) => dispatch => {
 	steemAPI.loadPost('hapramp', username, permlink)
 		.then(result => {
-			dispatch({type: actionTypes.ADD_POSTS, posts: [result.post]});
-			dispatch({type: allUserActionTypes.LOAD_USERS_DONE, results: [result.user]});
+			dispatch({type: actionTypes.ADD_POSTS, posts: result.posts});
+			dispatch({type: allUserActionTypes.LOAD_USERS_DONE, results: result.users});
 		})
 }
