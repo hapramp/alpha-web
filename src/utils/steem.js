@@ -204,10 +204,10 @@ class SteemAPI {
 		})
 	}
 
-	loadPost(parentPermlink, fullPermlink) {
+	loadPost(parentPermlink, author, permlink) {
 		return new Promise((resolve, reject) => {
-			let callback = (err, result) => err ? reject(err) : resolve({user: result.result.account, post: result.result.content});
-			steem.api.getState(`${parentPermlink}/${fullPermlink}`, callback);
+			let callback = (err, result) => err ? reject(err) : resolve({user: result.accounts[author], post: result.content[`${author}/${permlink}`]});
+			steem.api.getState(`/${parentPermlink}/@${author}/${permlink}`, callback);
 		})
 	}
 }
