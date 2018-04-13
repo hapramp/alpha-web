@@ -66,13 +66,13 @@ class Post extends React.Component {
 
 	getActionSection() {
 		/* Rating related calculations */
-		let final_rating;
+		let finalRating;
 		if (this.props.post.active_votes.length) {
-			final_rating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.filter(vote => vote.percent > 0).length;
+			finalRating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.filter(vote => vote.percent > 0).length;
 		} else {
-			final_rating = 0.0
+			finalRating = 0.0
 		}
-		final_rating = final_rating.toFixed(2);
+		finalRating = finalRating.toFixed(2);
 
 		let userRating = null;
 		this.props.post.active_votes.forEach(element => element.voter === localStorage.getItem('username') && (userRating = element.percent / 2000));
@@ -80,7 +80,7 @@ class Post extends React.Component {
 		if (this.state.ratingActive) {
 			return this.getRatingView(userRating);
 		} else {
-			return this.getCollapsedActionSection(final_rating, userRating);
+			return this.getCollapsedActionSection(finalRating, userRating);
 		}
 	}
 
