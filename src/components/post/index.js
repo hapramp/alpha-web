@@ -66,7 +66,12 @@ class Post extends React.Component {
 
 	getActionSection() {
 		/* Rating related calculations */
-		let final_rating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.filter(vote => vote.percent > 0).length;
+		let final_rating;
+		if (this.props.post.active_votes.length) {
+			final_rating = this.props.post.active_votes.map(vote => vote.percent).reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes.filter(vote => vote.percent > 0).length;
+		} else {
+			final_rating = 0.0
+		}
 		final_rating = final_rating.toFixed(2);
 
 		let userRating = null;

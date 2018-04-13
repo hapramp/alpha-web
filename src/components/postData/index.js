@@ -26,7 +26,7 @@ class PostData extends React.Component {
 				let paddingTop = this.state.paddingTop ? this.state.paddingTop : aspectRatio;
 				return <LazyLoad height={100}>
 					<div className={[this.props.applyTopMargin ? 'uk-margin-top' : '', styles.imageDiv].join(' ')} style={{paddingTop}}>
-						<img src={this.props.data.content} alt={""} onLoad={this.resizeDiv}/>
+						<img src={this.props.data.content} alt={""} onLoad={this.resizeDiv} style={{margin: 'auto'}}/>
 					</div>
 				</LazyLoad>;
 			default:
