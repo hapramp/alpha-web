@@ -9,7 +9,11 @@ export const allPostsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.ADD_POSTS:
 			posts = _.cloneDeep(state.posts);
-			action.posts.map(post => posts[post.author + '/' + post.permlink] = post);
+			action.posts.map(post => {
+				typeof(post.json_metadata) === 'string' && (post.json_metadata = JSON.parse(post.json_metadata));
+				posts[post.author + '/' + post.permlink] = post
+				return post;
+			});
 			return {...state, posts};
 
 		case actionTypes.VOTE_POST_INIT:
