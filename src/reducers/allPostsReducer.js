@@ -4,7 +4,7 @@ import _ from 'lodash';
 const initialState = {posts: {}};
 
 export const allPostsReducer = (state = initialState, action) => {
-	let posts, current_vote, key, currentUser;
+	let posts, key, currentUser;
 
 	switch (action.type) {
 		case actionTypes.ADD_POSTS:
