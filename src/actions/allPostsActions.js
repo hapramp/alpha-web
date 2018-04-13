@@ -1,5 +1,6 @@
 import HaprampAPI from '../utils/haprampAPI';
 import steemAPI from '../utils/steem';
+import {actionTypes as allUserActionTypes} from './allUserActions';
 
 export const actionTypes = {
 	ADD_POSTS: 'ALL_POSTS.ADD',
@@ -22,4 +23,12 @@ export const ratePost = (author, permlink, currentVote, vote) => dispatch => {
 				.catch(reason => {console.log(reason); dispatch({type: actionTypes.VOTE_POST_ERROR, reason, author, permlink})});
 		})
 		.catch(reason => dispatch({type: actionTypes.VOTE_POST_ERROR, author, permlink, reason}));
+}
+
+export const loadPost = fullPermlink => dispatch => {
+	steemAPI.loadPost('hapramp-test', fullPermlink)
+		.then(result => {
+			dispatch({type: actionTypes.ADD_POSTS, posts: [result.post]});
+			dispatch({type: allUserActionTypes.LOAD_USERS_DONE, results: [result.user]});
+		})
 }
