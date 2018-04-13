@@ -10,6 +10,7 @@ import UserProfile from '../userProfile';
 import Browse from '../browse';
 import BrowseCommunity from '../browseCommunity';
 import CreateArticle from '../createArticle';
+import ContentSingle from '../contentSingle';
 
 class Root extends React.Component {
 
@@ -51,6 +52,9 @@ class Root extends React.Component {
 
 				{/* Profile section */}
 				<Route exact path={'/@:username'} component={UserProfile}/>
+
+				{/* Single content */}
+				<Route exact path={'/@:username/:permlink'} component={ContentSingle}/>
 
 				{/* Unknown route - 404 */}
 				<Route exact path={'*'} render={() => <div>Not found</div>}/>
