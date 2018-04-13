@@ -65,7 +65,6 @@ class CreateArticle extends React.Component {
 								onChange={this.handleContentChange.bind(this)}/>
 			</div>
 		</div>
-
 	}
 
 	render() {

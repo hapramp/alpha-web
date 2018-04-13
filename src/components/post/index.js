@@ -41,7 +41,7 @@ class Post extends React.Component {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
 			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView}>
 				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
-				{final_rating} from {this.props.post.net_votes}
+				{final_rating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}
 			</span>
 			<span className={['uk-flex', styles.action, indexStyles.pointer].join(' ')} onClick={this.redirectToPost.bind(this)}>
 				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
