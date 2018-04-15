@@ -75,7 +75,7 @@ class Post extends React.Component {
 				{content && content.data.map((data, idx) => <PostData applyTopMargin={idx !== 0} key={idx} data={data}/>)}
 			</div>
 			{/* Action bar */}
-			<ActionBar post={this.props.post}/>
+			<ActionBar post={this.props.post} withLink/>
 		</div>
 	}
 }
