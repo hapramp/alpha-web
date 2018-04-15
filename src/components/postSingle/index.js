@@ -7,6 +7,7 @@ import {getCommunitiesForPost} from '../../utils/communityUtils';
 import {fixUser} from '../../utils/defaultFixUtils';
 import styles from './styles.scss';
 import PostData from '../postData';
+import ActionBar from '../actionBar';
 
 class PostSingle extends React.Component {
 	getLeftSection() {
@@ -28,6 +29,7 @@ class PostSingle extends React.Component {
 			<div className={[styles.rightContent].join(' ')}>
 				{data.content}
 			</div>
+			<ActionBar post={this.props.post}/>
 		</div>
 	}
 
