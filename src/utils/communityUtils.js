@@ -7,3 +7,9 @@ export const getCommunitiesForPost = post => {
 	return allCommunities.filter(community =>
 		_.some(post.json_metadata.tags, i => i === community.tag));
 }
+
+export const getOtherTags = tags => {
+	let allCommunities = getStore().getState().communities.communities;
+	return tags.filter(tag =>
+		!_.some(allCommunities, i => i.tag === tag));
+}
