@@ -5,7 +5,7 @@ import styles from './styles.scss';
 
 class PostUserMeta extends React.Component {
 	render() {
-		return <div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
+		return <div className={[this.props.className ? this.props.className : '', 'uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
 			<img src={this.props.profile.image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 			<div className={['uk-margin-left'].join(' ')}>
 				<div className={[styles.userNameContainer].join(' ')}>
