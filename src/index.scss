@@ -2,6 +2,7 @@ $primary-color: #3F72AF;
 $primary-light-color: #DBE2EF;
 $primary-dark-color: #112D4E;
 
+$secondary-color: #ff6b95;
 $background-color: #FAFAFA;
 
 html {
@@ -47,4 +48,8 @@ a, a:hover {
 
 .pointer {
   cursor: pointer;
+}
+
+.secondaryText {
+	color: $secondary-color;
 }
