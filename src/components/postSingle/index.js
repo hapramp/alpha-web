@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import indexStyles from '../../index.scss';
+import PostUserMeta from '../postUserMeta';
+import {getCommunitiesForPost} from '../../utils/communityUtils';
 
 class PostSingle extends React.Component {
 	getLeftSection() {
@@ -19,6 +21,7 @@ class PostSingle extends React.Component {
 		containsImage && (classes = ['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l'])
 		let data = containsImage ? this.props.post.json_metadata.content.data[1] : this.props.post.json_metadata.content.data[1]
 		return <div className={classes.join(' ')}>
+			<PostUserMeta profile={{name: 'Pratyush', image: ''}} created={this.props.post.created} communities={getCommunitiesForPost(this.props.post)}/>
 			{data.content}
 		</div>
 	}
