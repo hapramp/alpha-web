@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
 				LOADING
 			</div>
 		}
-		let jsonMetadata = JSON.parse(this.props.userProfile.user.json_metadata);
+		let jsonMetadata = this.props.userProfile.user.json_metadata;
 
 		/*
 		"{"profile":

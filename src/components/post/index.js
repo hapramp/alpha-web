@@ -10,6 +10,7 @@ import indexStyles from '../../index.scss';
 import {ratePost} from '../../actions/allPostsActions';
 import PostUserMeta from '../postUserMeta';
 import {getCommunitiesForPost} from '../../utils/communityUtils';
+import {fixUser} from '../../utils/defaultFixUtils';
 
 class Post extends React.Component {
 	constructor(props) {
@@ -142,21 +143,7 @@ class Post extends React.Component {
 
 		/* Author details */
 		let user = this.props.allUsers[this.props.post.author];
-		if (!user || !user.json_metadata) {
-			!user && (user = {});
-			!user.json_metadata && (user.json_metadata = {});
-			user.json_metadata.profile = {name: this.props.post.author , profile_image: userPlaceholder};
-		} else {
-			user = _.clone(user);
-			try {
-				user.json_metadata = JSON.parse(this.props.allUsers[this.props.post.author].json_metadata);
-			} catch (error) {
-				user.json_metadata = {};
-				user.json_metadata.profile = {};
-			}
-			!user.json_metadata.profile.name && (user.json_metadata.profile.name = this.props.post.author);
-			!user.json_metadata.profile.profile_image && (user.json_metadata.profile.profile_image = userPlaceholder);
-		}
+		user = fixUser(user, this.props.post.author);
 
 		/* Render */
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
