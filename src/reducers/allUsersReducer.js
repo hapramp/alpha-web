@@ -9,7 +9,14 @@ export const allUserReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_USERS_DONE:
 			users = _.cloneDeep(state.users);
-			action.results.forEach(userDetail => users[userDetail.name] = userDetail);
+			action.results.forEach(userDetail => {
+				try {
+					userDetail.json_metadata = JSON.parse(userDetail.json_metadata);
+				} catch (err) {
+					userDetail.json_metadata = {profile: {}};
+				}
+				users[userDetail.name] = userDetail
+			});
 			return {...state, users};
 
 		case actionTypes.LOAD_HAPRAMP_USER_DONE:
