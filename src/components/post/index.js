@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import TimeAgo from 'react-time-ago'
 import {withRouter} from 'react-router-dom';
 
 import userPlaceholder from '../userProfile/user-placeholder.jpg';
@@ -9,6 +8,7 @@ import PostData from '../postData';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import {ratePost} from '../../actions/allPostsActions';
+import PostUserMeta from '../postUserMeta';
 
 class Post extends React.Component {
 	constructor(props) {
@@ -163,17 +163,8 @@ class Post extends React.Component {
 		/* Render */
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
-			<div className={['uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
-				<img src={user.json_metadata.profile.profile_image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
-				<div className={['uk-margin-left'].join(' ')}>
-					<div className={[styles.userNameContainer].join(' ')}><span className={styles.userName}>{user.json_metadata.profile.name}</span> | <TimeAgo>{new Date(this.props.post.created + 'Z')}</TimeAgo></div>
-					<div>{communities.map((community, idx) => <span key={idx} style={{backgroundColor: community.color}}
-							className={[styles.communityLabel].join(' ')}>
-							{community.name}
-						</span>)}
-					</div>
-				</div>
-			</div>
+			<PostUserMeta profile={{name: user.json_metadata.profile.name, image: user.json_metadata.profile.profile_image}} created={this.props.post.created}
+				communities={communities}/>
 			{/* Actual post */}
 			<div className={[styles.postSection].join(' ')}>
 				{content && content.data.map((data, idx) => <PostData applyTopMargin={idx !== 0} key={idx} data={data}/>)}
