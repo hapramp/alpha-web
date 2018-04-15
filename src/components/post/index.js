@@ -9,6 +9,7 @@ import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import {ratePost} from '../../actions/allPostsActions';
 import PostUserMeta from '../postUserMeta';
+import {getCommunitiesForPost} from '../../utils/communityUtils';
 
 class Post extends React.Component {
 	constructor(props) {
@@ -137,9 +138,6 @@ class Post extends React.Component {
 			return <div>Loading...</div>
 		}
 
-		let communities = this.props.communities.filter(community =>
-			_.some(this.props.post.json_metadata.tags, i => i === community.tag));
-
 		let content = this.props.post.json_metadata.content;
 
 		/* Author details */
@@ -164,7 +162,7 @@ class Post extends React.Component {
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<PostUserMeta profile={{name: user.json_metadata.profile.name, image: user.json_metadata.profile.profile_image}} created={this.props.post.created}
-				communities={communities}/>
+				communities={getCommunitiesForPost(this.props.post)}/>
 			{/* Actual post */}
 			<div className={[styles.postSection].join(' ')}>
 				{content && content.data.map((data, idx) => <PostData applyTopMargin={idx !== 0} key={idx} data={data}/>)}
