@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
@@ -28,8 +29,18 @@ class ActionBar extends React.Component {
 		this.disableRatingView();
 	}
 
-	redirectToPost() {
-		this.props.history.push(`/@${this.props.post.author}/${this.props.post.permlink}`);
+	getCommentSection() {
+		if (this.props.withLink) {
+			return <Link to={`/@${this.props.post.author}/${this.props.post.permlink}`} className={['uk-flex', styles.action].join(' ')}>
+				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
+				{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
+			</Link>
+		} else {
+			return <div to={`/@${this.props.post.author}/${this.props.post.permlink}`} className={['uk-flex', styles.action].join(' ')}>
+				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
+				{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
+			</div>
+		}
 	}
 
 	getCollapsedActionSection(final_rating, userRating) {
@@ -38,10 +49,7 @@ class ActionBar extends React.Component {
 				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
 				{final_rating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}
 			</span>
-			<span className={['uk-flex', styles.action, indexStyles.pointer].join(' ')} onClick={this.redirectToPost.bind(this)}>
-				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
-				{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
-			</span>
+			{this.getCommentSection()}
 			<span className={['uk-flex', styles.action].join(' ')}>
 				<i className={['uk-margin-small-right', 'fas', 'fa-dollar-sign'].join(' ')}></i>
 				{this.props.post.total_payout_value}
