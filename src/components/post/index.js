@@ -29,7 +29,7 @@ class Post extends React.Component {
 
 	onRateClick(event) {
 		let rating = parseInt(event.target.getAttribute('data-rating'), 10);
-		this.props.ratePost(this.props.post.author, this.props.post.permlink, this.props.post.hapramp_cu_vote, rating);
+		this.props.ratePost(this.props.post.author, this.props.post.permlink, rating);
 		this.disableRatingView();
 	}
 
