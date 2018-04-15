@@ -140,8 +140,7 @@ class Post extends React.Component {
 		let content = this.props.post.json_metadata.content;
 
 		/* Author details */
-		let user = this.props.allUsers[this.props.post.author];
-		user = fixUser(user, this.props.post.author);
+		let user = this.props.postingUser;
 
 		/* Render */
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
@@ -159,10 +158,11 @@ class Post extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+	let post = state.allPosts.posts[ownProps.postPermlink];
+	let postingUsername = post.author;
 	return {
-		communities: state.communities.communities,
-		allUsers: state.allUsers.users,
-		post: state.allPosts.posts[ownProps.postPermlink],
+		post,
+		postingUser: fixUser(state.allUsers.users[postingUsername], postingUsername),
 	}
 };
 
