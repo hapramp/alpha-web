@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import _ from 'lodash';
 import {withRouter} from 'react-router-dom';
 
-import userPlaceholder from '../userProfile/user-placeholder.jpg';
 import PostData from '../postData';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
