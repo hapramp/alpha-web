@@ -10,6 +10,7 @@ import {userFeedReducer} from './userFeedReducer';
 import {allUserReducer} from './allUsersReducer';
 import {createArticleReducer} from './createArticleReducer';
 import {allPostsReducer} from './allPostsReducer';
+import {repliesReducer} from './repliesReducer';
 
 export default combineReducers({
 	login: loginReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
 	allUsers: allUserReducer,
 	createArticle: createArticleReducer,
 	allPosts: allPostsReducer,
+	replies: repliesReducer,
 });
