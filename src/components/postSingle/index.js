@@ -9,6 +9,7 @@ import styles from './styles.scss';
 import PostData from '../postData';
 import ActionBar from '../actionBar';
 import CustomTags from '../customTags';
+import Replies from '../replies';
 
 class PostSingle extends React.Component {
 	getLeftSection() {
@@ -32,6 +33,7 @@ class PostSingle extends React.Component {
 			</div>
 			<CustomTags post={this.props.post.json_metadata.tags} className={['uk-margin-top', 'uk-margin-large-bottom'].join(' ')}/>
 			<ActionBar post={this.props.post}/>
+			<Replies parentAuthor={this.props.post.author} parentPermlink={this.props.post.permlink}/>
 		</div>
 	}
 
