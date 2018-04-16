@@ -20,6 +20,12 @@ const initialState = {};
 export const repliesReducer = (state = initialState, action) => {
 	let key = `${action.parentAuthor}/${action.parentPermlink}`;
 
+	state = _.cloneDeep(state);
+
+	if (key === 'undefined/undefined') {  // TODO: Find out why
+		return state;
+	}
+
 	// Make sure key exists
 	!state[key] && (state[key] = {
 		error: null,
@@ -27,7 +33,7 @@ export const repliesReducer = (state = initialState, action) => {
 		replies: {}
 	});
 
-	let postReplies = _.cloneDeep(state[key]);
+	let postReplies = state[key];
 
 	switch (action.type) {
 		case actionTypes.REPLIES_LOAD_INIT:
@@ -39,7 +45,7 @@ export const repliesReducer = (state = initialState, action) => {
 		case actionTypes.REPLIES_LOAD_DONE:
 			postReplies.error = null;
 			postReplies.loading = false;
-			action.results.foreach(reply => {
+			action.results.forEach(reply => {
 				let innerKey = `${reply.author}/${reply.permlink}`;
 				postReplies.replies[innerKey] = reply;
 			});
