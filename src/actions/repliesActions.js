@@ -1,4 +1,4 @@
-import steemAPI from '../../utils/steem';
+import steemAPI from '../utils/steem';
 
 export const actionTypes = {
 	REPLIES_LOAD_INIT: 'REPLIES.LOAD.INIT',
