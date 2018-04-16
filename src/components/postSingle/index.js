@@ -30,7 +30,7 @@ class PostSingle extends React.Component {
 			<div className={[styles.rightContent].join(' ')}>
 				{data.content}
 			</div>
-			<CustomTags post={this.props.post.json_metadata.tags} className={['uk-margin-top'].join(' ')}/>
+			<CustomTags post={this.props.post.json_metadata.tags} className={['uk-margin-top', 'uk-margin-large-bottom'].join(' ')}/>
 			<ActionBar post={this.props.post}/>
 		</div>
 	}
