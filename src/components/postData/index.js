@@ -18,7 +18,7 @@ class PostData extends React.Component {
 	getActualData() {
 		switch (this.props.data.type) {
 			case 'text':
-				return <div className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>{this.props.data.content}</div>;
+				return <div className={['uk-margin-medium-left', 'uk-margin-medium-right', styles.text].join(' ')}>{this.props.data.content}</div>;
 			case 'image':
 				!this.props.data.height && (this.props.data.height = 9);
 				!this.props.data.width && (this.props.data.width = 16);

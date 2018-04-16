@@ -12,7 +12,7 @@ class PostUserMeta extends React.Component {
 					<span className={styles.userName}>{this.props.profile.name}</span> | <TimeAgo>{new Date(this.props.created + 'Z')}</TimeAgo>
 				</div>
 				<div>
-					{this.props.communities.map((community, idx) => <span key={idx} style={{backgroundColor: community.color}} className={[styles.communityLabel].join(' ')}>{community.name}</span>)}
+					{this.props.communities.map((community, idx) => <span key={idx} style={{backgroundColor: community.color}} className={[styles.communityLabel].join(' ')}><b>{community.name}</b></span>)}
 				</div>
 			</div>
 		</div>

@@ -33,12 +33,12 @@ class ActionBar extends React.Component {
 		if (this.props.withLink) {
 			return <Link to={`/@${this.props.post.author}/${this.props.post.permlink}`} className={['uk-flex', styles.action].join(' ')}>
 				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
-				{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
+				<span className={[styles.actionText].join(' ')}>{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}</span>
 			</Link>
 		} else {
 			return <div to={`/@${this.props.post.author}/${this.props.post.permlink}`} className={['uk-flex', styles.action].join(' ')}>
 				<i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')}></i>
-				{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
+				<span className={[styles.actionText].join(' ')}>{this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}</span>
 			</div>
 		}
 	}
@@ -47,12 +47,12 @@ class ActionBar extends React.Component {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
 			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView}>
 				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
-				{final_rating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}
+				<span className={[styles.actionText].join(' ')}>{final_rating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}</span>
 			</span>
 			{this.getCommentSection()}
 			<span className={['uk-flex', styles.action].join(' ')}>
 				<i className={['uk-margin-small-right', 'fas', 'fa-dollar-sign'].join(' ')}></i>
-				{this.props.post.total_payout_value}
+				<span className={[styles.actionText].join(' ')}>{this.props.post.total_payout_value}</span>
 			</span>
 		</div>
 	}
