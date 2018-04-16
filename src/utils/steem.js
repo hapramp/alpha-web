@@ -210,6 +210,13 @@ class SteemAPI {
 			steem.api.getState(`/${parentPermlink}/@${author}/${permlink}`, callback);
 		})
 	}
+
+	getReplies(parentAuthor, parentPermlink) {
+		return new Promise((resolve, reject) => {
+			let callback = (err, result) => err ? reject(err) : resolve(result);
+			steem.api.getContentReplies(parentAuthor, parentPermlink, callback);
+		})
+	}
 }
 
 export default new SteemAPI();
