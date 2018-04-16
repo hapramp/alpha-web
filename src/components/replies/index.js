@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {loadReplies} from '../../actions/repliesActions';
 import Reply from '../reply';
+import styles from './styles.scss';
 
 class Replies extends React.Component {
 	constructor(props) {
@@ -17,8 +18,9 @@ class Replies extends React.Component {
 			</div>
 		}
 		return <div className={['uk-margin-large-top'].join(' ')}>
-			{this.props.replies.loading && <div className={['uk-text-center'].join(' ')}>Loading...</div>}
+			{this.props.replies.loading && <div className={['uk-text-center', styles.status].join(' ')}>Loading...</div>}
 			{Object.values(this.props.replies.replies).map(reply => <Reply reply={reply} key={reply.id}/>)}
+			{!this.props.replies.loading && !Object.keys(this.props.replies.replies).length && <div className={['uk-text-center', styles.status].join(' ')}>No replies</div>}
 		</div>
 	}
 }
