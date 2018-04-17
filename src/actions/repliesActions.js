@@ -16,16 +16,22 @@ export const loadReplies = (parentAuthor, parentPermlink) => dispatch => {
 
 export const addReply = (parentAuthor, parentPermlink, body) => dispatch => {
 	dispatch({type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body});
-	steemAPI.addReply(parentAuthor, parentPermlink, body)
+	steemAPI.createReply(parentAuthor, parentPermlink, body)
 		.then(result => {
 			dispatch({type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result});
 			getSteemReplies(parentAuthor, parentPermlink, dispatch);
+			return result;
 		})
 		.catch(reason => dispatch({type: actionTypes.ADD_REPLY_ERROR, parentAuthor, parentPermlink, body, reason}));
 }
 
 const getSteemReplies = (parentAuthor, parentPermlink, dispatch) => {
 	steemAPI.getReplies(parentAuthor, parentPermlink)
-		.then(results => dispatch({type: actionTypes.REPLIES_LOAD_DONE, parentAuthor, parentPermlink, results}))
-		.catch(reason => dispatch({type: actionTypes.REPLIES_LOAD_ERROR, parentAuthor, parentPermlink, reason}));
+		.then(results => {
+			dispatch({type: actionTypes.REPLIES_LOAD_DONE, parentAuthor, parentPermlink, results});
+			return results;
+		}).catch(reason => {
+			dispatch({type: actionTypes.REPLIES_LOAD_ERROR, parentAuthor, parentPermlink, reason});
+			return reason;
+		});
 };
