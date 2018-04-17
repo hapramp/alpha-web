@@ -220,10 +220,11 @@ class SteemAPI {
 		})
 	}
 
-	createReply(parentAuthor, parentPermlink, author, permlink, body) {
+	createReply(parentAuthor, parentPermlink, author, body) {
 		return new Promise((resolve, reject) => {
 			let callback = (err, result) => err ? reject(err) : resolve(result);
 			let jsonMetadata = {app: constants.VERSION.APP_NAME};
+			let permlink = getCommentPermlink(parentAuthor, parentAuthor);
 			steem.broadcast.comment(localStorage.getItem('posting_key'), parentAuthor,
 				parentPermlink, author, permlink, '', body, jsonMetadata, callback);
 		})
