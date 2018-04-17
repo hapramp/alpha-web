@@ -6,6 +6,8 @@ import steem from 'steem';
 import Promise from 'bluebird';
 import _ from 'lodash';
 
+import constants from './constants';
+
 const getCommentPermlink = (parentAuthor, parentPermlink) => {
 	return steem.formatter.commentPermlink(parentAuthor, parentPermlink);
 };
@@ -38,7 +40,7 @@ const createJsonMetadataFromTags = tags => {
 	}
 	return {
 		tags: tags,
-		app: 'hapramp/0.0.1'
+		app: constants.VERSION.APP_NAME,
 	}
 };
 
@@ -215,6 +217,15 @@ class SteemAPI {
 		return new Promise((resolve, reject) => {
 			let callback = (err, result) => err ? reject(err) : resolve(result);
 			steem.api.getContentReplies(parentAuthor, parentPermlink, callback);
+		})
+	}
+
+	createReply(parentAuthor, parentPermlink, author, permlink, body) {
+		return new Promise((resolve, reject) => {
+			let callback = (err, result) => err ? reject(err) : resolve(result);
+			let jsonMetadata = {app: constants.VERSION.APP_NAME};
+			steem.broadcast.comment(localStorage.getItem('posting_key'), parentAuthor,
+				parentPermlink, author, permlink, '', body, jsonMetadata, callback);
 		})
 	}
 }

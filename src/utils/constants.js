@@ -20,5 +20,8 @@ export default {
 				FAILED_BODY: 'Failed to get body from backend'
 			}
 		}
-	}
+	},
+	VERSION: {
+		APP_NAME: 'hapramp/0.0.1',
+	},
 }
