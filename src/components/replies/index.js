@@ -22,7 +22,7 @@ class Replies extends React.Component {
 			{this.props.replies.loading && <div className={['uk-text-center', styles.status].join(' ')}>Loading...</div>}
 			{Object.values(this.props.replies.replies).map(reply => <Reply reply={reply} key={reply.id}/>)}
 			{!this.props.replies.loading && !Object.keys(this.props.replies.replies).length && <div className={['uk-text-center', styles.status].join(' ')}>No replies</div>}
-			<CreateReply/>
+			<CreateReply post={this.props.rootPost}/>
 		</div>
 	}
 }
@@ -30,7 +30,10 @@ class Replies extends React.Component {
 const mapStateToProps = (state, ownProps) => {
 	let key = `${ownProps.parentAuthor}/${ownProps.parentPermlink}`;
 	let replies = state.replies[key];
-	return {replies};
+	return {
+		replies,
+		rootPost: state.allPosts.posts[key],
+	};
 };
 
 export default connect(mapStateToProps, {
