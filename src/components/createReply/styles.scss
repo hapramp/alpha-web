@@ -1,0 +1,28 @@
+.postingUserImage {
+	height: 32px;
+	width: 32px;
+	margin: 8px 8px 0 0;
+}
+
+.commentInputContainer {
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	height: 30px;
+	padding: 8px 20px 8px 30px;
+	border-radius: 32px;
+	width: calc(100% - 40px);
+	flex-grow: 1;
+	display: flex;
+}
+
+.commentInput, .commentInput:focus {
+	flex-grow: 1;
+	border: 0px solid transparent;
+	outline: none;
+	font-size: 20px;
+	height: 30px;
+}
+
+.sendIcon {
+	padding: 4px;
+	font-size: 18px;
+}
