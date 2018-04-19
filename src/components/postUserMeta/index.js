@@ -8,8 +8,7 @@ class PostUserMeta extends React.Component {
 	render() {
 		return <div className={[this.props.className ? this.props.className : '', 'uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
 			<Link to={`/@${this.props.profile.username}`}>
-				<img src={`https://steemitimages.com/u/${this.props.profile.username}/avatar`}
-					className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
+				<img src={this.props.profile.image} className={['uk-border-circle', styles.userImage].join(' ')} alt={""}/>
 			</Link>
 			<div className={['uk-margin-left'].join(' ')}>
 				<div className={[styles.userNameContainer].join(' ')}>
