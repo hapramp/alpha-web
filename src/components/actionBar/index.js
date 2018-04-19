@@ -82,6 +82,7 @@ class ActionBar extends React.Component {
 		} else {
 			finalRating = 0.0
 		}
+		!finalRating && (finalRating = 0.0);
 		finalRating = finalRating.toFixed(2);
 
 		let userRating = null;
