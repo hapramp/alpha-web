@@ -9,7 +9,7 @@ export const getCommunitiesForPost = post => {
 }
 
 export const getOtherTags = tags => {
-	let allCommunities = getStore().getState().communities.communities;
+	let allCommunities = getStore().getState().communities.communities.concat([{tag: 'hapramp'}]);
 	return tags.filter(tag =>
 		!_.some(allCommunities, i => i.tag === tag));
 }

@@ -7,7 +7,7 @@ import {getOtherTags} from '../../utils/communityUtils';
 
 class CustomTags extends React.Component {
 	render() {
-		let otherTags = getOtherTags(this.props.post);
+		let otherTags = getOtherTags(this.props.tags);
 		return <div className={[this.props.className].join(' ')}>
 			{otherTags.map(tag => <span className={['uk-margin-small-right', styles.tagText].join(' ')} key={tag}>
 				<span className={indexStyles.secondaryText}>#</span>
