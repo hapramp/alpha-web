@@ -68,7 +68,7 @@ class Post extends React.Component {
 		/* Render */
 		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
 			{/* Top section */}
-			<PostUserMeta profile={{name: user.json_metadata.profile.name, image: user.json_metadata.profile.profile_image}} created={this.props.post.created}
+			<PostUserMeta profile={{name: user.json_metadata.profile.name, image: user.json_metadata.profile.profile_image, username: user.name}} created={this.props.post.created}
 				communities={getCommunitiesForPost(this.props.post)}/>
 			{/* Actual post */}
 			<div className={[styles.postSection].join(' ')}>
