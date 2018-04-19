@@ -11,9 +11,8 @@ class Reply extends React.Component {
 				<img className={['uk-border-circle', styles.userImage].join(' ')} src={this.props.postingUser.json_metadata.profile.profile_image} alt={this.props.postingUser.name}/>
 				<span className={[styles.userName].join(' ')}>{this.props.postingUser.json_metadata.profile.name}</span>
 			</div>
-			<div className={[styles.replyBody].join(' ')}>
-				{this.props.reply.body}
-			</div>
+			<div className={[styles.replyBody].join(' ')}
+			  dangerouslySetInnerHTML={{__html: window.markdownToHtmlConverter.makeHtml(this.props.reply.body)}}/>
 		</div>
 	}
 }

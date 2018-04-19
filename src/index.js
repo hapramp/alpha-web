@@ -5,15 +5,17 @@ import {BrowserRouter} from 'react-router-dom';
 import Icons from 'uikit/dist/js/uikit-icons';
 import UIKit from 'uikit';
 import * as firebase from 'firebase';
+import TimeAgo from 'javascript-time-ago'
+// Load locale-specific relative date/time formatting rules.
+import en from 'javascript-time-ago/locale/en'
+import showdown from 'showdown';
 
 import registerServiceWorker from './registerServiceWorker';
 import Root from './components/root';
 import getStore from './utils/storeUtils';
 
-import TimeAgo from 'javascript-time-ago'
-
-// Load locale-specific relative date/time formatting rules.
-import en from 'javascript-time-ago/locale/en'
+// Markdown to HTML
+window.markdownToHtmlConverter = new showdown.Converter();
 
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.locale(en)
