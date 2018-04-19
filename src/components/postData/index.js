@@ -19,7 +19,7 @@ class PostData extends React.Component {
 	}
 
 	getActualData() {
-		switch (this.props.data.type) {
+		switch (this.props.data.type.toLowerCase()) {
 			case 'text':
 				return <div className={[horizontalMarginClasses, styles.text].join(' ')}>{this.props.data.content}</div>;
 
@@ -35,22 +35,18 @@ class PostData extends React.Component {
 				</LazyLoad>;
 
 			case 'h1':
-			case 'H1':
 			case 'heading':
 				return <h1 className={[horizontalMarginClasses, indexStyles.primaryText, indexStyles.h1].join(' ')}>
 					{this.props.data.content}
 					</h1>
 
 			case 'h2':
-			case 'H2':
 			case 'sub-heading':
 				return <h2 className={[horizontalMarginClasses, indexStyles.primaryText, indexStyles.h2].join(' ')}>
 					{this.props.data.content}
 				</h2>
 
 			case 'youtube':
-			case 'YOUTUBE':
-			case 'YouTube':
 				return <div className={['uk-cover-container', 'uk-medium-height'].join(' ')}>
 						<iframe title={this.props.data.content} src={`https://www.youtube.com/embed/${this.props.data.content}?rel=0&amp`}
 						  width="100%" height="315" frameBorder="0" allowFullScreen>
@@ -58,7 +54,6 @@ class PostData extends React.Component {
 					</div>
 
 			case 'ol':
-			case 'OL':
 				if (typeof(this.props.data.content) === 'string') {
 					this.props.data.content = this.props.data.content.split(' ');
 				}
@@ -67,7 +62,6 @@ class PostData extends React.Component {
 				</ol>
 
 			case 'ul':
-			case 'UL':
 			if (typeof(this.props.data.content) === 'string') {
 				this.props.data.content = this.props.data.content.split(' ');
 			}
