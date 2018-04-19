@@ -53,3 +53,31 @@ a, a:hover {
 .secondaryText {
 	color: $secondary-color;
 }
+
+.primaryText {
+	color: $primary-color;
+}
+
+.h1 {
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 54px;
+}
+
+.h2 {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 36px;
+}
+
+.h3 {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 30px;
+}
+
+.h4 {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 27px;
+}
