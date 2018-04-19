@@ -2,6 +2,9 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 
 import styles from './styles.scss';
+import indexStyles from '../../index.scss';
+
+let horizontalMarginClasses = ['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ');
 
 class PostData extends React.Component {
 	constructor(props) {
@@ -18,8 +21,9 @@ class PostData extends React.Component {
 	getActualData() {
 		switch (this.props.data.type) {
 			case 'text':
-				return <div className={['uk-margin-medium-left', 'uk-margin-medium-right', styles.text].join(' ')}>{this.props.data.content}</div>;
-			case 'image':
+				return <div className={[horizontalMarginClasses, styles.text].join(' ')}>{this.props.data.content}</div>;
+
+				case 'image':
 				!this.props.data.height && (this.props.data.height = 9);
 				!this.props.data.width && (this.props.data.width = 16);
 				let aspectRatio = (this.props.data.height / this.props.data.width) * 100 + '%';
@@ -29,8 +33,31 @@ class PostData extends React.Component {
 						<img src={this.props.data.content} alt={""} onLoad={this.resizeDiv} style={{margin: 'auto'}}/>
 					</div>
 				</LazyLoad>;
+
+			case 'h1':
+			case 'H1':
+			case 'heading':
+				return <h1 className={[horizontalMarginClasses, indexStyles.primaryText, indexStyles.h1].join(' ')}>
+					{this.props.data.content}
+					</h1>
+
+			case 'h2':
+			case 'H2':
+			case 'sub-heading':
+				return <h2 className={[horizontalMarginClasses, indexStyles.primaryText, indexStyles.h2].join(' ')}>
+					{this.props.data.content}
+				</h2>
+
+			case 'youtube':
+			case 'YOUTUBE':
+			case 'YouTube':
+				return <div className={['uk-cover-container', 'uk-medium-height'].join(' ')}>
+						<iframe title={this.props.data.content} src={`https://www.youtube.com/embed/${this.props.data.content}?rel=0&amp;showinfo=0`} width="560" height="315" frameborder="0" allowfullscreen uk-cover>
+						</iframe>
+					</div>
+
 			default:
-				return <div className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>??</div>;
+				return <h2 className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>??</h2>;
 		}
 	}
 
