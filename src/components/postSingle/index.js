@@ -21,7 +21,8 @@ class PostSingle extends React.Component {
 	}
 
 	getRightSection() {
-		let containsImage = this.props.post.json_metadata.content.data[0].type === 'image';
+		let containsImage = this.props.post.json_metadata.content.data[0].type.toLowerCase() === 'image'
+			|| this.props.post.json_metadata.content.data[0].type.toLowerCase() === 'youtube';
 		let classes = ['uk-width-1-1@s', 'uk-width-2-3@m', 'uk-width-1-3@l'];
 		containsImage && (classes = ['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l'])
 		let data = containsImage ? this.props.post.json_metadata.content.data[1] : this.props.post.json_metadata.content.data[0];
