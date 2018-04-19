@@ -52,7 +52,8 @@ class PostData extends React.Component {
 			case 'YOUTUBE':
 			case 'YouTube':
 				return <div className={['uk-cover-container', 'uk-medium-height'].join(' ')}>
-						<iframe title={this.props.data.content} src={`https://www.youtube.com/embed/${this.props.data.content}?rel=0&amp;showinfo=0`} width="100%" height="315" frameborder="0" allowfullscreen uk-cover>
+						<iframe title={this.props.data.content} src={`https://www.youtube.com/embed/${this.props.data.content}?rel=0&amp`}
+						  width="100%" height="315" frameBorder="0" allowFullScreen>
 						</iframe>
 					</div>
 
