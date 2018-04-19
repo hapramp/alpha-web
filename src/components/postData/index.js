@@ -52,9 +52,27 @@ class PostData extends React.Component {
 			case 'YOUTUBE':
 			case 'YouTube':
 				return <div className={['uk-cover-container', 'uk-medium-height'].join(' ')}>
-						<iframe title={this.props.data.content} src={`https://www.youtube.com/embed/${this.props.data.content}?rel=0&amp;showinfo=0`} width="560" height="315" frameborder="0" allowfullscreen uk-cover>
+						<iframe title={this.props.data.content} src={`https://www.youtube.com/embed/${this.props.data.content}?rel=0&amp;showinfo=0`} width="100%" height="315" frameborder="0" allowfullscreen uk-cover>
 						</iframe>
 					</div>
+
+			case 'ol':
+			case 'OL':
+				if (typeof(this.props.data.content) === 'string') {
+					this.props.data.content = this.props.data.content.split(' ');
+				}
+				return <ol className={[horizontalMarginClasses].join(' ')}>
+					{this.props.data.content.map((i, idx) => <li key={idx}>{i}</li>)}
+				</ol>
+
+			case 'ul':
+			case 'UL':
+			if (typeof(this.props.data.content) === 'string') {
+				this.props.data.content = this.props.data.content.split(' ');
+			}
+			return <ul className={[horizontalMarginClasses].join(' ')}>
+				{this.props.data.content.map((i, idx) => <li key={idx}>{i}</li>)}
+			</ul>
 
 			default:
 				return <h2 className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}>??</h2>;
