@@ -100,10 +100,10 @@ class CreatePost extends React.Component {
 				<span className={['uk-margin-left'].join(' ')} style={{opacity: 0.87}}>{this.props.userFullName}</span>
 			</div>
 			<div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
-				<span className={[styles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}
+				{!this.props.creating && <span className={[styles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}
 							onClick={this.handlePostCreate.bind(this)}>
 					Publish
-				</span>
+				</span>}
 			</div>
 		</div>
 	}
@@ -232,6 +232,7 @@ const mapStateToProps = state => {
 		fullPermlink: state.createPost.fullPermlink,
 		postCreating: state.createPost.creating,
 		errors: state.createPost.errors,
+		creating: state.createPost.creating,
 	}
 };
 
