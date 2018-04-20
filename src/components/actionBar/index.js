@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import _ from 'lodash';
 
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
@@ -13,6 +14,18 @@ class ActionBar extends React.Component {
 		this.enableRatingView = this.enableRatingView.bind(this);
 		this.disableRatingView = this.disableRatingView.bind(this);
 		this.onRateClick = this.onRateClick.bind(this);
+		this.handleRatePress = this.handleRatePress.bind(this);
+		this.handleRateRelease = this.handleRateRelease.bind(this);
+		this.buttonPressTimer = null;
+		this.toggleFullRate = this.toggleFullRate.bind(this);
+	}
+
+	handleRatePress() {
+		this.buttonPressTimer = setTimeout(this.enableRatingView, 500);
+	}
+
+	handleRateRelease() {
+		clearTimeout(this.buttonPressTimer);
 	}
 
 	enableRatingView() {
@@ -21,6 +34,15 @@ class ActionBar extends React.Component {
 
 	disableRatingView() {
 		setTimeout(() => this.setState({...this.state, ratingActive: false}), 300);
+	}
+
+	toggleFullRate() {
+		let rating = 5;
+		if (_.some(this.props.post.active_votes, i => i.voter === localStorage.getItem('username') && i.percent > 0)) {
+			// Already rated, remove rating
+			rating = 0;
+		}
+		this.props.ratePost(this.props.post.author, this.props.post.permlink, rating);
 	}
 
 	onRateClick(event) {
@@ -45,7 +67,9 @@ class ActionBar extends React.Component {
 
 	getCollapsedActionSection(final_rating, userRating) {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
-			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.enableRatingView}>
+			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.toggleFullRate}
+				onTouchStart={this.handleRatePress} onTouchEnd={this.handleRateRelease}
+				onMouseDown={this.handleRatePress} onMouseUp={this.handleRateRelease}>
 				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
 				<span className={[styles.actionText].join(' ')}>{final_rating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}</span>
 			</span>
