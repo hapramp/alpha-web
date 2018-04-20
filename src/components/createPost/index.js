@@ -8,8 +8,8 @@ import _ from 'lodash';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import {
-	changeCommunity, changeMedia, clearError, createPost, postCreateError, removeMedia, resetPostCreate,
-	setHashtags
+	changeCommunity, changeMedia, clearError, createPost, setHashtags,
+	postCreateError, removeMedia, resetPostCreate,
 } from "../../actions/createPostActions";
 
 class CreatePost extends React.Component {

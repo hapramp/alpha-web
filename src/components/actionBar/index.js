@@ -70,7 +70,7 @@ class ActionBar extends React.Component {
 			<span className={['uk-flex', indexStyles.pointer, styles.action].join(' ')} onClick={this.toggleFullRate}
 				onTouchStart={this.handleRatePress} onTouchEnd={this.handleRateRelease}
 				onMouseDown={this.handleRatePress} onMouseUp={this.handleRateRelease}>
-				<i className={['uk-margin-small-right', userRating ? 'fas' : 'far', 'fa-star'].join(' ')}></i>
+				<i className={['uk-margin-small-right', userRating ? ['fas', indexStyles.primaryText].join(' ') : 'far', 'fa-star'].join(' ')}></i>
 				<span className={[styles.actionText].join(' ')}>{final_rating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}</span>
 			</span>
 			{this.getCommentSection()}
@@ -89,7 +89,7 @@ class ActionBar extends React.Component {
 		return <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-between'].join(' ')} onMouseLeave={this.disableRatingView}>
 			<span className={['uk-margin-left'].join(' ')}>
 				{[1, 2, 3, 4, 5].map((i, idx) => <span key={i} className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')} onClick={this.onRateClick}>
-					<i className={['uk-margin-small-right', i <= userRating ? 'fas' : 'far', 'fa-star'].join(' ')} data-rating={i}></i>
+					<i className={['uk-margin-small-right', i <= userRating ? ['fas', indexStyles.primaryText].join(' ') : 'far', 'fa-star'].join(' ')} data-rating={i}></i>
 				</span>)}
 			</span>
 			{ratingSection}
