@@ -14,6 +14,10 @@ import {
 
 class CreatePost extends React.Component {
 
+	componentWillUnmount() {
+		this.props.clearError();
+	}
+
 	handleUploadImageClick() {
 		let input = document.createElement('input');
 		input.type = 'file';
