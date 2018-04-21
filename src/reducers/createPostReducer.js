@@ -19,7 +19,7 @@ export const createPostReducer = (state = initialState, action) => {
 			return {...state, community};
 
 		case actionTypes.CHANGE_MEDIA:
-			return {...state, media: action.file};
+			return {...state, media: {content: action.content, type: action.mediaType}};
 
 		case actionTypes.REMOVE_MEDIA:
 			return {...state, media: null};

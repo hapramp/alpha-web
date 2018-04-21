@@ -18,7 +18,7 @@ export const actionTypes = {
 
 export const changeCommunity = community => dispatch => dispatch({type: actionTypes.CHANGE_COMMUNITY, community});
 
-export const changeMedia = file => dispatch => dispatch({type: actionTypes.CHANGE_MEDIA, file});
+export const changeMedia = (content, type) => dispatch => dispatch({type: actionTypes.CHANGE_MEDIA, content, mediaType: type});
 
 export const removeMedia = () => dispatch => dispatch({type: actionTypes.REMOVE_MEDIA});
 

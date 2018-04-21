@@ -28,7 +28,7 @@ class CreatePost extends React.Component {
 			if (input.files.length > 0) {
 				file = input.files[0];
 			}
-			this.props.changeMedia(file);
+			this.props.changeMedia(file, 'image');
 		});
 		input.click();
 	}
@@ -170,16 +170,24 @@ class CreatePost extends React.Component {
 	}
 
 	getMediaViewer() {
-		return <div className={['uk-flex', 'uk-flex-center', 'uk-margin-bottom'].join(' ')}>
-			<div className={'uk-inline'}>
-				<img className={[styles.mediaViewer].join(' ')} src={window.URL.createObjectURL(this.props.media)}
-						 alt={'Media'} id='media-image'/>
-				<div className={['uk-overlay', 'uk-overlay-default', 'uk-position-top-right', styles.topOverlay].join(' ')}
-						 onClick={this.props.removeMedia}>
-					<p><span uk-icon="icon: close"/></p>
+		switch (this.props.media.type) {
+			case 'image':
+				return <div className={['uk-flex', 'uk-flex-center', 'uk-margin-bottom'].join(' ')}>
+					<div className={'uk-inline'}>
+						<img className={[styles.mediaViewer].join(' ')} src={window.URL.createObjectURL(this.props.media.content)}
+								alt={'Media'} id='media-image'/>
+						<div className={['uk-overlay', 'uk-overlay-default', 'uk-position-top-right', styles.topOverlay].join(' ')}
+								onClick={this.props.removeMedia}>
+							<p><span uk-icon="icon: close"/></p>
+						</div>
+					</div>
 				</div>
+
+			default:
+			return <div>
+				Unknown media type.
 			</div>
-		</div>
+		}
 	}
 
 	showHashtags() {
