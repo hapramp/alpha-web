@@ -39,37 +39,47 @@ class CreatePost extends React.Component {
 		let post;
 
 		if (this.props.media) {
-			let imageElement = document.getElementById('media-image');
-			let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.name)
-				.put(this.props.media);
+			if (this.props.media.type === 'image') {
+				let imageElement = document.getElementById('media-image');
+				let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.name)
+					.put(this.props.media);
 
-			let onUploadProgress = snapshot => {
-				console.log('Progress - ', snapshot)
-				// TODO: Show an indicator
-			};
-			let onUploadError = error => {
-				console.log(error)
-				// TODO: Show some error
-			};
-			let onUploadComplete = () => {
-				let downloadURL = uploadTask.snapshot.downloadURL;
-				console.log('Image uploaded', downloadURL);
+				let onUploadProgress = snapshot => {
+					console.log('Progress - ', snapshot)
+					// TODO: Show an indicator
+				};
+				let onUploadError = error => {
+					console.log(error)
+					// TODO: Show some error
+				};
+				let onUploadComplete = () => {
+					let downloadURL = uploadTask.snapshot.downloadURL;
+					console.log('Image uploaded', downloadURL);
+					post = {
+						type: 'post', data: [
+							{type: 'image', content: downloadURL, height: imageElement.height, width: imageElement.width},
+							{type: 'text', content},
+						]
+					};
+					this.props.createPost({post, tags: this.props.hashtags, community});
+				};
+				uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, onUploadProgress, onUploadError, onUploadComplete);
+			} else if (this.props.media.type === 'youtube') {
 				post = {
 					type: 'post', data: [
-						{type: 'image', content: downloadURL, height: imageElement.height, width: imageElement.width},
-						{type: 'text', content},
+						{type: 'youtube', content: this.props.media.content},
+						{type: 'text', content}
+					]
+				}
+				this.props.createPost({post, tags: this.props.hashtags, community});
+			} else {
+				post = {
+					type: 'post', data: [
+						{type: 'text', content}
 					]
 				};
 				this.props.createPost({post, tags: this.props.hashtags, community});
-			};
-			uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, onUploadProgress, onUploadError, onUploadComplete);
-		} else {
-			post = {
-				type: 'post', data: [
-					{type: 'text', content}
-				]
-			};
-			this.props.createPost({post, tags: this.props.hashtags, community});
+			}
 		}
 	}
 
