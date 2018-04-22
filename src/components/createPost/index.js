@@ -146,7 +146,7 @@ class CreatePost extends React.Component {
 					</span>
 					<span>Image</span>
 				</div>
-				<div className={[styles.upload].join(' ')}>
+				{/* <div className={[styles.upload].join(' ')}>
 				<span className={[indexStyles.marginRightSmall].join(' ')}>
 					<svg fill="#444" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none"/>
@@ -154,7 +154,7 @@ class CreatePost extends React.Component {
 					</svg>
 				</span>
 					<span>Music</span>
-				</div>
+				</div> */}
 				<div className={[styles.upload].join(' ')}>
 				<span className={[indexStyles.marginRightSmall].join(' ')}>
 					<svg fill="#444" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
