@@ -35,10 +35,13 @@ class PostMediaUpload extends React.Component {
 	onYoutubeInputKeyPress(event) {
 		if (event.keyCode === 13) {
 			let link = event.target.value;
-			let videoId = 'PQmrmVs10X8';  // TODO: Parse this from link
+			let videoId = link.split('v=')[1];
+			let ampersandPosition = videoId.indexOf('&');
+			if (ampersandPosition != -1) {
+  			videoId = videoId.substring(0, ampersandPosition);
+			}
 			this.props.changeMedia(videoId, 'youtube');
 			this.setState({...this.state, activeMediaChooser: null});
-			// TODO: Verify
 			event.target.value = '';
 		}
 	}
