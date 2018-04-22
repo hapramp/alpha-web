@@ -13,7 +13,8 @@ import Replies from '../replies';
 
 class PostSingle extends React.Component {
 	getLeftSection() {
-		if (this.props.post.json_metadata.content.data[0].type === 'image') {
+		if (this.props.post.json_metadata.content.data[0].type === 'image'
+			|| this.props.post.json_metadata.content.data[0].type === 'youtube') {
 			return	<div className={['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l', 'uk-padding-remove'].join(' ')}>
 				<PostData data={this.props.post.json_metadata.content.data[0]}/>
 			</div>
