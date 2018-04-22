@@ -37,7 +37,7 @@ class PostMediaUpload extends React.Component {
 			let link = event.target.value;
 			let videoId = link.split('v=')[1];
 			let ampersandPosition = videoId.indexOf('&');
-			if (ampersandPosition != -1) {
+			if (ampersandPosition !== -1) {
   			videoId = videoId.substring(0, ampersandPosition);
 			}
 			this.props.changeMedia(videoId, 'youtube');
