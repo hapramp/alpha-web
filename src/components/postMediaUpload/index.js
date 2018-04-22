@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import {changeMedia} from '../../actions/createPostActions';
+import PostMediaViewer from '../postMediaViewer';
 
 class PostMediaUpload extends React.Component {
 
@@ -34,7 +35,8 @@ class PostMediaUpload extends React.Component {
 	onYoutubeInputKeyPress(event) {
 		if (event.keyCode === 13) {
 			let link = event.target.value;
-			this.props.changeMedia(link, 'youtube');
+			let videoId = 'PQmrmVs10X8';  // TODO: Parse this from link
+			this.props.changeMedia(videoId, 'youtube');
 			this.setState({...this.state, activeMediaChooser: null});
 			// TODO: Verify
 			event.target.value = '';
@@ -72,7 +74,7 @@ class PostMediaUpload extends React.Component {
 				<input type='text' className={[styles.linkInput].join(' ')} onKeyUp={this.onYoutubeInputKeyPress}/>
 			</div>}
 		</div>
-		{/* TODO: Insert media viewer here */}
+		<PostMediaViewer className={['uk-margin-top'].join(' ')}/>
 	</div>
 	}
 }
