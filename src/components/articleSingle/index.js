@@ -7,12 +7,17 @@ import indexStyles from '../../index.scss';
 import CustomTags from '../customTags';
 import ActionBar from '../actionBar';
 import Replies from '../replies';
+import PostUserMeta from '../postUserMeta';
+import {getCommunitiesForPost} from '../../utils/communityUtils';
 
 class ArticleSingle extends React.Component {
 	render() {
 		return <div uk-grid={'true'} className={['uk-margin-bottom'].join(' ')}>
 			<div  className={['uk-width-1-6@m', 'uk-text-center', 'uk-width-1-4@l'].join(' ')}/>
 			<div className={['uk-width-1-1@s', 'uk-width-2-3@m', 'uk-width-1-2@l', 'uk-padding-remove', indexStyles.white].join(' ')}>
+				<PostUserMeta profile={{name: this.props.postingUser.json_metadata.profile.name, image: this.props.postingUser.json_metadata.profile.profile_image,
+					username: this.props.post.author}}
+					created={this.props.post.created} communities={getCommunitiesForPost(this.props.post)} className={['uk-padding', 'uk-margin-large-bottom'].join(' ')}/>
 				<div>
 					{this.props.post.json_metadata.content.data.map((content, idx) => <PostData className={['uk-margin-top'].join(' ')} data={content}/>)}
 				</div>
