@@ -28,8 +28,8 @@ class PostSingle extends React.Component {
 		containsImage && (classes = ['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l'])
 		let data = containsImage ? this.props.post.json_metadata.content.data[1] : this.props.post.json_metadata.content.data[0];
 		return <div className={classes.concat([]).join(' ')}>
-			<PostUserMeta profile={{name: this.props.postingUser.json_metadata.profile.name, image: this.props.postingUser.json_metadata.profile.profile_image}}
-				created={this.props.post.created} communities={getCommunitiesForPost(this.props.post)} className={['uk-padding-remove-left'].join(' ')}/>
+			<PostUserMeta profile={{name: this.props.postingUser.json_metadata.profile.name, image: this.props.postingUser.json_metadata.profile.profile_image,
+				username: this.props.post.author}} created={this.props.post.created} communities={getCommunitiesForPost(this.props.post)} className={['uk-padding-remove-left'].join(' ')}/>
 			<div className={[styles.rightContent].join(' ')}>
 				{data.content}
 			</div>
