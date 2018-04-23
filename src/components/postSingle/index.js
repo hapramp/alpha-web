@@ -15,19 +15,20 @@ class PostSingle extends React.Component {
 	getLeftSection() {
 		if (this.props.post.json_metadata.content.data[0].type === 'image'
 			|| this.props.post.json_metadata.content.data[0].type === 'youtube') {
-			return	<div className={['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l', 'uk-padding-remove'].join(' ')}>
+			return	<div className={['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l', 'uk-padding-remove', indexStyles.white].join(' ')}>
 				<PostData data={this.props.post.json_metadata.content.data[0]}/>
 			</div>
 		}
+		return <div className={['uk-width-1-6@m', 'uk-width-1-4@l'].join(' ')}/>
 	}
 
 	getRightSection() {
 		let containsImage = this.props.post.json_metadata.content.data[0].type.toLowerCase() === 'image'
 			|| this.props.post.json_metadata.content.data[0].type.toLowerCase() === 'youtube';
-		let classes = ['uk-width-1-1@s', 'uk-width-2-3@m', 'uk-width-1-3@l'];
+		let classes = ['uk-width-1-1@s', 'uk-width-2-3@m', 'uk-width-1-2@l'];
 		containsImage && (classes = ['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l'])
 		let data = containsImage ? this.props.post.json_metadata.content.data[1] : this.props.post.json_metadata.content.data[0];
-		return <div className={classes.concat([]).join(' ')}>
+		return <div className={classes.concat([indexStyles.white]).join(' ')}>
 			<PostUserMeta profile={{name: this.props.postingUser.json_metadata.profile.name, image: this.props.postingUser.json_metadata.profile.profile_image,
 				username: this.props.post.author}} created={this.props.post.created} communities={getCommunitiesForPost(this.props.post)} className={['uk-padding-remove-left'].join(' ')}/>
 			<div className={[styles.rightContent].join(' ')}>
@@ -40,7 +41,7 @@ class PostSingle extends React.Component {
 	}
 
 	render() {
-		return <div uk-grid={'true'} className={[indexStyles.white].join(' ')}>
+		return <div uk-grid={'true'} className={[].join(' ')}>
 			{this.getLeftSection()}
 			{this.getRightSection()}
 		</div>
