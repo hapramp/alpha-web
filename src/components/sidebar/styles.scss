@@ -6,7 +6,7 @@
 }
 
 .communitiesHeader {
-  font-weight: 1000;
+  font-weight: 500;
 }
 
 .active {
@@ -20,5 +20,5 @@
 .communityContainer:hover, .communityContainer.active {
   border-right: 4px solid $primary-light-color;
   opacity: 1;
-  font-weight: 800;
+  font-weight: 500;
 }
