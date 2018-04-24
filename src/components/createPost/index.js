@@ -72,14 +72,15 @@ class CreatePost extends React.Component {
 					]
 				}
 				this.props.createPost({post, tags: this.props.hashtags, community});
-			} else {
-				post = {
-					type: 'post', data: [
-						{type: 'text', content}
-					]
-				};
-				this.props.createPost({post, tags: this.props.hashtags, community});
 			}
+		} else {
+			post = {
+				type: 'post',
+				data: [
+					{type: 'text', content}
+				]
+			};
+			this.props.createPost({post, tags: this.props.hashtags, community});
 		}
 	}
 
