@@ -66,7 +66,7 @@ class Post extends React.Component {
 		let user = this.props.postingUser;
 
 		/* Render */
-		return <div className={['uk-margin-bottom', styles.postContainer, indexStyles.white].join(' ')}>
+		return <div className={['uk-margin-bottom', this.props.border ? styles.postContainerBorder : '', indexStyles.white].join(' ')}>
 			{/* Top section */}
 			<PostUserMeta profile={{name: user.json_metadata.profile.name, image: user.json_metadata.profile.profile_image, username: user.name}} created={this.props.post.created}
 				communities={getCommunitiesForPost(this.props.post)}/>
