@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import PostData from '../postData';
 import styles from './styles.scss';
@@ -71,9 +71,12 @@ class Post extends React.Component {
 			<PostUserMeta profile={{name: user.json_metadata.profile.name, image: user.json_metadata.profile.profile_image, username: user.name}} created={this.props.post.created}
 				communities={getCommunitiesForPost(this.props.post)}/>
 			{/* Actual post */}
-			<div className={[styles.postSection].join(' ')}>
+			<div className={[styles.postSection, content.type === 'article' ? styles.articleView : ''].join(' ')}>
 				{content && content.data.map((data, idx) => <PostData applyTopMargin={idx !== 0} key={idx} data={data}/>)}
 			</div>
+			{content.type === 'article' && <div className={['uk-text-center', styles.articleReadMore, indexStyles.pointer].join(' ')}>
+				<Link to={`/@${this.props.post.author}/${this.props.post.permlink}`}>READ MORE</Link>
+			</div>}
 			{/* Action bar */}
 			<ActionBar post={this.props.post} withLink/>
 		</div>

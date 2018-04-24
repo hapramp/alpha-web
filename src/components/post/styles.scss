@@ -21,3 +21,18 @@
 	text-decoration: line-through;
 	transform: rotate(288deg);
 }
+
+.articleView {
+	max-height: 380px;
+	overflow: hidden;
+}
+
+.articleReadMore {
+	margin-top: -16px;
+	padding: 8px 0;
+	background-color: rgba(255, 255, 255, 0.9);
+	color: #3F72AF;
+	letter-spacing: 2px;
+	font-weight: 500;
+	position: relative;
+}
