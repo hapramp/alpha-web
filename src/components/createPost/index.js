@@ -41,8 +41,8 @@ class CreatePost extends React.Component {
 		if (this.props.media) {
 			if (this.props.media.type === 'image') {
 				let imageElement = document.getElementById('media-image');
-				let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.name)
-					.put(this.props.media);
+				let uploadTask = window.firebaseStorage.ref().child('images/' + new Date().toISOString() + this.props.media.content.name)
+					.put(this.props.media.content);
 
 				let onUploadProgress = snapshot => {
 					console.log('Progress - ', snapshot)
