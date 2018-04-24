@@ -11,7 +11,13 @@ const initialState = {};
 		replies: {
 			replyFullPermlink: {...},
 			...
-		}
+		},
+		pendingReplies: [
+			{
+				author: ...,
+				body: ...,
+			}
+		]
 	},
 	...
 }
@@ -30,7 +36,8 @@ export const repliesReducer = (state = initialState, action) => {
 	!state[key] && (state[key] = {
 		error: null,
 		loading: false,
-		replies: {}
+		replies: {},
+		pendingReplies: [],
 	});
 
 	let postReplies = state[key];
@@ -49,6 +56,7 @@ export const repliesReducer = (state = initialState, action) => {
 				let innerKey = `${reply.author}/${reply.permlink}`;
 				postReplies.replies[innerKey] = reply;
 			});
+			postReplies.pendingReplies = [];
 			state[key] = postReplies;
 			return state;
 
@@ -59,6 +67,15 @@ export const repliesReducer = (state = initialState, action) => {
 			return state;
 
 		// TODO: Handle cases for creating reply
+		case actionTypes.ADD_REPLY_INIT:
+			postReplies.pendingReplies.push({author: localStorage.getItem('username'), body: action.body});
+			state[key] = postReplies;
+			return state;
+
+		case actionTypes.ADD_REPLY_ERROR:
+			postReplies.pendingReplies = [];
+			state[key] = postReplies;
+			return state;
 
 		default:
 			return state;

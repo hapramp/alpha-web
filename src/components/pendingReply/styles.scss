@@ -1,0 +1,26 @@
+.pendingReply {
+	opacity: 0.48;
+}
+
+.userImage {
+	width: 28px;
+	height: 28px;
+}
+
+.userName {
+	font-family: 'Roboto-Regular';
+	margin-left: 8px;
+	font-size: 14px;
+	line-height: 20px;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.replyBody {
+	font-style: italic;
+	font-weight: 500;
+	margin-top: 8px;
+	margin-left: 40px;
+	font-size:12px;
+	color:rgba(0,0,0,0.38);
+	line-height:16px;
+}
