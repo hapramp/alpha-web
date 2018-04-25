@@ -22,7 +22,6 @@ class AddContentButton extends React.Component {
 				<div className={['uk-margin-bottom', styles.contentType].join(' ')}>
 					<Link to={'/create/post'}>Post</Link></div>
 			</div>}
-
 			<span uk-icon="icon: plus" style={{transform: rotation}} className={[styles.addButton,
 				indexStyles.transition].join(' ')} onClick={this.props.toggleClicked}/>
 		</div>
