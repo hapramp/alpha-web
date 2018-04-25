@@ -15,11 +15,9 @@ const notifyWithoutRepeat = (message, options) => {
 	setTimeout(() => delete messages[message], options.timeout);
 };
 
-let options;
-
 export default {
 	info: (message, repeat = false) => notify(message, {...defaultOptions, status: 'primary'}, repeat),
 	success: (message, repeat = false) => notify(message, {...defaultOptions, status: 'success'}, repeat),
 	danger: (message, repeat = false) => notify(message, {...defaultOptions, status: 'danger', timeout: 5000}, repeat),
-	info: (message, repeat = false) => notify(message, {...defaultOptions, status: 'warning'}, repeat),
+	warning: (message, repeat = false) => notify(message, {...defaultOptions, status: 'warning'}, repeat),
 };
