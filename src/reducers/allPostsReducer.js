@@ -1,5 +1,7 @@
-import {actionTypes} from '../actions/allPostsActions';
 import _ from 'lodash';
+
+import notify from '../utils/notification';
+import {actionTypes} from '../actions/allPostsActions';
 
 const initialState = {posts: {}};
 
@@ -29,6 +31,10 @@ export const allPostsReducer = (state = initialState, action) => {
 				posts[key].active_votes.push({voter: currentUser, percent: action.vote * 20 * 100});
 			}
 			return {...state, posts};
+
+		case actionTypes.VOTE_POST_DONE:
+			notify.info(`Rating done for post by ${action.author}.`)
+			break;
 
 		// TODO: Handle post upvote error case
 
