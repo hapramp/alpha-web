@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import notify from '../utils/notification';
 import {actionTypes} from "../actions/createPostActions";
 
 const initialState = {
@@ -31,15 +32,12 @@ export const createPostReducer = (state = initialState, action) => {
 			// Check for too frequent post error
 			if (action.message.data && action.message.data.stack && action.message.data.stack[0]) {
 				let index = action.message.data.stack[0].format.indexOf('auth.last_root_post');
-				console.log(index);
 				if (index > -1) {
-					message = 'You need to wait for 5 minutes before creating the next post.';
+					notify.danger('You need to wait for 5 minutes before creating the next post.');
 				}
+			} else {
+				notify.danger(message);
 			}
-			errors.push({element: action.element, message});
-
-			// Remove redundancy
-			errors = _.uniqBy(errors, i => [i.element, i.message].join());
 
 			return {...state, errors, creating: false};
 

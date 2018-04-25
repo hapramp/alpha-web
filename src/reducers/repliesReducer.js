@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import notify from '../utils/notification';
 import {actionTypes} from '../actions/repliesActions';
 
 const initialState = {};
@@ -76,6 +77,9 @@ export const repliesReducer = (state = initialState, action) => {
 			postReplies.pendingReplies = [];
 			state[key] = postReplies;
 			return state;
+
+		case actionTypes.ADD_REPLY_DONE:
+			notify.success('Reply posted.');
 
 		default:
 			return state;
