@@ -75,7 +75,8 @@ class Post extends React.Component {
 				{content && content.data.map((data, idx) => <PostData applyTopMargin={idx !== 0} key={idx} data={data}/>)}
 			</div>
 			{content.type === 'article' && <div className={['uk-text-center', styles.articleReadMore, indexStyles.pointer].join(' ')}>
-				<Link to={`/@${this.props.post.author}/${this.props.post.permlink}`}>READ MORE</Link>
+				<Link to={`/@${this.props.post.author}/${this.props.post.permlink}`}
+					className={[styles.readMoreText, indexStyles.transition].join(' ')}>READ MORE</Link>
 			</div>}
 			{/* Action bar */}
 			<ActionBar post={this.props.post} withLink/>

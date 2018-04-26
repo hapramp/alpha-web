@@ -36,3 +36,16 @@
 	font-weight: 500;
 	position: relative;
 }
+
+.readMoreText {
+	padding: 4px 8px;
+	color: rgba(0, 0, 0, 0.54);
+	background: white;
+	border: 1px solid rgba(0, 0, 0, 0.24);
+	border-radius: 4px;
+}
+
+.readMoreText:hover {
+	background-color: $primary-color;
+	color: white;
+}
