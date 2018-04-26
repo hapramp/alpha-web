@@ -12,7 +12,7 @@ class AddContentButton extends React.Component {
 	}
 
 	render() {
-		let rotation = this.props.isClicked ? 'rotate(135deg)' : '';
+	let style = {transform: this.props.isClicked ? 'rotate(135deg)' : ''};
 		return <div className={['uk-align-right', 'uk-margin-right', 'uk-margin-bottom', 'uk-text-center',
 			styles.addContent].join(' ')}>
 			{this.props.isClicked &&
@@ -22,7 +22,7 @@ class AddContentButton extends React.Component {
 				<div className={['uk-margin-bottom', styles.contentType].join(' ')}>
 					<Link to={'/create/post'}>Post</Link></div>
 			</div>}
-			<span uk-icon="icon: plus" style={{transform: rotation}} className={[styles.addButton,
+			<span uk-icon="icon: plus" style={style} className={[styles.addButton,
 				indexStyles.transition].join(' ')} onClick={this.props.toggleClicked}/>
 		</div>
 	}
