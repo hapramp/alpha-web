@@ -10,6 +10,9 @@ export const actionTypes = {
 	FOLLOW_INIT: 'FOLLOW.FOLLOW.INIT',
 	FOLLOW_DONE: 'FOLLOW.FOLLOW.DONE',
 	FOLLOW_ERROR: 'FOLLOW.FOLLOW.ERROR',
+	UNFOLLOW_INIT: 'FOLLOW.UNFOLLOW.INIT',
+	UNFOLLOW_DONE: 'FOLLOW.UNFOLLOW.DONE',
+	UNFOLLOW_ERROR: 'FOLLOW.UNFOLLOW.ERROR',
 };
 
 export const getFollowers = (username, count = 10000) => dispatch => {
@@ -34,6 +37,8 @@ export const getFollowing = (username, count = 10000) => dispatch => {
 		})
 };
 
+// TODO: Refresh followers/following of relevant users after follow/unfollow
+
 export const follow = username => dispatch => {
 	dispatch({type: actionTypes.FOLLOW_INIT, username});
 	SteemAPI.follow(username)
@@ -42,5 +47,16 @@ export const follow = username => dispatch => {
 		})
 		.catch(reason => {
 			dispatch({type: actionTypes.FOLLOW_ERROR, username});
+		})
+}
+
+export const unfollow = username => dispatch => {
+	dispatch({type: actionTypes.UNFOLLOW_INIT, username});
+	SteemAPI.follow(username, true)
+		.then(result => {
+			dispatch({type: actionTypes.UNFOLLOW_DONE, username});
+		})
+		.catch(reason => {
+			dispatch({type: actionTypes.UNFOLLOW_ERROR, username});
 		})
 }
