@@ -238,10 +238,10 @@ class SteemAPI {
 		})
 	}
 
-	follow(user) {
+	follow(user, unfollow = false) {
 		return new Promise((resolve, reject) => {
 			let callback = (err, result) => err ? reject(err) : resolve(result);
-			let jsonData = getFollowJsonData(user, true);
+			let jsonData = getFollowJsonData(user, !unfollow);
 			steem.broadcast.customJson(
 				localStorage.getItem('posting_key'),
 				[],  // Required auths
