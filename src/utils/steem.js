@@ -12,6 +12,14 @@ const getCommentPermlink = (parentAuthor, parentPermlink) => {
 	return steem.formatter.commentPermlink(parentAuthor, parentPermlink);
 };
 
+const getFollowJsonData = (userToFollow, follow) => JSON.stringify([
+	'follow', {
+		follower: localStorage.getItem('username'),
+		following: userToFollow,
+		what: follow ? ['blog'] : []
+	}
+]);
+
 const getCommentBeneficiaries = (permlink, username) => {
 	let beneficiariesObject = _.extend({}, {
 		author: username,
@@ -227,6 +235,21 @@ class SteemAPI {
 			let permlink = getCommentPermlink(parentAuthor, parentAuthor);
 			steem.broadcast.comment(localStorage.getItem('posting_key'), parentAuthor,
 				parentPermlink, localStorage.getItem('username'), permlink, '', body, jsonMetadata, callback);
+		})
+	}
+
+	follow(user) {
+		return new Promise((resolve, reject) => {
+			let callback = (err, result) => err ? reject(err) : resolve(result);
+			let jsonData = getFollowJsonData(user, true);
+			steem.broadcast.customJson(
+				localStorage.getItem('posting_key'),
+				[],  // Required auths
+				[localStorage.getItem('username')],
+				'follow',
+				jsonData,
+				callback
+			);
 		})
 	}
 }
