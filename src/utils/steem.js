@@ -252,6 +252,20 @@ class SteemAPI {
 			);
 		})
 	}
+
+	getFollowers(username, count) {
+		return new Promise((resolve, reject) => {
+			let callback = (err, result) => err ? reject(err) : resolve(result);
+			steem.api.getFollowers(username, 0, 'blog', count, callback);
+		})
+	}
+
+	getFollowing(username, count) {
+		return new Promise((resolve, rejct) => {
+			let callback = (err, result) => err ? reject(err) : resolve(result);
+			steem.api.getFollowing(username, 0, 'blog', count, callback);
+		})
+	}
 }
 
 export default new SteemAPI();
