@@ -261,7 +261,7 @@ class SteemAPI {
 	}
 
 	getFollowing(username, count) {
-		return new Promise((resolve, rejct) => {
+		return new Promise((resolve, reject) => {
 			let callback = (err, result) => err ? reject(err) : resolve(result);
 			steem.api.getFollowing(username, 0, 'blog', count, callback);
 		})
