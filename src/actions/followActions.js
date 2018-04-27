@@ -33,3 +33,14 @@ export const getFollowing = (username, count = 10000) => dispatch => {
 			dispatch({type: actionTypes.FOLLOWING_LOAD_ERROR, username, count, reason});
 		})
 };
+
+export const follow = username => dispatch => {
+	dispatch({type: actionTypes.FOLLOW_INIT, username});
+	SteemAPI.follow(username)
+		.then(result => {
+			dispatch({type: actionTypes.FOLLOW_DONE, username});
+		})
+		.catch(reason => {
+			dispatch({type: actionTypes.FOLLOW_ERROR, username});
+		})
+}
