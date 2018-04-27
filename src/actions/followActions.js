@@ -1,3 +1,5 @@
+import SteemAPI from '../utils/steem';
+
 export const actionTypes = {
 	FOLLOWER_LOAD_INIT: 'FOLLOW.FOLLOWER.LOAD.INIT',
 	FOLLOWER_LOAD_DONE: 'FOLLOW.FOLLOWER.LOAD.DONE',
@@ -8,4 +10,26 @@ export const actionTypes = {
 	FOLLOW_INIT: 'FOLLOW.FOLLOW.INIT',
 	FOLLOW_DONE: 'FOLLOW.FOLLOW.DONE',
 	FOLLOW_ERROR: 'FOLLOW.FOLLOW.ERROR',
+};
+
+export const getFollowers = (username, count = 10000) => dispatch => {
+	dispatch({type: actionTypes.FOLLOWER_LOAD_INIT, username, count});
+	SteemAPI.getFollowers(username, count)
+		.then(results => {
+			dispatch({type: actionTypes.FOLLOWER_LOAD_DONE, username, count, results});
+		})
+		.catch(reason => {
+			dispatch({type: actionTypes.FOLLOWER_LOAD_ERROR, username, count, reason});
+		})
+};
+
+export const getFollowing = (username, count = 10000) => dispatch => {
+	dispatch({type: actionTypes.FOLLOWING_LOAD_INIT, username, count});
+	SteemAPI.getFollowing(username, count)
+		.then(results => {
+			dispatch({type: actionTypes.FOLLOWING_LOAD_DONE, username, count, results});
+		})
+		.catch(reason => {
+			dispatch({type: actionTypes.FOLLOWING_LOAD_ERROR, username, count, reason});
+		})
 };
