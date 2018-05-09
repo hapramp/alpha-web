@@ -15,24 +15,26 @@ export const actionTypes = {
 	UNFOLLOW_ERROR: 'FOLLOW.UNFOLLOW.ERROR',
 };
 
-export const getFollowers = (username, count = 10000) => dispatch => {
+export const getFollowers = (username, count = 1000) => dispatch => {
 	dispatch({type: actionTypes.FOLLOWER_LOAD_INIT, username, count});
 	SteemAPI.getFollowers(username, count)
 		.then(results => {
 			dispatch({type: actionTypes.FOLLOWER_LOAD_DONE, username, count, results});
 		})
 		.catch(reason => {
+			console.log(reason);
 			dispatch({type: actionTypes.FOLLOWER_LOAD_ERROR, username, count, reason});
 		})
 };
 
-export const getFollowing = (username, count = 10000) => dispatch => {
+export const getFollowing = (username, count = 1000) => dispatch => {
 	dispatch({type: actionTypes.FOLLOWING_LOAD_INIT, username, count});
 	SteemAPI.getFollowing(username, count)
 		.then(results => {
 			dispatch({type: actionTypes.FOLLOWING_LOAD_DONE, username, count, results});
 		})
 		.catch(reason => {
+			console.log(reason);
 			dispatch({type: actionTypes.FOLLOWING_LOAD_ERROR, username, count, reason});
 		})
 };

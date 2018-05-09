@@ -10,6 +10,7 @@ import {
 	resetUserProfileInfo
 } from '../../actions/userProfileActions';
 import {loadHaprampUserDetails} from '../../actions/allUserActions';
+import {getFollowers, getFollowing, follow, unfollow} from '../../actions/followActions';
 
 class UserProfile extends React.Component {
 	constructor(props) {
@@ -17,7 +18,12 @@ class UserProfile extends React.Component {
 		props.loadUserProfileInfo(props.match.params.username);
 		props.getFollowCount(props.match.params.username);
 		props.getUserFeeds(props.match.params.username);
+		props.getFollowers(props.match.params.username);
+		props.getFollowing(props.match.params.username);
 		this.props.loadHaprampUserDetails(this.props.match.params.username);
+
+		this.followUser = this.followUser.bind(this);
+		this.unFollowUser = this.unFollowUser.bind(this);
 	}
 
 	componentWillUnmount() {
@@ -31,6 +37,14 @@ class UserProfile extends React.Component {
 			this.props.getFollowCount(newProps.match.params.username);
 			this.props.getUserFeeds(newProps.match.params.username);
 		}
+	}
+
+	followUser() {
+		this.props.follow(this.props.match.params.username);
+	}
+
+	unFollowUser() {
+		this.props.unfollow(this.props.match.params.username, true);
 	}
 
 	render() {
@@ -119,6 +133,11 @@ class UserProfile extends React.Component {
 				</div>
 			</div>
 
+			{this.props.match.params.username !== localStorage.getItem('username') &&
+			<div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
+					{this.props.isFollowing ? <button className={['uk-button', 'uk-button-default'].join(' ')} onClick={this.unFollowUser}>Unfollow</button> : <button className={['uk-button', 'uk-button-primary'].join(' ')} onClick={this.followUser}>Follow</button>}
+			</div>}
+
 			<div className={['uk-margin-top', 'uk-text-center'].join(' ')}>
 				<span>{this.props.userProfile.user.post_count} Post{this.props.userProfile.user.post_count === 1 ? '' : 's'}</span>
 				<span
@@ -137,6 +156,7 @@ class UserProfile extends React.Component {
 				<div className={['uk-margin-top', 'uk-margin-bottom', styles.interestsHeader].join(' ')}>INTERESTS</div>
 				<div className={['uk-flex'].join(' ')}>
 					{this.props.allUsers.haprampUsers[this.props.match.params.username] &&
+						this.props.allUsers.haprampUsers[this.props.match.params.username].communities &&
 						this.props.allUsers.haprampUsers[this.props.match.params.username].communities.map(community =>
 						<div key={community.id} className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
 							<div><img className={[styles.communityImage].join(' ')} src={community.image_uri} alt={""}/></div>
@@ -157,14 +177,35 @@ class UserProfile extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
+const mapStateToProps = (state, ownProps) => {
+	let result = {
 		userProfile: state.userProfile,
-		allUsers: state.allUsers
+		allUsers: state.allUsers,
+	};
+
+	let username = localStorage.getItem('username');
+
+	if (!state.follow[username]) {
+		return {...result, isFollowing: false};
 	}
+
+	if (!state.follow[username].following) {
+		return {...result, isFollowing: false};
+	}
+
+	if (!state.follow[username].following.results) {
+		return {...result, isFollowing: false};
+	}
+
+	if (!state.follow[username].following.results[ownProps.match.params.username]) {
+		return {...result, isFollowing: false}
+	}
+
+	return {...result, isFollowing: true};
 };
 
 export default connect(mapStateToProps, {
 	loadUserProfileInfo, resetUserProfileInfo,
-	getFollowCount, getUserFeeds, loadHaprampUserDetails
+	getFollowCount, getUserFeeds, loadHaprampUserDetails,
+	getFollowers, getFollowing, follow, unfollow,
 })(UserProfile);
