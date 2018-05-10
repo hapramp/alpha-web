@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import styles from './styles.scss';
-import logo from '../header/logo.png';
+import logo from './logo.png';
 import {login} from "../../actions/loginActions";
 
 class SignIn extends React.Component {
