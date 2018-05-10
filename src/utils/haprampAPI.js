@@ -71,29 +71,16 @@ export default {
 					}).catch(e => reject(e))
 				})
 			},
-			confirm: permlink => {
-				return new Promise((resolve, reject) => {
-					fetch(constants.BACKEND_URL.V2 + '/posts/_confirm', {
-						method: 'POST',
-						headers: {'Content-Type': 'application/json'},
-						body: JSON.stringify({full_permlink: permlink})
-					}).then(response => {
-						if (response.ok) {
-							response.json().then(json => resolve(json));
-						} else {
-							reject();  // TODO: Give some reason
-						}
-					}).catch(e => reject(e))
-				})
-			},
-			rate: (permlink, vote) => {
+			confirm: (vote, permlink) => {
+				let url = constants.BACKEND_URL.V2 + `/posts/votes/_notify?permlink=${permlink}`;
 				let options = {
-					headers: {Authorization: 'Token ' + localStorage.getItem('ppk_hash'), 'Content-Type': 'application/json'},
 					method: 'POST',
-					body: JSON.stringify({vote})
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Token ' + localStorage.getItem('ppk_hash'), 'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({vote}),
 				};
-				vote === 0 && (options.method = 'DELETE');
-				let url = constants.BACKEND_URL.V2 + '/posts/votes?permlink=' + encodeURIComponent(permlink);
 				return getPromiseForUrl(url, options);
 			},
 		},

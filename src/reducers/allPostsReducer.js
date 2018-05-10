@@ -34,7 +34,7 @@ export const allPostsReducer = (state = initialState, action) => {
 
 		case actionTypes.VOTE_POST_DONE:
 			notify.info(`Rating done for post by ${action.author}.`)
-			break;
+			return state;
 
 		// TODO: Handle post upvote error case
 
