@@ -77,7 +77,7 @@ export default {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: 'Token ' + localStorage.getItem('ppk_hash'), 'Content-Type': 'application/json'
+						Authorization: 'Token ' + localStorage.getItem('ppk_hash'),
 					},
 					body: JSON.stringify({vote}),
 				};
