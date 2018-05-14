@@ -24,7 +24,7 @@ export const addReply = (parentAuthor, parentPermlink, body) => dispatch => {
 			haprampAPI.v2.post.confirmComment(`${parentAuthor}/${parentPermlink}`);
 			return result;
 		})
-		.catch(reason => dispatch({type: actionTypes.ADD_REPLY_ERROR, parentAuthor, parentPermlink, body, reason}));
+		.catch(reason => dispatch({type: actionTypes.ADD_REPLY_ERROR, parentAuthor, parentPermlink, body, reason: reason.toString()}));
 }
 
 const getSteemReplies = (parentAuthor, parentPermlink, dispatch) => {

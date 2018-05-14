@@ -80,7 +80,7 @@ export const repliesReducer = (state = initialState, action) => {
 
 		case actionTypes.ADD_REPLY_DONE:
 			notify.success('Reply posted.');
-			break;
+			return state;
 
 		default:
 			return state;
