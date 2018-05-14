@@ -83,6 +83,16 @@ export default {
 				};
 				return getPromiseForUrl(url, options);
 			},
+			confirmComment: permlink => {
+				let url = constants.BACKEND_URL.V2 + `/posts/comments/_notify?permlink=${permlink}`;
+				let options = {
+					method: 'POST',
+					headers: {
+						Authorization: `Token ${localStorage.getItem('ppk_hash')}`,
+					},
+				}
+				return getPromiseForUrl(url, options);
+			},
 		},
 		feed: {
 			getUserFeed: username => getPromiseForUrl(constants.BACKEND_URL.V2 + '/feeds/user/' + username

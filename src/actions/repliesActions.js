@@ -1,4 +1,5 @@
 import steemAPI from '../utils/steem';
+import haprampAPI from '../utils/haprampAPI';
 
 export const actionTypes = {
 	REPLIES_LOAD_INIT: 'REPLIES.LOAD.INIT',
@@ -20,6 +21,7 @@ export const addReply = (parentAuthor, parentPermlink, body) => dispatch => {
 		.then(result => {
 			dispatch({type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result});
 			getSteemReplies(parentAuthor, parentPermlink, dispatch);
+			haprampAPI.v2.post.confirmComment(`${parentAuthor}/${parentPermlink}`);
 			return result;
 		})
 		.catch(reason => dispatch({type: actionTypes.ADD_REPLY_ERROR, parentAuthor, parentPermlink, body, reason}));
