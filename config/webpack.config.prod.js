@@ -88,7 +88,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     // `web` extension prefixes have been added for better support
     // for React Native Web.
-    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx', '.scss'],
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
 
       // Support React Native Web
@@ -136,7 +136,7 @@ module.exports = {
           // "url" loader works just like "file" loader but it also embeds
           // assets smaller than specified size as data URLs to avoid requests.
           {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.scss/],
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),
             options: {
               limit: 10000,
@@ -216,7 +216,7 @@ module.exports = {
           {
             test: /\.scss$/,
             use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
+              fallback: 'style-loader',
               use: [
                 {
                   loader: 'css-loader',
@@ -224,14 +224,14 @@ module.exports = {
                     modules: true,
                     sourceMap: true,
                     importLoaders: 2,
-                    localIdentName: '[name]__[local]___[hash:base64:5]'
+                    localIdentName: '[name]__[local]__[hash:base64:5]'
                   }
-                  },
+                },
                 'sass-loader'
               ]
-            })
-          },
-          // "file" loader makes sure assets end up in the `build` folder.
+						}),
+					},
+					// "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
           // that fall through the other loaders.
@@ -276,6 +276,7 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    new ExtractTextPlugin({filename: 'scss.style.css', allChunks: true}),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -304,7 +305,7 @@ module.exports = {
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
-      filename: cssFilename,
+      filename: cssFilename, allChunks: true,
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
