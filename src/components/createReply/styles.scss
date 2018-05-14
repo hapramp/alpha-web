@@ -7,7 +7,7 @@
 .commentInputContainer {
 	border: 1px solid rgba(0, 0, 0, 0.12);
 	height: 30px;
-	padding: 8px 20px 8px 30px;
+	padding: 8px 20px 8px 20px;
 	border-radius: 32px;
 	width: calc(100% - 40px);
 	flex-grow: 1;
@@ -18,8 +18,9 @@
 	flex-grow: 1;
 	border: 0px solid transparent;
 	outline: none;
-	font-size: 20px;
+	font-size: 14px;
 	height: 30px;
+	color: rgba(0, 0, 0, 0.54);
 }
 
 .sendIcon {
