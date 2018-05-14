@@ -10,7 +10,7 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import showdown from 'showdown';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import Root from './components/root';
 import getStore from './utils/storeUtils';
 
@@ -43,4 +43,4 @@ ReactDOM.render(
 		</BrowserRouter>
 	</Provider>,
 	document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
