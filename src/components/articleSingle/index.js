@@ -11,6 +11,10 @@ import PostUserMeta from '../postUserMeta';
 import {getCommunitiesForPost} from '../../utils/communityUtils';
 
 class ArticleSingle extends React.Component {
+	componentDidMount() {
+		window.scrollTo(0, 0);
+	}
+
 	render() {
 		return <div uk-grid={'true'} className={['uk-margin-bottom'].join(' ')}>
 			<div  className={['uk-width-1-6@m', 'uk-text-center', 'uk-width-1-4@l'].join(' ')}/>

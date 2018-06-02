@@ -40,6 +40,10 @@ class PostSingle extends React.Component {
 		</div>
 	}
 
+	componentDidMount() {
+		window.scrollTo(0, 0);
+	}
+
 	render() {
 		return <div uk-grid={'true'} className={[].join(' ')}>
 			{this.getLeftSection()}
