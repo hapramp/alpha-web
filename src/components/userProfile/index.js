@@ -134,7 +134,7 @@ class UserProfile extends React.Component {
 			</div>
 
 			{this.props.match.params.username !== localStorage.getItem('username') &&
-			<div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
+			<div className={['uk-text-center', styles.followButton].join(' ')}>
 					{this.props.isFollowing ? <button className={['uk-button', 'uk-button-default'].join(' ')} onClick={this.unFollowUser}>Unfollow</button> : <button className={['uk-button', 'uk-button-primary'].join(' ')} onClick={this.followUser}>Follow</button>}
 			</div>}
 
