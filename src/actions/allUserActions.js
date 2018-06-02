@@ -12,14 +12,14 @@ export const actionTypes = {
 
 export const loadUserAccounts = usernames => dispatch => {
 	dispatch({type: actionTypes.LOAD_USERS_INIT, usernames});
-	SteemAPI.getUserAccounts(usernames)
+	return SteemAPI.getUserAccounts(usernames)
 		.then(results => dispatch({type: actionTypes.LOAD_USERS_DONE, results}))
 		.catch(error => dispatch({type: actionTypes.LOAD_USERS_ERROR, reason: error}))
 };
 
 export const loadHaprampUserDetails = username => dispatch => {
 	dispatch({type: actionTypes.LOAD_HAPRAMP_USER_INIT, username});
-	HaprampAPI.v2.users.getUserDetailsByUsername(username)
+	return HaprampAPI.v2.users.getUserDetailsByUsername(username)
 		.then(result => dispatch({type: actionTypes.LOAD_HAPRAMP_USER_DONE, result}))
 		.catch(reason => dispatch({type: actionTypes.LOAD_HAPRAMP_USER_ERROR, reason}));
 };

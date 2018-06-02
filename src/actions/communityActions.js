@@ -8,7 +8,7 @@ export const actionTypes = {
 
 export const loadCommunities = () => dispatch => {
 	dispatch({type: actionTypes.LOADING_COMMUNITIES});
-	haprampAPI.v2.communities.getAllCommunities()
+	return haprampAPI.v2.communities.getAllCommunities()
 		.then(result => dispatch({type: actionTypes.LOADED_COMMUNITIES, result}))
 		.catch(reason => dispatch({type: actionTypes.LOADING_COMMUNITIES_FAILED, reason}));
 };

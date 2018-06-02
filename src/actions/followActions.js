@@ -1,4 +1,5 @@
 import SteemAPI from '../utils/steem';
+import {authRequired} from '../utils/decorators';
 
 export const actionTypes = {
 	FOLLOWER_LOAD_INIT: 'FOLLOW.FOLLOWER.LOAD.INIT',
@@ -17,7 +18,7 @@ export const actionTypes = {
 
 export const getFollowers = (username, count = 1000) => dispatch => {
 	dispatch({type: actionTypes.FOLLOWER_LOAD_INIT, username, count});
-	SteemAPI.getFollowers(username, count)
+	return SteemAPI.getFollowers(username, count)
 		.then(results => {
 			dispatch({type: actionTypes.FOLLOWER_LOAD_DONE, username, count, results});
 		})
@@ -29,7 +30,7 @@ export const getFollowers = (username, count = 1000) => dispatch => {
 
 export const getFollowing = (username, count = 1000) => dispatch => {
 	dispatch({type: actionTypes.FOLLOWING_LOAD_INIT, username, count});
-	SteemAPI.getFollowing(username, count)
+	return SteemAPI.getFollowing(username, count)
 		.then(results => {
 			dispatch({type: actionTypes.FOLLOWING_LOAD_DONE, username, count, results});
 		})
@@ -41,24 +42,24 @@ export const getFollowing = (username, count = 1000) => dispatch => {
 
 // TODO: Refresh followers/following of relevant users after follow/unfollow
 
-export const follow = username => dispatch => {
+export const follow = authRequired(username => dispatch => {
 	dispatch({type: actionTypes.FOLLOW_INIT, username});
-	SteemAPI.follow(username)
+	return SteemAPI.follow(username)
 		.then(result => {
 			dispatch({type: actionTypes.FOLLOW_DONE, username});
 		})
 		.catch(reason => {
 			dispatch({type: actionTypes.FOLLOW_ERROR, username});
 		})
-}
+});
 
-export const unfollow = username => dispatch => {
+export const unfollow = authRequired(username => dispatch => {
 	dispatch({type: actionTypes.UNFOLLOW_INIT, username});
-	SteemAPI.follow(username, true)
+	return SteemAPI.follow(username, true)
 		.then(result => {
 			dispatch({type: actionTypes.UNFOLLOW_DONE, username});
 		})
 		.catch(reason => {
 			dispatch({type: actionTypes.UNFOLLOW_ERROR, username});
 		})
-}
+})

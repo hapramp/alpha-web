@@ -1,5 +1,6 @@
 import steemAPI from '../utils/steem';
 import haprampAPI from '../utils/haprampAPI';
+import {authRequired} from '../utils/decorators';
 
 export const actionTypes = {
 	REPLIES_LOAD_INIT: 'REPLIES.LOAD.INIT',
@@ -15,9 +16,9 @@ export const loadReplies = (parentAuthor, parentPermlink) => dispatch => {
 	getSteemReplies(parentAuthor, parentPermlink, dispatch);
 }
 
-export const addReply = (parentAuthor, parentPermlink, body) => dispatch => {
+export const addReply = authRequired((parentAuthor, parentPermlink, body) => dispatch => {
 	dispatch({type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body});
-	steemAPI.createReply(parentAuthor, parentPermlink, body)
+	return steemAPI.createReply(parentAuthor, parentPermlink, body)
 		.then(result => {
 			dispatch({type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result});
 			getSteemReplies(parentAuthor, parentPermlink, dispatch);
@@ -25,10 +26,10 @@ export const addReply = (parentAuthor, parentPermlink, body) => dispatch => {
 			return result;
 		})
 		.catch(reason => dispatch({type: actionTypes.ADD_REPLY_ERROR, parentAuthor, parentPermlink, body, reason: reason.toString()}));
-}
+})
 
 const getSteemReplies = (parentAuthor, parentPermlink, dispatch) => {
-	steemAPI.getReplies(parentAuthor, parentPermlink)
+	return steemAPI.getReplies(parentAuthor, parentPermlink)
 		.then(results => {
 			dispatch({type: actionTypes.REPLIES_LOAD_DONE, parentAuthor, parentPermlink, results});
 			return results;

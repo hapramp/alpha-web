@@ -21,7 +21,7 @@ export const login = (username, postingKey) => {
 		dispatch({type: actionTypes.LOGIN_INIT, message: constants.MESSAGES.AUTH.HASHING_POSTING_KEY});
 		const ppkHash = sha256(postingKey);
 		dispatch({type: actionTypes.LOGIN_CHECK, message: constants.MESSAGES.AUTH.USER_CHECK});
-		haprampAPI.v2.login(username, ppkHash)
+		return haprampAPI.v2.login(username, ppkHash)
 			.then(json => {
 				steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 				dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
@@ -75,7 +75,7 @@ export const fakeLogin = data => {
 		// Update authUser state
 		updateUser(data, dispatch);
 		// Update profile changes
-		steemAPI.getUserAccount(data.username).then(result => setAuthUser(result, dispatch));
+		return steemAPI.getUserAccount(data.username).then(result => setAuthUser(result, dispatch));
 	}
 };
 

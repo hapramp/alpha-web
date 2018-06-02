@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 
 import Sidebar from '../sidebar';
@@ -70,7 +71,7 @@ const mapStateToProps = state => {
 	}
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
 	loadFeedsByHot, loadFeedsByCreated, loadFeedsByTrending,
 	loadUserAccounts
-})(BrowseCommunity);
+})(BrowseCommunity));

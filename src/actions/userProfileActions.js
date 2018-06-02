@@ -17,7 +17,7 @@ export const actionTypes = {
 
 export const loadUserProfileInfo = username => dispatch => {
 	dispatch({type: actionTypes.LOAD_USER_INFO, username});
-	SteemAPI.getUserAccount(username)
+	return SteemAPI.getUserAccount(username)
 		.then(result => {
 			dispatch({type: allUserActionTypes.LOAD_USERS_DONE, results: [result]})
 			dispatch({type: actionTypes.LOADED_USER_INFO, username, result});
@@ -28,14 +28,14 @@ export const loadUserProfileInfo = username => dispatch => {
 export const resetUserProfileInfo = () => dispatch => dispatch({type: actionTypes.RESET_USER_INFO});
 
 export const getFollowCount = username => dispatch => {
-	SteemAPI.getFollowCount(username)
+	return SteemAPI.getFollowCount(username)
 		.then(result => dispatch({type: actionTypes.FOLLOW_COUNT_DONE, result}))
 		.catch(reason => dispatch({type: actionTypes.FOLLOW_COUNT_FAILED, reason}))
 };
 
 export const getUserFeeds = username => dispatch => {
 	dispatch({type: actionTypes.USER_BLOG_LOADING, username});
-	haprampAPI.v2.feed.getFeedsByBlog(username)
+	return haprampAPI.v2.feed.getFeedsByBlog(username)
 		.then(result => {
 			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: result.posts});
 			dispatch({type: actionTypes.USER_BLOG_LOADED, results: result.posts.map(post => post.author + '/' + post.permlink), username});

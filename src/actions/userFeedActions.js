@@ -9,7 +9,7 @@ export const actionTypes = {
 
 export const loadFeedsForUser = username => dispatch => {
 	dispatch({type: actionTypes.FEED_LOADING});
-	haprampAPI.v2.feed.getUserFeed(username)
+	return haprampAPI.v2.feed.getUserFeed(username)
 		.then(result => {
 			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: result.posts});
 			dispatch({type: actionTypes.FEED_LOADED, results: result.posts.map(post => post.author + '/' + post.permlink), feedType: 'user', username});
@@ -19,7 +19,7 @@ export const loadFeedsForUser = username => dispatch => {
 
 export const loadFeedsByHot = tag => dispatch => {
 	dispatch({type: actionTypes.FEED_LOADING});
-	haprampAPI.v2.feed.getFeedsByHot(tag)
+	return haprampAPI.v2.feed.getFeedsByHot(tag)
 		.then(result => {
 			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: result.posts});
 			dispatch({type: actionTypes.FEED_LOADED, results: result.posts.map(post => post.author + '/' + post.permlink), feedType: 'hot', tag});
@@ -29,7 +29,7 @@ export const loadFeedsByHot = tag => dispatch => {
 
 export const loadFeedsByTrending = tag => dispatch => {
 	dispatch({type: actionTypes.FEED_LOADING});
-	haprampAPI.v2.feed.getFeedsByTrending(tag)
+	return haprampAPI.v2.feed.getFeedsByTrending(tag)
 		.then(result => {
 			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: result.posts});
 			dispatch({type: actionTypes.FEED_LOADED, results: result.posts.map(post => post.author + '/' + post.permlink), feedType: 'trending', tag});
@@ -39,7 +39,7 @@ export const loadFeedsByTrending = tag => dispatch => {
 
 export const loadFeedsByCreated = tag => dispatch => {
 	dispatch({type: actionTypes.FEED_LOADING});
-	haprampAPI.v2.feed.getFeedsByCreated(tag)
+	return haprampAPI.v2.feed.getFeedsByCreated(tag)
 		.then(result => {
 			dispatch({type: allPostsActionTypes.ADD_POSTS, posts: result.posts});
 			dispatch({type: actionTypes.FEED_LOADED, results: result.posts.map(post => post.author + '/' + post.permlink), feedType: 'created', tag});

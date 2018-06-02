@@ -43,7 +43,7 @@ export const createPost = data => dispatch => {
 
 	let fullPermlink = author + '/' + permlink;
 	let wif = localStorage.getItem('posting_key');
-	haprampAPI.v2.post.prepare(post, fullPermlink)
+	return haprampAPI.v2.post.prepare(post, fullPermlink)
 		.then(body => {
 			Steem.createPost(wif, author, body, tags, post, permlink, community)
 				.then(response => {

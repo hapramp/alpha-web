@@ -1,6 +1,6 @@
 export default {
 	BACKEND_URL: {
-		V2: 'https://hapramp2.herokuapp.com/api/v2'
+		V2: 'http://18.221.180.107/api/v2'
 	},
 	MESSAGES: {
 		AUTH: {
