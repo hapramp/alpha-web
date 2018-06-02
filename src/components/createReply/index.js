@@ -23,9 +23,9 @@ class CreateReply extends React.Component {
 		if (!body.length) {
 			return;
 		}
+		this.replyInput.value = ''
 		this.props.addReply(this.props.post.author, this.props.post.permlink, body)
-			.then(() => this.replyInput.value = '')
-			.catch(() => {/* Some error, already shown */})
+			.catch(() => this.replyInput.value = body);
 	}
 
 	render() {

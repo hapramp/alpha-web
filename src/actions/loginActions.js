@@ -23,8 +23,10 @@ export const login = (username, postingKey) => {
 		dispatch({type: actionTypes.LOGIN_CHECK, message: constants.MESSAGES.AUTH.USER_CHECK});
 		return haprampAPI.v2.login(username, ppkHash)
 			.then(json => {
-				steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
-				dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
+				Promise.all([
+					steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch)),
+					dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash}),
+				]).then(() => window.location.reload(true))
 			})
 			.catch(e => {
 				if (e.reason === constants.MESSAGES.AUTH.INVALID_CREDENTIALS) {
@@ -44,17 +46,17 @@ export const login = (username, postingKey) => {
 										type: actionTypes.SIGNUP_POST_COMMENT_DONE,
 										message: constants.MESSAGES.AUTH.SIGNUP_COMMENT_DONE
 									});
-									console.log(result);
 									haprampAPI.v2.signupDone(username, ppkHash)
 										.then(json => {
-											steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
-											steemAPI.deleteComment(postingKey, username, result.comment.permlink);
-											dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash});
+											Promise.all([
+												steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch)),
+												steemAPI.deleteComment(postingKey, username, result.comment.permlink),
+												dispatch({type: actionTypes.LOGIN_DONE, username, postingKey, ppkHash}),
+											]).then(() => window.location.reload(true))
 										})
 										.catch(e => dispatch({type: actionTypes.LOGIN_UNAUTHORIZED, reason: e.reason}))
 								})
 								.catch(e => {
-									console.log('Error creating comment: ', e);
 									dispatch({
 										type: actionTypes.SIGNUP_POST_COMMENT_ERROR,
 										message: constants.MESSAGES.AUTH.SIGNUP_COMMENT_ERROR
