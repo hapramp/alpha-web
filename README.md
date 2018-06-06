@@ -18,5 +18,5 @@ If you want to contribute to the project, we would love to have you with us. Go 
 ---
 
 ## License
-[MIT](LICENSE)
+[MIT](LICENSE)  
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web?ref=badge_large)
