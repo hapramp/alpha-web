@@ -1,23 +1,21 @@
-# Hapramp Alpha Web App
+<p align="center">
+  <img src="./assets/banner@168px.png" alt="HapRamp Alpha Web App"/>
+</p>
+<p align="center">Alpha Web App for <a href="https://hapramp.com/">HapRamp</a> - A <a href="https://steem.io/">Steem</a> based Social Media for the Creatives :art:.</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+<p align="center">
+<a href="https://travis-ci.org/hapramp/alpha-web"><img alt="Travis" src="https://travis-ci.org/hapramp/alpha-web.svg?branch=master"></a>
+</p>
 
-## Develop
+## Contributing
 
-### Install dependencies
+If you want to contribute to the project, we would love to have you with us. Go through the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started.
 
-```
-yarn
-```
+---
 
-### Development Server
+> This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-```
-yarn start
-```
+---
 
-### Optimized Build
-
-```
-yarn build
-```
+## License
+[MIT](LICENSE)
