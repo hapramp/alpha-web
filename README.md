@@ -18,4 +18,11 @@ If you want to contribute to the project, we would love to have you with us. Go 
 ---
 
 ## License
-[MIT](LICENSE)
+
+<p align="center">
+  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web?ref=badge_large">
+    <img alt="fossa" src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web.svg?type=large"></img>
+  </a>
+  <br/>
+  <a href="LICENSE">MIT</a>
+</p>
