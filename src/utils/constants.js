@@ -24,4 +24,11 @@ export default {
 	VERSION: {
 		APP_NAME: 'hapramp/0.0.1',
 	},
+	SC2: {
+		CONFIG: {
+			app: 'hapramp.app',
+			callbackURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/_oauth/' : 'https://alpha.hapramp.com/_oauth/',
+			scope: ['comment', 'vote',],
+		}
+	}
 }
