@@ -7,7 +7,6 @@ import styles from './styles.scss';
 import baseStyles from '../../index.scss';
 import logo from './logo.png';
 import {fakeLogin} from "../../actions/loginActions";
-import {getLocalUser} from "../../utils/localStoreUtils";
 import {loadCommunities} from "../../actions/communityActions";
 import steemAPI from '../../utils/steem';
 

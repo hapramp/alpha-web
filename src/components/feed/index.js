@@ -40,7 +40,7 @@ class Feed extends React.Component {
 const mapStateToProps = state => {
 	return {
 		userFeed: state.userFeed.user,
-		username: state.authUser.username,
+		username: state.authUser.username || localStorage.getItem('username'),
 		allUsers: state.allUsers.users,
 		allPosts: state.allPosts.posts
 	}

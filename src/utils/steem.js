@@ -4,7 +4,6 @@
 
 import steem from 'steem';
 import Promise from 'bluebird';
-import _ from 'lodash';
 import sc2 from 'sc2-sdk/src/sc2';
 
 import constants from './constants';
@@ -88,7 +87,6 @@ class SteemAPI {
 			}),
 			// Create a reply to a post
 			createReply: (parentAuthor, parentPermlink, body) => new Promise((resolve, reject) => {
-				let callback = (err, result) => err ? reject(err) : resolve(result);
 				let jsonMetadata = {app: constants.VERSION.APP_NAME};
 				let permlink = getCommentPermlink(parentAuthor, parentAuthor);
 				this.sc2Api.comment(parentAuthor, parentPermlink, localStorage.getItem('username'),

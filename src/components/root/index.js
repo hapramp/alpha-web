@@ -62,7 +62,7 @@ class Root extends React.Component {
 					let params = new URLSearchParams(props.location.search);
 					let accessToken = params.get('access_token');
 					let username = params.get('username');
-					let expiresIn = parseInt(params.get('expires_in'));
+					let expiresIn = parseInt(params.get('expires_in'), 10);
 					Cookie.set('access_token', accessToken, {expires: expiresIn});
 					localStorage.setItem('username', username);
 					return <Redirect to={'/'}/>
