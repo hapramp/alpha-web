@@ -14,6 +14,7 @@ class Header extends React.Component {
 
 	componentWillMount() {
 		let accessToken = Cookie.get('access_token');
+		steemAPI.sc2Api.setAccessToken(accessToken);
 		accessToken && this.props.fakeLogin();
 		this.props.loadCommunities();
 	}

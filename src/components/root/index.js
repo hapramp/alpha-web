@@ -4,7 +4,6 @@ import Cookie from 'js-cookie';
 
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
-import SignIn from '../signin';
 import Feed from '../feed';
 import CreatePost from '../createPost';
 import UserProfile from '../userProfile';
@@ -30,9 +29,6 @@ class Root extends React.Component {
 
 				{/* User based feed */}
 				<Route exact path={'/feed'} component={Feed}/>
-
-				{/* Sign in */}
-				<Route exact path={'/signin'} component={SignIn}/>
 
 				{/* Browse views */}
 				<Route exact path={'/browse'} component={Browse}/>

@@ -42,25 +42,20 @@ export const createPost = data => dispatch => {
 	let permlink = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase() + '-post';
 
 	let fullPermlink = author + '/' + permlink;
-	let wif = localStorage.getItem('posting_key');
 	return haprampAPI.v2.post.prepare(post, fullPermlink)
 		.then(body => {
-			Steem.createPost(wif, author, body, tags, post, permlink, community)
-				.then(response => {
-					console.log(response);
-					haprampAPI.v2.post.confirm(fullPermlink)
-						.then(response => dispatch({type: actionTypes.POST_CREATED, fullPermlink: fullPermlink}))
-						.catch(e => dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'}))
-				})
+			return Steem.sc2Operations.createPost(author, body, tags, post, permlink, community)
+				.then(response => dispatch({type: actionTypes.POST_CREATED, fullPermlink: fullPermlink}))
 				.catch(e => {
 					console.log('Steem error', e);
-					dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'});
-				})
+					return dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'
+				});
 		})
 		.catch(e => {
 			console.log('Hapramp API Error', e);
 			dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'})
 		})
+	})
 };
 
 export const resetPostCreate = () => dispatch => dispatch({type: actionTypes.POST_CREATE_RESET});

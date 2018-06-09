@@ -1,5 +1,4 @@
 import steemAPI from '../utils/steem';
-import haprampAPI from '../utils/haprampAPI';
 import {actionTypes as allUserActionTypes} from './allUserActions';
 import {authRequired} from '../utils/decorators';
 
@@ -17,10 +16,9 @@ export const deletePosts = posts => dispatch => dispatch({type: actionTypes.DELE
 
 export const ratePost = authRequired((author, permlink, vote) => dispatch => {
 	dispatch({type: actionTypes.VOTE_POST_INIT, author, permlink, vote});
-	return steemAPI.vote(localStorage.getItem('username'), author, permlink, vote * 20)
+	return steemAPI.sc2Operations.vote(localStorage.getItem('username'), author, permlink, vote * 20)
 		.then(response => {
 			dispatch({type: actionTypes.VOTE_POST_DONE, author, permlink});
-			haprampAPI.v2.post.confirm(vote, `${author}/${permlink}`);
 		}).catch(reason => {
 			dispatch({type: actionTypes.VOTE_POST_ERROR, reason: reason.toString(), author, permlink})
 		});

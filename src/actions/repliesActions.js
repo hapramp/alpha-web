@@ -18,7 +18,7 @@ export const loadReplies = (parentAuthor, parentPermlink) => dispatch => {
 
 export const addReply = authRequired((parentAuthor, parentPermlink, body) => dispatch => {
 	dispatch({type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body});
-	return steemAPI.createReply(parentAuthor, parentPermlink, body)
+	return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, body)
 		.then(result => {
 			dispatch({type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result});
 			getSteemReplies(parentAuthor, parentPermlink, dispatch);

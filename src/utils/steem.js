@@ -73,10 +73,10 @@ class SteemAPI {
 					permlink,
 					title: '',
 					body,
-					jsonMetadata: JSON.stringify({
+					jsonMetadata: {
 						tags, app: 'hapramp/0.0.1',
 						content
-					})
+					}
 				};
 				this.sc2Api.comment(commentObj.parentAuthor, commentObj.parentPermlink, commentObj.author,
 					commentObj.permlink, commentObj.title, commentObj.body, commentObj.jsonMetadata, getSteemResolver(resolve, reject));

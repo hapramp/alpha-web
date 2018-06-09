@@ -28,7 +28,7 @@ export default {
 		CONFIG: {
 			app: 'hapramp.app',
 			callbackURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/_oauth/' : 'https://alpha.hapramp.com/_oauth/',
-			scope: ['comment', 'vote',],
+			scope: ['comment', 'vote', 'delete_comment', 'comment_options', 'custom_json'],
 		}
 	}
 }

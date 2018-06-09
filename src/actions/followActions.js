@@ -44,7 +44,7 @@ export const getFollowing = (username, count = 1000) => dispatch => {
 
 export const follow = authRequired(username => dispatch => {
 	dispatch({type: actionTypes.FOLLOW_INIT, username});
-	return SteemAPI.follow(username)
+	return SteemAPI.sc2Operations.follow(localStorage.getItem('username'), username)
 		.then(result => {
 			dispatch({type: actionTypes.FOLLOW_DONE, username});
 		})
@@ -55,11 +55,11 @@ export const follow = authRequired(username => dispatch => {
 
 export const unfollow = authRequired(username => dispatch => {
 	dispatch({type: actionTypes.UNFOLLOW_INIT, username});
-	return SteemAPI.follow(username, true)
+	return SteemAPI.sc2Operations.follow(localStorage.getItem('username'), username, true)
 		.then(result => {
 			dispatch({type: actionTypes.UNFOLLOW_DONE, username});
 		})
 		.catch(reason => {
 			dispatch({type: actionTypes.UNFOLLOW_ERROR, username});
 		})
-})
+});
