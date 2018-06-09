@@ -48,8 +48,7 @@ export const createPost = data => dispatch => {
 				.then(response => dispatch({type: actionTypes.POST_CREATED, fullPermlink: fullPermlink}))
 				.catch(e => {
 					console.log('Steem error', e);
-					return dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'
-				});
+					return dispatch({type: actionTypes.CREATE_ERROR, message: e, element: 'top'});
 		})
 		.catch(e => {
 			console.log('Hapramp API Error', e);

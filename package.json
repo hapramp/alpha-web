@@ -50,7 +50,6 @@
     "react-time-ago": "^2.0.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "sc2-sdk": "https://github.com/adcpm/sc2-sdk.git",
     "showdown": "^1.8.6",
     "sjcl": "^1.0.7",
     "steem": "^0.7.1",
