@@ -23,8 +23,6 @@ export const setLocalUser = user => {
 export const getLocalUser = () => {
 	return {
 		username: localStorage.getItem('username'),
-		postingKey: localStorage.getItem('posting_key'),
-		ppkHash: localStorage.getItem('ppk_hash'),
 		avatar: localStorage.getItem('avatar'),
 		name: localStorage.getItem('name'),
 		website: localStorage.getItem('website'),

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import Cookie from 'js-cookie';
 
 import styles from './styles.scss';
 import baseStyles from '../../index.scss';
@@ -8,12 +9,13 @@ import logo from './logo.png';
 import {fakeLogin} from "../../actions/loginActions";
 import {getLocalUser} from "../../utils/localStoreUtils";
 import {loadCommunities} from "../../actions/communityActions";
+import steemAPI from '../../utils/steem';
 
 class Header extends React.Component {
 
 	componentWillMount() {
-		let data = getLocalUser();
-		data.username && data.postingKey && data.ppkHash && this.props.fakeLogin(data);
+		let accessToken = Cookie.get('access_token');
+		accessToken && this.props.fakeLogin();
 		this.props.loadCommunities();
 	}
 
@@ -36,9 +38,11 @@ class Header extends React.Component {
 			</div>
 		} else {
 			return <div className={'uk-navbar-item'}>
-				<button className={["uk-button uk-button-small", styles.signIn, baseStyles.hoverEffect,
-					baseStyles.transition].join(' ')} onClick={this.navigateToSignIn.bind(this)}>SIGN IN
-				</button>
+				<a href={steemAPI.sc2Api.getLoginURL()}>
+					<button className={["uk-button uk-button-small", styles.signIn, baseStyles.hoverEffect,
+						baseStyles.transition].join(' ')}>SIGN IN
+					</button>
+				</a>
 			</div>
 		}
 	}

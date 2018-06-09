@@ -20,8 +20,6 @@ export const loginReducer = (state = initialState, action) => {
 			case actionTypes.LOGIN_DONE:
 				newState.loggedIn = true;
 				localStorage.setItem('username', action.username);
-				localStorage.setItem('posting_key', action.postingKey);
-				localStorage.setItem('ppk_hash', action.ppkHash);
 				break;
 			default:
 			// No problem

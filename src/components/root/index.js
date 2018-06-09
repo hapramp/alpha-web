@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
+import Cookie from 'js-cookie';
 
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
@@ -55,6 +56,17 @@ class Root extends React.Component {
 
 				{/* Single content */}
 				<Route exact path={'/@:username/:permlink'} component={ContentSingle}/>
+
+				{/* OAuth Callback */}
+				<Route exact path={'/_oauth/'} render={props => {
+					let params = new URLSearchParams(props.location.search);
+					let accessToken = params.get('access_token');
+					let username = params.get('username');
+					let expiresIn = parseInt(params.get('expires_in'));
+					Cookie.set('access_token', accessToken, {expires: expiresIn});
+					localStorage.setItem('username', username);
+					return <Redirect to={'/'}/>
+				}}/>
 
 				{/* Unknown route - 404 */}
 				<Route exact path={'*'} render={() => <div>Not found</div>}/>

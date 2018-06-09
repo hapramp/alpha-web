@@ -68,17 +68,13 @@ export const login = (username, postingKey) => {
 	}
 };
 
-export const fakeLogin = data => {
-	return dispatch => {
-		dispatch({
-			type: actionTypes.LOGIN_DONE, username: data.username,
-			postingKey: data.postingKey, ppkHash: data.ppkHash
-		});
-		// Update authUser state
-		updateUser(data, dispatch);
-		// Update profile changes
-		return steemAPI.getUserAccount(data.username).then(result => setAuthUser(result, dispatch));
-	}
+export const fakeLogin = () => dispatch => {
+	let username = localStorage.getItem('username');
+	dispatch({
+		type: actionTypes.LOGIN_DONE, username,
+	});
+	// Update profile changes
+	return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 };
 
 const setAuthUser = (result, dispatch) => {
