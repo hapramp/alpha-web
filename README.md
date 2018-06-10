@@ -4,8 +4,20 @@
 <p align="center">Alpha Web App for <a href="https://hapramp.com/">HapRamp</a> - A <a href="https://steem.io/">Steem</a> based Social Media for the Creatives :art:.</p>
 
 <p align="center">
-<a href="https://travis-ci.org/hapramp/alpha-web"><img alt="Travis" src="https://travis-ci.org/hapramp/alpha-web.svg?branch=master"></a>  
-<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web.svg?type=shield"/></a>
+  <!-- Travis -->
+  <a href="https://travis-ci.org/hapramp/alpha-web">
+    <img alt="Travis" src="https://travis-ci.org/hapramp/alpha-web.svg?branch=master">
+  </a>  
+
+  <!-- Codecov -->
+  <a href="https://codecov.io/gh/hapramp/alpha-web">
+    <img src="https://codecov.io/gh/hapramp/alpha-web/branch/master/graph/badge.svg" />
+  </a>
+
+  <!-- FOSSA -->
+  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web?ref=badge_shield" alt="FOSSA Status">
+    <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web.svg?type=shield"/>
+  </a>  
 </p>
 
 ## Contributing
