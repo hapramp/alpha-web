@@ -2,6 +2,9 @@ import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import Cookie from 'js-cookie';
 
+import {fakeLogin} from '../../actions/loginActions';
+import steemAPI from '../../utils/steem';
+
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
 import Feed from '../feed';
@@ -13,7 +16,6 @@ import CreateArticle from '../createArticle';
 import ContentSingle from '../contentSingle';
 
 class Root extends React.Component {
-
 	render() {
 		return <div style={{backgroundColor: '#FAFAFA'}}>
 			<Header/>
@@ -61,7 +63,9 @@ class Root extends React.Component {
 					let expiresIn = parseInt(params.get('expires_in'), 10);
 					Cookie.set('access_token', accessToken, {expires: expiresIn});
 					localStorage.setItem('username', username);
-					return <Redirect to={'/'}/>
+					steemAPI.sc2Api.setAccessToken(accessToken);
+					getStore().dispatch(fakeLogin());
+					return <Redirect to={'/feed'}/>
 				}}/>
 
 				{/* Unknown route - 404 */}

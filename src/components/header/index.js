@@ -1,21 +1,16 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Cookie from 'js-cookie';
 
 import styles from './styles.scss';
 import baseStyles from '../../index.scss';
 import logo from './logo.png';
-import {fakeLogin} from "../../actions/loginActions";
 import {loadCommunities} from "../../actions/communityActions";
 import steemAPI from '../../utils/steem';
 
 class Header extends React.Component {
 
 	componentWillMount() {
-		let accessToken = Cookie.get('access_token');
-		steemAPI.sc2Api.setAccessToken(accessToken);
-		accessToken && this.props.fakeLogin();
 		this.props.loadCommunities();
 	}
 
@@ -78,5 +73,5 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(connect(mapStateToProps, {
-	fakeLogin, loadCommunities
+	loadCommunities,
 })(Header));
