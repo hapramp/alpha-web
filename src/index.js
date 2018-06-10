@@ -9,10 +9,13 @@ import TimeAgo from 'javascript-time-ago'
 // Load locale-specific relative date/time formatting rules.
 import en from 'javascript-time-ago/locale/en'
 import showdown from 'showdown';
+import Cookie from 'js-cookie';
 
 // import registerServiceWorker from './registerServiceWorker';
 import Root from './components/root';
 import getStore from './utils/storeUtils';
+import {fakeLogin} from './actions/loginActions';
+import steemAPI from './utils/steem';
 
 // Markdown to HTML
 window.markdownToHtmlConverter = new showdown.Converter();
@@ -35,6 +38,13 @@ let config = {
 };
 firebase.initializeApp(config);
 window.firebaseStorage = firebase.storage();
+
+// Login user
+const accessToken = Cookie.get('access_token');
+if (accessToken) {
+	getStore().dispatch(fakeLogin());
+	steemAPI.sc2Api.setAccessToken(accessToken);
+}
 
 ReactDOM.render(
 	<Provider store={store}>
