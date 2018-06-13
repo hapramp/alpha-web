@@ -3,11 +3,11 @@
 .userSection {
   height: 72px;
   padding-right: 16px;
-  border-right: 2px solid $background-color;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .topSection {
-  border-bottom: 2px solid $background-color;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
 }
 
 .titleInput {

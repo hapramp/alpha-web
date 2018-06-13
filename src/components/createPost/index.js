@@ -5,6 +5,7 @@ import twitter from 'twitter-text';
 import * as firebase from 'firebase';
 import _ from 'lodash';
 
+import userPlaceHolder from '../userProfile/user-placeholder.jpg';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import {
@@ -93,11 +94,10 @@ class CreatePost extends React.Component {
 	}
 
 	getUserSection() {
+		const image = this.props.userAvatar || userPlaceHolder;
 		return <div className={['uk-flex', 'uk-flex-between', 'uk-margin-bottom'].join(' ')}>
 			<div>
-				{this.props.userAvatar ?
-					<img src={this.props.userAvatar} className={['uk-border-circle', styles.userAvatar].join(' ')}
-							 alt={'You'}/> : <span uk-icon="icon: user"/>}
+				<img src={image} className={['uk-border-circle', styles.userAvatar].join(' ')} alt={'You'}/>
 				<span className={['uk-margin-left'].join(' ')} style={{opacity: 0.87}}>{this.props.userFullName}</span>
 			</div>
 			<div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>

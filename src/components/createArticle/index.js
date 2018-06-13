@@ -25,16 +25,13 @@ class CreateArticle extends React.Component {
 
 	getUserSection() {
 		/* User details */
-		let name, image;
-		name = this.props.authUser.name ? this.props.authUser.name : this.props.authUser.username;
-		image = this.props.authUser.avatar;
-		image = userProfilePlaceholder;
+		const	name = this.props.authUser.name ? this.props.authUser.name : this.props.authUser.username;
+		const image = this.props.authUser.avatar || userProfilePlaceholder;
 
 		return <div className={['uk-flex', 'uk-flex-center', 'uk-margin', styles.userSection].join(' ')}>
-			<div className={['uk-margin-right'].join(' ')}>{ image ?
-				<img src={image} alt={""} className={['uk-border-circle', createPostStyles.userAvatar].join(' ')}/> :
-				<span uk-icon="icon: user"/>
-			}</div>
+			<div className={['uk-margin-right'].join(' ')}>
+				<img src={image} alt={""} className={['uk-border-circle', createPostStyles.userAvatar].join(' ')}/>
+			</div>
 			<div className={['uk-align-center'].join(' ')}>{name}</div>
 		</div>
 	}
