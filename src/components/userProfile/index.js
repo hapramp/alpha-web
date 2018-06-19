@@ -1,61 +1,61 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import Post from '../post';
 import {
-	getFollowCount, getUserFeeds, loadUserProfileInfo,
-	resetUserProfileInfo
+  getFollowCount, getUserFeeds, loadUserProfileInfo,
+  resetUserProfileInfo,
 } from '../../actions/userProfileActions';
-import {loadHaprampUserDetails} from '../../actions/allUserActions';
-import {getFollowers, getFollowing, follow, unfollow} from '../../actions/followActions';
+import { loadHaprampUserDetails } from '../../actions/allUserActions';
+import { getFollowers, getFollowing, follow, unfollow } from '../../actions/followActions';
 
 class UserProfile extends React.Component {
-	constructor(props) {
-		super(props);
-		props.loadUserProfileInfo(props.match.params.username);
-		props.getFollowCount(props.match.params.username);
-		props.getUserFeeds(props.match.params.username);
-		props.getFollowers(props.match.params.username);
-		props.getFollowing(props.match.params.username);
-		this.props.loadHaprampUserDetails(this.props.match.params.username);
+  constructor(props) {
+    super(props);
+    props.loadUserProfileInfo(props.match.params.username);
+    props.getFollowCount(props.match.params.username);
+    props.getUserFeeds(props.match.params.username);
+    props.getFollowers(props.match.params.username);
+    props.getFollowing(props.match.params.username);
+    this.props.loadHaprampUserDetails(this.props.match.params.username);
 
-		this.followUser = this.followUser.bind(this);
-		this.unFollowUser = this.unFollowUser.bind(this);
-	}
+    this.followUser = this.followUser.bind(this);
+    this.unFollowUser = this.unFollowUser.bind(this);
+  }
 
-	componentWillUnmount() {
-		this.props.resetUserProfileInfo();
-	}
+  componentWillUnmount() {
+    this.props.resetUserProfileInfo();
+  }
 
-	componentWillReceiveProps(newProps) {
-		if (newProps.match.params.username !== this.props.match.params.username && !newProps.userProfile.loading) {
-			this.props.loadUserProfileInfo(newProps.match.params.username);
-			this.props.loadHaprampUserDetails(newProps.match.params.username);
-			this.props.getFollowCount(newProps.match.params.username);
-			this.props.getUserFeeds(newProps.match.params.username);
-		}
-	}
+  componentWillReceiveProps(newProps) {
+    if (newProps.match.params.username !== this.props.match.params.username && !newProps.userProfile.loading) {
+      this.props.loadUserProfileInfo(newProps.match.params.username);
+      this.props.loadHaprampUserDetails(newProps.match.params.username);
+      this.props.getFollowCount(newProps.match.params.username);
+      this.props.getUserFeeds(newProps.match.params.username);
+    }
+  }
 
-	followUser() {
-		this.props.follow(this.props.match.params.username);
-	}
+  followUser() {
+    this.props.follow(this.props.match.params.username);
+  }
 
-	unFollowUser() {
-		this.props.unfollow(this.props.match.params.username, true);
-	}
+  unFollowUser() {
+    this.props.unfollow(this.props.match.params.username, true);
+  }
 
-	render() {
-		if (!this.props.userProfile.user) {
-			return <div className={['uk-position-center'].join(' ')}>
+  render() {
+    if (!this.props.userProfile.user) {
+      return (<div className={['uk-position-center'].join(' ')}>
 				LOADING
-			</div>
-		}
-		let jsonMetadata = this.props.userProfile.user.json_metadata;
+              </div>);
+    }
+    const jsonMetadata = this.props.userProfile.user.json_metadata;
 
-		/*
+    /*
 		"{"profile":
 			{
 				"profile_image":"https://pbs.twimg.com/profile_images/950061525737259008/diSwoT_A_400x400.jpg",
@@ -114,98 +114,111 @@ class UserProfile extends React.Component {
 		tags_usage(pin): []
 		guest_bloggers(pin): []
 		*/
-		jsonMetadata.profile = jsonMetadata.profile ? jsonMetadata.profile : {};
-		jsonMetadata.profile.profile_image = jsonMetadata.profile.profile_image ? jsonMetadata.profile.profile_image : userPlaceholder;
+    jsonMetadata.profile = jsonMetadata.profile ? jsonMetadata.profile : {};
+    jsonMetadata.profile.profile_image = jsonMetadata.profile.profile_image ? jsonMetadata.profile.profile_image : userPlaceholder;
 
-		return <div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top', indexStyles.white].join(' ')}>
-			{/* User details */}
-			{jsonMetadata.profile.cover_image &&
-			<div className={['uk-cover-container', styles.profileCoverContainer].join(' ')}
-				style={{backgroundImage: `url(${jsonMetadata.profile.cover_image})`}}/>}
-			<div className={['uk-text-center'].join(' ')}>
-				<img src={jsonMetadata.profile.profile_image} alt={""}
-						 className={['uk-border-circle', jsonMetadata.profile.cover_image ? styles.profileImage : styles.profileImageNoCover].join(' ')}/>
-			</div>
-			<div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
-				<div>
-					<span className={styles.userName}>{jsonMetadata.profile.name}</span>
-					<span className={'uk-margin-small-left'}>@{this.props.userProfile.user.name}</span>
-				</div>
-			</div>
+    return (<div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top', indexStyles.white].join(' ')}>
+      {/* User details */}
+      {jsonMetadata.profile.cover_image &&
+      <div
+        className={['uk-cover-container', styles.profileCoverContainer].join(' ')}
+        style={{ backgroundImage: `url(${jsonMetadata.profile.cover_image})` }}
+      />}
+      <div className={['uk-text-center'].join(' ')}>
+        <img
+          src={jsonMetadata.profile.profile_image}
+          alt=""
+          className={['uk-border-circle', jsonMetadata.profile.cover_image ? styles.profileImage : styles.profileImageNoCover].join(' ')}
+        />
+      </div>
+      <div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
+        <div>
+          <span className={styles.userName}>{jsonMetadata.profile.name}</span>
+          <span className="uk-margin-small-left">@{this.props.userProfile.user.name}</span>
+        </div>
+      </div>
 
-			{this.props.match.params.username !== localStorage.getItem('username') &&
-			<div className={['uk-text-center', styles.followButton].join(' ')}>
-					{this.props.isFollowing ? <button className={['uk-button', 'uk-button-default'].join(' ')} onClick={this.unFollowUser}>Unfollow</button> : <button className={['uk-button', 'uk-button-primary'].join(' ')} onClick={this.followUser}>Follow</button>}
-			</div>}
+      {this.props.match.params.username !== localStorage.getItem('username') &&
+      <div className={['uk-text-center', styles.followButton].join(' ')}>
+        {this.props.isFollowing ? <button className={['uk-button', 'uk-button-default'].join(' ')} onClick={this.unFollowUser}>Unfollow</button> : <button className={['uk-button', 'uk-button-primary'].join(' ')} onClick={this.followUser}>Follow</button>}
+      </div>}
 
-			<div className={['uk-margin-top', 'uk-text-center'].join(' ')}>
-				<span>{this.props.userProfile.user.post_count} Post{this.props.userProfile.user.post_count === 1 ? '' : 's'}</span>
-				<span
-					className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.follower.count} Follower{this.props.userProfile.follower.count === 1 ? '' : 's'}</span>
-				<span className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.following.count} Following</span>
-			</div>
+      <div className={['uk-margin-top', 'uk-text-center'].join(' ')}>
+        <span>{this.props.userProfile.user.post_count} Post{this.props.userProfile.user.post_count === 1 ? '' : 's'}</span>
+        <span
+          className={['uk-margin-small-left'].join(' ')}
+        >{this.props.userProfile.follower.count} Follower{this.props.userProfile.follower.count === 1 ? '' : 's'}
+        </span>
+        <span className={['uk-margin-small-left'].join(' ')}>{this.props.userProfile.following.count} Following</span>
+      </div>
 
-			<div className={['uk-margin-top', 'uk-margin-bottom', 'uk-flex', 'uk-flex-center'].join(' ')}>
-				<div className={['uk-text-center', styles.bio].join(' ')}>
-					{jsonMetadata.profile.about || 'No bio provided.'}
-				</div>
-			</div>
+      <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-flex', 'uk-flex-center'].join(' ')}>
+        <div className={['uk-text-center', styles.bio].join(' ')}>
+          {jsonMetadata.profile.about || 'No bio provided.'}
+        </div>
+      </div>
 
-			<div className={['uk-flex', 'uk-flex-center', 'uk-margin-large-bottom'].join(' ')}>
-			<div className={[].join(' ')}>
-				<div className={['uk-margin-top', 'uk-margin-bottom', styles.interestsHeader].join(' ')}>INTERESTS</div>
-				<div className={['uk-flex'].join(' ')}>
-					{this.props.allUsers.haprampUsers[this.props.match.params.username] &&
+      <div className={['uk-flex', 'uk-flex-center', 'uk-margin-large-bottom'].join(' ')}>
+        <div className={[].join(' ')}>
+          <div className={['uk-margin-top', 'uk-margin-bottom', styles.interestsHeader].join(' ')}>INTERESTS</div>
+          <div className={['uk-flex'].join(' ')}>
+            {this.props.allUsers.haprampUsers[this.props.match.params.username] &&
 						this.props.allUsers.haprampUsers[this.props.match.params.username].communities &&
 						this.props.allUsers.haprampUsers[this.props.match.params.username].communities.map(community =>
-						<div key={community.id} className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
-							<div><img className={[styles.communityImage].join(' ')} src={community.image_uri} alt={""}/></div>
-							<div className={['uk-margin-small-top'].join(' ')}>{community.name}</div>
-						</div>)}
-				</div>
-			</div>
-			</div>
+  (<div key={community.id} className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
+    <div><img className={[styles.communityImage].join(' ')} src={community.image_uri} alt="" /></div>
+    <div className={['uk-margin-small-top'].join(' ')}>{community.name}</div>
+  </div>))}
+          </div>
+        </div>
+      </div>
 
-			{/* User posts */}
-			<div className={['uk-flex', 'uk-flex-center', indexStyles.white, styles.userPostsContainer].join(' ')}>
-				<div className={[styles.blogContainer].join(' ')}>
-				<div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST</div>
-					{this.props.userProfile.blog.posts.map(item => <Post key={item} postPermlink={item} border={true}/>)}
-				</div>
-			</div>
-		</div>
-	}
+      {/* User posts */}
+      <div className={['uk-flex', 'uk-flex-center', indexStyles.white, styles.userPostsContainer].join(' ')}>
+        <div className={[styles.blogContainer].join(' ')}>
+          <div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST</div>
+          {this.props.userProfile.blog.posts.map(item => <Post key={item} postPermlink={item} border />)}
+        </div>
+      </div>
+    </div>);
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
-	let result = {
-		userProfile: state.userProfile,
-		allUsers: state.allUsers,
-	};
+  const result = {
+    userProfile: state.userProfile,
+    allUsers: state.allUsers,
+  };
 
-	let username = localStorage.getItem('username');
+  const username = localStorage.getItem('username');
 
-	if (!state.follow[username]) {
-		return {...result, isFollowing: false};
-	}
+  if (!state.follow[username]) {
+    return { ...result, isFollowing: false };
+  }
 
-	if (!state.follow[username].following) {
-		return {...result, isFollowing: false};
-	}
+  if (!state.follow[username].following) {
+    return { ...result, isFollowing: false };
+  }
 
-	if (!state.follow[username].following.results) {
-		return {...result, isFollowing: false};
-	}
+  if (!state.follow[username].following.results) {
+    return { ...result, isFollowing: false };
+  }
 
-	if (!state.follow[username].following.results[ownProps.match.params.username]) {
-		return {...result, isFollowing: false}
-	}
+  if (!state.follow[username].following.results[ownProps.match.params.username]) {
+    return { ...result, isFollowing: false };
+  }
 
-	return {...result, isFollowing: true};
+  return { ...result, isFollowing: true };
 };
 
 export default connect(mapStateToProps, {
-	loadUserProfileInfo, resetUserProfileInfo,
-	getFollowCount, getUserFeeds, loadHaprampUserDetails,
-	getFollowers, getFollowing, follow, unfollow,
+  loadUserProfileInfo,
+  resetUserProfileInfo,
+  getFollowCount,
+  getUserFeeds,
+  loadHaprampUserDetails,
+  getFollowers,
+  getFollowing,
+  follow,
+  unfollow,
 })(UserProfile);

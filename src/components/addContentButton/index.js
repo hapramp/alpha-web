@@ -1,39 +1,45 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Link, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import {resetClicked, toggleClicked} from "../../actions/addContentActions";
+import { resetClicked, toggleClicked } from '../../actions/addContentActions';
 
 class AddContentButton extends React.Component {
-	componentWillUnmount() {
-		this.props.resetClicked();
-	}
+  componentWillUnmount() {
+    this.props.resetClicked();
+  }
 
-	render() {
-	let style = {transform: this.props.isClicked ? 'rotate(135deg)' : ''};
-		return <div className={['uk-align-right', 'uk-margin-right', 'uk-margin-bottom', 'uk-text-center',
-			styles.addContent].join(' ')}>
-			{this.props.isClicked &&
-			<div className={[indexStyles.transition].join(' ')}>
-				<div className={['uk-margin-bottom', styles.contentType].join(' ')}>
-					<Link to={'/create/article'}>Article</Link></div>
-				<div className={['uk-margin-bottom', styles.contentType].join(' ')}>
-					<Link to={'/create/post'}>Post</Link></div>
-			</div>}
-			<span uk-icon="icon: plus" style={style} className={[styles.addButton,
-				indexStyles.transition].join(' ')} onClick={this.props.toggleClicked}/>
-		</div>
-	}
+  render() {
+    const style = { transform: this.props.isClicked ? 'rotate(135deg)' : '' };
+    return (<div className={['uk-align-right', 'uk-margin-right', 'uk-margin-bottom', 'uk-text-center',
+			styles.addContent].join(' ')}
+    >
+      {this.props.isClicked &&
+      <div className={[indexStyles.transition].join(' ')}>
+        <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
+          <Link to="/create/article">Article</Link>
+        </div>
+        <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
+          <Link to="/create/post">Post</Link>
+        </div>
+      </div>}
+      <span
+        uk-icon="icon: plus"
+        style={style}
+        className={[styles.addButton,
+				indexStyles.transition].join(' ')}
+        onClick={this.props.toggleClicked}
+      />
+    </div>);
+  }
 }
 
-const mapStateToProps = state => {
-	return {
-		isClicked: state.addContent.isClicked
-	}
-};
+const mapStateToProps = state => ({
+  isClicked: state.addContent.isClicked,
+});
 
 export default withRouter(connect(mapStateToProps, {
-	toggleClicked, resetClicked
-})(AddContentButton))
+  toggleClicked, resetClicked,
+})(AddContentButton));

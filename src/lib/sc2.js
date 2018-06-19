@@ -109,7 +109,7 @@ SteemConnect.prototype.comment = function comment(
   title,
   body,
   jsonMetadata,
-  cb
+  cb,
 ) {
   const params = {
     parent_author: parentAuthor,
@@ -175,7 +175,7 @@ SteemConnect.prototype.claimRewardBalance = function claimRewardBalance(
   rewardSteem,
   rewardSbd,
   rewardVests,
-  cb
+  cb,
 ) {
   const params = {
     account,
@@ -187,9 +187,7 @@ SteemConnect.prototype.claimRewardBalance = function claimRewardBalance(
 };
 
 SteemConnect.prototype.revokeToken = function revokeToken(cb) {
-  return this.send('oauth2/token/revoke', 'POST', { token: this.options.accessToken }, cb).then(
-    () => this.removeAccessToken()
-  );
+  return this.send('oauth2/token/revoke', 'POST', { token: this.options.accessToken }, cb).then(() => this.removeAccessToken());
 };
 
 SteemConnect.prototype.updateUserMetadata = function updateUserMetadata(metadata = {}, cb) {
