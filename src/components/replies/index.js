@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { loadReplies } from '../../actions/repliesActions';
 import Reply from '../reply';
@@ -15,20 +16,38 @@ class Replies extends React.Component {
 
   render() {
     if (!this.props.replies) {
-      return (<div>
-				Loading...
-              </div>);
+      return <div>Loading...</div>;
     }
-    return (<div className={[this.props.className, 'uk-margin-large-top', 'uk-margin-bottom'].join(' ')}>
-      {this.props.replies.loading && <div className={['uk-text-center', styles.status].join(' ')}>Loading...</div>}
-      {Object.values(this.props.replies.replies).map(reply => <Reply reply={reply} key={reply.id} />)}
-      {this.props.replies.pendingReplies.map((reply, idx) => <PendingReply reply={reply} key={idx} />)}
-      {!this.props.replies.loading && !Object.keys(this.props.replies.replies).length && !this.props.replies.pendingReplies.length
-				&& <div className={['uk-text-center', styles.status].join(' ')}>No replies</div>}
-      <CreateReply post={this.props.rootPost} />
-            </div>);
+    return (
+      <div className={[this.props.className, 'uk-margin-large-top', 'uk-margin-bottom'].join(' ')}>
+        {this.props.replies.loading && <div className={['uk-text-center', styles.status].join(' ')}>Loading...</div>}
+        {Object.values(this.props.replies.replies)
+          .map(reply => <Reply reply={reply} key={reply.id} />)}
+        {this.props.replies.pendingReplies
+          .map(reply => <PendingReply reply={reply} key={reply.body} />)}
+        {!this.props.replies.loading &&
+          !Object.keys(this.props.replies.replies).length &&
+          !this.props.replies.pendingReplies.length &&
+          <div className={['uk-text-center', styles.status].join(' ')}>No replies</div>}
+        <CreateReply post={this.props.rootPost} />
+      </div>);
   }
 }
+
+Replies.propTypes = {
+  loadReplies: PropTypes.func,
+  parentAuthor: PropTypes.string.isRequired,
+  parentPermlink: PropTypes.string.isRequired,
+  replies: PropTypes.arrayOf(PropTypes.shape),
+  className: PropTypes.string,
+  rootPost: PropTypes.shape.isRequired,
+};
+
+Replies.defaultProps = {
+  loadReplies: () => {},
+  replies: [],
+  className: '',
+};
 
 const mapStateToProps = (state, ownProps) => {
   const key = `${ownProps.parentAuthor}/${ownProps.parentPermlink}`;
