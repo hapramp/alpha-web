@@ -4,13 +4,14 @@ import { actionTypes } from '../actions/allUserActions';
 
 const initialState = { users: {}, haprampUsers: {} };
 
-export const allUserReducer = (state = initialState, action) => {
-  let users,
-    haprampUsers;
+export default (state = initialState, action) => {
+  let users;
+  let haprampUsers;
   switch (action.type) {
     case actionTypes.LOAD_USERS_DONE:
       users = _.cloneDeep(state.users);
-      action.results.forEach((userDetail) => {
+      action.results.forEach((oldUserDetail) => {
+        const userDetail = { ...oldUserDetail };
         try {
           userDetail.json_metadata = JSON.parse(userDetail.json_metadata);
         } catch (err) {

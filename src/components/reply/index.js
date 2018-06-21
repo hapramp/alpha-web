@@ -1,30 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { fixUser } from '../../utils/defaultFixUtils';
 import styles from './styles.scss';
 
-class Reply extends React.Component {
-  render() {
-    return (<div className="uk-margin-bottom">
-      <div>
-        <img className={['uk-border-circle', styles.userImage].join(' ')} src={this.props.postingUser.json_metadata.profile.profile_image} alt={this.props.postingUser.name} />
-        <span className={[styles.userName].join(' ')}>{this.props.postingUser.json_metadata.profile.name}</span>
-      </div>
-      <div
-        className={[styles.replyBody].join(' ')}
-        dangerouslySetInnerHTML={{ __html: window.markdownToHtmlConverter.makeHtml(this.props.reply.body) }}
+const Reply = props => (
+  <div className="uk-margin-bottom">
+    <div>
+      <img
+        className={['uk-border-circle', styles.userImage].join(' ')}
+        src={props.postingUser.json_metadata.profile.profile_image}
+        alt={props.postingUser.name}
       />
-            </div>);
-  }
-}
+      <span className={[styles.userName].join(' ')}>{props.postingUser.json_metadata.profile.name}</span>
+    </div>
+    <div
+      className={[styles.replyBody].join(' ')}
+      dangerouslySetInnerHTML={{
+        __html: window.markdownToHtmlConverter.makeHtml(props.reply.body),
+      }}
+    />
+  </div>
+);
 
-const mapStateToProps = (state, ownProps) => {
-  let postingUser = state.allUsers.users[ownProps.reply.author];
-  postingUser = fixUser(postingUser, ownProps.reply.author);
+Reply.propTypes = {
+  postingUser: PropTypes.shape({
+    name: PropTypes.string,
+    json_metadata: PropTypes.shape({
+      profile: PropTypes.shape,
+    }),
+  }),
+  reply: PropTypes.shape({
+    body: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+Reply.defaultProps = {
+  postingUser: null,
+};
+
+const mapStateToprops = (state, ownprops) => {
+  let postingUser = state.allUsers.users[ownprops.reply.author];
+  postingUser = fixUser(postingUser, ownprops.reply.author);
   return {
     postingUser,
   };
 };
 
-export default connect(mapStateToProps)(Reply);
+export default connect(mapStateToprops)(Reply);

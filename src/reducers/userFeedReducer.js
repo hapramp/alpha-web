@@ -4,7 +4,7 @@ const initialState = {
   user: { posts: [] }, hot: { posts: [] }, trending: { posts: [] }, created: { posts: [] },
 };
 
-export const userFeedReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FEED_LOADED:
       if (action.feedType === 'user') {
@@ -17,7 +17,7 @@ export const userFeedReducer = (state = initialState, action) => {
       return { ...state, created: { posts: action.results } };
 
     default:
-		// No problem
+      // No problem
   }
   return state;
 };

@@ -13,10 +13,14 @@ const initialState = {
   creating: false,
 };
 
-export const createPostReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
+  let community;
+  let errors;
+  const { message } = action;
+
   switch (action.type) {
     case actionTypes.CHANGE_COMMUNITY:
-      let community = state.community.slice();
+      community = state.community.slice();
       if (_.some(community, i => i === action.community)) {
         community = community.filter(i => i !== action.community);
       } else if (community.length < 3) {
@@ -31,8 +35,7 @@ export const createPostReducer = (state = initialState, action) => {
       return { ...state, media: null };
 
     case actionTypes.CREATE_ERROR:
-      const errors = state.errors.slice();
-      const message = action.message;
+      errors = state.errors.slice();
 
       // Check for too frequent post error
       if (action.message.data && action.message.data.stack && action.message.data.stack[0]) {

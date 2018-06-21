@@ -5,7 +5,7 @@ const initialState = {
   name: null, avatar: null, location: null, cover: null, website: null,
 };
 
-export const authUserReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case loginActionTypes.SET_AUTH_USER:
       notify.success(`Logged in as ${action.username}`);

@@ -5,16 +5,19 @@ import { actionTypes } from '../actions/allPostsActions';
 
 const initialState = { posts: {} };
 
-export const allPostsReducer = (state = initialState, action) => {
-  let posts,
-    key,
-    currentUser;
+export default (state = initialState, action) => {
+  let posts;
+  let key;
+  let currentUser;
 
   switch (action.type) {
     case actionTypes.ADD_POSTS:
       posts = _.cloneDeep(state.posts);
-      action.posts.map((post) => {
-        typeof (post.json_metadata) === 'string' && (post.json_metadata = JSON.parse(post.json_metadata));
+      action.posts.map((oldPost) => {
+        const post = { ...oldPost };
+        if (typeof (post.json_metadata) === 'string') {
+          post.json_metadata = JSON.parse(post.json_metadata);
+        }
         posts[`${post.author}/${post.permlink}`] = post;
         return post;
       });
@@ -25,8 +28,11 @@ export const allPostsReducer = (state = initialState, action) => {
       key = `${action.author}/${action.permlink}`;
       currentUser = localStorage.getItem('username');
       if (_.some(posts[key].active_votes, i => i.voter === currentUser)) {
-        posts[key].active_votes = posts[key].active_votes.map((vote) => {
-          vote.voter === currentUser && (vote.percent = action.vote * 20 * 100);
+        posts[key].active_votes = posts[key].active_votes.map((oldVote) => {
+          const vote = { ...oldVote };
+          if (vote.voter === currentUser) {
+            vote.percent = action.vote * 20 * 100;
+          }
           return vote;
         });
       } else {

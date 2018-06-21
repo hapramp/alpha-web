@@ -9,7 +9,7 @@ const initialState = {
   following: { count: 0, accounts: [] },
 };
 
-export const userProfileReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOAD_USER_INFO:
       // TODO: Serve from cache while loading

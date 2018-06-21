@@ -19,33 +19,45 @@ const initialState = {};
  * }
  */
 
-export const followReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   const newState = _.clone(state);
-  let following,
-    follower;
+  let following;
+  let follower;
   switch (action.type) {
     case actionTypes.FOLLOWER_LOAD_DONE:
     case actionTypes.FOLLOWING_LOAD_DONE:
 
       action.results.map((result) => {
-        follower = result.follower;
-        following = result.following;
-        !newState[follower] && (newState[follower] = {});
-        !newState[following] && (newState[following] = {});
+        ({ follower, following } = result);
 
-        !newState[following].followers && (newState[following].followers = {
-          results: {},
-          count: 0,
-        });
-        !newState[follower].following && (newState[follower].following = {
-          results: {},
-          count: 0,
-        });
+        if (!newState[follower]) {
+          newState[follower] = {};
+        }
+        if (!newState[following]) {
+          newState[following] = {};
+        }
+
+        if (!newState[following].followers) {
+          newState[following].followers = {
+            results: {},
+            count: 0,
+          };
+        }
+        if (!newState[follower].following) {
+          newState[follower].following = {
+            results: {},
+            count: 0,
+          };
+        }
 
         newState[follower].following.results[following] = true;
-        newState[follower].following.count = Object.keys(newState[follower].following.results[following]).length;
+        newState[follower].following.count = Object
+          .keys(newState[follower].following.results[following])
+          .length;
         newState[following].followers.results[follower] = true;
-        newState[following].followers.count = Object.keys(newState[following].followers.results[follower]).length;
+        newState[following].followers.count = Object
+          .keys(newState[following].followers.results[follower])
+          .length;
         return result;
       });
       return newState;
@@ -53,38 +65,60 @@ export const followReducer = (state = initialState, action) => {
     case actionTypes.FOLLOW_INIT:
       following = action.username;
       follower = localStorage.getItem('username');
-      !newState[follower] && (newState[follower] = {});
-      !newState[following] && (newState[following] = {});
 
-      !newState[following].followers && (newState[following].followers = {
-        results: {},
-        count: 0,
-      });
-      !newState[follower].following && (newState[follower].following = {
-        results: {},
-        count: 0,
-      });
+      if (!newState[follower]) {
+        newState[follower] = {};
+      }
+      if (!newState[following]) {
+        newState[following] = {};
+      }
+
+      if (!newState[following].followers) {
+        newState[following].followers = {
+          results: {},
+          count: 0,
+        };
+      }
+      if (!newState[follower].following) {
+        newState[follower].following = {
+          results: {},
+          count: 0,
+        };
+      }
+
       newState[follower].following.results[following] = true;
-      newState[follower].following.count = Object.keys(newState[follower].following.results[following]).length;
+      newState[follower].following.count = Object
+        .keys(newState[follower].following.results[following])
+        .length;
       newState[following].followers.results[follower] = true;
-      newState[following].followers.count = Object.keys(newState[following].followers.results[follower]).length;
+      newState[following].followers.count = Object
+        .keys(newState[following].followers.results[follower])
+        .length;
       return newState;
 
 
     case actionTypes.UNFOLLOW_INIT:
       following = action.username;
       follower = localStorage.getItem('username');
-      !newState[follower] && (newState[follower] = {});
-      !newState[following] && (newState[following] = {});
+      if (!newState[follower]) {
+        newState[follower] = {};
+      }
+      if (!newState[following]) {
+        newState[following] = {};
+      }
 
-      !newState[following].followers && (newState[following].followers = {
-        results: [],
-        count: 0,
-      });
-      !newState[follower].following && (newState[follower].following = {
-        results: [],
-        count: 0,
-      });
+      if (!newState[following].followers) {
+        newState[following].followers = {
+          results: [],
+          count: 0,
+        };
+      }
+      if (!newState[follower].following) {
+        newState[follower].following = {
+          results: [],
+          count: 0,
+        };
+      }
       delete newState[follower].following.results[following];
       newState[follower].following.count = newState[follower].following.results[following] ?
         Object.keys(newState[follower].following.results[following]).length : 0;

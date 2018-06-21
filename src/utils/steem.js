@@ -9,9 +9,11 @@ import _ from 'lodash';
 import sc2 from '../lib/sc2';
 import constants from './constants';
 
-const getSteemResolver = (resolve, reject) => (error, result) => (error ? reject(error) : resolve(result));
+const getSteemResolver = (resolve, reject) =>
+  (error, result) => (error ? reject(error) : resolve(result));
 
-const getCommentPermlink = (parentAuthor, parentPermlink) => steem.formatter.commentPermlink(parentAuthor, parentPermlink);
+const getCommentPermlink = (parentAuthor, parentPermlink) =>
+  steem.formatter.commentPermlink(parentAuthor, parentPermlink);
 
 const getFollowJsonData = (userToFollow, follow) => JSON.stringify([
   'follow', {
@@ -53,58 +55,10 @@ const createJsonMetadataFromTags = (tags) => {
   };
 };
 
+steem.api.setOptions({ url: 'https://api.steemit.com' });
+
 class SteemAPI {
-  constructor() {
-    this.sc2Api = sc2.Initialize(constants.SC2.CONFIG);
-    steem.api.setOptions({ url: 'https://api.steemit.com' });
-
-    this.sc2Operations = {
-      // Getting URL for logging in to the app. Opens SteemConnect OAuth page
-      getLoginURL: state => this.sc2Api.getLoginURL(),
-      // Create a post given the parameters
-      createPost: (author, body, tags, content, permlink, community) => new Promise((resolve, reject) => {
-        // TODO: Add beneficiaries
-        tags.push(...community.map(i => i.toLowerCase()));
-        const commentObj = {
-          parentAuthor: '',
-          parentPermlink: 'hapramp',
-          author,
-          permlink,
-          title: '',
-          body,
-          jsonMetadata: {
-            tags,
-            app: 'hapramp/0.0.1',
-            content,
-          },
-        };
-        this.sc2Api.comment(
-          commentObj.parentAuthor, commentObj.parentPermlink, commentObj.author,
-          commentObj.permlink, commentObj.title, commentObj.body, commentObj.jsonMetadata, getSteemResolver(resolve, reject),
-        );
-      }),
-      // Vote on a comment/post
-      vote: (username, author, permlink, power) => new Promise((resolve, reject) => {
-        this.sc2Api.vote(username, author, permlink, power * 100, getSteemResolver(resolve, reject));
-      }),
-      // Create a reply to a post
-      createReply: (parentAuthor, parentPermlink, body) => new Promise((resolve, reject) => {
-        const jsonMetadata = { app: constants.VERSION.APP_NAME };
-        const permlink = getCommentPermlink(parentAuthor, parentAuthor);
-        this.sc2Api.comment(
-          parentAuthor, parentPermlink, localStorage.getItem('username'),
-          permlink, '', body, jsonMetadata, getSteemResolver(resolve, reject),
-        );
-      }),
-      // (Un)Follow a user
-      follow: (follower, following, unfollow = false) => new Promise((resolve, reject) => {
-        unfollow ? this.sc2Api.unfollow(follower, following, getSteemResolver(resolve, reject))
-          : this.sc2Api.follow(follower, following, getSteemResolver(resolve, reject));
-      }),
-    };
-  }
-
-  comment(wif, parentAuthor, parentPermlink, author, body, tags) {
+  static comment(wif, parentAuthor, parentPermlink, author, body, tags) {
     return new Promise((resolve, reject) => {
       const commentPermlink = getCommentPermlink(parentAuthor, parentPermlink);
 
@@ -123,18 +77,17 @@ class SteemAPI {
         if (err) {
           reject(err);
         } else {
-          success.comment = commentObject;
-          resolve(success);
+          resolve({ ...success, comment: commentObject });
         }
       };
 
       const commentOperation = ['comment', commentObject];
 
-      this.handleBroadcastMessagesComment(commentOperation, [], wif, author, callback);
+      SteemAPI.handleBroadcastMessagesComment(commentOperation, [], wif, author, callback);
     });
   }
 
-  deleteComment(wif, author, permlink) {
+  static deleteComment(wif, author, permlink) {
     return new Promise((resolve, reject) => {
       const callbackBc = (err, success) => {
         if (err) {
@@ -147,8 +100,8 @@ class SteemAPI {
     });
   }
 
-  handleBroadcastMessagesComment(message, extetion, postingKey, username, callback) {
-    this.preCompileTransactionComment(message, postingKey)
+  static handleBroadcastMessagesComment(message, extetion, postingKey, username, callback) {
+    SteemAPI.preCompileTransactionComment(message, postingKey)
       .then((response) => {
         if (response.ok) {
           const beneficiaries = getCommentBeneficiaries(message[1].permlink, username);
@@ -165,17 +118,18 @@ class SteemAPI {
       });
   }
 
-  preCompileTransactionComment(message, postingKey) {
+  static preCompileTransactionComment(message, postingKey) {
+    /* eslint-disable no-underscore-dangle */
     return steem.broadcast._prepareTransaction({
       extensions: [],
       operations: [message],
     }).then(transaction => Promise.join(
       transaction,
       steem.auth.signTransaction(transaction, [postingKey]),
-    )).spread((transaction, signedTransaction) => fetch('http://api.github.com'));
+    ));
   }
 
-  getUserAccount(username) {
+  static getUserAccount(username) {
     return new Promise((resolve, reject) => {
       steem.api.getAccounts([username], (err, result) => {
         if (err) {
@@ -189,7 +143,7 @@ class SteemAPI {
     });
   }
 
-  getUserAccounts(usernames) {
+  static getUserAccounts(usernames) {
     return new Promise((resolve, reject) => {
       steem.api.getAccounts(usernames, (err, result) => {
         if (err) {
@@ -203,7 +157,7 @@ class SteemAPI {
     });
   }
 
-  createPost(wif, author, body, tags, content, permlink, community) {
+  static createPost(wif, author, body, tags, content, permlink, community) {
     return new Promise((resolve, reject) => {
       tags.push(...community.map(i => i.toLowerCase()));
       const commentObj = {
@@ -238,7 +192,7 @@ class SteemAPI {
     });
   }
 
-  getFollowCount(username) {
+  static getFollowCount(username) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => {
         if (err) {
@@ -251,28 +205,30 @@ class SteemAPI {
     });
   }
 
-  vote(username, author, permlink, power) {
+  static vote(username, author, permlink, power) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
       steem.broadcast.vote(localStorage.getItem('posting_key'), username, author, permlink, power * 100, callback);
     });
   }
 
-  loadPost(parentPermlink, author, permlink) {
+  static loadPost(parentPermlink, author, permlink) {
     return new Promise((resolve, reject) => {
-      const callback = (err, result) => (err ? reject(err) : resolve({ users: Object.values(result.accounts), posts: Object.values(result.content) }));
+      const callback = (err, result) => (err ?
+        reject(err) :
+        resolve({ users: Object.values(result.accounts), posts: Object.values(result.content) }));
       steem.api.getState(`/${parentPermlink}/@${author}/${permlink}`, callback);
     });
   }
 
-  getReplies(parentAuthor, parentPermlink) {
+  static getReplies(parentAuthor, parentPermlink) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
       steem.api.getContentReplies(parentAuthor, parentPermlink, callback);
     });
   }
 
-  createReply(parentAuthor, parentPermlink, body) {
+  static createReply(parentAuthor, parentPermlink, body) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
       const jsonMetadata = { app: constants.VERSION.APP_NAME };
@@ -284,7 +240,7 @@ class SteemAPI {
     });
   }
 
-  follow(user, unfollow = false) {
+  static follow(user, unfollow = false) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
       const jsonData = getFollowJsonData(user, !unfollow);
@@ -299,14 +255,14 @@ class SteemAPI {
     });
   }
 
-  getFollowers(username, count) {
+  static getFollowers(username, count) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
       steem.api.getFollowers(username, 0, 'blog', count, callback);
     });
   }
 
-  getFollowing(username, count) {
+  static getFollowing(username, count) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
       steem.api.getFollowing(username, 0, 'blog', count, callback);
@@ -314,4 +270,56 @@ class SteemAPI {
   }
 }
 
-export default new SteemAPI();
+SteemAPI.sc2Api = sc2.Initialize(constants.SC2.CONFIG);
+SteemAPI.sc2Operations = {
+  // Getting URL for logging in to the app. Opens SteemConnect OAuth page
+  getLoginURL: state => this.sc2Api.getLoginURL(state || {}),
+  // Create a post given the parameters
+  createPost: (author, body, tags, content, permlink, community) =>
+    new Promise((resolve, reject) => {
+      // TODO: Add beneficiaries
+      tags.push(...community.map(i => i.toLowerCase()));
+      const commentObj = {
+        parentAuthor: '',
+        parentPermlink: 'hapramp',
+        author,
+        permlink,
+        title: '',
+        body,
+        jsonMetadata: {
+          tags,
+          app: 'hapramp/0.0.1',
+          content,
+        },
+      };
+      this.sc2Api.comment(
+        commentObj.parentAuthor, commentObj.parentPermlink, commentObj.author,
+        commentObj.permlink, commentObj.title, commentObj.body, commentObj.jsonMetadata,
+        getSteemResolver(resolve, reject),
+      );
+    }),
+  // Vote on a comment/post
+  vote: (username, author, permlink, power) => new Promise((resolve, reject) => {
+    this.sc2Api.vote(
+      username, author, permlink,
+      power * 100, getSteemResolver(resolve, reject),
+    );
+  }),
+  // Create a reply to a post
+  createReply: (parentAuthor, parentPermlink, body) => new Promise((resolve, reject) => {
+    const jsonMetadata = { app: constants.VERSION.APP_NAME };
+    const permlink = getCommentPermlink(parentAuthor, parentAuthor);
+    this.sc2Api.comment(
+      parentAuthor, parentPermlink, localStorage.getItem('username'),
+      permlink, '', body, jsonMetadata, getSteemResolver(resolve, reject),
+    );
+  }),
+  // (Un)Follow a user
+  follow: (follower, following, unfollow = false) => new Promise((resolve, reject) => (
+    unfollow ? this.sc2Api.unfollow(follower, following, getSteemResolver(resolve, reject))
+      : this.sc2Api.follow(follower, following, getSteemResolver(resolve, reject))
+  )),
+};
+
+
+export default SteemAPI;

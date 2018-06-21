@@ -6,40 +6,42 @@ import { actionTypes } from '../actions/repliesActions';
 const initialState = {};
 /*
 {
-	fullPermlink: {
-		error: null,
-		loading: false,
-		replies: {
-			replyFullPermlink: {...},
-			...
-		},
-		pendingReplies: [
-			{
-				author: ...,
-				body: ...,
-			}
-		]
-	},
-	...
+  fullPermlink: {
+    error: null,
+    loading: false,
+    replies: {
+      replyFullPermlink: {...},
+      ...
+    },
+    pendingReplies: [
+      {
+        author: ...,
+        body: ...,
+      }
+    ]
+  },
+  ...
 }
 */
 
-export const repliesReducer = (state = initialState, action) => {
+export default (oldState = initialState, action) => {
   const key = `${action.parentAuthor}/${action.parentPermlink}`;
 
-  state = _.cloneDeep(state);
+  const state = _.cloneDeep(oldState);
 
   if (key === 'undefined/undefined') { // TODO: Find out why
     return state;
   }
 
   // Make sure key exists
-  !state[key] && (state[key] = {
-    error: null,
-    loading: false,
-    replies: {},
-    pendingReplies: [],
-  });
+  if (!state[key]) {
+    state[key] = {
+      error: null,
+      loading: false,
+      replies: {},
+      pendingReplies: [],
+    };
+  }
 
   const postReplies = state[key];
 
@@ -67,7 +69,7 @@ export const repliesReducer = (state = initialState, action) => {
       state[key] = postReplies;
       return state;
 
-      // TODO: Handle cases for creating reply
+    // TODO: Handle cases for creating reply
     case actionTypes.ADD_REPLY_INIT:
       postReplies.pendingReplies.push({ author: localStorage.getItem('username'), body: action.body });
       state[key] = postReplies;

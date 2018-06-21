@@ -2,7 +2,7 @@ import { actionTypes } from '../actions/createArticleActions';
 
 const initialState = { title: '', content: '' };
 
-export const createArticleReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_TITLE:
       return { ...state, title: action.title };

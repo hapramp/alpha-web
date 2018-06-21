@@ -2,7 +2,7 @@ import { actionTypes } from '../actions/communityActions';
 
 const initialState = { loading: false, communities: [], error: null };
 
-export const communitiesReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOADING_COMMUNITIES:
       return { ...state, loading: true };

@@ -7,13 +7,16 @@ const defaultOptions = {
 
 const messages = {};
 
-const notify = (message, options, repeat) => (repeat ? UIKit.notification(message, options) : notifyWithoutRepeat(message, options));
-
 const notifyWithoutRepeat = (message, options) => {
-  !messages[message] && UIKit.notification(message, options);
+  if (!messages[message]) {
+    UIKit.notification(message, options);
+  }
   messages[message] = true;
   setTimeout(() => delete messages[message], options.timeout);
 };
+
+const notify = (message, options, repeat) => (
+  repeat ? UIKit.notification(message, options) : notifyWithoutRepeat(message, options));
 
 export default {
   info: (message, repeat = false) => notify(message, { ...defaultOptions, status: 'primary' }, repeat),

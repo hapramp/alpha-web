@@ -4,7 +4,7 @@ import { actionTypes } from '../actions/addContentActions';
 
 const initialState = { isClicked: false };
 
-export const addContentReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   const newState = _.clone(state);
   switch (action.type) {
     case actionTypes.TOGGLE_CONTENT_TYPE:

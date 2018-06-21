@@ -4,10 +4,12 @@ import { actionTypes } from '../actions/loginActions';
 
 const initialState = { messages: [], loggingIn: false, loggedIn: false };
 
-export const loginReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   if (action.type.startsWith('LOGIN')) {
     const newState = _.clone(state);
-    action.message && newState.messages.push(action.message);
+    if (action.message) {
+      newState.messages.push(action.message);
+    }
     switch (action.type) {
       case actionTypes.LOGIN_INIT:
         newState.loggingIn = true;
@@ -22,7 +24,7 @@ export const loginReducer = (state = initialState, action) => {
         localStorage.setItem('username', action.username);
         break;
       default:
-			// No problem
+        // No problem
     }
     return newState;
   }
