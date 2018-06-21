@@ -174,7 +174,13 @@ class ActionBar extends React.Component {
 
 ActionBar.propTypes = {
   ratePost: PropTypes.func,
-  post: PropTypes.shape,
+  post: PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    permlink: PropTypes.string.isRequired,
+    replies: PropTypes.arrayOf(PropTypes.string),
+    active_votes: PropTypes.arrayOf(PropTypes.shape()),
+    total_payout_value: PropTypes.string.isRequired,
+  }),
   withLink: PropTypes.bool,
 };
 

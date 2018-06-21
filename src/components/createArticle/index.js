@@ -52,7 +52,7 @@ class CreateArticle extends React.Component {
     return (
       <div className={['uk-flex', 'uk-flex-between', 'uk-margin-bottom', styles.topSection].join(' ')}>
         {this.getUserSection()}
-        {this.getContinueSection()}
+        {CreateArticle.getContinueSection()}
       </div>);
   }
 

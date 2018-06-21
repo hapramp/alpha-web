@@ -140,7 +140,11 @@ class UserProfile extends React.Component {
 
 UserProfile.propTypes = {
   loadUserProfileInfo: PropTypes.func,
-  match: PropTypes.shape.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      username: PropTypes.string,
+    }),
+  }).isRequired,
   getFollowCount: PropTypes.func,
   getUserFeeds: PropTypes.func,
   getFollowers: PropTypes.func,
@@ -149,9 +153,28 @@ UserProfile.propTypes = {
   resetUserProfileInfo: PropTypes.func,
   follow: PropTypes.func,
   unfollow: PropTypes.func,
-  userProfile: PropTypes.shape,
+  userProfile: PropTypes.shape({
+    user: PropTypes.shape({
+      json_metadata: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+      name: PropTypes.string.isRequired,
+      post_count: PropTypes.number.isRequired,
+    }),
+    follower: PropTypes.shape({
+      count: PropTypes.number,
+    }),
+    following: PropTypes.shape({
+      count: PropTypes.number,
+    }),
+    blog: PropTypes.shape({
+      posts: PropTypes.arrayOf(PropTypes.string),
+    }),
+  }),
   isFollowing: PropTypes.bool,
-  allUsers: PropTypes.shape,
+  allUsers: PropTypes.shape({
+    haprampUsers: PropTypes.shape({}),
+  }),
 };
 
 UserProfile.defaultProps = {

@@ -36,6 +36,7 @@ export const addReply = authRequired((parentAuthor, parentPermlink, body) => (di
   });
   return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, body)
     .then((result) => {
+      console.log('erplu created');
       dispatch({
         type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result,
       });

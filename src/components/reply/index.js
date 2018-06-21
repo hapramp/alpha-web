@@ -28,7 +28,10 @@ Reply.propTypes = {
   postingUser: PropTypes.shape({
     name: PropTypes.string,
     json_metadata: PropTypes.shape({
-      profile: PropTypes.shape,
+      profile: PropTypes.shape({
+        profile_image: PropTypes.string,
+        name: PropTypes.string,
+      }),
     }),
   }),
   reply: PropTypes.shape({

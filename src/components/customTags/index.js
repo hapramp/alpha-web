@@ -7,7 +7,7 @@ import styles from './styles.scss';
 import { getOtherTags } from '../../utils/communityUtils';
 
 const CustomTags = props => (
-  <div className={[this.props.className].join(' ')}>
+  <div className={[props.className].join(' ')}>
     {getOtherTags(props.tags).map(tag => (
       <span className={['uk-margin-small-right', styles.tagText].join(' ')} key={tag}>
         <span className={indexStyles.secondaryText}>#</span>
@@ -17,13 +17,13 @@ const CustomTags = props => (
 );
 
 CustomTags.propTypes = {
-  tags: PropTypes.arrayOf({
-    tag: PropTypes.string,
-  }),
+  tags: PropTypes.arrayOf(PropTypes.string),
+  className: PropTypes.string,
 };
 
 CustomTags.defaultProps = {
   tags: [],
+  className: '',
 };
 
 

@@ -102,7 +102,7 @@ class PostData extends React.Component {
 
 PostData.propTypes = {
   className: PropTypes.string,
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape().isRequired,
   applyTopMargin: PropTypes.bool,
 };
 

@@ -35,7 +35,7 @@ class ArticleSingle extends React.Component {
             className={['uk-padding', 'uk-margin-large-bottom'].join(' ')}
           />
           <div>
-            {this.props.post.json_metadata.content.data.map(content => <PostData className={['uk-margin-top'].join(' ')} data={content} />)}
+            {this.props.post.json_metadata.content.data.map(content => <PostData key={JSON.stringify(content)} className={['uk-margin-top'].join(' ')} data={content} />)}
           </div>
           <CustomTags
             tags={this.props.post.json_metadata.tags}
@@ -53,8 +53,25 @@ class ArticleSingle extends React.Component {
 }
 
 ArticleSingle.propTypes = {
-  postingUser: PropTypes.shape,
-  post: PropTypes.shape,
+  postingUser: PropTypes.shape({
+    json_metadata: PropTypes.shape({
+      profile: PropTypes.shape({
+        name: PropTypes.string,
+        profile_image: PropTypes.string,
+      }),
+    }),
+  }),
+  post: PropTypes.shape({
+    author: PropTypes.string,
+    created: PropTypes.string,
+    json_metadata: PropTypes.shape({
+      content: PropTypes.shape({
+        data: PropTypes.arrayOf(PropTypes.shape()),
+      }),
+      tags: PropTypes.arrayOf(PropTypes.string),
+    }),
+    permlink: PropTypes.string.isRequired,
+  }),
 };
 
 ArticleSingle.defaultProps = {

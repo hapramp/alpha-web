@@ -309,7 +309,7 @@ SteemAPI.sc2Operations = {
   createReply: (parentAuthor, parentPermlink, body) => new Promise((resolve, reject) => {
     const jsonMetadata = { app: constants.VERSION.APP_NAME };
     const permlink = getCommentPermlink(parentAuthor, parentAuthor);
-    this.sc2Api.comment(
+    SteemAPI.sc2Api.comment(
       parentAuthor, parentPermlink, localStorage.getItem('username'),
       permlink, '', body, jsonMetadata, getSteemResolver(resolve, reject),
     );

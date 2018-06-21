@@ -22,7 +22,7 @@ class PostSingle extends React.Component {
   }
 
   getLeftSection() {
-    if (this.isMedia(this.props.post.json_metadata.content)) {
+    if (PostSingle.isMedia(this.props.post.json_metadata.content)) {
       return (
         <div className={['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l',
           'uk-padding-remove', indexStyles.white].join(' ')}
@@ -34,7 +34,7 @@ class PostSingle extends React.Component {
   }
 
   getRightSection() {
-    const containsImage = this.isMedia(this.props.post.json_metadata.content);
+    const containsImage = PostSingle.isMedia(this.props.post.json_metadata.content);
     const classes = containsImage ?
       ['uk-width-1-1@s', 'uk-width-1-2@m', 'uk-width-1-2@l'] :
       ['uk-width-1-1@s', 'uk-width-2-3@m', 'uk-width-1-2@l'];
@@ -72,8 +72,15 @@ class PostSingle extends React.Component {
 }
 
 PostSingle.propTypes = {
-  post: PropTypes.shape.isRequired,
-  postingUser: PropTypes.shape,
+  post: PropTypes.shape().isRequired,
+  postingUser: PropTypes.shape({
+    json_metadata: PropTypes.shape({
+      profile: PropTypes.shape({
+        name: PropTypes.string,
+        profile_image: PropTypes.string,
+      }),
+    }),
+  }),
 };
 
 PostSingle.defaultProps = {

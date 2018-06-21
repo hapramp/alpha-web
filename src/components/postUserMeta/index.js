@@ -29,7 +29,7 @@ const PostUserMeta = props => (
 PostUserMeta.propTypes = {
   className: PropTypes.string,
   profile: PropTypes.shape({
-    username: PropTypes.string.isRequired,
+    username: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,

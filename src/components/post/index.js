@@ -54,8 +54,8 @@ const Post = (props) => {
 };
 
 Post.propTypes = {
-  post: PropTypes.shape.isRequired,
-  postingUser: PropTypes.string.isRequired,
+  post: PropTypes.shape().isRequired,
+  postingUser: PropTypes.shape().isRequired,
   border: PropTypes.bool,
 };
 

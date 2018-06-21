@@ -240,7 +240,7 @@ CreatePost.propTypes = {
     content: PropTypes.string,
   }),
   communities: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     tag: PropTypes.string,
   })),
   postCreateError: PropTypes.func,
@@ -250,7 +250,7 @@ CreatePost.propTypes = {
   userFullName: PropTypes.string,
   creating: PropTypes.bool,
   activeCommunity: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     tag: PropTypes.string,
   })),
   errors: PropTypes.arrayOf(PropTypes.shape),

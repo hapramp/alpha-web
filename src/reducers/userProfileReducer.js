@@ -10,13 +10,21 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  let newUser = action.result;
+  if (action.type === actionTypes.LOADED_USER_INFO && action.result) {
+    if (typeof (action.result.json_metadata) === 'string') {
+      newUser.json_metadata = JSON.parse(newUser.json_metadata);
+    } else {
+      newUser = action.result;
+    }
+  }
   switch (action.type) {
     case actionTypes.LOAD_USER_INFO:
       // TODO: Serve from cache while loading
       return { ...state, loading: true, user: null };
 
     case actionTypes.LOADED_USER_INFO:
-      return { ...state, loading: false, user: action.result };
+      return { ...state, loading: false, user: newUser };
 
     case actionTypes.LOAD_USER_INFO_FAILED:
       return { ...state, loading: false, error: action.reason };

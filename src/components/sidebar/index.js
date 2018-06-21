@@ -29,11 +29,11 @@ const Sidebar = props => (
 );
 
 Sidebar.propTypes = {
-  communities: PropTypes.arrayOf({
-    id: PropTypes.string.isRequired,
+  communities: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     tag: PropTypes.string.isRequired,
     image_uri: PropTypes.string,
-  }),
+  })),
   match: PropTypes.shape({
     params: PropTypes.shape.isRequired,
   }),

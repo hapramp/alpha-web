@@ -15,7 +15,7 @@ class Replies extends React.Component {
   }
 
   render() {
-    if (!this.props.replies) {
+    if (!this.props.replies || this.props.replies.length === 0) {
       return <div>Loading...</div>;
     }
     return (
@@ -38,14 +38,22 @@ Replies.propTypes = {
   loadReplies: PropTypes.func,
   parentAuthor: PropTypes.string.isRequired,
   parentPermlink: PropTypes.string.isRequired,
-  replies: PropTypes.arrayOf(PropTypes.shape),
+  replies: PropTypes.shape({
+    length: PropTypes.number,
+    loading: PropTypes.bool,
+    replies: PropTypes.shape({}),
+    pendingReplies: PropTypes.arrayOf(PropTypes.shape()),
+  }),
   className: PropTypes.string,
-  rootPost: PropTypes.shape.isRequired,
+  rootPost: PropTypes.shape().isRequired,
 };
 
 Replies.defaultProps = {
   loadReplies: () => {},
-  replies: [],
+  replies: {
+    replies: {},
+    pendingReplies: [],
+  },
   className: '',
 };
 

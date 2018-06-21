@@ -46,15 +46,7 @@ ContentSingle.propTypes = {
 };
 
 ContentSingle.defaultProps = {
-  post: {
-    json_metadata: {
-      content: {
-        type: 'post',
-      },
-    },
-    author: '',
-    permlink: '',
-  },
+  post: null,
   match: {
     params: {
       username: '',

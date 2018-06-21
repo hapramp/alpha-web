@@ -47,7 +47,7 @@ Feed.propTypes = {
   userFeed: PropTypes.shape({
     posts: PropTypes.arrayOf(PropTypes.shape),
   }),
-  allPosts: PropTypes.shape,
+  allPosts: PropTypes.shape({}),
   username: PropTypes.string.isRequired,
   loadFeedsForUser: PropTypes.func.isRequired,
 };
