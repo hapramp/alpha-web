@@ -70,7 +70,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "precommit": "yarn lint"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -115,6 +116,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6"
   }
