@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import { authRequiredComponent } from '../../utils/decorators';
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
 import Feed from '../feed';
@@ -29,7 +30,7 @@ const Root = () => (
       />
 
       {/* User based feed */}
-      <Route exact path="/feed" component={Feed} />
+      <Route exact path="/feed" component={authRequiredComponent(Feed)} />
 
       {/* Browse views */}
       <Route exact path="/browse" component={Browse} />
@@ -42,8 +43,8 @@ const Root = () => (
       <Route exact path="/browse/:community/:filter" component={BrowseCommunity} />
 
       {/* Content Creation Views */}
-      <Route exact path="/create/post" component={CreatePost} />
-      <Route exact path="/create/article" component={CreateArticle} />
+      <Route exact path="/create/post" component={authRequiredComponent(CreatePost)} />
+      <Route exact path="/create/article" component={authRequiredComponent(CreateArticle)} />
       <Redirect path="/create" to="/create/post" />
 
       {/* Profile redirect logic */}
@@ -52,7 +53,7 @@ const Root = () => (
         path="/profile"
         render={() => (getStore().getState().login.loggedIn ?
           <Redirect to={`/@${getStore().getState().authUser.username}`} /> :
-          <Redirect to="/signin" />)
+          <Redirect to="/" />)
       }
       />
 

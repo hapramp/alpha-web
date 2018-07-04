@@ -52,6 +52,7 @@
     "react-router-dom": "^4.2.2",
     "react-time-ago": "^2.0.2",
     "redux": "^3.7.2",
+    "redux-auth-wrapper": "^2.0.3",
     "redux-thunk": "^2.2.0",
     "showdown": "^1.8.6",
     "sjcl": "^1.0.7",
