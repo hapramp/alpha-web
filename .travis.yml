@@ -15,3 +15,11 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: firebase
+  token:
+    secure: $FIREBASE_DEPLOY_TOKEN
+  on:
+    repo: hapramp/alpha-web
+    branch: master
