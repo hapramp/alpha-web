@@ -1,3 +1,5 @@
+import Cookie from 'js-cookie';
+
 import notify from './notification';
 
 export const notAuthorizedErrorAction = () => () => {
@@ -5,4 +7,4 @@ export const notAuthorizedErrorAction = () => () => {
   return Promise.reject();
 };
 
-export const authRequired = target => (localStorage.getItem('username') ? target : notAuthorizedErrorAction);
+export const authRequired = target => () => (Cookie.get('username') ? target : notAuthorizedErrorAction)();

@@ -1,3 +1,5 @@
+import Cookie from 'js-cookie';
+
 import steemAPI from '../utils/steem';
 import { getLocalUser, setLocalUser } from '../utils/localStoreUtils';
 
@@ -32,11 +34,10 @@ const setAuthUser = (result, dispatch) => {
 };
 
 export const fakeLogin = () => (dispatch) => {
-  const username = localStorage.getItem('username');
+  const username = Cookie.get('username');
   dispatch({
     type: actionTypes.LOGIN_DONE, username,
   });
   // Update profile changes
   return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 };
-
