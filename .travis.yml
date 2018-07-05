@@ -18,6 +18,7 @@ after_success:
 
 deploy:
   provider: firebase
+  skip_cleanup: true
   token:
     secure: $FIREBASE_DEPLOY_TOKEN
   on:
