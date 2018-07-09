@@ -5,7 +5,7 @@ export const actionTypes = {
   RESET_CONTENT_TYPE: 'ADD_CONTENT_BUTTON.RESET',
 };
 
-export const toggleClicked = authRequired(() => dispatch =>
+export const toggleClicked = () => authRequired(dispatch =>
   dispatch({ type: actionTypes.TOGGLE_CONTENT_TYPE }));
 
 export const resetClicked = () => dispatch => dispatch({ type: actionTypes.RESET_CONTENT_TYPE });

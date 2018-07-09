@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import steemAPI from '../utils/steem';
 import { actionTypes as allUserActionTypes } from './allUserActions';
 import { authRequired } from '../utils/decorators';
@@ -14,11 +16,11 @@ export const addPosts = posts => dispatch => dispatch({ type: actionTypes.ADD_PO
 
 export const deletePosts = posts => dispatch => dispatch({ type: actionTypes.DELETE_POSTS, posts });
 
-export const ratePost = authRequired((author, permlink, vote) => (dispatch) => {
+export const ratePost = (author, permlink, vote) => authRequired((dispatch) => {
   dispatch({
     type: actionTypes.VOTE_POST_INIT, author, permlink, vote,
   });
-  return steemAPI.sc2Operations.vote(localStorage.getItem('username'), author, permlink, vote * 20)
+  return steemAPI.sc2Operations.vote(Cookies.get('username'), author, permlink, vote * 20)
     .then(() => {
       dispatch({ type: actionTypes.VOTE_POST_DONE, author, permlink });
     }).catch((reason) => {

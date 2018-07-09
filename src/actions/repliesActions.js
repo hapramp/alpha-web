@@ -30,7 +30,7 @@ export const loadReplies = (parentAuthor, parentPermlink) => (dispatch) => {
   getSteemReplies(parentAuthor, parentPermlink, dispatch);
 };
 
-export const addReply = authRequired((parentAuthor, parentPermlink, body) => (dispatch) => {
+export const addReply = (parentAuthor, parentPermlink, body) => authRequired((dispatch) => {
   dispatch({
     type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body,
   });
