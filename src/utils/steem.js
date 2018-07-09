@@ -273,7 +273,7 @@ class SteemAPI {
 SteemAPI.sc2Api = sc2.Initialize(constants.SC2.CONFIG);
 SteemAPI.sc2Operations = {
   // Getting URL for logging in to the app. Opens SteemConnect OAuth page
-  getLoginURL: state => this.sc2Api.getLoginURL(state || {}),
+  getLoginURL: state => SteemAPI.sc2Api.getLoginURL(state || {}),
   // Create a post given the parameters
   createPost: (author, body, tags, content, permlink, community) =>
     new Promise((resolve, reject) => {
@@ -292,7 +292,7 @@ SteemAPI.sc2Operations = {
           content,
         },
       };
-      this.sc2Api.comment(
+      SteemAPI.sc2Api.comment(
         commentObj.parentAuthor, commentObj.parentPermlink, commentObj.author,
         commentObj.permlink, commentObj.title, commentObj.body, commentObj.jsonMetadata,
         getSteemResolver(resolve, reject),
@@ -300,7 +300,9 @@ SteemAPI.sc2Operations = {
     }),
   // Vote on a comment/post
   vote: (username, author, permlink, power) => new Promise((resolve, reject) => {
-    this.sc2Api.vote(
+    console.log('voting bitch!!', username, author, permlink, power);
+    console.log(SteemAPI.sc2Api);
+    return SteemAPI.sc2Api.vote(
       username, author, permlink,
       power * 100, getSteemResolver(resolve, reject),
     );
@@ -316,8 +318,8 @@ SteemAPI.sc2Operations = {
   }),
   // (Un)Follow a user
   follow: (follower, following, unfollow = false) => new Promise((resolve, reject) => (
-    unfollow ? this.sc2Api.unfollow(follower, following, getSteemResolver(resolve, reject))
-      : this.sc2Api.follow(follower, following, getSteemResolver(resolve, reject))
+    unfollow ? SteemAPI.sc2Api.unfollow(follower, following, getSteemResolver(resolve, reject))
+      : SteemAPI.sc2Api.follow(follower, following, getSteemResolver(resolve, reject))
   )),
 };
 

@@ -17,6 +17,7 @@ export const addPosts = posts => dispatch => dispatch({ type: actionTypes.ADD_PO
 export const deletePosts = posts => dispatch => dispatch({ type: actionTypes.DELETE_POSTS, posts });
 
 export const ratePost = (author, permlink, vote) => authRequired((dispatch) => {
+  console.log(author, permlink, vote, dispatch);
   dispatch({
     type: actionTypes.VOTE_POST_INIT, author, permlink, vote,
   });
