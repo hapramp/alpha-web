@@ -22,15 +22,29 @@ class Header extends React.Component {
             <Link to="/notifications" uk-icon="icon: bell" />
           </div>
           <div className="uk-navbar-item">
-            {localStorage.getItem('avatar') ?
-              <Link to="/profile"><img
+            <div
+              style={{ cursor: 'pointer' }}
+              alt="You"
+              role="checkbox" // eslint-disable-line
+              aria-checked="false"
+            >{this.props.avatar
+              ? <img
                 src={this.props.avatar}
-                className={['uk-border-circle',
-                styles.userImage].join(' ')}
+                className={['uk-border-circle', styles.userImage].join(' ')}
                 alt="You"
               />
-              </Link> :
-              <Link to="/profile" uk-icon="user" />}
+              : <span uk-icon="user" />}
+            </div>
+            <div uk-dropdown="mode: click">
+              <ul className="uk-nav uk-dropdown-nav">
+                <li className={styles.dropDownHoverable}>
+                  <Link to="/profile" className={[styles.flexImportant].join(' ')}>
+                    <div uk-icon="user" style={{ marginRight: '8px' }} />
+                    <div>Profile</div>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>);
     }

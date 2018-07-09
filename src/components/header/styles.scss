@@ -43,3 +43,17 @@
   width: 32px;
   height: 32px;
 }
+
+.dropDownHoverable * {
+  color: rgba(0, 0, 0, 0.25);
+  transition: all 0.3s;
+}
+
+.dropDownHoverable:hover * {
+  color: black;
+  transition: all 0.3s;
+}
+
+.flexImportant {
+  display: flex !important;
+}
