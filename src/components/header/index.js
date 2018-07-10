@@ -43,6 +43,12 @@ class Header extends React.Component {
                     <div>Profile</div>
                   </Link>
                 </li>
+                <li className={styles.dropDownHoverable}>
+                  <Link to="/signout" className={[styles.flexImportant].join(' ')}>
+                    <div uk-icon="sign-out" style={{ marginRight: '8px' }} />
+                    <div>Sign Out</div>
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

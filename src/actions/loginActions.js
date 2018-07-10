@@ -13,6 +13,8 @@ export const actionTypes = {
   SIGNUP_POST_COMMENT_DONE: 'LOGIN.SIGNUP.CONNENT.DONE',
   SIGNUP_POST_COMMENT_ERROR: 'LOGIN.SIGNUP.COMMENT.ERROR',
   SET_AUTH_USER: 'LOGIN.DONE.USER.SET',
+  LOG_OUT_INIT: 'LOGIN.LOGOUT.DONE.INIT',
+  LOG_OUT_DONE: 'LOGIN.LOGOUT.DONE.DONE',
 };
 
 const updateUser = (data, dispatch) => {
@@ -40,4 +42,12 @@ export const fakeLogin = () => (dispatch) => {
   });
   // Update profile changes
   return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: actionTypes.LOG_OUT_INIT });
+  Cookie.remove('username');
+  Cookie.remove('access_token');
+  return steemAPI.sc2Api.revokeToken()
+    .finally(() => dispatch({ type: actionTypes.LOG_OUT_DONE }));
 };

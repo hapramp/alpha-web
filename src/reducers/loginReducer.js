@@ -23,6 +23,11 @@ export default (state = initialState, action) => {
         newState.loggedIn = true;
         localStorage.setItem('username', action.username);
         break;
+
+      case actionTypes.LOG_OUT_DONE:
+        newState.loggedIn = false;
+        break;
+
       default:
         // No problem
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { authRequiredComponent } from '../../utils/decorators';
+import { logout as signOut } from '../../actions/loginActions';
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
 import Feed from '../feed';
@@ -12,6 +13,7 @@ import BrowseCommunity from '../browseCommunity';
 import CreateArticle from '../createArticle';
 import ContentSingle from '../contentSingle';
 import OAuthCallback from '../OAuthCallback';
+import SignOut from '../SignOut';
 
 const Root = () => (
   <div style={{ backgroundColor: '#FAFAFA' }}>
@@ -66,10 +68,11 @@ const Root = () => (
       {/* OAuth Callback */}
       <Route exact path="/_oauth/" component={OAuthCallback} />
 
+      <Route exact path="/signout" render={() => <SignOut onSignOut={() => getStore().dispatch(signOut())} />} />
+
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div>Not found</div>} />
     </Switch>
-  </div>
-);
+  </div>);
 
 export default Root;
