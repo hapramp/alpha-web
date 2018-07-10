@@ -1,0 +1,15 @@
+.resultCard {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 1px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  min-height: 64px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.userImage {
+  width: 64px;
+  height: 64px;
+}

@@ -12,6 +12,7 @@ import createArticleReducer from './createArticleReducer';
 import allPostsReducer from './allPostsReducer';
 import repliesReducer from './repliesReducer';
 import followReducer from './followReducer';
+import searchReducer from '../search/search.reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -26,4 +27,5 @@ export default combineReducers({
   allPosts: allPostsReducer,
   replies: repliesReducer,
   follow: followReducer,
+  search: searchReducer,
 });
