@@ -14,6 +14,7 @@ import CreateArticle from '../createArticle';
 import ContentSingle from '../contentSingle';
 import OAuthCallback from '../OAuthCallback';
 import SignOut from '../SignOut';
+import Search from '../../search';
 
 const Root = () => (
   <div style={{ backgroundColor: '#FAFAFA' }}>
@@ -69,6 +70,8 @@ const Root = () => (
       <Route exact path="/_oauth/" component={OAuthCallback} />
 
       <Route exact path="/signout" render={() => <SignOut onSignOut={() => getStore().dispatch(signOut())} />} />
+
+      <Route exact path="/search" component={Search} />
 
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div>Not found</div>} />

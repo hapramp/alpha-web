@@ -323,5 +323,6 @@ SteemAPI.sc2Operations = {
   )),
 };
 
+SteemAPI.steem = steem;
 
 export default SteemAPI;
