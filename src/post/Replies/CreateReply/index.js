@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import indexStyles from '../../index.scss';
-import { addReply } from '../../actions/repliesActions';
+import indexStyles from '../../../index.scss';
+import { addReply } from '../../../actions/repliesActions';
 
 class CreateReply extends React.Component {
   constructor(props) {

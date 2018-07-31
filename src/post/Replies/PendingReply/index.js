@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 
 import styles from './styles.scss';
-import { fixUser } from '../../utils/defaultFixUtils';
+import { fixUser } from '../../../utils/defaultFixUtils';
 
 const PendingReply = props => (
   <div className={['uk-margin-bottom', styles.pendingReply].join(' ')}>

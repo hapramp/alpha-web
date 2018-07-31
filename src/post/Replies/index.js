@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { loadReplies } from '../../actions/repliesActions';
-import Reply from '../reply';
+import Reply from './Reply';
 import styles from './styles.scss';
-import CreateReply from '../createReply';
-import PendingReply from '../pendingReply';
+import CreateReply from './CreateReply';
+import PendingReply from './PendingReply';
 
 class Replies extends React.Component {
   constructor(props) {

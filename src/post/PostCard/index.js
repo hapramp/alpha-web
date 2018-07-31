@@ -1,33 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Remarkable from 'remarkable';
 
-// import PostData from '../postData';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import { ratePost } from '../../actions/allPostsActions';
-import PostUserMeta from '../postUserMeta';
+import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import { fixUser } from '../../utils/defaultFixUtils';
-import ActionBar from '../actionBar';
-
-const remarkable = new Remarkable({
-  html: true,
-  breaks: true,
-  linkify: true,
-  typographer: false,
-  quotes: '“”‘’',
-});
+import ActionBar from '../ActionBar';
+import PostBody from '../../post/PostBody';
 
 const Post = (props) => {
   if (!props.post) {
     return <div>Loading...</div>;
   }
 
-  const { content } = props.post.json_metadata;
-  const { body } = props.post;
+  const { body, author, permlink } = props.post;
 
   /* Author details */
   const user = props.postingUser;
@@ -46,30 +36,12 @@ const Post = (props) => {
         communities={getCommunitiesForPost(props.post)}
       />
       {/* Actual post */}
-      <div
-        className={`${styles.postSection} ${content.type === 'article' ? styles.articleView : ''}`}
-        dangerouslySetInnerHTML={{ __html: remarkable.render(body) }}
+      <PostBody
+        body={body}
+        author={author}
+        permlink={permlink}
+        minify
       />
-      {/*
-      <div
-        className={[
-          styles.postSection,
-          content.type === 'article' ? styles.articleView : ''
-        ].join(' ')}
-      >
-        {content && content.data.map((data, idx) =>
-          <PostData applyTopMargin={idx !== 0} key={`${data.type}/${data.content}`} data={data} />)}
-      </div>
-      */}
-      {content.type === 'article' &&
-        <div className={['uk-text-center', styles.articleReadMore, indexStyles.pointer].join(' ')}>
-          <Link
-            to={`/@${props.post.author}/${props.post.permlink}`}
-            className={[styles.readMoreText, indexStyles.transition].join(' ')}
-          >READ MORE
-          </Link>
-        </div>}
-      {/* Action bar */}
       <ActionBar post={props.post} withLink />
     </div>);
 };

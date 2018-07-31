@@ -5,7 +5,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 import Sidebar from '../sidebar';
-import Post from '../post';
+import PostCard from '../../post/PostCard';
 import { loadFeedsByCreated, loadFeedsByHot, loadFeedsByTrending } from '../../actions/userFeedActions';
 import { loadUserAccounts } from '../../actions/allUserActions';
 import feedStyles from '../feed/styles.scss';
@@ -59,7 +59,7 @@ class BrowseCommunity extends React.Component {
               <div>
                 {this.props.userFeed[this.props.match.params.filter].posts
                   && this.props.userFeed[this.props.match.params.filter].posts.map(post => (
-                    <Post
+                    <PostCard
                       key={post}
                       postPermlink={post}
                     />))}

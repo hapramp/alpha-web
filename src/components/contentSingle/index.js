@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { loadPost } from '../../actions/allPostsActions';
-import PostSingle from '../postSingle';
-import ArticleSingle from '../articleSingle';
+import PostSingle from '../../post/PostSingle';
 
 class ContentSingle extends React.Component {
   constructor(props) {
@@ -19,10 +18,9 @@ class ContentSingle extends React.Component {
 
     return (
       <div className={['uk-container', 'uk-margin-top'].join(' ')}>
-        {(this.props.post.json_metadata.content && this.props.post.json_metadata.content.type === 'post') ?
-          <PostSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} /> :
-          <ArticleSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} />}
-      </div>);
+        <PostSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} />
+      </div>
+    );
   }
 }
 

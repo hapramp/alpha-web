@@ -1,0 +1,56 @@
+@import "../../index.scss";
+
+.container {
+  padding: 0 24px;
+}
+
+.bodyContainer {
+  font-size: 16px;
+  color: rgba(0,0,0,0.54);
+  line-height: 24px;
+}
+
+.bodyContainer h1 {
+  font-family: Roboto-Medium;
+  font-size: 36px;
+  color: $primary-color;
+  line-height: 54px;
+}
+
+.bodyContainer h2 {
+  font-family: Roboto;
+  font-size: 18px;
+  color: $primary-color;
+  line-height: 30px;
+}
+
+.articleReadMore {
+	margin-top: -16px;
+	padding: 8px 0;
+	background-color: rgba(255, 255, 255, 0.9);
+	color: #3F72AF;
+	letter-spacing: 2px;
+	font-weight: 500;
+  position: relative;
+  cursor: pointer;
+}
+
+.readMoreText {
+	padding: 4px 8px;
+	color: rgba(0, 0, 0, 0.54);
+	background: white;
+	border: 1px solid rgba(0, 0, 0, 0.24);
+	border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.readMoreText:hover {
+	background-color: $primary-color;
+	color: white;
+  transition: all 0.3s;
+}
+
+.minify {
+	max-height: 380px;
+	overflow: hidden;
+}

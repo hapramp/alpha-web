@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { loadFeedsForUser } from '../../actions/userFeedActions';
 import { loadUserAccounts } from '../../actions/allUserActions';
-import Post from '../post';
+import PostCard from '../../post/PostCard';
 import AddContentButton from '../addContentButton';
 import Sidebar from '../sidebar';
 import styles from './styles.scss';
@@ -35,7 +35,7 @@ class Feed extends React.Component {
           </div>
           <div className={['uk-margin-top', styles.feedPosts].join(' ')}>
             {this.props.userFeed.posts && this.props.userFeed.posts.map(post =>
-              <Post key={post} postPermlink={post} />)}
+              <PostCard key={post} postPermlink={post} />)}
           </div>
           <AddContentButton />
         </div>

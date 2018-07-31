@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import Post from '../post';
+import PostCard from '../../post/PostCard';
 import {
   getFollowCount, getUserFeeds, loadUserProfileInfo,
   resetUserProfileInfo,
@@ -131,7 +131,7 @@ class UserProfile extends React.Component {
             {this.props.userProfile
               .blog
               .posts
-              .map(item => <Post key={item} postPermlink={item} border />)}
+              .map(item => <PostCard key={item} postPermlink={item} border />)}
           </div>
         </div>
       </div>);

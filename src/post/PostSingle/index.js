@@ -1,25 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Remarkable from 'remarkable';
 
 import { fixUser } from '../../utils/defaultFixUtils';
-// import PostData from '../postData';
 import indexStyles from '../../index.scss';
-import CustomTags from '../customTags';
-import ActionBar from '../actionBar';
-import Replies from '../replies';
-import PostUserMeta from '../postUserMeta';
+import CustomTags from '../CustomTags';
+import ActionBar from '../ActionBar';
+import Replies from '../Replies';
+import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
-import styles from './styles.scss';
-
-const remarkable = new Remarkable({
-  html: true,
-  breaks: true,
-  linkify: true,
-  typographer: false,
-  quotes: '“”‘’',
-});
+import PostBody from '../PostBody';
 
 class ArticleSingle extends React.Component {
   componentDidMount() {
@@ -27,9 +17,7 @@ class ArticleSingle extends React.Component {
   }
 
   render() {
-    const { body } = this.props.post;
-    const renderBody = remarkable.render(body);
-    console.log(renderBody);
+    const { body, author, permlink } = this.props.post;
     return (
       <div uk-grid="true" className={['uk-margin-bottom'].join(' ')}>
         <div className={['uk-width-1-6@m', 'uk-text-center', 'uk-width-1-4@l'].join(' ')} />
@@ -47,20 +35,11 @@ class ArticleSingle extends React.Component {
             communities={getCommunitiesForPost(this.props.post)}
             className={['uk-padding'].join(' ')}
           />
-          <div
-            className={`uk-padding uk-padding-remove-top ${styles.bodyContainer}`}
-            dangerouslySetInnerHTML={{ __html: renderBody }}
+          <PostBody
+            body={body}
+            author={author}
+            permlink={permlink}
           />
-          {/*
-            this.props.post.json_metadata.content.data
-              .map(content => (
-                <PostData
-                  key={JSON.stringify(content)}
-                  className={['uk-margin-top'].join(' ')}
-                  data={content}
-                />
-              ))
-          */}
           <CustomTags
             tags={this.props.post.json_metadata.tags}
             className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}
