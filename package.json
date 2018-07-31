@@ -2,6 +2,9 @@
   "name": "alpha-web",
   "version": "0.4.1",
   "private": false,
+  "engines": {
+    "node": "<=9 >=8"
+  },
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
