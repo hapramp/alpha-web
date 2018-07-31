@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import getStore from '../utils/storeUtils';
 import haprampAPI from '../utils/haprampAPI';
 import Steem from '../utils/steem';
 
@@ -35,28 +34,30 @@ export const clearError = () => dispatch => dispatch({ type: actionTypes.CLEAR_E
 export const setHashtags = hashtags => dispatch =>
   dispatch({ type: actionTypes.SET_HASHTAGS, hashtags });
 
-export const createPost = oldData => (dispatch) => {
+export const createPost = oldData => (dispatch, getState) => {
   // Deep copy
   const data = _.cloneDeep(oldData);
   const { tags, post, community } = data;
 
   dispatch({ type: actionTypes.POST_CREATE_INIT });
 
-  const author = getStore().getState().authUser.username;
+  const author = getState().authUser.username;
+  // TODO: Generate a better permlink
   const permlink = `${new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase()}-post`;
 
   const fullPermlink = `${author}/${permlink}`;
   return haprampAPI.v2.post.prepare(post, fullPermlink)
-    .then(body => Steem.sc2Operations.createPost(author, body, tags, post, permlink, community)
+    .then(body => Steem.sc2Operations
+      .createPost(author, body, tags, post, permlink, community)
       .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
       .catch((e) => {
         console.log('Steem error', e);
         return dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
-      })
-      .catch((e) => {
-        console.log('Hapramp API Error', e);
-        dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
-      }));
+      }))
+    .catch((e) => {
+      console.log('Hapramp API Error', e);
+      dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
+    });
 };
 
 export const resetPostCreate = () => dispatch => dispatch({ type: actionTypes.POST_CREATE_RESET });

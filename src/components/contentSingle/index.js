@@ -19,7 +19,7 @@ class ContentSingle extends React.Component {
 
     return (
       <div className={['uk-container', 'uk-margin-top'].join(' ')}>
-        {this.props.post.json_metadata.content.type === 'post' ?
+        {(this.props.post.json_metadata.content && this.props.post.json_metadata.content.type === 'post') ?
           <PostSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} /> :
           <ArticleSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} />}
       </div>);

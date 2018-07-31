@@ -170,7 +170,6 @@ class SteemAPI {
         json_metadata: JSON.stringify({
           tags,
           app: 'hapramp/0.0.1',
-          content,
         }),
       };
       const benef = getCommentBeneficiaries(permlink, author);
@@ -289,7 +288,7 @@ SteemAPI.sc2Operations = {
         jsonMetadata: {
           tags,
           app: 'hapramp/0.0.1',
-          content,
+          // content,
         },
       };
       SteemAPI.sc2Api.comment(

@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Remarkable from 'remarkable';
 
-import PostData from '../postData';
+// import PostData from '../postData';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import { ratePost } from '../../actions/allPostsActions';
@@ -12,12 +13,21 @@ import { getCommunitiesForPost } from '../../utils/communityUtils';
 import { fixUser } from '../../utils/defaultFixUtils';
 import ActionBar from '../actionBar';
 
+const remarkable = new Remarkable({
+  html: true,
+  breaks: true,
+  linkify: true,
+  typographer: false,
+  quotes: '“”‘’',
+});
+
 const Post = (props) => {
   if (!props.post) {
     return <div>Loading...</div>;
   }
 
   const { content } = props.post.json_metadata;
+  const { body } = props.post;
 
   /* Author details */
   const user = props.postingUser;
@@ -36,10 +46,21 @@ const Post = (props) => {
         communities={getCommunitiesForPost(props.post)}
       />
       {/* Actual post */}
-      <div className={[styles.postSection, content.type === 'article' ? styles.articleView : ''].join(' ')}>
+      <div
+        className={`${styles.postSection} ${content.type === 'article' ? styles.articleView : ''}`}
+        dangerouslySetInnerHTML={{ __html: remarkable.render(body) }}
+      />
+      {/*
+      <div
+        className={[
+          styles.postSection,
+          content.type === 'article' ? styles.articleView : ''
+        ].join(' ')}
+      >
         {content && content.data.map((data, idx) =>
           <PostData applyTopMargin={idx !== 0} key={`${data.type}/${data.content}`} data={data} />)}
       </div>
+      */}
       {content.type === 'article' &&
         <div className={['uk-text-center', styles.articleReadMore, indexStyles.pointer].join(' ')}>
           <Link
