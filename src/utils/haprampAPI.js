@@ -19,7 +19,7 @@ export default {
         fetch(`${constants.BACKEND_URL.V2}/posts`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: JSON.stringify(content), fullPermlink }),
+          body: JSON.stringify({ content: JSON.stringify(content), full_permlink: fullPermlink }),
         }).then((response) => {
           if (response.ok) {
             response.json().then(json => resolve(json.body));
