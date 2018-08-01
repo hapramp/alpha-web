@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import notify from '../utils/notification';
-import { actionTypes } from '../actions/allPostsActions';
+import { actionTypes } from './actions';
 
 const initialState = { posts: {} };
 

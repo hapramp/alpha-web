@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 import indexStyles from '../../../index.scss';
-import { addReply } from '../../../actions/repliesActions';
+import { addReply } from '../actions';
 
 class CreateReply extends React.Component {
   constructor(props) {

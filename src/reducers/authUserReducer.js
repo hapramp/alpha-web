@@ -2,7 +2,7 @@ import { actionTypes as loginActionTypes } from '../actions/loginActions';
 import notify from '../utils/notification';
 
 const initialState = {
-  name: null, avatar: null, location: null, cover: null, website: null,
+  name: null, avatar: null, location: null, cover: null, website: null, username: null,
 };
 
 export default (state = initialState, action) => {

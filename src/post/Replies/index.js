@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { loadReplies } from '../../actions/repliesActions';
+import { loadReplies } from './actions';
 import Reply from './Reply';
 import styles from './styles.scss';
 import CreateReply from './CreateReply';

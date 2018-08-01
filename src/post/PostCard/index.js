@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
-import { ratePost } from '../../actions/allPostsActions';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import { fixUser } from '../../utils/defaultFixUtils';
@@ -65,4 +64,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { ratePost })(Post));
+export default withRouter(connect(mapStateToProps)(Post));

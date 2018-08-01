@@ -1,5 +1,5 @@
 import haprampAPI from '../utils/haprampAPI';
-import { actionTypes as allPostsActionTypes } from './allPostsActions';
+import { actionTypes as allPostsActionTypes } from '../post/actions';
 
 export const actionTypes = {
   FEED_LOADING: 'FEED.LOAD.INIT',

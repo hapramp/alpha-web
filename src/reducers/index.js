@@ -9,8 +9,8 @@ import communitiesReducer from './communitiesReducer';
 import userFeedReducer from './userFeedReducer';
 import allUserReducer from './allUsersReducer';
 import createArticleReducer from './createArticleReducer';
-import allPostsReducer from './allPostsReducer';
-import repliesReducer from './repliesReducer';
+import allPostsReducer from '../post/reducer';
+import repliesReducer from '../post/Replies/reducer';
 import followReducer from './followReducer';
 import searchReducer from '../search/search.reducer';
 

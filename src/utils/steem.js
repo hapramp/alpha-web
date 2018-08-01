@@ -211,12 +211,12 @@ class SteemAPI {
     });
   }
 
-  static loadPost(parentPermlink, author, permlink) {
+  static loadPost(author, permlink) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ?
         reject(err) :
-        resolve({ users: Object.values(result.accounts), posts: Object.values(result.content) }));
-      steem.api.getState(`/${parentPermlink}/@${author}/${permlink}`, callback);
+        resolve({ users: [result.author], posts: [result] }));
+      steem.api.getContent(author, permlink, callback);
     });
   }
 
@@ -298,14 +298,11 @@ SteemAPI.sc2Operations = {
       );
     }),
   // Vote on a comment/post
-  vote: (username, author, permlink, power) => new Promise((resolve, reject) => {
-    console.log('voting bitch!!', username, author, permlink, power);
-    console.log(SteemAPI.sc2Api);
-    return SteemAPI.sc2Api.vote(
+  vote: (username, author, permlink, power) => new Promise((resolve, reject) =>
+    SteemAPI.sc2Api.vote(
       username, author, permlink,
       power * 100, getSteemResolver(resolve, reject),
-    );
-  }),
+    )),
   // Create a reply to a post
   createReply: (parentAuthor, parentPermlink, body) => new Promise((resolve, reject) => {
     const jsonMetadata = { app: constants.VERSION.APP_NAME };

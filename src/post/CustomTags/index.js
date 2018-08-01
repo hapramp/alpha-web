@@ -6,9 +6,9 @@ import indexStyles from '../../index.scss';
 import styles from './styles.scss';
 import { getOtherTags } from '../../utils/communityUtils';
 
-const CustomTags = props => (
-  <div className={[props.className].join(' ')}>
-    {getOtherTags(props.tags).map(tag => (
+const CustomTags = ({ className, tags }) => (
+  <div className={[className].join(' ')}>
+    {getOtherTags(tags).map(tag => (
       <span className={['uk-margin-small-right', styles.tagText].join(' ')} key={tag}>
         <span className={indexStyles.secondaryText}>#</span>
         {tag}

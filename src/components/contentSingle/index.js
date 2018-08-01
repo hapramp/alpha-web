@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { loadPost } from '../../actions/allPostsActions';
+import { loadPost } from '../../post/actions';
 import PostSingle from '../../post/PostSingle';
 
 class ContentSingle extends React.Component {

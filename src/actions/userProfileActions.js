@@ -1,7 +1,7 @@
 import SteemAPI from '../utils/steem';
 import haprampAPI from '../utils/haprampAPI';
 import { actionTypes as allUserActionTypes } from './allUserActions';
-import { actionTypes as allPostsActionTypes } from './allPostsActions';
+import { actionTypes as allPostsActionTypes } from '../post/actions';
 
 export const actionTypes = {
   LOAD_USER_INFO: 'USER_PROFILE.LOAD.INIT',

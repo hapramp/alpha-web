@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
-import notify from '../utils/notification';
-import { actionTypes } from '../actions/repliesActions';
+import { actionTypes } from './actions';
 
 const initialState = {};
 /*
@@ -81,7 +80,6 @@ export default (oldState = initialState, action) => {
       return state;
 
     case actionTypes.ADD_REPLY_DONE:
-      notify.success('Reply posted.');
       return state;
 
     default:

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import indexStyles from '../../index.scss';
 import styles from './styles.scss';
-import { ratePost } from '../../actions/allPostsActions';
+import { ratePost } from './actions';
 
 class ActionBar extends React.Component {
   constructor(props) {
