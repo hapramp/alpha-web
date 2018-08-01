@@ -9,6 +9,10 @@ import _ from 'lodash';
 import sc2 from '../lib/sc2';
 import constants from './constants';
 
+const appVersion = require('../../package.json').version;
+
+const appName = `hapramp/${appVersion}`;
+
 const getSteemResolver = (resolve, reject) =>
   (error, result) => (error ? reject(error) : resolve(result));
 
@@ -51,7 +55,7 @@ const createJsonMetadataFromTags = (tags) => {
   }
   return {
     tags,
-    app: constants.VERSION.APP_NAME,
+    app: appName,
   };
 };
 
@@ -169,7 +173,7 @@ class SteemAPI {
         body,
         json_metadata: JSON.stringify({
           tags,
-          app: 'hapramp/0.0.1',
+          app: appName,
         }),
       };
       const benef = getCommentBeneficiaries(permlink, author);
@@ -287,7 +291,7 @@ SteemAPI.sc2Operations = {
         body,
         jsonMetadata: {
           tags,
-          app: 'hapramp/0.0.1',
+          app: appName,
           // content,
         },
       };

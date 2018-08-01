@@ -11,9 +11,6 @@ export const addPosts = posts => dispatch => dispatch({ type: actionTypes.ADD_PO
 export const deletePosts = posts => dispatch => dispatch({ type: actionTypes.DELETE_POSTS, posts });
 
 export const loadPost = (username, permlink) => (dispatch, getState, { steemAPI }) =>
+  // TODO: Update user redux state from post info
   steemAPI.loadPost(username, permlink)
-    .then((result) => {
-      console.log(result);
-      dispatch({ type: actionTypes.ADD_POSTS, posts: result.posts });
-      // dispatch({ type: allUserActionTypes.LOAD_USERS_DONE, results: result.users });
-    });
+    .then(result => dispatch({ type: actionTypes.ADD_POSTS, posts: result.posts }));

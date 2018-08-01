@@ -21,9 +21,6 @@ export default {
       },
     },
   },
-  VERSION: {
-    APP_NAME: 'hapramp/0.0.1',
-  },
   SC2: {
     CONFIG: {
       app: 'hapramp.app',
