@@ -1,6 +1,3 @@
-import SteemAPI from '../utils/steem';
-import HaprampAPI from '../utils/haprampAPI';
-
 export const actionTypes = {
   LOAD_USERS_INIT: 'ALL_USERS.STEEM.LOAD.INIT',
   LOAD_USERS_DONE: 'ALL_USERS.STEEM.LOAD.DONE',
@@ -10,16 +7,16 @@ export const actionTypes = {
   LOAD_HAPRAMP_USER_ERROR: 'ALL_USERS.HAPRAMP.LOAD.ERROR',
 };
 
-export const loadUserAccounts = usernames => (dispatch) => {
+export const loadUserAccounts = usernames => (dispatch, getState, { steemAPI }) => {
   dispatch({ type: actionTypes.LOAD_USERS_INIT, usernames });
-  return SteemAPI.getUserAccounts(usernames)
+  return steemAPI.getUserAccounts(usernames)
     .then(results => dispatch({ type: actionTypes.LOAD_USERS_DONE, results }))
     .catch(error => dispatch({ type: actionTypes.LOAD_USERS_ERROR, reason: error }));
 };
 
-export const loadHaprampUserDetails = username => (dispatch) => {
+export const loadHaprampUserDetails = username => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.LOAD_HAPRAMP_USER_INIT, username });
-  return HaprampAPI.v2.users.getUserDetailsByUsername(username)
+  return haprampAPI.v2.users.getUserDetailsByUsername(username)
     .then(result => dispatch({ type: actionTypes.LOAD_HAPRAMP_USER_DONE, result }))
     .catch(reason => dispatch({ type: actionTypes.LOAD_HAPRAMP_USER_ERROR, reason }));
 };

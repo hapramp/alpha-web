@@ -1,8 +1,5 @@
 import _ from 'lodash';
 
-import haprampAPI from '../utils/haprampAPI';
-import Steem from '../utils/steem';
-
 export const actionTypes = {
   CHANGE_COMMUNITY: 'POST.CREATE.COMMUNITY.CHANGE',
   CHANGE_MEDIA: 'POST.CREATE.MEDIA.CHANGE',
@@ -15,26 +12,25 @@ export const actionTypes = {
   POST_CREATE_INIT: 'POST.CREATE.INIT',
 };
 
-export const changeCommunity = community => dispatch =>
-  dispatch({ type: actionTypes.CHANGE_COMMUNITY, community });
+export const changeCommunity = community => ({ type: actionTypes.CHANGE_COMMUNITY, community });
 
-export const changeMedia = (content, type) => dispatch =>
-  dispatch({ type: actionTypes.CHANGE_MEDIA, content, mediaType: type });
+export const changeMedia = (content, type) => ({
+  type: actionTypes.CHANGE_MEDIA, content, mediaType: type,
+});
 
-export const removeMedia = () => dispatch => dispatch({ type: actionTypes.REMOVE_MEDIA });
+export const removeMedia = () => ({ type: actionTypes.REMOVE_MEDIA });
 
-export const postCreateError = err => dispatch => dispatch({
+export const postCreateError = err => ({
   type: actionTypes.CREATE_ERROR,
   element: err.element,
   message: err.message,
 });
 
-export const clearError = () => dispatch => dispatch({ type: actionTypes.CLEAR_ERROR });
+export const clearError = () => ({ type: actionTypes.CLEAR_ERROR });
 
-export const setHashtags = hashtags => dispatch =>
-  dispatch({ type: actionTypes.SET_HASHTAGS, hashtags });
+export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashtags });
 
-export const createPost = oldData => (dispatch, getState) => {
+export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI }) => {
   // Deep copy
   const data = _.cloneDeep(oldData);
   const { tags, post, community } = data;
@@ -47,17 +43,16 @@ export const createPost = oldData => (dispatch, getState) => {
 
   const fullPermlink = `${author}/${permlink}`;
   return haprampAPI.v2.post.prepare(post, fullPermlink)
-    .then(body => Steem.sc2Operations
-      .createPost(author, body, tags, post, permlink, community)
+    .then(body => steemAPI.sc2Operations.createPost(author, body, tags, post, permlink, community)
       .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
       .catch((e) => {
-        console.log('Steem error', e);
+        console.error('Steem error', e);
         return dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
       }))
     .catch((e) => {
-      console.log('Hapramp API Error', e);
-      dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
+      console.error('Hapramp API Error', e);
+      return dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
     });
 };
 
-export const resetPostCreate = () => dispatch => dispatch({ type: actionTypes.POST_CREATE_RESET });
+export const resetPostCreate = () => ({ type: actionTypes.POST_CREATE_RESET });

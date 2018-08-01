@@ -1,4 +1,3 @@
-import haprampAPI from '../utils/haprampAPI';
 import { actionTypes as allPostsActionTypes } from '../post/actions';
 
 export const actionTypes = {
@@ -7,12 +6,12 @@ export const actionTypes = {
   FEED_LOADING_FAILED: 'FEED.LOAD.FAILED',
 };
 
-export const loadFeedsForUser = username => (dispatch) => {
+export const loadFeedsForUser = username => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING });
   return haprampAPI.v2.feed.getUserFeed(username)
     .then((result) => {
       dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result.posts });
-      dispatch({
+      return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
         feedType: 'user',
@@ -22,12 +21,12 @@ export const loadFeedsForUser = username => (dispatch) => {
     .catch(reason => dispatch({ type: actionTypes.FEED_LOADING_FAILED, reason }));
 };
 
-export const loadFeedsByHot = tag => (dispatch) => {
+export const loadFeedsByHot = tag => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING });
   return haprampAPI.v2.feed.getFeedsByHot(tag)
     .then((result) => {
       dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result.posts });
-      dispatch({
+      return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
         feedType: 'hot',
@@ -37,7 +36,7 @@ export const loadFeedsByHot = tag => (dispatch) => {
     .catch(reason => dispatch({ type: actionTypes.FEED_LOADING_FAILED, reason }));
 };
 
-export const loadFeedsByTrending = tag => (dispatch) => {
+export const loadFeedsByTrending = tag => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING });
   return haprampAPI.v2.feed.getFeedsByTrending(tag)
     .then((result) => {
@@ -52,7 +51,7 @@ export const loadFeedsByTrending = tag => (dispatch) => {
     .catch(reason => dispatch({ type: actionTypes.FEED_LOADING_FAILED, reason }));
 };
 
-export const loadFeedsByCreated = tag => (dispatch) => {
+export const loadFeedsByCreated = tag => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING });
   return haprampAPI.v2.feed.getFeedsByCreated(tag)
     .then((result) => {
@@ -60,7 +59,7 @@ export const loadFeedsByCreated = tag => (dispatch) => {
         type: allPostsActionTypes.ADD_POSTS,
         posts: result.posts,
       });
-      dispatch({
+      return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
         feedType: 'created',

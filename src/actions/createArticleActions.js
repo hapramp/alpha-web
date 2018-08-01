@@ -3,7 +3,6 @@ export const actionTypes = {
   SET_TITLE: 'CREATE_ARTICLE.TITLE.SET',
 };
 
-export const setContent = content => dispatch =>
-  dispatch({ type: actionTypes.SET_CONTENT, content });
+export const setContent = content => ({ type: actionTypes.SET_CONTENT, content });
 
-export const setTitle = title => dispatch => dispatch({ type: actionTypes.SET_TITLE, title });
+export const setTitle = title => ({ type: actionTypes.SET_TITLE, title });

@@ -1,6 +1,5 @@
 import Cookie from 'js-cookie';
 
-import steemAPI from '../utils/steem';
 import { getLocalUser, setLocalUser } from '../utils/localStoreUtils';
 
 export const actionTypes = {
@@ -35,7 +34,7 @@ const setAuthUser = (result, dispatch) => {
   updateUser(data, dispatch);
 };
 
-export const fakeLogin = () => (dispatch) => {
+export const fakeLogin = () => (dispatch, getState, { steemAPI }) => {
   const username = Cookie.get('username');
   dispatch({
     type: actionTypes.LOGIN_DONE, username,
@@ -44,7 +43,7 @@ export const fakeLogin = () => (dispatch) => {
   return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch, getState, { steemAPI }) => {
   dispatch({ type: actionTypes.LOG_OUT_INIT });
   Cookie.remove('username');
   Cookie.remove('access_token');
