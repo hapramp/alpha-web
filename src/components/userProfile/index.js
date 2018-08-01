@@ -12,6 +12,7 @@ import {
 } from '../../actions/userProfileActions';
 import { loadHaprampUserDetails } from '../../actions/allUserActions';
 import { getFollowers, getFollowing, follow, unfollow } from '../../actions/followActions';
+import UserAvatar from '../UserAvatar';
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -72,10 +73,14 @@ class UserProfile extends React.Component {
           style={{ backgroundImage: `url(${jsonMetadata.profile.cover_image})` }}
         />}
         <div className={['uk-text-center'].join(' ')}>
-          <img
-            src={jsonMetadata.profile.profile_image}
-            alt=""
-            className={['uk-border-circle', jsonMetadata.profile.cover_image ? styles.profileImage : styles.profileImageNoCover].join(' ')}
+          <UserAvatar
+            size="medium"
+            username={this.props.userProfile.user.name}
+            className={
+              jsonMetadata.profile.cover_image
+              ? styles.profileImage
+              : styles.profileImageNoCover
+            }
           />
         </div>
         <div className={['uk-text-center', 'uk-margin-top'].join(' ')}>

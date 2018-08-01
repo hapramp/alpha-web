@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
+import UserAvatar from '../../components/UserAvatar';
 
 const PostUserMeta = props => (
   <div className={[props.className ? props.className : '', 'uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
-    <Link to={`/@${props.profile.username}`}>
-      <img src={props.profile.image} className={['uk-border-circle', styles.userImage].join(' ')} alt="" />
-    </Link>
+    <UserAvatar size="small" username={props.profile.username} className={styles.userImage} />
     <div className={['uk-margin-left'].join(' ')}>
       <div className={[styles.userNameContainer].join(' ')}>
         <Link to={`/@${props.profile.username}`}>

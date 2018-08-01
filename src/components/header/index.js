@@ -8,6 +8,7 @@ import baseStyles from '../../index.scss';
 import logo from './logo.png';
 import { loadCommunities } from '../../actions/communityActions';
 import steemAPI from '../../utils/steem';
+import UserAvatar from '../UserAvatar';
 
 class Header extends React.Component {
   componentWillMount() {
@@ -15,6 +16,7 @@ class Header extends React.Component {
   }
 
   getNavbarRight() {
+    const { username } = this.props;
     if (this.props.isLoggedIn) {
       return (
         <div className="uk-navbar-item">
@@ -27,13 +29,8 @@ class Header extends React.Component {
               alt="You"
               role="checkbox" // eslint-disable-line
               aria-checked="false"
-            >{this.props.avatar
-              ? <img
-                src={this.props.avatar}
-                className={['uk-border-circle', styles.userImage].join(' ')}
-                alt="You"
-              />
-              : <span uk-icon="user" />}
+            >
+              <UserAvatar size="small" username={username} to="#" className={styles.userImage} />
             </div>
             <div uk-dropdown="mode: click">
               <ul className="uk-nav uk-dropdown-nav">
@@ -94,18 +91,19 @@ class Header extends React.Component {
 Header.propTypes = {
   isLoggedIn: PropTypes.bool,
   loadCommunities: PropTypes.func,
-  avatar: PropTypes.string,
+  username: PropTypes.string,
 };
 
 Header.defaultProps = {
   isLoggedIn: false,
   loadCommunities: () => {},
-  avatar: null,
+  username: null,
 };
 
 const mapStateToProps = state => ({
   isLoggedIn: state.login.loggedIn,
   avatar: state.authUser.avatar,
+  username: state.authUser.username,
 });
 
 export default withRouter(connect(mapStateToProps, {
