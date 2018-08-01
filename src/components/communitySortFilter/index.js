@@ -18,7 +18,7 @@ const CommunitySortFilter = props => (
       </span>
     </Link>
     <Link to={`/browse/${props.match.params.community}/created`}>
-      <span className={[this.props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
+      <span className={[props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
         CREATED
       </span>
     </Link>
