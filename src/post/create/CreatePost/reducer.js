@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
-import notify from '../utils/notification';
-import { actionTypes } from '../actions/createPostActions';
+import { actionTypes } from './actions';
 
 const initialState = {
   community: [],
@@ -16,7 +15,6 @@ const initialState = {
 export default (state = initialState, action) => {
   let community;
   let errors;
-  const { message } = action;
 
   switch (action.type) {
     case actionTypes.CHANGE_COMMUNITY:
@@ -36,17 +34,6 @@ export default (state = initialState, action) => {
 
     case actionTypes.CREATE_ERROR:
       errors = state.errors.slice();
-
-      // Check for too frequent post error
-      if (action.message.data && action.message.data.stack && action.message.data.stack[0]) {
-        const index = action.message.data.stack[0].format.indexOf('auth.last_root_post');
-        if (index > -1) {
-          notify.danger('You need to wait for 5 minutes before creating the next post.');
-        }
-      } else {
-        notify.danger(message);
-      }
-
       return { ...state, errors, creating: false };
 
     case actionTypes.CLEAR_ERROR:

@@ -6,14 +6,14 @@ import * as firebase from 'firebase';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
-import userPlaceHolder from '../userProfile/user-placeholder.jpg';
 import styles from './styles.scss';
-import indexStyles from '../../index.scss';
+import indexStyles from '../../../index.scss';
 import {
   changeCommunity, changeMedia, clearError, createPost, setHashtags,
   postCreateError, removeMedia, resetPostCreate,
-} from '../../actions/createPostActions';
-import PostMediaUpload from '../postMediaUpload';
+} from './actions';
+import PostMediaUpload from './PostMediaUpload';
+import UserAvatar from '../../../components/UserAvatar';
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -28,25 +28,34 @@ class CreatePost extends React.Component {
   }
 
   getUserSection() {
-    const image = this.props.userAvatar || userPlaceHolder;
     return (
       <div className={['uk-flex', 'uk-flex-between', 'uk-margin-bottom'].join(' ')}>
         <div>
-          <img src={image} className={['uk-border-circle', styles.userAvatar].join(' ')} alt="You" />
+          <UserAvatar username={this.props.username} size="small" />
           <span className={['uk-margin-left'].join(' ')} style={{ opacity: 0.87 }}>{this.props.userFullName}</span>
         </div>
         <div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
-          {!this.props.creating &&
-            <span
-              className={[styles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}
-              onClick={this.handlePostCreate}
-              role="button"
-              onKeyDown={this.handlePostCreate}
-              tabIndex={0}
-            >Publish
-            </span>}
+          {!this.props.creating
+            ? (
+              <span
+                className={[styles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}
+                onClick={this.handlePostCreate}
+                role="button"
+                onKeyDown={this.handlePostCreate}
+                tabIndex={0}
+              >
+              Publish
+              </span>
+             )
+            : (
+              <span className={`${styles.publishButton} ${indexStyles.hoverEffect} ${indexStyles.transition}`}>
+                Publishing...
+              </span>
+            )
+          }
         </div>
-      </div>);
+      </div>
+    );
   }
 
   getTextView() {
@@ -60,7 +69,8 @@ class CreatePost extends React.Component {
           id="post-create-text"
           onChange={this.parseHashTags}
         />
-      </div>);
+      </div>
+    );
   }
 
   getCommunitySelector() {
@@ -246,7 +256,7 @@ CreatePost.propTypes = {
   postCreateError: PropTypes.func,
   setHashtags: PropTypes.func,
   clearError: PropTypes.func,
-  userAvatar: PropTypes.string,
+  username: PropTypes.string.isRequired,
   userFullName: PropTypes.string,
   creating: PropTypes.bool,
   activeCommunity: PropTypes.arrayOf(PropTypes.shape({
@@ -271,7 +281,6 @@ CreatePost.defaultProps = {
   postCreateError: () => {},
   setHashtags: () => {},
   clearError: () => {},
-  userAvatar: '',
   userFullName: '',
   creating: false,
   activeCommunity: [],
@@ -282,7 +291,7 @@ CreatePost.defaultProps = {
 
 const mapStateToProps = state => ({
   userFullName: state.authUser.name,
-  userAvatar: state.authUser.avatar,
+  username: state.authUser.username,
   communities: state.communities.communities,
   activeCommunity: state.createPost.community,
   media: state.createPost.media,

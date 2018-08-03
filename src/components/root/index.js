@@ -6,7 +6,7 @@ import { logout as signOut } from '../../actions/loginActions';
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
 import Feed from '../feed';
-import CreatePost from '../createPost';
+import CreatePost from '../../post/create/CreatePost';
 import UserProfile from '../userProfile';
 import Browse from '../browse';
 import BrowseCommunity from '../browseCommunity';

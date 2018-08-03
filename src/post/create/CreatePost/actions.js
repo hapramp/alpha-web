@@ -30,7 +30,7 @@ export const clearError = () => ({ type: actionTypes.CLEAR_ERROR });
 
 export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashtags });
 
-export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI }) => {
+export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI, notify }) => {
   // Deep copy
   const data = _.cloneDeep(oldData);
   const { tags, post, community } = data;
@@ -51,6 +51,16 @@ export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI
       }))
     .catch((e) => {
       console.error('Hapramp API Error', e);
+      // Check for too frequent post error
+      if (e.data && e.data.stack && e.data.stack[0]) {
+        const index = e.data.stack[0].format.indexOf('auth.last_root_post');
+        if (index > -1) {
+          notify.danger('You need to wait for 5 minutes before creating the next post.');
+        }
+      } else {
+        notify.danger('Some unknown error occurred while creating the post.');
+        console.error('Post create error', e);
+      }
       return dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
     });
 };

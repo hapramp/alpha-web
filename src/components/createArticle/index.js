@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // import draftToHtml from 'draftjs-to-html';  // To convert to HTML
 
 import styles from './styles.scss';
-import createPostStyles from '../createPost/styles.scss';
+import createPostStyles from '../../post/create/CreatePost/styles.scss';
 import userProfilePlaceholder from '../userProfile/user-placeholder.jpg';
 import indexStyles from '../../index.scss';
 import { setTitle, setContent } from '../../actions/createArticleActions';

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import { removeMedia } from '../../actions/createPostActions';
+import { removeMedia } from '../actions';
 
 const PostMediaViewer = (props) => {
   if (!props.media) {

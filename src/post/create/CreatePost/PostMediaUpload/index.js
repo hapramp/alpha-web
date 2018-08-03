@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import indexStyles from '../../index.scss';
-import { changeMedia } from '../../actions/createPostActions';
-import PostMediaViewer from '../postMediaViewer';
+import indexStyles from '../../../../index.scss';
+import { changeMedia } from '../actions';
+import PostMediaViewer from '../PostMediaViewer';
 
 class PostMediaUpload extends React.Component {
   constructor(props) {
