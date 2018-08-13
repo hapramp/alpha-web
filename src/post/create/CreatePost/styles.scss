@@ -2,18 +2,14 @@
 
 .createPostModal {
   background: white;
-  width: 500px;
-  padding: 50px;
-  margin: 50px 0 0 0;
-
-  @media screen and (max-width: 500px) {
-    width: 100%;
-  }
+  width: 1020px;
+  padding: 56px;
+  margin-top: 34px;
 }
 
-.userAvatar {
-  width: 72px;
-  height: 72px;
+.userAvatar img {
+  width: 56px;
+  height: 56px;
 }
 
 .publishButton {
@@ -57,4 +53,11 @@
 
 .errorContainer {
   font-size: 13px;
+}
+
+.postInputArea {
+  margin-left: 25px;
+  width: 750px;
+  flex-grow: 1;
+  margin-bottom: 40px;
 }

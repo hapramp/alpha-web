@@ -1,0 +1,24 @@
+@import "../../../../index";
+
+.container {
+  background-color: #fafafa;
+  padding: 20px 48px 32px 48px;
+}
+
+.communityLabel {
+  padding: 4px 8px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.communityNormal {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.54);
+  transition: all ease-in 0.3s;
+}
+
+.communitySelected {
+  background-color: $primary-color;
+  color: white;
+  transition: all ease-out 0.3s;
+}
