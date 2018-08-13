@@ -17,7 +17,11 @@ const PostUserMeta = props => (
       </div>
       <div>
         {props.communities.map(community => (
-          <span key={community.tag} style={{ backgroundColor: community.color || 'white' }} className={[styles.communityLabel].join(' ')}>
+          <span
+            key={community.tag}
+            style={{ backgroundColor: community.color || 'black' }}
+            className={[styles.communityLabel].join(' ')}
+          >
             <b>{community.name}</b>
           </span>))}
       </div>
