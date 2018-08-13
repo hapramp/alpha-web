@@ -9,14 +9,12 @@ import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import { fixUser } from '../../utils/defaultFixUtils';
 import ActionBar from '../ActionBar';
-import PostBody from '../../post/PostBody';
+import PostCardBody from '../../post/PostCard/PostCardBody';
 
 const Post = (props) => {
   if (!props.post) {
     return <div>Loading...</div>;
   }
-
-  const { body, author, permlink } = props.post;
 
   /* Author details */
   const user = props.postingUser;
@@ -35,12 +33,7 @@ const Post = (props) => {
         communities={getCommunitiesForPost(props.post)}
       />
       {/* Actual post */}
-      <PostBody
-        body={body}
-        author={author}
-        permlink={permlink}
-        minify
-      />
+      <PostCardBody post={props.post} />
       <ActionBar post={props.post} withLink />
     </div>);
 };
