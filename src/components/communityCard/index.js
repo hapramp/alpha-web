@@ -22,7 +22,7 @@ class CommunityCard extends React.Component {
     description(pin): null
     */
   navigateToCommunity() {
-    this.props.history.push(`/browse/${this.props.community.tag}`);
+    this.props.history.push(`/feed/${this.props.community.tag}`);
   }
 
   render() {

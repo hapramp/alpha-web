@@ -11,14 +11,19 @@ const Sidebar = props => (
   <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
     <div className={styles.communitiesHeader}>COMMUNITIES</div>
     <div>
-      <Link to="/feed">
-        <div
-          className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname === '/feed/' ? styles.active : ''}`}
-        >
-          <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
-          <span className="uk-margin-left">Feed</span>
-        </div>
-      </Link>
+      {
+        props.username
+        && (
+          <Link to="/feed">
+            <div
+              className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname === '/feed/' ? styles.active : ''}`}
+            >
+              <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
+              <span className="uk-margin-left">Feed</span>
+            </div>
+          </Link>
+        )
+      }
       {
         props.communities.map(community => (
           <Link key={community.id} to={`/feed/${community.tag}`}>
