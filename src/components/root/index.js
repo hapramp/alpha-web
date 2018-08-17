@@ -5,7 +5,7 @@ import { authRequiredComponent } from '../../utils/decorators';
 import { logout as signOut } from '../../actions/loginActions';
 import getStore from '../../utils/storeUtils';
 import Header from '../header';
-import Feed from '../feed';
+import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
 import UserProfile from '../userProfile';
 import Browse from '../browse';
@@ -74,7 +74,7 @@ const Root = () => (
       <Route exact path="/search" component={Search} />
 
       {/* Unknown route - 404 */}
-      <Route exact path="*" render={() => <div>Not found</div>} />
+      <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />
     </Switch>
   </div>);
 

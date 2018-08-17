@@ -1,23 +1,22 @@
 import { actionTypes } from '../actions/userFeedActions';
 
 const initialState = {
-  user: { posts: [] }, hot: { posts: [] }, trending: { posts: [] }, created: { posts: [] },
+  user: { loading: false, posts: [], error: null },
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.FEED_LOADING:
+      return { ...state, user: { ...state.user, loading: true } };
+
     case actionTypes.FEED_LOADED:
-      if (action.feedType === 'user') {
-        return { ...state, user: { posts: action.results } };
-      } else if (action.feedType === 'hot') {
-        return { ...state, hot: { posts: action.results } };
-      } else if (action.feedType === 'trending') {
-        return { ...state, trending: { posts: action.results } };
-      }
-      return { ...state, created: { posts: action.results } };
+      return { ...state, user: { ...state.user, posts: action.results, loading: false } };
+
+    case actionTypes.FEED_LOADING_FAILED:
+      console.log(state);
+      return { ...state, user: { ...state.user, loading: false, error: action.reason || true } };
 
     default:
-      // No problem
+      return state;
   }
-  return state;
 };

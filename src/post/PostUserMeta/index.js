@@ -6,17 +6,19 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import UserAvatar from '../../components/UserAvatar';
 
-const PostUserMeta = props => (
-  <div className={[props.className ? props.className : '', 'uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
-    <UserAvatar size="small" username={props.profile.username} className={styles.userImage} />
+const PostUserMeta = ({
+  className, profile, created, communities,
+}) => (
+  <div className={[className || '', 'uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
+    <UserAvatar size="small" username={profile.username} className={styles.userImage} />
     <div className={['uk-margin-left'].join(' ')}>
       <div className={[styles.userNameContainer].join(' ')}>
-        <Link to={`/@${props.profile.username}`}>
-          <span className={styles.userName}>{props.profile.name || props.profile.username}</span>
-        </Link> | <TimeAgo>{new Date(`${props.created}Z`)}</TimeAgo>
+        <Link to={`/@${profile.username}`}>
+          <span className={styles.userName}>{profile.name}</span>
+        </Link> | <TimeAgo>{new Date(`${created}Z`)}</TimeAgo>
       </div>
       <div>
-        {props.communities.map(community => (
+        {communities.map(community => (
           <span
             key={community.tag}
             style={{ backgroundColor: community.color || 'black' }}

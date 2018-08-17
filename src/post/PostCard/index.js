@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
-import { fixUser } from '../../utils/defaultFixUtils';
+
 import ActionBar from '../ActionBar';
 import PostCardBody from '../../post/PostCard/PostCardBody';
 
@@ -18,6 +19,7 @@ const Post = (props) => {
 
   /* Author details */
   const user = props.postingUser;
+  const { author } = props.post;
 
   /* Render */
   return (
@@ -25,9 +27,8 @@ const Post = (props) => {
       {/* Top section */}
       <PostUserMeta
         profile={{
-          name: user.json_metadata.profile.name,
-          image: user.json_metadata.profile.profile_image,
-          username: user.name,
+          name: _.get(user, 'json_metadata.profile.name', author),
+          username: author,
         }}
         created={props.post.created}
         communities={getCommunitiesForPost(props.post)}
@@ -53,7 +54,7 @@ const mapStateToProps = (state, ownProps) => {
   const postingUsername = post.author;
   return {
     post,
-    postingUser: fixUser(state.allUsers.users[postingUsername], postingUsername),
+    postingUser: state.allUsers.users[postingUsername],
   };
 };
 

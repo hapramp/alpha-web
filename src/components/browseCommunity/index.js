@@ -4,11 +4,10 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
-import Sidebar from '../sidebar';
 import PostCard from '../../post/PostCard';
 import { loadFeedsByCreated, loadFeedsByHot, loadFeedsByTrending } from '../../actions/userFeedActions';
 import { loadUserAccounts } from '../../actions/allUserActions';
-import feedStyles from '../feed/styles.scss';
+import feedStyles from '../../feed/styles.scss';
 import CommunitySortFilter from '../communitySortFilter';
 
 class BrowseCommunity extends React.Component {
@@ -42,7 +41,7 @@ class BrowseCommunity extends React.Component {
         props.loadFeedsByCreated(community);
         break;
       default:
-      // No problem
+        // No problem
     }
   }
 
@@ -50,9 +49,6 @@ class BrowseCommunity extends React.Component {
     return (
       <div className={['uk-container'].join(' ')}>
         <div uk-grid="true">
-          <div className={feedStyles.sidebarContainer}>
-            <Sidebar />
-          </div>
           <div className={['uk-margin-top', feedStyles.feedPosts].join(' ')}>
             <div className={[].join(' ')}>
               <CommunitySortFilter />

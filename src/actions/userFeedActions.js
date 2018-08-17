@@ -1,4 +1,5 @@
 import { actionTypes as allPostsActionTypes } from '../post/actions';
+import { loadUserAccounts } from '../actions/allUserActions';
 
 export const actionTypes = {
   FEED_LOADING: 'FEED.LOAD.INIT',
@@ -7,10 +8,11 @@ export const actionTypes = {
 };
 
 export const loadFeedsForUser = username => (dispatch, getState, { haprampAPI }) => {
-  dispatch({ type: actionTypes.FEED_LOADING });
+  dispatch({ type: actionTypes.FEED_LOADING, feedType: 'user' });
   return haprampAPI.v2.feed.getUserFeed(username)
     .then((result) => {
       dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result.posts });
+      dispatch(loadUserAccounts(result.posts.map(i => i.author)));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
