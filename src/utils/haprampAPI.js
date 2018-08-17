@@ -53,10 +53,8 @@ export default {
     },
     feed: {
       getUserFeed: username => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/user/${username}`),
-      getFeedsByCreated: category => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/created/${category}`),
-      getFeedsByTrending: category => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/trending/${category}`),
-      getFeedsByHot: category => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/hot/${category}`),
       getFeedsByBlog: blog => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}`),
+      getTagFeed: tag => getPromiseForUrl(`${constants.BACKEND_URL.V2}/curation/tag/${tag}`),
     },
     communities: {
       getAllCommunities: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/communities`),

@@ -13,7 +13,7 @@ const Sidebar = props => (
     <div>
       <Link to="/feed">
         <div
-          className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.match.params.community ? '' : styles.active}`}
+          className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname === '/feed/' ? styles.active : ''}`}
         >
           <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
           <span className="uk-margin-left">Feed</span>
@@ -23,7 +23,7 @@ const Sidebar = props => (
         props.communities.map(community => (
           <Link key={community.id} to={`/feed/${community.tag}`}>
             <div
-              className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.match.params.community === community.tag ? styles.active : ''}`}
+              className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname.split('/')[2] === community.tag ? styles.active : ''}`}
             >
               <img
                 src={community.image_uri}
@@ -45,18 +45,16 @@ Sidebar.propTypes = {
     tag: PropTypes.string.isRequired,
     image_uri: PropTypes.string,
   })),
-  match: PropTypes.shape({
-    params: PropTypes.shape.isRequired,
-  }),
   username: PropTypes.string,
+  location: PropTypes.objectOf(PropTypes.shape()),
 };
 
 Sidebar.defaultProps = {
   communities: [],
-  match: {
-    params: {},
-  },
   username: null,
+  location: {
+    pathname: '/feed/',
+  },
 };
 
 const mapStateToProps = state => ({

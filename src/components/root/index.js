@@ -9,7 +9,6 @@ import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
 import UserProfile from '../userProfile';
 import Browse from '../browse';
-import BrowseCommunity from '../browseCommunity';
 import CreateArticle from '../createArticle';
 import ContentSingle from '../contentSingle';
 import OAuthCallback from '../OAuthCallback';
@@ -32,18 +31,11 @@ const Root = () => (
       }}
       />
 
-      {/* User based feed */}
-      <Route exact path="/feed" component={authRequiredComponent(Feed)} />
+      {/* User feed */}
+      <Route path="/feed" component={Feed} />
 
       {/* Browse views */}
       <Route exact path="/browse" component={Browse} />
-      <Route
-        exact
-        path="/browse/:community"
-        render={({ match }) =>
-          <Redirect to={`/browse/${match.params.community}/hot`} />}
-      />
-      <Route exact path="/browse/:community/:filter" component={BrowseCommunity} />
 
       {/* Content Creation Views */}
       <Route exact path="/create/post" component={authRequiredComponent(CreatePost)} />

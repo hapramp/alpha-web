@@ -23,6 +23,13 @@ class UserFeed extends React.Component {
     username: null,
   };
 
+  constructor(props) {
+    super(props);
+    if (this.props.username) {
+      this.props.loadFeedsForUser(this.props.username);
+    }
+  }
+
   componentWillReceiveProps(newProps) {
     if (newProps.username !== this.props.username) {
       this.props.loadFeedsForUser(newProps.username);

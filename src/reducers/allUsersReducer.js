@@ -24,7 +24,6 @@ export default (state = initialState, action) => {
       return { ...state, fetchingUsers: users };
 
     case actionTypes.LOAD_USERS_DONE:
-      console.log(action);
       users = _.cloneDeep(state.users);
       fetchingUsers = _.cloneDeep(state.fetchingUsers);
       action.results.forEach((oldUserDetail) => {
