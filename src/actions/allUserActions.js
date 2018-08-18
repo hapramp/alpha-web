@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const actionTypes = {
   LOAD_USERS_INIT: 'ALL_USERS.STEEM.LOAD.INIT',
   LOAD_USERS_DONE: 'ALL_USERS.STEEM.LOAD.DONE',
@@ -8,10 +10,17 @@ export const actionTypes = {
 };
 
 export const loadUserAccounts = usernames => (dispatch, getState, { steemAPI }) => {
-  dispatch({ type: actionTypes.LOAD_USERS_INIT, usernames });
-  return steemAPI.getUserAccounts(usernames)
+  const { fetchingUsers } = getState().allUsers;
+  const pendingUsernames = _.uniq(usernames.filter(username => !fetchingUsers[username]));
+  if (!pendingUsernames.length) {
+    return usernames;
+  }
+  dispatch({ type: actionTypes.LOAD_USERS_INIT, usernames: pendingUsernames });
+  return steemAPI.getUserAccounts(pendingUsernames)
     .then(results => dispatch({ type: actionTypes.LOAD_USERS_DONE, results }))
-    .catch(error => dispatch({ type: actionTypes.LOAD_USERS_ERROR, reason: error }));
+    .catch(error => dispatch({
+      type: actionTypes.LOAD_USERS_ERROR, reason: error, usernames: pendingUsernames,
+    }));
 };
 
 export const loadHaprampUserDetails = username => (dispatch, getState, { haprampAPI }) => {

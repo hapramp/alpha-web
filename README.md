@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="./assets/banner@168px.png" alt="HapRamp Alpha Web App"/>
+  <img src="./assets/banner@168px.png" alt="1Ramp Alpha Web App"/>
 </p>
-<p align="center">Alpha Web App for <a href="https://hapramp.com/">HapRamp</a> - A <a href="https://steem.io/">Steem</a> based Social Media for the Creatives :art:.</p>
+<p align="center">Alpha Web App for <a href="https://1ramp.io/">1Ramp</a> - A <a href="https://steem.io/">Steem</a> based Social Media for the Creatives :art:.</p>
 
 <p align="center">
   <!-- Travis -->
@@ -11,12 +11,17 @@
 
   <!-- Codecov -->
   <a href="https://codecov.io/gh/hapramp/alpha-web">
-    <img src="https://codecov.io/gh/hapramp/alpha-web/branch/master/graph/badge.svg" />
+    <img alt="Codecov" src="https://codecov.io/gh/hapramp/alpha-web/branch/master/graph/badge.svg" />
   </a>
 
+  <!-- Discord -->
+  <a href="https://discord.gg/r9vwcHe">
+    <img src="https://img.shields.io/discord/456730715598618624.svg" alt="Discord">
+  </a>
+  
   <!-- FOSSA -->
-  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web?ref=badge_shield" alt="FOSSA Status">
-    <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web.svg?type=shield"/>
+  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web?ref=badge_shield">
+    <img alt="FOSSA Status" src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhapramp%2Falpha-web.svg?type=shield"/>
   </a>  
 </p>
 

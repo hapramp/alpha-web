@@ -278,10 +278,8 @@ SteemAPI.sc2Operations = {
   // Getting URL for logging in to the app. Opens SteemConnect OAuth page
   getLoginURL: state => SteemAPI.sc2Api.getLoginURL(state || {}),
   // Create a post given the parameters
-  createPost: (author, body, tags, content, permlink, community) =>
+  createPost: (author, body, tags, content, permlink) =>
     new Promise((resolve, reject) => {
-      // TODO: Add beneficiaries
-      tags.push(...community.map(i => i.toLowerCase()));
       const commentObj = {
         parentAuthor: '',
         parentPermlink: 'hapramp',

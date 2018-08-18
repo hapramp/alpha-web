@@ -33,7 +33,9 @@ export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashta
 export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI, notify }) => {
   // Deep copy
   const data = _.cloneDeep(oldData);
-  const { tags, post, community } = data;
+  const { post, community } = data;
+  let { tags } = data;
+  tags = _.uniq(['hapramp', ...community, ...tags]);
 
   dispatch({ type: actionTypes.POST_CREATE_INIT });
 
@@ -43,7 +45,7 @@ export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI
 
   const fullPermlink = `${author}/${permlink}`;
   return haprampAPI.v2.post.prepare(post, fullPermlink)
-    .then(body => steemAPI.sc2Operations.createPost(author, body, tags, post, permlink, community)
+    .then(body => steemAPI.sc2Operations.createPost(author, body, tags, post, permlink)
       .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
       .catch((e) => {
         console.error('Steem error', e);

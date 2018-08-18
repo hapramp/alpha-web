@@ -12,6 +12,11 @@
   height: 48px;
 }
 
+.userImage img {
+  width: 48px;
+  height: 48px;
+}
+
 .userNameContainer {
 	height: 24px;
 	font-size: 16px;
@@ -32,6 +37,7 @@
   height: 16px;
   font-size: 10px;
   color: white;
-	font-weight: 400;
-	margin-right: 8px;
+  margin-right: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

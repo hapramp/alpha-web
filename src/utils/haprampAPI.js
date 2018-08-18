@@ -52,11 +52,9 @@ export default {
       },
     },
     feed: {
-      getUserFeed: username => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/user/${username}${localStorage.getItem('username') ? `?current_user=${localStorage.getItem('username')}` : ''}`),
-      getFeedsByCreated: category => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/created/${category}${localStorage.getItem('username') ? `?current_user=${localStorage.getItem('username')}` : ''}`),
-      getFeedsByTrending: category => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/trending/${category}${localStorage.getItem('username') ? `?current_user=${localStorage.getItem('username')}` : ''}`),
-      getFeedsByHot: category => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/hot/${category}${localStorage.getItem('username') ? `?current_user=${localStorage.getItem('username')}` : ''}`),
-      getFeedsByBlog: blog => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}${localStorage.getItem('username') ? `?current_user=${localStorage.getItem('username')}` : ''}`),
+      getUserFeed: username => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/user/${username}`),
+      getFeedsByBlog: blog => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}`),
+      getTagFeed: tag => getPromiseForUrl(`${constants.BACKEND_URL.V2}/curation/tag/${tag}`),
     },
     communities: {
       getAllCommunities: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/communities`),
