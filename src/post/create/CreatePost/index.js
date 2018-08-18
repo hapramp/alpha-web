@@ -25,6 +25,7 @@ class CreatePost extends React.Component {
     };
 
     this.setPostInputValue = this.setPostInputValue.bind(this);
+    this.createPost = this.createPost.bind(this);
   }
 
   componentWillUnmount() {
@@ -48,6 +49,10 @@ class CreatePost extends React.Component {
     this.setState(state => ({ ...state, postInputValue: value }));
     const hashtags = twitter.extractHashtags(value) || [];
     this.props.setHashtags(hashtags);
+  }
+
+  createPost() {
+    this.props.createPost(this.state.postInputValue);
   }
 
   render() {
@@ -86,7 +91,7 @@ class CreatePost extends React.Component {
             style={{ marginBottom: 24 }}
           />
 
-          <PublishButton />
+          <PublishButton onClick={this.createPost} />
         </div>
       </div>);
   }
@@ -110,6 +115,7 @@ CreatePost.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.shape),
   hashtags: PropTypes.arrayOf(PropTypes.string),
   changeCommunity: PropTypes.func,
+  createPost: PropTypes.func,
 };
 
 CreatePost.defaultProps = {
@@ -123,6 +129,7 @@ CreatePost.defaultProps = {
   errors: [],
   hashtags: [],
   changeCommunity: () => {},
+  createPost: () => {},
 };
 
 const mapStateToProps = state => ({

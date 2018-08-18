@@ -12,6 +12,9 @@ export const actionTypes = {
   POST_CREATE_INIT: 'POST.CREATE.INIT',
 };
 
+// TODO: More improvements
+const enhancePost = post => post.split('\n').join('<br />'); // Replace all
+
 export const changeCommunity = community => ({ type: actionTypes.CHANGE_COMMUNITY, community });
 
 export const changeMedia = (content, type) => ({
@@ -30,39 +33,29 @@ export const clearError = () => ({ type: actionTypes.CLEAR_ERROR });
 
 export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashtags });
 
-export const createPost = oldData => (dispatch, getState, { haprampAPI, steemAPI, notify }) => {
-  // Deep copy
-  const data = _.cloneDeep(oldData);
-  const { post, community } = data;
-  let { tags } = data;
-  tags = _.uniq(['hapramp', ...community, ...tags]);
+export const createPost = post => (dispatch, getState, { steemAPI }) => {
+  const enhancedPost = enhancePost(post);
+
+  const { hashtags, community } = getState().createPost;
+  const { communities } = getState().communities;
+  const findCommunity = id => communities.filter(i => i.id === id)[0].tag;
+  const tags = _.uniq(['hapramp', ...community.map(findCommunity), ...hashtags]);
+  const author = getState().authUser.username;
 
   dispatch({ type: actionTypes.POST_CREATE_INIT });
 
-  const author = getState().authUser.username;
+  if (community.length === 0) {
+    return dispatch({ type: actionTypes.CREATE_ERROR, reason: 'Please select atleast one community' });
+  }
+
   // TODO: Generate a better permlink
   const permlink = `${new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase()}-post`;
 
   const fullPermlink = `${author}/${permlink}`;
-  return haprampAPI.v2.post.prepare(post, fullPermlink)
-    .then(body => steemAPI.sc2Operations.createPost(author, body, tags, post, permlink)
-      .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
-      .catch((e) => {
-        console.error('Steem error', e);
-        return dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
-      }))
+  return steemAPI.sc2Operations.createPost(author, enhancedPost, tags, post, permlink)
+    .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
     .catch((e) => {
-      console.error('Hapramp API Error', e);
-      // Check for too frequent post error
-      if (e.data && e.data.stack && e.data.stack[0]) {
-        const index = e.data.stack[0].format.indexOf('auth.last_root_post');
-        if (index > -1) {
-          notify.danger('You need to wait for 5 minutes before creating the next post.');
-        }
-      } else {
-        notify.danger('Some unknown error occurred while creating the post.');
-        console.error('Post create error', e);
-      }
+      console.error('Steem error', e);
       return dispatch({ type: actionTypes.CREATE_ERROR, message: e, element: 'top' });
     });
 };
