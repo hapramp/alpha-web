@@ -72,7 +72,7 @@ class ActionBar extends React.Component {
         {this.getCommentSection()}
         <span className={['uk-flex', styles.action].join(' ')}>
           <i className={['uk-margin-small-right', 'fas', 'fa-dollar-sign'].join(' ')} />
-          <span className={[styles.actionText].join(' ')}>{this.props.post.total_payout_value}</span>
+          <span className={[styles.actionText].join(' ')}>{this.props.post.pending_payout_value}</span>
         </span>
       </div>);
   }
@@ -179,7 +179,7 @@ ActionBar.propTypes = {
     permlink: PropTypes.string.isRequired,
     replies: PropTypes.arrayOf(PropTypes.string),
     active_votes: PropTypes.arrayOf(PropTypes.shape()),
-    total_payout_value: PropTypes.string.isRequired,
+    pending_payout_value: PropTypes.string.isRequired,
   }),
   withLink: PropTypes.bool,
 };
