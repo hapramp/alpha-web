@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="./assets/banner@168px.png" alt="HapRamp Alpha Web App"/>
+  <img src="./assets/banner@168px.png" alt="1Ramp Alpha Web App"/>
 </p>
-<p align="center">Alpha Web App for <a href="https://hapramp.com/">HapRamp</a> - A <a href="https://steem.io/">Steem</a> based Social Media for the Creatives :art:.</p>
+<p align="center">Alpha Web App for <a href="https://1ramp.io/">1Ramp</a> - A <a href="https://steem.io/">Steem</a> based Social Media for the Creatives :art:.</p>
 
 <p align="center">
   <!-- Travis -->
