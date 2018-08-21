@@ -234,7 +234,7 @@ class SteemAPI {
   static createReply(parentAuthor, parentPermlink, body) {
     return new Promise((resolve, reject) => {
       const callback = (err, result) => (err ? reject(err) : resolve(result));
-      const jsonMetadata = { app: constants.VERSION.APP_NAME };
+      const jsonMetadata = { app: appName };
       const permlink = getCommentPermlink(parentAuthor, parentAuthor);
       steem.broadcast.comment(
         localStorage.getItem('posting_key'), parentAuthor,
@@ -306,11 +306,11 @@ SteemAPI.sc2Operations = {
       power * 100, getSteemResolver(resolve, reject),
     )),
   // Create a reply to a post
-  createReply: (parentAuthor, parentPermlink, body) => new Promise((resolve, reject) => {
-    const jsonMetadata = { app: constants.VERSION.APP_NAME };
+  createReply: (parentAuthor, parentPermlink, author, body) => new Promise((resolve, reject) => {
+    const jsonMetadata = { app: appName };
     const permlink = getCommentPermlink(parentAuthor, parentAuthor);
     SteemAPI.sc2Api.comment(
-      parentAuthor, parentPermlink, localStorage.getItem('username'),
+      parentAuthor, parentPermlink, author,
       permlink, '', body, jsonMetadata, getSteemResolver(resolve, reject),
     );
   }),

@@ -7,8 +7,9 @@ export const actionTypes = {
   ADD_REPLY_ERROR: 'REPLIES.ADD.ERROR',
 };
 
-const getSteemReplies = (parentAuthor, parentPermlink, steemAPI, dispatch) =>
-  steemAPI.getReplies(parentAuthor, parentPermlink)
+export const loadReplies = (parentAuthor, parentPermlink) => (dispatch, getState, { steemAPI }) => {
+  dispatch({ type: actionTypes.REPLIES_LOAD_INIT, parentAuthor, parentPermlink });
+  return steemAPI.getReplies(parentAuthor, parentPermlink)
     .then((results) => {
       dispatch({
         type: actionTypes.REPLIES_LOAD_DONE, parentAuthor, parentPermlink, results,
@@ -20,29 +21,24 @@ const getSteemReplies = (parentAuthor, parentPermlink, steemAPI, dispatch) =>
       });
       return reason;
     });
-
-export const loadReplies = (parentAuthor, parentPermlink) => (dispatch, getState, { steemAPI }) => {
-  dispatch({ type: actionTypes.REPLIES_LOAD_INIT, parentAuthor, parentPermlink });
-  getSteemReplies(parentAuthor, parentPermlink, steemAPI, dispatch);
 };
 
 export const addReply = (parentAuthor, parentPermlink, body) =>
-  (dispatch, getState, { steemAPI, haprampAPI, notify }) => {
+  (dispatch, getState, { steemAPI, notify }) => {
     const { username } = getState().authUser;
     if (!username) {
       notify.danger('Please login first!');
       return Promise.reject();
     }
     dispatch({
-      type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body,
+      type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body, username,
     });
-    return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, body)
+    return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, username, body)
       .then((result) => {
-        getSteemReplies(parentAuthor, parentPermlink, steemAPI, dispatch);
-        haprampAPI.v2.post.confirmComment(`${parentAuthor}/${parentPermlink}`);
+        dispatch(loadReplies(parentAuthor, parentPermlink));
         notify.success('Reply posted.');
         return dispatch({
-          type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result,
+          type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result, username,
         });
       })
       .catch(reason => dispatch({
@@ -50,6 +46,7 @@ export const addReply = (parentAuthor, parentPermlink, body) =>
         parentAuthor,
         parentPermlink,
         body,
+        username,
         reason: reason.toString(),
       }));
   };
