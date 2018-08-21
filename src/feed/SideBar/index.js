@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import indexStyles from '../../index.scss';
 import UserAvatar from '../../components/UserAvatar';
+import appIcon from './app_icon.png';
 
 const Sidebar = props => (
   <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
-    <div className={styles.communitiesHeader}>COMMUNITIES</div>
     <div>
       {
         props.username
@@ -24,6 +24,21 @@ const Sidebar = props => (
           </div>
         )
       }
+      <Link to="/feed/new/">
+        <div
+          className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname === '/feed/new/' ? styles.active : ''}`}
+        >
+          <img
+            src={appIcon}
+            className={`uk-border-circle ${styles.communityImage}`}
+            alt=""
+          />
+          <span className="uk-margin-left">NEW</span>
+        </div>
+      </Link>
+    </div>
+    <div className={`uk-margin-top ${styles.communitiesHeader}`}>COMMUNITIES</div>
+    <div>
       {
         props.communities.map(community => (
           <Link key={community.id} to={`/feed/${community.tag}`}>
