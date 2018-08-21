@@ -28,24 +28,24 @@ class ActionBar extends React.Component {
   }
 
   getCommentSection() {
+    const child = [
+      <i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')} />,
+      <span className={[styles.actionText].join(' ')}>
+        {this.props.post.children} Comment{this.props.post.children === 1 ? '' : 's'}
+      </span>,
+    ];
     if (this.props.withLink) {
       return (
         <Link
           to={`/@${this.props.post.author}/${this.props.post.permlink}`}
           className={['uk-flex', styles.action].join(' ')}
         >
-          <i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')} />
-          <span className={[styles.actionText].join(' ')}>
-            {this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
-          </span>
+          {child}
         </Link>);
     }
     return (
       <div className={['uk-flex', styles.action].join(' ')}>
-        <i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')} />
-        <span className={[styles.actionText].join(' ')}>
-          {this.props.post.replies.length} Comment{this.props.post.replies.length === 1 ? '' : 's'}
-        </span>
+        {child}
       </div>);
   }
 
@@ -177,7 +177,7 @@ ActionBar.propTypes = {
   post: PropTypes.shape({
     author: PropTypes.string.isRequired,
     permlink: PropTypes.string.isRequired,
-    replies: PropTypes.arrayOf(PropTypes.string),
+    children: PropTypes.number,
     active_votes: PropTypes.arrayOf(PropTypes.shape()),
     pending_payout_value: PropTypes.string.isRequired,
   }),
