@@ -14,14 +14,14 @@ const Sidebar = props => (
       {
         props.username
         && (
-          <Link to="/feed">
-            <div
-              className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname === '/feed/' ? styles.active : ''}`}
-            >
-              <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
+          <div
+            className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${props.location.pathname === '/feed/' ? styles.active : ''}`}
+          >
+            <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
+            <Link to="/feed">
               <span className="uk-margin-left">Feed</span>
-            </div>
-          </Link>
+            </Link>
+          </div>
         )
       }
       {
@@ -51,7 +51,9 @@ Sidebar.propTypes = {
     image_uri: PropTypes.string,
   })),
   username: PropTypes.string,
-  location: PropTypes.objectOf(PropTypes.shape()),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
 Sidebar.defaultProps = {

@@ -29,8 +29,8 @@ class ActionBar extends React.Component {
 
   getCommentSection() {
     const child = [
-      <i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')} />,
-      <span className={[styles.actionText].join(' ')}>
+      <i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')} key={0} />,
+      <span className={[styles.actionText].join(' ')} key={1} >
         {this.props.post.children} Comment{this.props.post.children === 1 ? '' : 's'}
       </span>,
     ];

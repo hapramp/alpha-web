@@ -41,12 +41,13 @@ const Post = (props) => {
 
 Post.propTypes = {
   post: PropTypes.shape().isRequired,
-  postingUser: PropTypes.shape().isRequired,
+  postingUser: PropTypes.shape(),
   border: PropTypes.bool,
 };
 
 Post.defaultProps = {
   border: false,
+  postingUser: {},
 };
 
 const mapStateToProps = (state, ownProps) => {

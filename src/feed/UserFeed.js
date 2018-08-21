@@ -10,7 +10,10 @@ import PostCard from '../post/PostCard';
 
 class UserFeed extends React.Component {
   static propTypes = {
-    userFeed: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape)),
+    userFeed: PropTypes.shape({
+      posts: PropTypes.arrayOf(PropTypes.shape),
+      loading: PropTypes.bool,
+    }),
     loadFeedsForUser: PropTypes.func,
     username: PropTypes.string,
   };
@@ -18,6 +21,7 @@ class UserFeed extends React.Component {
   static defaultProps = {
     userFeed: {
       posts: [],
+      loading: false,
     },
     loadFeedsForUser: () => {},
     username: null,

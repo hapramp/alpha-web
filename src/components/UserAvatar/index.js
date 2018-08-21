@@ -22,11 +22,12 @@ const UserAvatar = ({
 };
 
 UserAvatar.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   size: PropTypes.string,
 };
 
 UserAvatar.defaultProps = {
+  username: '',
   size: 'medium',
 };
 

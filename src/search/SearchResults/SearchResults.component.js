@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './SearchResults.styles.scss';
 
 const SearchResults = ({ users }) => users.map(username => (
-  <div className={`uk-margin-small-top ${styles.resultCard}`}>
+  <div className={`uk-margin-small-top ${styles.resultCard}`} key={username} >
     <Link to={`/@${username}`} key={username}>
       <img
         src={`https://steemitimages.com/u/${username}/avatar/small`}
