@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import styles from './styles.scss';
-import indexStyles from '../../index.scss';
+import indexStyles from '../../styles/_variables.scss';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 

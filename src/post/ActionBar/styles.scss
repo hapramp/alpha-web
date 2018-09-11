@@ -1,21 +1,23 @@
+@import "../../styles/_variables.scss";
+
 .action i {
-	font-size: 28px;
+  font-size: 28px;
 }
 
 .largeIcon {
-	font-size: 28px;
+  font-size: 28px;
 }
 
 .cancelRatingButton {
-	text-decoration: line-through;
-	transform: rotate(288deg);
+  text-decoration: line-through;
+  transform: rotate(288deg);
 }
 
 .actionText {
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	font-size: 12px;
-	line-height: 16px;
-	color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  font-size: $fs-small;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.54);
 }

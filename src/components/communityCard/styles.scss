@@ -1,7 +1,9 @@
+@import "../../styles/_variables.scss";
+
 .communityName {
-  font-size: 20px;
+  font-size: $fs-base * 1.5;
 }
 
 .communityTag {
-  font-size: 16px;
+  font-size: $fs-base;
 }

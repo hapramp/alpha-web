@@ -1,4 +1,4 @@
-@import "../../../../index";
+@import "../../../../styles/_variables.scss";
 
 .container {
   height: 40px;
@@ -8,7 +8,6 @@
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.38);
   transition: all ease-out 0.3s;
 }
-
 
 .enabled {
   background-color: $primary-color;

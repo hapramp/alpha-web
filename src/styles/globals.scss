@@ -1,0 +1,84 @@
+@import "./_variables.scss";
+
+html {
+  font-family: $fnt-primary;
+  background-color: $background-color;
+}
+
+body {
+  font-family: $fnt-primary;
+  -webkit-font-smoothing: antialiased;
+}
+
+.h1 {
+  font-size: $fs-xx-large;
+  font-weight: 500;
+  line-height: 54px;
+}
+
+.h2 {
+  font-size: $fs-x-large;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.h3 {
+  font-size: $fs-base * 1.5;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.h4 {
+  font-size: $fs-large;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.transition {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.hoverEffect:hover {
+  -webkit-box-shadow: 0 5px 5px 0 $primary-dark-color;
+  -moz-box-shadow: 0 5px 5px 0 $primary-dark-color;
+  box-shadow: 0 5px 5px 0 $primary-dark-color;
+}
+
+.transparent {
+  opacity: 0;
+}
+
+a,
+a:hover {
+  color: unset;
+  text-decoration: none;
+}
+
+.separator {
+  padding: 1px 10% 0 10%;
+  background-color: $primary-light-color;
+}
+
+.marginRightSmall {
+  margin-right: 8px;
+}
+
+.white {
+  background-color: white;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.secondaryText {
+  color: $secondary-color;
+}
+
+.primaryText {
+  color: $primary-color;
+}

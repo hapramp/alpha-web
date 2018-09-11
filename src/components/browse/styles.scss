@@ -1,7 +1,7 @@
-@import "../../index.scss";
+@import "../../styles/_variables.scss";
 
 .browseHeader {
   color: $primary-color;
   text-align: center;
-  font-size: 18px;
+  font-size: $fs-large;
 }

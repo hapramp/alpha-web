@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import indexStyles from '../../index.scss';
+import indexStyles from '../../styles/_variables.scss';
 import styles from './styles.scss';
 import { getOtherTags } from '../../utils/communityUtils';
 

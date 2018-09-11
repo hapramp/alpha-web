@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../styles/_variables.scss";
 
 .addContent {
   position: fixed !important;
@@ -19,7 +19,7 @@
 
 .contentType {
   background-color: $primary-light-color;
-  padding: 8px 24px;
+  padding: $bs-rhythmDiv $bs-rhythmDiv * 3px;
   border-radius: 24px;
   cursor: pointer;
 }

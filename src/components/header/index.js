@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import baseStyles from '../../index.scss';
+import baseStyles from '../../styles/_variables.scss';
 import logo from './logo.png';
 import { loadCommunities } from '../../actions/communityActions';
 import steemAPI from '../../utils/steem';
