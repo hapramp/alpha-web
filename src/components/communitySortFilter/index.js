@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import styles from './styles.scss';
-import indexStyles from '../../index.scss';
+import styles from '../../styles/_variables.scss';
+import indexStyles from '../../styles/globals.scss';
 
 const CommunitySortFilter = props => (
   <div className={[styles.filterContainer, indexStyles.white].join(' ')}>
@@ -13,12 +13,24 @@ const CommunitySortFilter = props => (
       </span>
     </Link>
     <Link to={`/browse/${props.match.params.community}/trending`}>
-      <span className={[props.match.params.filter === 'trending' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
+      <span
+        className={[
+          props.match.params.filter === 'trending' ? styles.activeFilter : '',
+          'uk-margin-left',
+          styles.filter,
+        ].join(' ')}
+      >
         TRENDING
       </span>
     </Link>
     <Link to={`/browse/${props.match.params.community}/created`}>
-      <span className={[props.match.params.filter === 'created' ? styles.activeFilter : '', 'uk-margin-left', styles.filter].join(' ')}>
+      <span
+        className={[
+          props.match.params.filter === 'created' ? styles.activeFilter : '',
+          'uk-margin-left',
+          styles.filter,
+        ].join(' ')}
+      >
         CREATED
       </span>
     </Link>

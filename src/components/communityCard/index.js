@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import indexStyles from '../../index.scss';
+import indexStyles from '../../styles/_variables.scss';
 
 class CommunityCard extends React.Component {
   constructor(props) {

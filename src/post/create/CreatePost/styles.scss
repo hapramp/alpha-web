@@ -1,4 +1,4 @@
-@import "../../../index";
+@import "../../../styles/_variables.scss";
 
 .createPostModal {
   background: white;
@@ -28,7 +28,7 @@
 
 .communitySingle {
   margin: 5px 12px 0 0 !important;
-  font-size: 11px;
+  font-size: $fs-x-small;
   background-color: $background-color;
   padding: 4px 8px;
   -webkit-border-radius: 2px;
@@ -43,16 +43,16 @@
 }
 
 .communityHeading {
-  font-size: 12px;
+  font-size: $fs-small;
 }
 
 .hashtagInfo {
-  font-size: 12px;
+  font-size: $fs-small;
   padding: 0;
 }
 
 .errorContainer {
-  font-size: 13px;
+  font-size: $fs-small;
 }
 
 .postInputArea {

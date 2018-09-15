@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fixUser } from '../../utils/defaultFixUtils';
-import indexStyles from '../../index.scss';
+import indexStyles from '../../styles/_variables.scss';
 import CustomTags from '../CustomTags';
 import ActionBar from '../ActionBar';
 import Replies from '../Replies';

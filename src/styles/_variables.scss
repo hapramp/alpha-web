@@ -1,0 +1,22 @@
+/* colors */
+$primary-color: #3f72af;
+$primary-light-color: #dbe2ef;
+$primary-dark-color: #112d4e;
+$secondary-color: #ff6b95;
+$background-color: #fafafa;
+
+/*font-families */
+$fnt-primary: "Roboto", sans-serif;
+
+/* fonts - fs is name spacing for font-sizes */
+$fs-xx-small: 10px;
+$fs-x-small: 12px;
+$fs-small: 14px;
+$fs-base: 16px;
+$fs-large: 18px;
+$fs-x-large: 24px;
+$fs-xx-large: 32px;
+
+/* rhythmInc, rhythmDiv are used for maintaining consistency in spacing*/
+$bs-rhythmInc: 0.5;
+$bs-rhythmDiv: $bs-rhythmInc * 16;

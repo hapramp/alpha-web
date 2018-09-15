@@ -3,7 +3,7 @@ import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import indexStyles from '../../index.scss';
+import indexStyles from '../../styles/_variables.scss';
 
 const horizontalMarginClasses = ['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ');
 

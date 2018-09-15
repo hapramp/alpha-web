@@ -1,13 +1,37 @@
-$primary-color: #3F72AF;
-$primary-light-color: #DBE2EF;
-$primary-dark-color: #112D4E;
-
-$secondary-color: #ff6b95;
-$background-color: #FAFAFA;
+@import "./_variables.scss";
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: $fnt-primary;
   background-color: $background-color;
+}
+
+body {
+  font-family: $fnt-primary;
+  -webkit-font-smoothing: antialiased;
+}
+
+.h1 {
+  font-size: $fs-xx-large;
+  font-weight: 500;
+  line-height: 54px;
+}
+
+.h2 {
+  font-size: $fs-x-large;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.h3 {
+  font-size: $fs-base * 1.5;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.h4 {
+  font-size: $fs-large;
+  font-weight: 400;
+  line-height: 27px;
 }
 
 .transition {
@@ -28,7 +52,8 @@ html {
   opacity: 0;
 }
 
-a, a:hover {
+a,
+a:hover {
   color: unset;
   text-decoration: none;
 }
@@ -51,33 +76,9 @@ a, a:hover {
 }
 
 .secondaryText {
-	color: $secondary-color;
+  color: $secondary-color;
 }
 
 .primaryText {
-	color: $primary-color;
-}
-
-.h1 {
-	font-size: 36px;
-	font-weight: 500;
-	line-height: 54px;
-}
-
-.h2 {
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 36px;
-}
-
-.h3 {
-	font-size: 20px;
-	font-weight: 400;
-	line-height: 30px;
-}
-
-.h4 {
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 27px;
+  color: $primary-color;
 }

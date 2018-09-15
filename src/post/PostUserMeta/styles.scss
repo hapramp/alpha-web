@@ -1,9 +1,12 @@
+@import "../../styles/_variables.scss";
+
+
 .paddingModerate {
 	padding: 24px 24px 18px 24px;
 }
 
 .topSection {
-	font-size: 12px;
+	font-size: $fs-small;
 	height: 48px;
 }
 
@@ -19,7 +22,7 @@
 
 .userNameContainer {
 	height: 24px;
-	font-size: 16px;
+	font-size: $fs-base;
 	line-height: 24px;
 	margin-bottom: 4px;
 	// color: rgba(0, 0, 0, 0.87);
@@ -35,7 +38,7 @@
   border-radius: 16px;
   padding: 4px 8px;
   height: 16px;
-  font-size: 10px;
+  font-size: $fs-xx-small;
   color: white;
   margin-right: 8px;
   text-transform: uppercase;

@@ -1,7 +1,7 @@
-@import "../../../../index";
+@import "../../../../styles/_variables.scss";
 
 .mediaUpload {
-  font-size: 12px;
+  font-size: $fs-small;
 }
 
 .upload {
@@ -16,12 +16,12 @@
 }
 
 .mediaActive {
-	cursor: auto;
-	background: $primary-color;
-	color: white;
+  cursor: auto;
+  background: $primary-color;
+  color: white;
 }
 
 .linkInput {
-	height: 18px;
-	margin: 1px 4px;
+  height: 18px;
+  margin: 1px 4px;
 }
