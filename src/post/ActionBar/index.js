@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
-import indexStyles from '../../styles/_variables.scss';
+import indexStyles from '../../styles/globals.scss';
 import styles from './styles.scss';
 import { ratePost } from './actions';
 

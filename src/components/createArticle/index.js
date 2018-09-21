@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import createPostStyles from '../../post/create/CreatePost/styles.scss';
 import userProfilePlaceholder from '../userProfile/user-placeholder.jpg';
-import indexStyles from '../../styles/_variables.scss';
+import indexStyles from '../../styles/globals.scss';
 import { setTitle, setContent } from '../../actions/createArticleActions';
 
 /*

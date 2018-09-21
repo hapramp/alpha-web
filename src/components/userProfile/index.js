@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
-import indexStyles from '../../styles/_variables.scss';
+import indexStyles from '../../styles/globals.scss';
 import PostCard from '../../post/PostCard';
 import {
   getFollowCount, getUserFeeds, loadUserProfileInfo,
