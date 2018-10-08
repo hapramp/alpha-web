@@ -38,7 +38,7 @@ export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashta
  *
  * - Community tags (hapramp-*)
  * - Manual tags
- * - Stripped communitu tags (XYZ from hapramp-XYZ)
+ * - Strippe community tags (XYZ from hapramp-XYZ)
  *
  * @param {array} communities Communities included for the post
  * @param {array} hashtags Hashtags entered by the user
