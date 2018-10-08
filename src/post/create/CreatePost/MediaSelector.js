@@ -1,35 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MediaSelector = ({ onImageClick, onVideoClick, ...props }) => (
-  <div {...props}>
-    <span
-      onClick={onImageClick}
-      uk-icon="icon: image"
-      style={{ marginLeft: 4, cursor: 'pointer' }}
-      role="button"
-      tabIndex="-1"
-      onKeyUp={() => {}}
-    />
-    <span
-      onClick={onVideoClick}
-      uk-icon="icon: play-circle"
-      style={{ marginLeft: 22, cursor: 'pointer' }}
-      role="button"
-      tabIndex="-1"
-      onKeyUp={() => {}}
-    />
-  </div>
-);
+export default class MediaSelector extends React.Component {
+  static propTypes = {
+    changeMedia: PropTypes.func,
+  };
 
-MediaSelector.propTypes = {
-  onImageClick: PropTypes.func,
-  onVideoClick: PropTypes.func,
-};
+  static defaultProps = {
+    changeMedia: () => {},
+  };
 
-MediaSelector.defaultProps = {
-  onImageClick: () => {},
-  onVideoClick: () => {},
-};
+  onImageClick = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.addEventListener('change', () => {
+      // Send the details to action
+      if (input.files.length > 0) {
+        const [file] = input.files;
+        this.props.changeMedia(file, 'image');
+      }
+    });
+    input.click();
+  };
 
-export default MediaSelector;
+  render() {
+    return (
+      <div>
+        <span
+          onClick={this.onImageClick}
+          uk-icon="icon: image"
+          style={{ marginLeft: 4, cursor: 'pointer' }}
+          role="button"
+          tabIndex="-1"
+          onKeyUp={() => { }}
+        />
+        {/*
+        <span
+          onClick={this.onVideoClick}
+          uk-icon="icon: play-circle"
+          style={{ marginLeft: 22, cursor: 'pointer' }}
+          role="button"
+          tabIndex="-1"
+          onKeyUp={() => { }}
+        />
+        */}
+      </div>
+    );
+  }
+}
