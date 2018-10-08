@@ -33,13 +33,23 @@ export const clearError = () => ({ type: actionTypes.CLEAR_ERROR });
 
 export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashtags });
 
+
 export const createPost = post => (dispatch, getState, { steemAPI }) => {
   const enhancedPost = enhancePost(post);
 
   const { hashtags, community } = getState().createPost;
   const { communities } = getState().communities;
+
   const findCommunity = id => communities.filter(i => i.id === id)[0].tag;
-  const tags = _.uniq(['hapramp', ...community.map(findCommunity), ...hashtags]);
+  const findCommunityStripTag = id => findCommunity(id).replace('hapramp-', '');
+
+  // Generate only unique tags
+  const tags = _.uniq([
+    'hapramp', // hapramp is the first tag
+    ...community.map(findCommunity), // all the communities (hapramp-*)
+    ...hashtags, // hashtags entered by user
+    ...community.map(findCommunityStripTag), // extract tags from communities
+  ]);
   const author = getState().authUser.username;
 
   dispatch({ type: actionTypes.POST_CREATE_INIT });
