@@ -63,6 +63,22 @@ export const uploadMedia = (media, haprampAPI) => {
   return Promise.resolve();
 };
 
+const addFooter = (body, author, permlink) => {
+  const webLink = `https://alpha.1ramp.io/@${author}/${permlink}`;
+  return `${body}\n
+  <div id="1ramp-footer" />
+  <hr>
+  <center>
+    <h4>
+      <a href="https://1ramp.io">
+        <img src="https://ipfs.busy.org/ipfs/QmTFN4mf55SRZkP8Ug7jXVP3sXAmH7sd35zMNwLFpgGqNU"/>
+      </a>
+      <br>
+      See this post on <a href="https://play.google.com/store/apps/details?id=com.hapramp">1Ramp Android</a> and <a href="${webLink}">Web</a>.
+    </h4>
+  </center>`;
+};
+
 export const createPost = post => async (dispatch, getState, { steemAPI, haprampAPI }) => {
   let enhancedPost = enhancePost(post);
 
@@ -90,6 +106,8 @@ export const createPost = post => async (dispatch, getState, { steemAPI, hapramp
       enhancedPost = `![](${mediaUploadResponse.url})\n\n${enhancedPost}`;
     }
   }
+
+  enhancedPost = addFooter(enhancedPost, author, permlink);
 
   return steemAPI.sc2Operations.createPost(author, enhancedPost, tags, post, permlink)
     .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
