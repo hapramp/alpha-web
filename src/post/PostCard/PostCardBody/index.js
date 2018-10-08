@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { getImagesFromBody } from '../../utils';
 import ShortText from './ShortText';
 import styles from './styles.scss';
+import { removeFooter } from '../../PostBody';
 
 const PostCardBody = ({ post }) => {
   let jsonMetadata;
@@ -30,7 +31,7 @@ const PostCardBody = ({ post }) => {
       <Link to={`/@${post.author}/${post.permlink}`}>
         {image && <img src={image} style={{ width: '100%' }} alt="Post Cover" />}
         {post.title && <div className={styles.title}>{post.title}</div>}
-        <ShortText body={post.body} />
+        <ShortText body={removeFooter(post.body)} />
       </Link>
     </div>
   );
