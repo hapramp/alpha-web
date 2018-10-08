@@ -18,6 +18,11 @@ export default (state = initialState, action) => {
         cover: action.cover,
         website: action.website,
       };
+
+    case loginActionTypes.LOG_OUT_DONE:
+      notify.success('Logged out');
+      return initialState;
+
     default:
       return state;
   }

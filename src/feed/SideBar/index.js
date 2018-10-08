@@ -16,25 +16,25 @@ const Sidebar = props => (
   <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
     <div>
       {props.username && (
-        <div
-          className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${
-            props.location.pathname === '/feed/' ? styles.active : ''
-          }`}
-        >
-          <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
-          <Link to="/feed">
+        <Link to="/feed">
+          <div
+            className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${
+              props.location.pathname === '/feed/' ? styles.active : ''
+              }`}
+          >
+            <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
             <span className="uk-margin-left">Feed</span>
-          </Link>
-        </div>
+          </div>
+        </Link>
       )}
       <Link to="/feed/new/">
         <div
           className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${
             props.location.pathname === '/feed/new/' ? styles.active : ''
-          }`}
+            }`}
         >
           <img src={appIcon} className={`uk-border-circle ${styles.communityImage}`} alt="" />
-          <span className="uk-margin-left">NEW</span>
+          <span className="uk-margin-left">New</span>
         </div>
       </Link>
     </div>
@@ -45,7 +45,7 @@ const Sidebar = props => (
           <div
             className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${
               props.location.pathname.split('/')[2] === community.tag ? styles.active : ''
-            }`}
+              }`}
           >
             <img src={community.image_uri} className={`uk-border-circle ${styles.communityImage}`} alt="" />
             <span className="uk-margin-left">{community.name}</span>

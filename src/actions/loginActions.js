@@ -47,6 +47,7 @@ export const logout = () => (dispatch, getState, { steemAPI }) => {
   dispatch({ type: actionTypes.LOG_OUT_INIT });
   Cookie.remove('username');
   Cookie.remove('access_token');
+  Cookie.remove('1ramp_token');
   return steemAPI.sc2Api.revokeToken()
     .finally(() => dispatch({ type: actionTypes.LOG_OUT_DONE }));
 };
