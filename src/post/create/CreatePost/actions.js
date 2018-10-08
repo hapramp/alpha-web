@@ -33,6 +33,28 @@ export const clearError = () => ({ type: actionTypes.CLEAR_ERROR });
 
 export const setHashtags = hashtags => ({ type: actionTypes.SET_HASHTAGS, hashtags });
 
+/**
+ * Returns all the tags applicable.
+ *
+ * - Community tags (hapramp-*)
+ * - Manual tags
+ * - Stripped communitu tags (XYZ from hapramp-XYZ)
+ *
+ * @param {array} communities Communities included for the post
+ * @param {array} hashtags Hashtags entered by the user
+ * @param {array} allCommunities All the communities available
+ */
+export const getAllTags = (communities, hashtags, allCommunities) => {
+  const findCommunity = id => allCommunities.filter(i => i.id === id)[0].tag;
+  const findCommunityStripTag = id => findCommunity(id).replace('hapramp-', '');
+
+  return _.uniq([
+    'hapramp', // hapramp is the first tag
+    ...communities.map(findCommunity), // all the communities (hapramp-*)
+    ...hashtags, // hashtags entered by user
+    ...communities.map(findCommunityStripTag), // extract tags from communities
+  ]);
+};
 
 export const createPost = post => (dispatch, getState, { steemAPI }) => {
   const enhancedPost = enhancePost(post);
@@ -40,16 +62,7 @@ export const createPost = post => (dispatch, getState, { steemAPI }) => {
   const { hashtags, community } = getState().createPost;
   const { communities } = getState().communities;
 
-  const findCommunity = id => communities.filter(i => i.id === id)[0].tag;
-  const findCommunityStripTag = id => findCommunity(id).replace('hapramp-', '');
-
-  // Generate only unique tags
-  const tags = _.uniq([
-    'hapramp', // hapramp is the first tag
-    ...community.map(findCommunity), // all the communities (hapramp-*)
-    ...hashtags, // hashtags entered by user
-    ...community.map(findCommunityStripTag), // extract tags from communities
-  ]);
+  const tags = getAllTags(community, hashtags, communities);
   const author = getState().authUser.username;
 
   dispatch({ type: actionTypes.POST_CREATE_INIT });
