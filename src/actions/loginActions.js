@@ -34,12 +34,19 @@ const setAuthUser = (result, dispatch) => {
   updateUser(data, dispatch);
 };
 
-export const fakeLogin = () => (dispatch, getState, { steemAPI }) => {
+export const login1Ramp = () => (dispatch, getState, { haprampAPI }) => {
+  const username = Cookie.get('username');
+  const accessToken = Cookie.get('access_token');
+  return haprampAPI.v2.login(username, accessToken)
+    .then(({ token }) => Cookie.set('1ramp_token', token));
+};
+
+export const fakeLogin = () => async (dispatch, getState, { steemAPI }) => {
   const username = Cookie.get('username');
   dispatch({
     type: actionTypes.LOGIN_DONE, username,
   });
-  // Update profile changes
+  await dispatch(login1Ramp());
   return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 };
 

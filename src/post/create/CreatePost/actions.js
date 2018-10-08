@@ -56,16 +56,23 @@ export const getAllTags = (communities, hashtags, allCommunities) => {
   ]);
 };
 
-export const createPost = post => (dispatch, getState, { steemAPI }) => {
-  const enhancedPost = enhancePost(post);
+export const uploadMedia = (media, haprampAPI) => {
+  if (media.type === 'image') {
+    return haprampAPI.v2.uploadImage(media.content);
+  }
+  return Promise.resolve();
+};
 
-  const { hashtags, community } = getState().createPost;
+export const createPost = post => async (dispatch, getState, { steemAPI, haprampAPI }) => {
+  let enhancedPost = enhancePost(post);
+
+  const { hashtags, community, media } = getState().createPost;
   const { communities } = getState().communities;
 
   const tags = getAllTags(community, hashtags, communities);
   const author = getState().authUser.username;
 
-  dispatch({ type: actionTypes.POST_CREATE_INIT });
+  dispatch({ type: actionTypes.POST_CREATE_INIT, post });
 
   if (community.length === 0) {
     return dispatch({ type: actionTypes.CREATE_ERROR, reason: 'Please select atleast one community' });
@@ -75,6 +82,15 @@ export const createPost = post => (dispatch, getState, { steemAPI }) => {
   const permlink = `${new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase()}-post`;
 
   const fullPermlink = `${author}/${permlink}`;
+
+  // Add media if available
+  if (media) {
+    const mediaUploadResponse = await uploadMedia(media, haprampAPI);
+    if (mediaUploadResponse && mediaUploadResponse.url) {
+      enhancedPost = `![](${mediaUploadResponse.url})\n\n${enhancedPost}`;
+    }
+  }
+
   return steemAPI.sc2Operations.createPost(author, enhancedPost, tags, post, permlink)
     .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
     .catch((e) => {
