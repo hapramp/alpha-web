@@ -2,7 +2,9 @@ import _ from 'lodash';
 
 import { actionTypes } from '../actions/loginActions';
 
-const initialState = { messages: [], loggingIn: false, loggedIn: false };
+const initialState = {
+  messages: [], loggingIn: false, loggedIn: false, isRegistered: true,
+};
 
 export default (state = initialState, action) => {
   if (action.type.startsWith('LOGIN')) {
@@ -26,6 +28,14 @@ export default (state = initialState, action) => {
 
       case actionTypes.LOG_OUT_DONE:
         newState.loggedIn = false;
+        break;
+
+      case actionTypes.REGISTERED:
+        newState.isRegistered = true;
+        break;
+
+      case actionTypes.NOT_REGISTERED:
+        newState.isRegistered = false;
         break;
 
       default:

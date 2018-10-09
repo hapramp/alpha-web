@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import constants from './constants';
 
 const getPromiseForUrl = (url, options = {}) => new Promise((resolve, reject) => {
@@ -61,6 +63,15 @@ export default {
     },
     users: {
       getUserDetailsByUsername: username => getPromiseForUrl(`${constants.BACKEND_URL.V2}/users/usernames/${username}`),
+      getCurrentUserDetails: () => fetch(
+        `${constants.BACKEND_URL.V2}/users/user`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Token ${Cookies.get('1ramp_token')}`,
+          },
+        },
+      ).then(r => r.json()),
     },
   },
 };

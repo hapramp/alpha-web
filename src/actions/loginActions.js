@@ -14,6 +14,8 @@ export const actionTypes = {
   SET_AUTH_USER: 'LOGIN.DONE.USER.SET',
   LOG_OUT_INIT: 'LOGIN.LOGOUT.DONE.INIT',
   LOG_OUT_DONE: 'LOGIN.LOGOUT.DONE.DONE',
+  REGISTERED: 'LOGIN.REGISTER.REGISTERED',
+  NOT_REGISTERED: 'LOGIN.REGISTER.NOT_REGISTERED',
 };
 
 const updateUser = (data, dispatch) => {
@@ -34,11 +36,16 @@ const setAuthUser = (result, dispatch) => {
   updateUser(data, dispatch);
 };
 
+export const check1RampRegistrationStatus = () => (dispatch, getState, { haprampAPI }) =>
+  haprampAPI.v2.users.getCurrentUserDetails()
+    .catch(() => dispatch({ type: actionTypes.NOT_REGISTERED }));
+
 export const fakeLogin = () => (dispatch, getState, { steemAPI }) => {
   const username = Cookie.get('username');
   dispatch({
     type: actionTypes.LOGIN_DONE, username,
   });
+  dispatch(check1RampRegistrationStatus()); // See if current user is registered
   // Update profile changes
   return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 };
