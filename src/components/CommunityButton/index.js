@@ -33,7 +33,7 @@ export default class CommunityButton extends React.Component {
     return (
       <div {...remainingProps}>
         <div
-          className={styles.container}
+          className={`${styles.container} ${hovering ? styles.lighten : ''}`}
           style={{
             backgroundColor: (isSelected || hovering) ? community.color : 'transparent',
             borderColor: community.color,

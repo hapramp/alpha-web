@@ -79,6 +79,17 @@ export default {
           },
         },
       ).then(r => r.json()),
+      updateCommunities: communities => fetch(
+        `${constants.BACKEND_URL.V2}/users/communities`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+          body: JSON.stringify({ communities }),
+        },
+      ),
     },
     uploadImage: (image) => {
       const formData = new FormData();

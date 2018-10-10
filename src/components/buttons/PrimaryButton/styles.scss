@@ -1,0 +1,21 @@
+@import '../../../styles/variables.scss';
+
+.primaryButton {
+  background-color: $primary-color;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.primaryButton:hover {
+  background-color: $primary-dark-color;
+  transition: all 0.3s ease-out;
+}
+
+.disabled {
+  transition: all 0.3s ease-out;
+  cursor: unset;
+}

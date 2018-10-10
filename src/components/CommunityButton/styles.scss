@@ -1,4 +1,14 @@
 .container {
   border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
   cursor: pointer;
+  text-align: center;
+  position: inside;
+  height: 18px;
+  transition: all 0.3s ease-in;
+}
+
+.lighten {
+  opacity: 0.67;
 }

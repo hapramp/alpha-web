@@ -1,4 +1,34 @@
+@import '../styles/variables.scss';
+
 .container {
   margin-top: 24px;
-  padding: 104px;
+  max-width: 600px;
+  background-color: white;
+}
+
+.headerText {
+  font-family: "Roboto", monospace;
+  font-weight: 500;
+  font-size: 16px;
+  color: $primary-color;
+  line-height: 28px;
+  vertical-align: top;
+  margin-bottom: 40px;
+}
+
+.communityContainer {
+  margin-bottom: 33px;
+}
+
+.communityButton {
+  width: 80px !important;
+  height: 80px !important;
+  margin: auto;
+}
+
+.communityLabel {
+  margin-top: 8px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: 'Roboto', monospace;
 }

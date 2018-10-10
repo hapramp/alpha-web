@@ -1,14 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 
+import PrimaryButtom from '../components/buttons/PrimaryButton';
 import styles from './styles.scss';
-import { actionTypes } from '../actions/loginActions';
+import { register } from './actions';
 import CommunityButton from '../components/CommunityButton';
+import { isProcessing } from './reducer';
 
 class Register extends React.Component {
   static propTypes = {
     allCommunities: PropTypes.arrayOf(PropTypes.shape()),
+    register: PropTypes.func.isRequired,
+    processing: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -23,6 +28,12 @@ class Register extends React.Component {
     };
   }
 
+  registerCommunities = () => {
+    const { selectedCommunities } = this.state;
+
+    this.props.register(selectedCommunities);
+  };
+
   selectCommunity = communityId => () => {
     const communitySelected = !!this.state.selectedCommunities.find(i => i === communityId);
     if (communitySelected) {
@@ -33,7 +44,7 @@ class Register extends React.Component {
     } else {
       this.setState(state => ({
         ...state,
-        selectedCommunities: state.selectCommunity.concat([communityId]),
+        selectedCommunities: state.selectedCommunities.concat([communityId]),
       }));
     }
   }
@@ -42,20 +53,28 @@ class Register extends React.Component {
     const { allCommunities } = this.props;
     const { selectedCommunities } = this.state;
     return (
-      <div className={`uk-container ${styles.container}`}>
-        <div>PICK YOUR COMMUNITIES</div>
-        <div>
+      <div className={`uk-container uk-margin-large uk-padding-large ${styles.container}`}>
+        <div className={styles.headerText}>PICK YOUR COMMUNITIES</div>
+        <div className="uk-grid" style={{ marginBottom: 40 }}>
           {
             allCommunities.map(community => (
-              <CommunityButton
-                key={community.id}
-                isSelected={!!selectedCommunities.find(i => i === community.id)}
-                onClick={this.selectCommunity(community.id)}
-                community={community}
-              />
+              <div className={styles.communityContainer} key={community.id}>
+                <CommunityButton
+                  isSelected={!!selectedCommunities.find(i => i === community.id)}
+                  onClick={this.selectCommunity(community.id)}
+                  community={community}
+                  className={styles.communityButton}
+                />
+                <div className={styles.communityLabel}>
+                  {community.name}
+                </div>
+              </div>
             ))
           }
         </div>
+        <PrimaryButtom disabled={this.props.processing} onClick={this.registerCommunities}>
+          {this.props.processing ? 'Processing...' : 'Continue' }
+        </PrimaryButtom>
       </div>
     );
   }
@@ -63,10 +82,11 @@ class Register extends React.Component {
 
 const mapStateToProps = state => ({
   allCommunities: state.communities.communities,
+  processing: isProcessing(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  markRegistered: () => dispatch({ type: actionTypes.REGISTERED }),
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  register,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

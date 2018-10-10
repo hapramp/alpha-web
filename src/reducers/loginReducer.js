@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { actionTypes } from '../actions/loginActions';
+import { actionTypes as registerActionTypes } from '../register/actions';
 
 const initialState = {
   messages: [], loggingIn: false, loggedIn: false, isRegistered: true,
@@ -31,6 +32,7 @@ export default (state = initialState, action) => {
         break;
 
       case actionTypes.REGISTERED:
+      case registerActionTypes.done:
         newState.isRegistered = true;
         break;
 
