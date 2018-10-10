@@ -1,3 +1,5 @@
+import { setUserRegistered } from '../actions/loginActions';
+
 export const actionTypes = {
   start: '@REGISTER/START',
   done: '@REGISTER/DONE',
@@ -12,6 +14,7 @@ export const register = communities => (dispatch, getState, { haprampAPI, notify
   return haprampAPI.v2.users.updateCommunities(communities)
     .then(() => {
       notify.success('Communities updated!');
+      dispatch(setUserRegistered(true));
       return dispatch({
         type: actionTypes.done,
         communities,

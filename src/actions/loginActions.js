@@ -36,9 +36,13 @@ const setAuthUser = (result, dispatch) => {
   updateUser(data, dispatch);
 };
 
+export const setUserRegistered = registrationStatus => ({
+  type: registrationStatus ? actionTypes.REGISTERED : actionTypes.NOT_REGISTERED,
+});
+
 export const check1RampRegistrationStatus = () => (dispatch, getState, { haprampAPI }) =>
   haprampAPI.v2.users.getCurrentUserDetails()
-    .catch(() => dispatch({ type: actionTypes.NOT_REGISTERED }));
+    .catch(() => dispatch(setUserRegistered(false)));
 
 export const login1Ramp = () => (dispatch, getState, { haprampAPI }) => {
   if (Cookie.get('1ramp_token')) { // Token already present

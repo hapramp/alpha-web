@@ -1,9 +1,14 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import { authRequiredComponent } from '../../utils/decorators';
 import { logout as signOut } from '../../actions/loginActions';
 import getStore from '../../utils/storeUtils';
+import { isRegistered as isUserRegisteredOn1Ramp } from '../../reducers/loginReducer';
+
 import Header from '../header';
 import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
@@ -16,10 +21,18 @@ import SignOut from '../SignOut';
 import Search from '../../search';
 import Register from '../../register/Register';
 
-const Root = () => (
+const Root = ({ isRegistered }) => (
   <div style={{ backgroundColor: '#FAFAFA' }}>
     <Header />
     <Switch>
+
+      <Route
+        exact
+        path="/select-communities"
+        component={authRequiredComponent(Register)}
+      />
+      {!isRegistered && <Redirect to="/select-communities" />}
+
       {/* Entry check */}
       <Route
         exact
@@ -29,7 +42,8 @@ const Root = () => (
           return <Redirect to="/feed" />;
         }
           return <Redirect to="/browse" />;
-      }}
+        }
+      }
       />
 
       {/* User feed */}
@@ -66,11 +80,18 @@ const Root = () => (
 
       <Route exact path="/search" component={Search} />
 
-      <Route exact path="/register" component={Register} />
-
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />
     </Switch>
-  </div>);
+  </div>
+);
 
-export default Root;
+Root.propTypes = {
+  isRegistered: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = state => ({
+  isRegistered: isUserRegisteredOn1Ramp(state),
+});
+
+export default withRouter(connect(mapStateToProps)(Root));
