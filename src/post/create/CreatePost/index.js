@@ -15,6 +15,7 @@ import MediaSelector from './MediaSelector';
 import Tags from './Tags';
 import CommunitySelector from './CommunitySelector';
 import PublishButton from './PublishButton';
+import PostMediaViewer from './PostMediaViewer';
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -77,8 +78,10 @@ class CreatePost extends React.Component {
             />
           </div>
 
+          <PostMediaViewer media={this.props.media} style={{ paddingLeft: 88 }} />
+
           {/* Media selection section */}
-          <MediaSelector style={{ marginBottom: 24 }} />
+          <MediaSelector style={{ marginBottom: 24 }} changeMedia={this.props.changeMedia} />
 
           {/* Tags section */}
           <Tags tags={hashtags} style={{ marginBottom: 24 }} />
@@ -116,6 +119,8 @@ CreatePost.propTypes = {
   hashtags: PropTypes.arrayOf(PropTypes.string),
   changeCommunity: PropTypes.func,
   createPost: PropTypes.func,
+  changeMedia: PropTypes.func.isRequired,
+  media: PropTypes.shape({}),
 };
 
 CreatePost.defaultProps = {
@@ -130,6 +135,7 @@ CreatePost.defaultProps = {
   hashtags: [],
   changeCommunity: () => {},
   createPost: () => {},
+  media: null,
 };
 
 const mapStateToProps = state => ({

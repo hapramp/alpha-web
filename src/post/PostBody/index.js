@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
+import { oldAndroidFooter, bodyFooterSeparator } from '../constants';
 
 const remarkable = new Remarkable({
   html: true,
@@ -13,13 +14,18 @@ const remarkable = new Remarkable({
   quotes: '“”‘’',
 });
 
+export const removeFooter = (body) => {
+  const newBody = body.replace(oldAndroidFooter, ''); // Remove old footer if there
+  return newBody.split(bodyFooterSeparator)[0];
+};
+
 const PostBody = ({
   className, body, author, permlink, minify, ...props
 }) => (
   <div className={`${className} ${styles.container}`} {...props}>
     <div
       className={`${minify ? styles.minify : ''} ${styles.bodyContainer}`}
-      dangerouslySetInnerHTML={{ __html: remarkable.render(body) }}
+      dangerouslySetInnerHTML={{ __html: remarkable.render(removeFooter(body)) }}
     />
     {
       minify

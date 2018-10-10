@@ -40,13 +40,24 @@ export const check1RampRegistrationStatus = () => (dispatch, getState, { hapramp
   haprampAPI.v2.users.getCurrentUserDetails()
     .catch(() => dispatch({ type: actionTypes.NOT_REGISTERED }));
 
-export const fakeLogin = () => (dispatch, getState, { steemAPI }) => {
+export const login1Ramp = () => (dispatch, getState, { haprampAPI }) => {
+  if (Cookie.get('1ramp_token')) { // Token already present
+    return Promise.resolve();
+  }
+  const username = Cookie.get('username');
+  const accessToken = Cookie.get('access_token');
+  return haprampAPI.v2.login(username, accessToken)
+    .then(({ token }) => Cookie.set('1ramp_token', token));
+};
+
+export const fakeLogin = () => async (dispatch, getState, { steemAPI }) => {
   const username = Cookie.get('username');
   dispatch({
     type: actionTypes.LOGIN_DONE, username,
   });
   dispatch(check1RampRegistrationStatus()); // See if current user is registered
   // Update profile changes
+  await dispatch(login1Ramp());
   return steemAPI.getUserAccount(username).then(result => setAuthUser(result, dispatch));
 };
 

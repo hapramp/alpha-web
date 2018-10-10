@@ -26,9 +26,15 @@ class Register extends React.Component {
   selectCommunity = communityId => () => {
     const communitySelected = !!this.state.selectedCommunities.find(i => i === communityId);
     if (communitySelected) {
-      this.setState(state => ({ ...state, selectedCommunities: state.selectedCommunities.filter(i => i !== communityId) }));
+      this.setState(state => ({
+        ...state,
+        selectedCommunities: state.selectedCommunities.filter(i => i !== communityId),
+      }));
     } else {
-      this.setState(state => ({ ...state, selectedCommunities: state.selectCommunity.concat([ communityId ])}));
+      this.setState(state => ({
+        ...state,
+        selectedCommunities: state.selectCommunity.concat([communityId]),
+      }));
     }
   }
 

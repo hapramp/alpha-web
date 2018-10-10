@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookie from 'js-cookie';
 
 import constants from './constants';
 
@@ -13,6 +13,13 @@ const getPromiseForUrl = (url, options = {}) => new Promise((resolve, reject) =>
     })
     .catch(e => reject(e));
 });
+
+const validateJsonResponse = (response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  return Promise.reject(response.statusText);
+};
 
 export default {
   v2: {
@@ -68,10 +75,35 @@ export default {
         {
           method: 'GET',
           headers: {
-            Authorization: `Token ${Cookies.get('1ramp_token')}`,
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
           },
         },
       ).then(r => r.json()),
     },
+    uploadImage: (image) => {
+      const formData = new FormData();
+      formData.append('upload', image);
+      return fetch(`${constants.BACKEND_URL.V2}/upload`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Token ${Cookie.get('1ramp_token')}`,
+        },
+      }).then(validateJsonResponse);
+    },
+    login: (username, accessToken) => fetch(
+      `${constants.BACKEND_URL.V2}/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_token: accessToken,
+          username,
+        }),
+      },
+    ).then(validateJsonResponse),
   },
 };

@@ -7,25 +7,23 @@ import { removeMedia } from '../actions';
 
 const PostMediaViewer = (props) => {
   if (!props.media) {
-    return (
-      <div className={[props.className, styles.noMediaText].join(' ')}>
-        No media selected.
-      </div>);
+    return <span />;
   }
 
   switch (props.media.type) {
     case 'image':
       return (
-        <div className={[props.className, 'uk-flex', 'uk-flex-center', 'uk-margin-bottom'].join(' ')}>
+        <div className={`${props.className} uk-margin-bottom`} style={props.style}>
           <div className="uk-inline">
             <img
-              className={[styles.mediaViewer].join(' ')}
+              className={styles.mediaViewer}
               src={window.URL.createObjectURL(props.media.content)}
               alt="Media"
               id="media-image"
+              width="240px"
             />
             <div
-              className={['uk-overlay', 'uk-overlay-default', 'uk-position-top-right', styles.topOverlay].join(' ')}
+              className={`uk-overlay uk-overlay-default uk-position-top-right ${styles.topOverlay}`}
               onClick={props.removeMedia}
               role="button"
               tabIndex={-1}
@@ -38,7 +36,7 @@ const PostMediaViewer = (props) => {
 
     case 'youtube':
       return (
-        <div className={[props.className, 'uk-cover-container', 'uk-medium-height'].join(' ')}>
+        <div className={`${props.className} uk-cover-container uk-medium-height`} style={props.style}>
           <iframe
             title={props.media.content}
             src={`https://www.youtube.com/embed/${props.media.content}?rel=0&amp`}
@@ -53,7 +51,8 @@ const PostMediaViewer = (props) => {
       return (
         <div>
           Unknown media type.
-        </div>);
+        </div>
+      );
   }
 };
 
@@ -61,15 +60,17 @@ PostMediaViewer.propTypes = {
   removeMedia: PropTypes.func,
   media: PropTypes.shape({
     type: PropTypes.string,
-    content: PropTypes.string,
+    content: PropTypes.object,
   }),
   className: PropTypes.string,
+  style: PropTypes.shape({}),
 };
 
 PostMediaViewer.defaultProps = {
   removeMedia: () => {},
   media: null,
   className: '',
+  style: {},
 };
 
 const mapStateToProps = state => ({
