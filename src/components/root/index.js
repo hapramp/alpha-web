@@ -41,7 +41,7 @@ const Root = ({ isRegistered }) => (
         if (getStore().getState().login.loggedIn) {
           return <Redirect to="/feed" />;
         }
-          return <Redirect to="/browse" />;
+          return <Redirect to="/feed/new" />;
         }
       }
       />
