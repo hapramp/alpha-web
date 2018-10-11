@@ -63,8 +63,7 @@ export default (state = initialState, action) => {
       return newState;
 
     case actionTypes.FOLLOW_INIT:
-      following = action.username;
-      follower = localStorage.getItem('username');
+      ({ follower, following } = action);
 
       if (!newState[follower]) {
         newState[follower] = {};
@@ -98,8 +97,8 @@ export default (state = initialState, action) => {
 
 
     case actionTypes.UNFOLLOW_INIT:
-      following = action.username;
-      follower = localStorage.getItem('username');
+      ({ follower, following } = action);
+
       if (!newState[follower]) {
         newState[follower] = {};
       }

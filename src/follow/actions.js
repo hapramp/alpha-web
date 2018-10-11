@@ -1,3 +1,5 @@
+import { getAuthUsername } from '../reducers/authUserReducer';
+
 export const actionTypes = {
   FOLLOWER_LOAD_INIT: 'FOLLOW.FOLLOWER.LOAD.INIT',
   FOLLOWER_LOAD_DONE: 'FOLLOW.FOLLOWER.LOAD.DONE',
@@ -38,27 +40,45 @@ export const getFollowing = (username, count = 1000) => (dispatch, getState, { s
 // TODO: Refresh followers/following of relevant users after follow/unfollow
 
 export const follow = username => (dispatch, getState, { steemAPI, notify }) => {
-  const currentUser = getState().authUser.username;
+  const currentUser = getAuthUsername(getState());
   if (!currentUser) {
     notify.danger('Please login first!');
     return Promise.reject();
   }
 
-  dispatch({ type: actionTypes.FOLLOW_INIT, username });
+  dispatch({ type: actionTypes.FOLLOW_INIT, following: username, follower: currentUser });
   return steemAPI.sc2Operations.follow(currentUser, username)
-    .then(() => dispatch({ type: actionTypes.FOLLOW_DONE, username }))
-    .catch(reason => dispatch({ type: actionTypes.FOLLOW_ERROR, username, reason }));
+    .then(() => dispatch({
+      type: actionTypes.FOLLOW_DONE,
+      following: username,
+      follower: currentUser,
+    }))
+    .catch(reason => dispatch({
+      type: actionTypes.FOLLOW_ERROR,
+      following: username,
+      reason,
+      follower: currentUser,
+    }));
 };
 
 export const unfollow = username => (dispatch, getState, { steemAPI, notify }) => {
-  const currentUser = getState().authUser.username;
+  const currentUser = getAuthUsername(getState());
   if (!currentUser) {
     notify.danger('Please log in first!');
     return Promise.reject();
   }
 
-  dispatch({ type: actionTypes.UNFOLLOW_INIT, username });
+  dispatch({ type: actionTypes.UNFOLLOW_INIT, following: username, follower: currentUser });
   return steemAPI.sc2Operations.follow(localStorage.getItem('username'), username, true)
-    .then(() => dispatch({ type: actionTypes.UNFOLLOW_DONE, username }))
-    .catch(reason => dispatch({ type: actionTypes.UNFOLLOW_ERROR, username, reason }));
+    .then(() => dispatch({
+      type: actionTypes.UNFOLLOW_DONE,
+      following: username,
+      follower: currentUser,
+    }))
+    .catch(reason => dispatch({
+      type: actionTypes.UNFOLLOW_ERROR,
+      following: username,
+      reason,
+      follower: currentUser,
+    }));
 };
