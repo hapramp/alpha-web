@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
-import userPlaceholder from './user-placeholder.jpg';
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
 import PostCard from '../../post/PostCard';
@@ -12,7 +12,7 @@ import {
 } from '../actions';
 import { loadHaprampUserDetails } from '../../actions/allUserActions';
 import { getFollowers, getFollowing, follow, unfollow } from '../../actions/followActions';
-import UserAvatar from '../../components/UserAvatar';
+import UserCoverImage from '../UserCoverContainer';
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -55,34 +55,18 @@ class UserProfile extends React.Component {
       return (
         <div className={['uk-position-center'].join(' ')}>
           LOADING
-        </div>);
+        </div>
+      );
     }
     const jsonMetadata = this.props.userProfile.user.json_metadata;
 
-    jsonMetadata.profile = jsonMetadata.profile ? jsonMetadata.profile : {};
-    jsonMetadata.profile.profile_image = jsonMetadata.profile.profile_image ?
-      jsonMetadata.profile.profile_image :
-      userPlaceholder;
+    jsonMetadata.profile = _.get(jsonMetadata, 'profile', {});
+    const { username } = this.props.match.params;
 
     return (
       <div className={['uk-container', 'uk-margin-top', 'uk-padding', 'uk-padding-remove-top', indexStyles.white].join(' ')}>
         {/* User details */}
-        {jsonMetadata.profile.cover_image &&
-        <div
-          className={['uk-cover-container', styles.profileCoverContainer].join(' ')}
-          style={{ backgroundImage: `url(${jsonMetadata.profile.cover_image})` }}
-        />}
-        <div className={['uk-text-center'].join(' ')}>
-          <UserAvatar
-            size="medium"
-            username={this.props.userProfile.user.name}
-            className={
-              jsonMetadata.profile.cover_image
-              ? styles.profileImage
-              : styles.profileImageNoCover
-            }
-          />
-        </div>
+        <UserCoverImage username={username} coverImageUrl={jsonMetadata.profile.cover_image} />
         <div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
           <div>
             <span className={styles.userName}>{jsonMetadata.profile.name}</span>
