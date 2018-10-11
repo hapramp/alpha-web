@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { withRouter } from 'react-router';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
@@ -16,24 +17,14 @@ import UserCoverImage from '../UserCoverContainer';
 import FollowButton from '../../follow/FollowButton';
 
 class UserProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    props.loadUserProfileInfo(props.match.params.username);
-    props.getFollowCount(props.match.params.username);
-    props.getUserFeeds(props.match.params.username);
-    props.getFollowers(props.match.params.username);
-    props.getFollowing(props.match.params.username);
-    this.props.loadHaprampUserDetails(this.props.match.params.username);
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.match.params.username !== this.props.match.params.username &&
-      !newProps.userProfile.loading) {
-      this.props.loadUserProfileInfo(newProps.match.params.username);
-      this.props.loadHaprampUserDetails(newProps.match.params.username);
-      this.props.getFollowCount(newProps.match.params.username);
-      this.props.getUserFeeds(newProps.match.params.username);
-    }
+  componentDidMount() {
+    const { username } = this.props.match.params;
+    this.props.loadUserProfileInfo(username);
+    this.props.getFollowCount(username);
+    this.props.getUserFeeds(username);
+    this.props.getFollowers(username);
+    this.props.getFollowing(username);
+    this.props.loadHaprampUserDetails(username);
   }
 
   componentWillUnmount() {
@@ -169,7 +160,7 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   loadUserProfileInfo,
   resetUserProfileInfo,
   getFollowCount,
@@ -179,4 +170,4 @@ export default connect(mapStateToProps, {
   getFollowing,
   follow,
   unfollow,
-})(UserProfile);
+})(UserProfile));

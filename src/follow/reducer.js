@@ -135,15 +135,8 @@ export default (state = initialState, action) => {
 
 // Selectors
 
-export const isFollowing = (state, follower, following) => {
-  console.log(
-    _.get(state.follow, `[${follower}].following.results[${following}]`, false),
-    _.get(state.follow, `[${follower}].following`, false),
-    state.follow,
-  );
-  return _.get(
-    state.follow,
-    `[${follower}].following.results[${following}]`,
-    false,
-  );
-};
+export const isFollowing = (state, follower, following) => _.get(
+  state.follow,
+  `[${follower}].following.results[${following}]`,
+  false,
+);
