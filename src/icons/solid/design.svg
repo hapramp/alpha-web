@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/solid/design</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/solid/design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(1.000000, 0.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="vectors-pen-flat">
+                <path d="M8.688,3.181 C7.69004194,4.17632233 7.44109127,5.69862748 8.07,6.96 L10.4,11.632 C10.5124364,11.8570629 10.7424145,11.9992509 10.994,11.9992509 C11.2455855,11.9992509 11.4755636,11.8570629 11.588,11.632 L13.929,6.966 C14.5609407,5.70645536 14.316035,4.1838512 13.321,3.186" id="Shape" fill="#FFFFFF"></path>
+                <path d="M14,0.75 L8,0.75" id="Shape"></path>
+                <path d="M12.5,16.6 C16.3975959,17.1263643 19.7384844,19.6473819 21.314,23.251" id="Shape"></path>
+                <path d="M0.686,23.25 C2.26178804,19.6467696 5.60262612,17.1261691 9.5,16.6" id="Shape"></path>
+                <path d="M0.5,16.5 L9.5,16.5" id="Shape"></path>
+                <path d="M12.5,16.5 L21.5,16.5" id="Shape"></path>
+                <rect id="Rectangle-path" fill="#FFFFFF" x="9.5" y="15" width="3" height="3"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

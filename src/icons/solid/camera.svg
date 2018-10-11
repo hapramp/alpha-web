@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/solid/camera</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/solid/camera" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(0.000000, 3.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="camera-1">
+                <path d="M19.5,3 L18.415,0.829 C18.160804,0.32077798 17.6412475,-0.000170094778 17.073,-7.90478794e-14 L11.427,-7.90478794e-14 C10.8587525,-0.000170094778 10.339196,0.32077798 10.085,0.829 L9,3 L2.25,3 C1.42157288,3 0.75,3.67157288 0.75,4.5 L0.75,16.5 C0.75,17.3284271 1.42157288,18 2.25,18 L21.75,18 C22.5784271,18 23.25,17.3284271 23.25,16.5 L23.25,4.5 C23.25,3.67157288 22.5784271,3 21.75,3 L19.5,3 Z" id="Shape" fill="#FFFFFF"></path>
+                <circle id="Oval" cx="14.25" cy="9.75" r="5.25"></circle>
+                <path d="M4.125,6 C4.33210678,6 4.5,6.16789322 4.5,6.375 C4.5,6.58210678 4.33210678,6.75 4.125,6.75 C3.91789322,6.75 3.75,6.58210678 3.75,6.375 C3.75,6.16789322 3.91789322,6 4.125,6" id="Shape"></path>
+                <path d="M5.25,3 L5.25,1.5" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

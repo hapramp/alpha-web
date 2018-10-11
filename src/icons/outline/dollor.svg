@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/dollor</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/dollor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="currency-dollar">
+                <path d="M16.5,3.75 L10.8,3.75 C8.97746033,3.75 7.5,5.22746033 7.5,7.05 C7.5,12 16.5,12 16.5,16.95 C16.5,18.7725397 15.0225397,20.25 13.2,20.25 L7.5,20.25" id="Shape"></path>
+                <path d="M12,3.75 L12,0.75" id="Shape"></path>
+                <path d="M12,20.25 L12,23.25" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

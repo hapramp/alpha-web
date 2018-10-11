@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/comment_add</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/comment_add" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="messages-bubble-add">
+                <path d="M23.223,10.5 C22.9201359,6.14301681 19.9518362,2.42847751 15.7689757,1.17201126 C11.5861153,-0.0844549954 7.06225922,1.37955721 4.40862259,4.84845355 C1.75498596,8.31734989 1.52576476,13.0666722 3.833,16.775 L0.749,23.25 L7.224,20.166 C7.78710356,20.5154666 8.38170007,20.8114257 9,21.05" id="Shape"></path>
+                <circle id="Oval" cx="17.25" cy="17.249" r="6"></circle>
+                <path d="M17.25,14.249 L17.25,20.249" id="Shape"></path>
+                <path d="M14.25,17.249 L20.25,17.249" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

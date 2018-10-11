@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/search</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/search" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="search">
+                <circle id="Oval" transform="translate(11.389364, 11.388564) rotate(-23.025000) translate(-11.389364, -11.388564) " cx="11.3893642" cy="11.3885639" r="8.056"></circle>
+                <path d="M17.0853333,17.0844444 L23.3333333,23.3333333" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

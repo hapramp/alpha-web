@@ -7,8 +7,13 @@
   position: inside;
   height: 18px;
   transition: all 0.3s ease-in;
+  display: flex;
 }
 
 .lighten {
   opacity: 0.67;
+}
+
+.communityIcon {
+  width: 32px;
 }

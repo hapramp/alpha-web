@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/stats</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/stats" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="graph-stats">
+                <path d="M0.75,11.75 L4.25,11.75 C4.85567257,11.7501682 5.40201797,11.3860695 5.635,10.827 L8.235,4.712 C8.35657001,4.42597004 8.64195801,4.24455326 8.95254518,4.2558675 C9.26313235,4.26718175 9.53456393,4.46888268 9.635,4.763 L14.369,19.488 C14.4694361,19.7821173 14.7408676,19.9838182 15.0514548,19.9951325 C15.362042,20.0064467 15.64743,19.82503 15.769,19.539 L18.364,12.673 C18.596982,12.1139305 19.1433274,11.7498318 19.749,11.75 L23.249,11.75" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/solid/fashion</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/solid/fashion" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(0.000000, 3.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Regular">
+                <path d="M21.007,9.54 C21.1294244,9.71651709 21.1294244,9.95048291 21.007,10.127 C18.8402622,13.0248027 15.3796492,14.6622471 11.765,14.5 C8.1503864,14.6620701 4.68985203,13.0246629 2.523,10.127 C2.39999396,9.9506653 2.39999396,9.7163347 2.523,9.54 C4.68985203,6.64233707 8.1503864,5.00492993 11.765,5.167 C15.3795424,5.00528382 18.8399195,6.64261655 21.007,9.54 Z" id="Shape" fill="#FFFFFF"></path>
+                <circle id="Oval" cx="11.765" cy="9.834" r="4.667"></circle>
+                <path d="M11.765,9.459 C11.9721068,9.459 12.14,9.62689322 12.14,9.834" id="Shape"></path>
+                <path d="M11.39,9.834 C11.39,9.62689322 11.5578932,9.459 11.765,9.459" id="Shape"></path>
+                <path d="M11.765,10.209 C11.5578932,10.209 11.39,10.0411068 11.39,9.834" id="Shape"></path>
+                <path d="M12.14,9.834 C12.14,10.0411068 11.9721068,10.209 11.765,10.209" id="Shape"></path>
+                <path d="M20.819,9.283 C22.362275,8.7970557 23.3687664,7.31360902 23.25,5.7" id="Shape"></path>
+                <path d="M17.524,6.524 C18.6967758,5.51539321 19.0683889,3.85655103 18.438,2.444" id="Shape"></path>
+                <path d="M12.524,5.187 C13.3412302,3.80165399 13.1698501,2.04702857 12.1,0.846" id="Shape"></path>
+                <path d="M8.2,5.642 C8.13090968,4.0497173 7.02855782,2.689947 5.485,2.293" id="Shape"></path>
+                <path d="M4.084,7.835 C3.59248012,6.44064508 2.26216053,5.5186933 0.784,5.548" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

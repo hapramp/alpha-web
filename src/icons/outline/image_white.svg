@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/image_white</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/image_white" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#FFFFFF" stroke-width="1.5">
+            <g id="picture-sun">
+                <rect id="Rectangle-path" x="0.75" y="0.75" width="22.5" height="22.5" rx="1.5"></rect>
+                <circle id="Oval" cx="16.5" cy="7.5" r="3"></circle>
+                <path d="M3.961,14.959 C6.03120034,13.7791713 8.51243877,13.5589332 10.7580828,14.3556817 C13.0037268,15.1524302 14.79132,16.8872384 15.655,19.108" id="Shape"></path>
+                <path d="M14.382,16.918 C16.0266078,15.4189175 18.5258696,15.3655236 20.233,16.793" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

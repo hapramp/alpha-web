@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/solid/like_primary</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/solid/like_primary" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" fill="#B0C9E7" stroke="#000000" stroke-width="1.5">
+            <g id="like">
+                <path d="M0.75,21.75 L0.75,11.25 L2.25,11.25 C6.39213562,11.25 9.75,7.89213562 9.75,3.75 L9.75,3 C9.75,1.75735931 10.7573593,0.75 12,0.75 C13.2426407,0.75 14.25,1.75735931 14.25,3 L14.25,6.75 C14.25,7.57842712 14.9215729,8.25 15.75,8.25 L18.75,8.25 C20.0216941,8.25012532 21.2339628,8.78831706 22.0869946,9.73147266 C22.9400264,10.6746283 23.3541694,11.9346804 23.227,13.2 L22.762,17.849 C22.4538608,20.9149463 19.873392,23.2490387 16.792,23.249 L10.592,23.249 C10.034609,23.2488449 9.47995289,23.1710988 8.944,23.018 L5.308,21.981 C4.77204711,21.8279012 4.21739101,21.7501551 3.66,21.75 L0.75,21.75" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

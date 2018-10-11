@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/solid/user_primary</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/solid/user_primary" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(2.000000, 0.000000)" fill="#B0C9E7" stroke="#000000" stroke-width="1.5">
+            <g id="Regular">
+                <circle id="Oval" cx="10" cy="6" r="5.25"></circle>
+                <path d="M0.25,23.25 C0.25,17.8652237 4.61522369,13.5 10,13.5 C15.3847763,13.5 19.75,17.8652237 19.75,23.25" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

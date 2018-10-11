@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/invite</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/invite" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="icons/invite" stroke="#000000" stroke-width="1.5">
+            <g id="Group">
+                <g id="Regular">
+                    <circle id="Oval" cx="14.375" cy="14.375" r="5"></circle>
+                    <path d="M14.375,11.875 L14.375,16.875" id="Shape"></path>
+                    <path d="M11.875,14.375 L16.875,14.375" id="Shape"></path>
+                    <path d="M0.625,14.375 C0.62628649,12.4861446 1.57509394,10.723916 3.15124239,9.68298729 C4.72739083,8.64205862 6.72063086,8.46128396 8.45833333,9.20166667" id="Shape"></path>
+                    <circle id="Oval" cx="6.25" cy="4.0625" r="3.4375"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

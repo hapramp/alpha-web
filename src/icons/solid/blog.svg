@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/solid/blog</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/solid/blog" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="content-browser-edit" stroke="#000000" stroke-width="1.5">
+            <path d="M18.746,0.25 L2.246,0.25 C1.41757288,0.25 0.746,0.921572875 0.746,1.75 L0.746,18.25 C0.746,19.0784271 1.41757288,19.75 2.246,19.75 L20.246,19.75 C21.0744271,19.75 21.746,19.0784271 21.746,18.25 L21.746,9.25" id="Shape" fill="#FFFFFF"></path>
+            <path d="M0.746,4.75 L13.496,4.75" id="Shape"></path>
+            <path d="M22.782,4.465 L17.059,10.188 L14.246,10.75 L14.809,7.938 L20.532,2.215 C20.8293048,1.91730449 21.2327712,1.75002801 21.6535,1.75002801 C22.0742288,1.75002801 22.4776952,1.91730449 22.775,2.215 L22.782,2.221 C23.4009727,2.84094944 23.4009727,3.84505056 22.782,4.465 Z" id="Shape"></path>
+            <path d="M5.246,10.75 L9.746,10.75" id="Shape"></path>
+            <path d="M5.246,15.25 L14.996,15.25" id="Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/plus</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/plus" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="add">
+                <path d="M0.75,12 L23.25,12" id="Shape"></path>
+                <path d="M12,0.75 L12,23.25" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

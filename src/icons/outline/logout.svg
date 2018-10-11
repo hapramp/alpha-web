@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/logout</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/logout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Users-/-Geometric-Close-Up-Single-User-Actions-Neutral-/-single-neutral-actions-add" stroke="#000000" stroke-width="1.5">
+            <g id="Group">
+                <g id="logout">
+                    <path d="M0.625,10.0033333 L13.75,10.0033333" id="Shape"></path>
+                    <polyline id="Shape" points="10.625 13.1283333 13.75 10.0033333 10.625 6.87833333"></polyline>
+                    <path d="M2.755,13.8333333 C4.52529652,17.4701361 8.55756963,19.4195872 12.5073849,18.5482416 C16.4572002,17.676896 19.2950182,14.2118743 19.3708816,10.167801 C19.4467451,6.12372775 16.7408798,2.55471118 12.8265234,1.53584023 C8.91216705,0.51696929 4.80961647,2.31381788 2.90416667,5.88166667" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

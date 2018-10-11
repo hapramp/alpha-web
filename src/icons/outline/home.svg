@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/home</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="bird-house">
+                <path d="M2.96,9 L6.34,22.288 C6.46067736,22.8365117 6.93863099,23.2328836 7.5,23.25 L16.5,23.25 C17.0599918,23.2314382 17.5360147,22.8353015 17.656,22.288 L21.033,9" id="Shape"></path>
+                <polyline id="Shape" points="0.747 11.021 11.997 0.75 23.247 11.021"></polyline>
+                <circle id="Oval" cx="11.997" cy="14.25" r="3"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

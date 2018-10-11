@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/solid/craft</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/solid/craft" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(1.000000, 2.000000)" fill="#FFFFFF" stroke="#000000" stroke-width="1.5">
+            <g id="Regular">
+                <path d="M3.365,6.353 L8.615,6.353 L20.6,18.341 C20.8254045,18.566175 20.8839416,18.9091856 20.7459749,19.1963723 C20.6080082,19.4835591 20.3036537,19.6522338 19.987,19.617 L10.335,18.545 C9.27004672,18.4258765 8.34949743,17.7477575 7.92,16.766 L3.365,6.353 Z" id="Shape"></path>
+                <path d="M8.615,6.353 L17.722,0.5 C17.9696735,0.340960093 18.2874799,0.341495551 18.534616,0.501369141 C18.7817522,0.661242732 18.9125266,0.950896465 18.869,1.242 L16.869,14.604 L21.386,7.504 C21.5324583,7.27289272 21.5416408,6.9804215 21.4099683,6.74058203 C21.2782958,6.50074255 21.0266062,6.35149072 20.753,6.351 L18.1,6.351" id="Shape"></path>
+                <path d="M5.332,10.853 L1.216,10.853 C0.925070111,10.8528909 0.660449327,10.6845421 0.537067611,10.4210708 C0.413685895,10.1575994 0.453804838,9.84654323 0.64,9.623 L3.365,6.353" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

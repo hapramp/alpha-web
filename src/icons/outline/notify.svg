@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/notify</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/notify" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="alarm-bell">
+                <path d="M10,21.75 C10.260886,22.6387095 11.0762894,23.2491541 12.0025,23.2491541 C12.9287106,23.2491541 13.744114,22.6387095 14.005,21.75" id="Shape"></path>
+                <path d="M12,3 L12,0.75" id="Shape"></path>
+                <path d="M12,3 C16.1421356,3 19.5,6.35786438 19.5,10.5 C19.5,17.546 21,18.75 21,18.75 L3,18.75 C3,18.75 4.5,16.834 4.5,10.5 C4.5,6.35786438 7.85786438,3 12,3 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

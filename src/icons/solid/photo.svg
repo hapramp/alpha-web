@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/solid/photo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/solid/photo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="picture-landscape" stroke="#000000" stroke-width="1.5">
+            <rect id="Rectangle-path" fill="#FFFFFF" x="0.75" y="0.75" width="22.5" height="22.5" rx="1.5"></rect>
+            <path d="M5.25,17.25 L8.712,12.634 C8.97284764,12.2859685 9.37191456,12.0682923 9.80574985,12.0374 C10.2395851,12.0065077 10.6654695,12.1654413 10.973,12.473 L12,13.5 L15.3,9.1 C15.5832816,8.72229124 16.027864,8.5 16.5,8.5 C16.972136,8.5 17.4167184,8.72229124 17.7,9.1 L20.37,12.66" id="Shape"></path>
+            <circle id="Oval" cx="6.375" cy="6.375" r="1.875"></circle>
+            <path d="M0.75,17.25 L23.25,17.25" id="Shape"></path>
+        </g>
+    </g>
+</svg>

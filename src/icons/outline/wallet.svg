@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/wallet</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/wallet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="money-wallet">
+                <path d="M21.75,18.5 L21.75,20 C21.75,21.6568542 20.4068542,23 18.75,23 L3.75,23 C2.09314575,23 0.75,21.6568542 0.75,20 L0.75,9.5 C0.75,7.84314575 2.09314575,6.5 3.75,6.5 L18.75,6.5 C20.4068542,6.5 21.75,7.84314575 21.75,9.5 L21.75,11" id="Shape"></path>
+                <path d="M18.75,6.5 L16.421,1.842 C16.2431204,1.4860026 15.931063,1.2152834 15.5535213,1.08943616 C15.1759796,0.963588918 14.7639021,0.992929814 14.408,1.171 L3.75,6.5" id="Shape"></path>
+                <path d="M21.75,18.5 C22.5784271,18.5 23.25,17.8284271 23.25,17 L23.25,12.5 C23.25,11.6715729 22.5784271,11 21.75,11 L18,11 C15.9289322,11 14.2500001,12.6789322 14.2500001,14.75 C14.2500001,16.8210678 15.9289322,18.5 18,18.5 L21.75,18.5 Z" id="Shape"></path>
+                <path d="M18,14.375 C18.2071068,14.375 18.375,14.5428932 18.375,14.75 C18.375,14.9571068 18.2071068,15.125 18,15.125 C17.7928932,15.125 17.625,14.9571068 17.625,14.75 C17.625,14.5428932 17.7928932,14.375 18,14.375" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

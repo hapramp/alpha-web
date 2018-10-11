@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/solid/art</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/solid/art" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(1.000000, 0.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="color-painting-palette">
+                <path d="M15.022,15.624 C15.322,19.48 21.036,16.824 20.584,18.164 C18.059,25.645 7.936,23.849 3.618,19.329 C-0.549345372,15.0810834 -0.539553109,8.27590591 3.64,4.04 C7.868,-0.188 15.032,-0.495 18.928,4.018 C26.56,12.858 14.758,12.183 15.022,15.624 Z" id="Shape" fill="#FFFFFF"></path>
+                <circle id="Oval" cx="6.19" cy="13.309" r="1.52"></circle>
+                <circle id="Oval" cx="9.95" cy="18.144" r="1.52"></circle>
+                <circle id="Oval" cx="13.586" cy="5.912" r="1.52"></circle>
+                <circle id="Oval" cx="7.14" cy="7.524" r="1.52"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

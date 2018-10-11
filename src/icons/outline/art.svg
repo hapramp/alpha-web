@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/art</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/art" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="color-painting-palette">
+                <path d="M16.022,15.624 C16.322,19.48 22.036,16.824 21.584,18.164 C19.059,25.645 8.936,23.849 4.618,19.329 C0.450654628,15.0810834 0.460446891,8.27590591 4.64,4.04 C8.868,-0.188 16.032,-0.495 19.928,4.018 C27.56,12.858 15.758,12.183 16.022,15.624 Z" id="Shape"></path>
+                <circle id="Oval" cx="7.19" cy="13.309" r="1.52"></circle>
+                <circle id="Oval" cx="10.95" cy="18.144" r="1.52"></circle>
+                <circle id="Oval" cx="14.586" cy="5.912" r="1.52"></circle>
+                <circle id="Oval" cx="8.14" cy="7.524" r="1.52"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

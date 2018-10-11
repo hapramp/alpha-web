@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/outline/help</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/outline/help" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Users-/-Geometric-Close-Up-Single-User-Actions-Neutral-/-single-neutral-actions-add" stroke="#000000" stroke-width="1.5">
+            <g id="Group">
+                <g id="headphones-customer-support">
+                    <path d="M3.75,15 L3.125,15 C1.74428813,15 0.625,13.8807119 0.625,12.5 L0.625,10 C0.625,8.61928813 1.74428813,7.5 3.125,7.5 L3.75,7.5 C4.09517797,7.5 4.375,7.77982203 4.375,8.125 L4.375,14.375 C4.375,14.720178 4.09517797,15 3.75,15 Z" id="Shape"></path>
+                    <path d="M16.875,15 L16.25,15 C15.904822,15 15.625,14.720178 15.625,14.375 L15.625,8.125 C15.625,7.77982203 15.904822,7.5 16.25,7.5 L16.875,7.5 C18.2557119,7.5 19.375,8.61928813 19.375,10 L19.375,12.5 C19.375,13.8807119 18.2557119,15 16.875,15 Z" id="Shape"></path>
+                    <path d="M3.125,7.5 C3.125,3.70304234 6.20304234,0.625 10,0.625 C11.8233634,0.625 13.5720465,1.34932828 14.8613591,2.63864088 C16.1506717,3.92795348 16.875,5.67663663 16.875,7.5" id="Shape"></path>
+                    <path d="M12.5,18.125 L14.375,18.125 C15.7557119,18.125 16.875,17.0057119 16.875,15.625 L16.875,15" id="Shape"></path>
+                    <path d="M11.25,19.375 L10,19.375 C9.30964406,19.375 8.75,18.8153559 8.75,18.125 C8.75,17.4346441 9.30964406,16.875 10,16.875 L11.25,16.875 C11.9403559,16.875 12.5,17.4346441 12.5,18.125 C12.5,18.8153559 11.9403559,19.375 11.25,19.375 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

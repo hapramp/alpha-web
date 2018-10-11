@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
+import { getIconForCommunity } from '../../icons';
 
 export default class CommunityButton extends React.Component {
   static propTypes = {
@@ -30,6 +31,7 @@ export default class CommunityButton extends React.Component {
       isSelected, community, ...remainingProps
     } = this.props;
     const { hovering } = this.state;
+    const communityIcon = getIconForCommunity(community.name.toLowerCase());
     return (
       <div {...remainingProps}>
         <div
@@ -42,7 +44,7 @@ export default class CommunityButton extends React.Component {
           onMouseEnter={this.activateHover}
           onMouseLeave={this.deactivateHover}
         >
-          {community.name[0]}
+          <img src={communityIcon.solid} alt="" className={styles.communityIcon} />
         </div>
       </div>
     );

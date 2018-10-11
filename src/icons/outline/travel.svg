@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/travel</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/travel" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="travel-luggage-1">
+                <path d="M5.993,17.931 C1.9270766,16.0655822 -0.151596328,11.4970075 1.11324832,7.20612363 C2.37809297,2.91523974 6.60248086,0.204648817 11.030135,0.842924094 C15.4577891,1.48119937 18.7445875,5.27457687 18.746,9.748" id="Shape"></path>
+                <path d="M4.022,2.8 L9.302,4.8 C9.99108996,5.05836649 10.3909681,5.77848598 10.246,6.5 L9.933,8.068 C9.81915483,8.63664958 9.38771384,9.08872809 8.825,9.229 L6.746,9.748 L5.592,12.633 C5.36719673,13.1967281 4.97622248,13.678732 4.471,14.015 L2.641,15.272" id="Shape"></path>
+                <path d="M15.991,3.268 L14.524,6.193 C14.3462585,6.54883161 14.3171227,6.96068967 14.443,7.338 L15,9" id="Shape"></path>
+                <rect id="Rectangle-path" x="9.746" y="14.998" width="13.5" height="8.25" rx="1.5"></rect>
+                <path d="M12.746,14.998 L12.746,23.248" id="Shape"></path>
+                <path d="M20.246,14.998 L20.246,23.248" id="Shape"></path>
+                <path d="M14.246,15 L14.246,14.25 C14.246,13.0073593 15.2533593,12 16.496,12 C17.7386407,12 18.746,13.0073593 18.746,14.25 L18.746,15" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

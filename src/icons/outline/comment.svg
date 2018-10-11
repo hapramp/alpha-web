@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/outline/comment</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/outline/comment" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" stroke="#000000" stroke-width="1.5">
+            <g id="messages-bubble">
+                <path d="M12.75,0.75 C8.93932847,0.744505526 5.42568259,2.8069362 3.57279712,6.13681054 C1.71991166,9.46668489 1.81953469,13.539694 3.833,16.775 L0.75,23.25 L7.224,20.167 C11.010178,22.5210249 15.8701262,22.2274109 19.3453631,19.4346872 C22.8206,16.6419635 24.1533224,11.9591057 22.6693518,7.75501149 C21.1853811,3.55091729 17.2083089,0.74232281 12.75,0.75 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
