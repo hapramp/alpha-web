@@ -3,11 +3,15 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
 
 import { authRequiredComponent } from '../../utils/decorators';
-import { logout as signOut } from '../../actions/loginActions';
-import getStore from '../../utils/storeUtils';
-import { isRegistered as isUserRegisteredOn1Ramp } from '../../reducers/loginReducer';
+import { logout } from '../../actions/loginActions';
+import {
+  isRegistered as isUserRegisteredOn1Ramp,
+  isLoggedIn as isUserLoggedIn,
+} from '../../reducers/loginReducer';
+import { getAuthUsername } from '../../reducers/authUserReducer';
 
 import Header from '../header';
 import Feed from '../../feed';
@@ -21,11 +25,12 @@ import SignOut from '../SignOut';
 import Search from '../../search';
 import Register from '../../register/Register';
 
-const Root = ({ isRegistered }) => (
+const Root = ({
+  isRegistered, isLoggedIn, signOut, authUsername,
+}) => (
   <div style={{ backgroundColor: '#FAFAFA' }}>
     <Header />
     <Switch>
-
       <Route
         exact
         path="/select-communities"
@@ -38,7 +43,7 @@ const Root = ({ isRegistered }) => (
         exact
         path="/"
         render={() => {
-        if (getStore().getState().login.loggedIn) {
+        if (isLoggedIn) {
           return <Redirect to="/feed" />;
         }
           return <Redirect to="/feed/new" />;
@@ -61,9 +66,11 @@ const Root = ({ isRegistered }) => (
       <Route
         exact
         path="/profile"
-        render={() => (getStore().getState().login.loggedIn ?
-          <Redirect to={`/@${getStore().getState().authUser.username}`} /> :
-          <Redirect to="/" />)
+        render={() => (
+          isLoggedIn
+          ? <Redirect to={`/@${authUsername}`} />
+          : <Redirect to="/" />
+        )
       }
       />
 
@@ -76,7 +83,7 @@ const Root = ({ isRegistered }) => (
       {/* OAuth Callback */}
       <Route exact path="/_oauth/" component={OAuthCallback} />
 
-      <Route exact path="/signout" render={() => <SignOut onSignOut={() => getStore().dispatch(signOut())} />} />
+      <Route exact path="/signout" render={() => <SignOut onSignOut={signOut} />} />
 
       <Route exact path="/search" component={Search} />
 
@@ -88,10 +95,19 @@ const Root = ({ isRegistered }) => (
 
 Root.propTypes = {
   isRegistered: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired,
+  authUsername: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   isRegistered: isUserRegisteredOn1Ramp(state),
+  isLoggedIn: isUserLoggedIn(state),
+  authUsername: getAuthUsername(state),
 });
 
-export default withRouter(connect(mapStateToProps)(Root));
+const mapDispatchToProps = dispatch => bindActionCreators({
+  signOut: logout,
+}, dispatch);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Root));

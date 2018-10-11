@@ -48,3 +48,5 @@ export default (state = initialState, action) => {
 
 // Selectors
 export const isRegistered = state => state.login.isRegistered;
+
+export const isLoggedIn = state => state.login.loggedIn;

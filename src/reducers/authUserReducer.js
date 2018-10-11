@@ -27,3 +27,6 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+// Selectors
+export const getAuthUsername = state => state.authUser.username;
