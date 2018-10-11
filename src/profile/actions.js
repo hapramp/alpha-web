@@ -1,4 +1,4 @@
-import { actionTypes as allUserActionTypes } from './allUserActions';
+import { actionTypes as allUserActionTypes } from '../actions/allUserActions';
 import { actionTypes as allPostsActionTypes } from '../post/actions';
 
 export const actionTypes = {

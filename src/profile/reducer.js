@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/userProfileActions';
+import { actionTypes } from './actions';
 
 const initialState = {
   loading: false,

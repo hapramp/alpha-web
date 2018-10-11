@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 import createPostStyles from '../../post/create/CreatePost/styles.scss';
-import userProfilePlaceholder from '../userProfile/user-placeholder.jpg';
 import indexStyles from '../../styles/globals.scss';
 import { setTitle, setContent } from '../../actions/createArticleActions';
+import UserAvatar from '../UserAvatar';
 
 /*
 TODO:
@@ -37,12 +37,11 @@ class CreateArticle extends React.Component {
   getUserSection() {
     /* User details */
     const name = this.props.authUser.name ? this.props.authUser.name : this.props.authUser.username;
-    const image = this.props.authUser.avatar || userProfilePlaceholder;
 
     return (
       <div className={['uk-flex', 'uk-flex-center', 'uk-margin', styles.userSection].join(' ')}>
         <div className={['uk-margin-right'].join(' ')}>
-          <img src={image} alt="" className={['uk-border-circle', createPostStyles.userAvatar].join(' ')} />
+          <UserAvatar username={this.props.authUser.username} />
         </div>
         <div className={['uk-align-center'].join(' ')}>{name}</div>
       </div>);

@@ -4,7 +4,7 @@ import loginReducer from './loginReducer';
 import addContentReducer from './addContentReducer';
 import authUserReducer from './authUserReducer';
 import createPostReducer from '../post/create/CreatePost/reducer';
-import userProfileReducer from './userProfileReducer';
+import userProfileReducer from '../profile/reducer';
 import communitiesReducer from './communitiesReducer';
 import userFeedReducer from './userFeedReducer';
 import allUserReducer from './allUsersReducer';

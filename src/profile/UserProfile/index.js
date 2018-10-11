@@ -9,10 +9,10 @@ import PostCard from '../../post/PostCard';
 import {
   getFollowCount, getUserFeeds, loadUserProfileInfo,
   resetUserProfileInfo,
-} from '../../actions/userProfileActions';
+} from '../actions';
 import { loadHaprampUserDetails } from '../../actions/allUserActions';
 import { getFollowers, getFollowing, follow, unfollow } from '../../actions/followActions';
-import UserAvatar from '../UserAvatar';
+import UserAvatar from '../../components/UserAvatar';
 
 class UserProfile extends React.Component {
   constructor(props) {
