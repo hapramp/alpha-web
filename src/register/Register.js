@@ -58,7 +58,7 @@ class Register extends React.Component {
         <div className="uk-grid" style={{ marginBottom: 40 }}>
           {
             allCommunities.map(community => (
-              <div className={styles.communityContainer} key={community.id}>
+              <div className={`${styles.communityContainer} uk-width-1-4@s uk-width-1-2`} key={community.id}>
                 <CommunityButton
                   isSelected={!!selectedCommunities.find(i => i === community.id)}
                   onClick={this.selectCommunity(community.id)}
