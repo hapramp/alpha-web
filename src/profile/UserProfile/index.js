@@ -11,8 +11,9 @@ import {
   resetUserProfileInfo,
 } from '../actions';
 import { loadHaprampUserDetails } from '../../actions/allUserActions';
-import { getFollowers, getFollowing, follow, unfollow } from '../../actions/followActions';
+import { getFollowers, getFollowing, follow, unfollow } from '../../follow/actions';
 import UserCoverImage from '../UserCoverContainer';
+import FollowButton from '../../follow/FollowButton';
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -23,14 +24,11 @@ class UserProfile extends React.Component {
     props.getFollowers(props.match.params.username);
     props.getFollowing(props.match.params.username);
     this.props.loadHaprampUserDetails(this.props.match.params.username);
-
-    this.followUser = this.followUser.bind(this);
-    this.unFollowUser = this.unFollowUser.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.match.params.username !== this.props.match.params.username &&
-        !newProps.userProfile.loading) {
+      !newProps.userProfile.loading) {
       this.props.loadUserProfileInfo(newProps.match.params.username);
       this.props.loadHaprampUserDetails(newProps.match.params.username);
       this.props.getFollowCount(newProps.match.params.username);
@@ -40,14 +38,6 @@ class UserProfile extends React.Component {
 
   componentWillUnmount() {
     this.props.resetUserProfileInfo();
-  }
-
-  followUser() {
-    this.props.follow(this.props.match.params.username);
-  }
-
-  unFollowUser() {
-    this.props.unfollow(this.props.match.params.username, true);
   }
 
   render() {
@@ -75,9 +65,7 @@ class UserProfile extends React.Component {
         </div>
 
         {this.props.match.params.username !== localStorage.getItem('username') &&
-        <div className={['uk-text-center', styles.followButton].join(' ')}>
-          {this.props.isFollowing ? <button className={['uk-button', 'uk-button-default'].join(' ')} onClick={this.unFollowUser}>Unfollow</button> : <button className={['uk-button', 'uk-button-primary'].join(' ')} onClick={this.followUser}>Follow</button>}
-        </div>}
+          <FollowButton following={this.props.match.params.username} />}
 
         <div className={['uk-margin-top', 'uk-text-center'].join(' ')}>
           <span>{this.props.userProfile.user.post_count} Post{this.props.userProfile.user.post_count === 1 ? '' : 's'}</span>
@@ -99,16 +87,16 @@ class UserProfile extends React.Component {
             <div className={['uk-margin-top', 'uk-margin-bottom', styles.interestsHeader].join(' ')}>INTERESTS</div>
             <div className={['uk-flex'].join(' ')}>
               {this.props.allUsers.haprampUsers[this.props.match.params.username] &&
-              this.props.allUsers.haprampUsers[this.props.match.params.username].communities &&
-              this.props.allUsers.haprampUsers[this.props.match.params.username]
-                .communities
-                .map(community => (
-                  <div key={community.id} className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
-                    <div>
-                      <img className={[styles.communityImage].join(' ')} src={community.image_uri} alt="" />
-                    </div>
-                    <div className={['uk-margin-small-top'].join(' ')}>{community.name}</div>
-                  </div>))}
+                this.props.allUsers.haprampUsers[this.props.match.params.username].communities &&
+                this.props.allUsers.haprampUsers[this.props.match.params.username]
+                  .communities
+                  .map(community => (
+                    <div key={community.id} className={['uk-flex', 'uk-flex-column', 'uk-text-center', 'uk-margin-right'].join(' ')}>
+                      <div>
+                        <img className={[styles.communityImage].join(' ')} src={community.image_uri} alt="" />
+                      </div>
+                      <div className={['uk-margin-small-top'].join(' ')}>{community.name}</div>
+                    </div>))}
             </div>
           </div>
         </div>
@@ -140,8 +128,6 @@ UserProfile.propTypes = {
   getFollowing: PropTypes.func,
   loadHaprampUserDetails: PropTypes.func,
   resetUserProfileInfo: PropTypes.func,
-  follow: PropTypes.func,
-  unfollow: PropTypes.func,
   userProfile: PropTypes.shape({
     user: PropTypes.shape({
       json_metadata: PropTypes.shape({
@@ -160,53 +146,28 @@ UserProfile.propTypes = {
       posts: PropTypes.arrayOf(PropTypes.string),
     }),
   }),
-  isFollowing: PropTypes.bool,
   allUsers: PropTypes.shape({
     haprampUsers: PropTypes.shape({}),
   }),
 };
 
 UserProfile.defaultProps = {
-  loadUserProfileInfo: () => {},
-  getFollowCount: () => {},
-  getUserFeeds: () => {},
-  getFollowers: () => {},
-  getFollowing: () => {},
-  loadHaprampUserDetails: () => {},
-  resetUserProfileInfo: () => {},
-  follow: () => {},
-  unfollow: () => {},
+  loadUserProfileInfo: () => { },
+  getFollowCount: () => { },
+  getUserFeeds: () => { },
+  getFollowers: () => { },
+  getFollowing: () => { },
+  loadHaprampUserDetails: () => { },
+  resetUserProfileInfo: () => { },
   userProfile: {},
-  isFollowing: false,
   allUsers: {},
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const result = {
-    userProfile: state.userProfile,
-    allUsers: state.allUsers,
-  };
+const mapStateToProps = state => ({
+  userProfile: state.userProfile,
+  allUsers: state.allUsers,
+});
 
-  const username = localStorage.getItem('username');
-
-  if (!state.follow[username]) {
-    return { ...result, isFollowing: false };
-  }
-
-  if (!state.follow[username].following) {
-    return { ...result, isFollowing: false };
-  }
-
-  if (!state.follow[username].following.results) {
-    return { ...result, isFollowing: false };
-  }
-
-  if (!state.follow[username].following.results[ownProps.match.params.username]) {
-    return { ...result, isFollowing: false };
-  }
-
-  return { ...result, isFollowing: true };
-};
 
 export default connect(mapStateToProps, {
   loadUserProfileInfo,

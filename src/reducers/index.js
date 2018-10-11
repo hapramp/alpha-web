@@ -11,7 +11,7 @@ import allUserReducer from './allUsersReducer';
 import createArticleReducer from './createArticleReducer';
 import allPostsReducer from '../post/reducer';
 import repliesReducer from '../post/Replies/reducer';
-import followReducer from './followReducer';
+import followReducer from '../follow/reducer';
 import searchReducer from '../search/search.reducer';
 import registerReducer from '../register/reducer';
 

@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.followButton {
+  margin: $bs-rhythmDiv * 4px 0;
+}
+
+.followButton button {
+  border-radius: $bs-rhythmDiv * 4px;
+  font-size: $bs-rhythmDiv * 2px;
+  vertical-align: top;
+  text-transform: uppercase;
+  line-height: $bs-rhythmDiv * 5px;
+}

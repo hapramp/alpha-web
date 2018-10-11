@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { actionTypes } from '../actions/followActions';
+import { actionTypes } from './actions';
 
 const initialState = {};
 /**
@@ -127,9 +127,24 @@ export default (state = initialState, action) => {
         Object.keys(newState[following].followers.results[follower]).length : 0;
       return newState;
 
-      // TODO: Handle error case.. (remove from following/unfollowing)
+    // TODO: Handle error case.. (remove from following/unfollowing)
 
     default:
       return state;
   }
+};
+
+// Selectors
+
+export const isFollowing = (state, follower, following) => {
+  console.log(
+    _.get(state.follow, `[${follower}].following.results[${following}]`, false),
+    _.get(state.follow, `[${follower}].following`, false),
+    state.follow,
+  );
+  return _.get(
+    state.follow,
+    `[${follower}].following.results[${following}]`,
+    false,
+  );
 };
