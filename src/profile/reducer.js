@@ -36,7 +36,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOAD_USER_INFO:
       currentUser.loading = true;
-      currentUser.user = null;
       nextState[username] = currentUser;
       return nextState;
 
@@ -104,3 +103,17 @@ export const getUserProfile = (state, username) => _.get(
 );
 
 export const getUserBlogPosts = (state, username) => getUserProfile(state, username).blog.posts;
+
+export const getUserJSONMetadata = (state, username) => _.get(
+  getUserProfile(state, username),
+  'user.json_metadata',
+  {},
+);
+
+export const getUserName = (state, username) => _.get(
+  getUserProfile(state, username),
+  'user.name',
+  username,
+);
+
+export const isProfileMetaLoading = (state, username) => !getUserProfile(state, username).user;

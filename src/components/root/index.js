@@ -16,7 +16,7 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import Header from '../header';
 import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
-import UserProfile from '../../profile/UserProfile';
+import UserProfile from '../../profile/container';
 import Browse from '../browse';
 import CreateArticle from '../createArticle';
 import ContentSingle from '../contentSingle';

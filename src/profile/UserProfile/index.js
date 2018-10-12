@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { withRouter } from 'react-router';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
@@ -10,18 +9,28 @@ import {
   getUserFeeds, loadUserProfileInfo,
 } from '../actions';
 import { loadHaprampUserDetails } from '../../actions/allUserActions';
-import { getFollowers, getFollowing, follow, unfollow } from '../../follow/actions';
+import { getFollowers, getFollowing } from '../../follow/actions';
 import UserCoverImage from '../UserCoverContainer';
 import FollowButton from '../../follow/FollowButton';
 import { getAuthUsername } from '../../reducers/authUserReducer';
 import UserDataCount from './UserDataCount';
-import { getUserProfile } from '../reducer';
+import { getUserProfile, isProfileMetaLoading, getUserJSONMetadata, getUserName } from '../reducer';
 import UserCommunities from './UserCommunities';
 import UserBlog from './UserBlog';
 
 class UserProfile extends React.Component {
   componentDidMount() {
-    const { username } = this.props.match.params;
+    const { username } = this.props;
+    this.makeNetworkCalls(username);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.username !== newProps.username) {
+      this.makeNetworkCalls(newProps.username);
+    }
+  }
+
+  makeNetworkCalls = (username) => {
     this.props.loadUserProfileInfo(username);
     this.props.getFollowers(username);
     this.props.getFollowing(username);
@@ -29,17 +38,17 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.props.userProfile.user) {
+    if (this.props.isLoading) {
       return (
         <div className={['uk-position-center'].join(' ')}>
           LOADING
         </div>
       );
     }
-    const jsonMetadata = this.props.userProfile.user.json_metadata;
+    const { jsonMetadata } = this.props;
 
     jsonMetadata.profile = _.get(jsonMetadata, 'profile', {});
-    const { username } = this.props.match.params;
+    const { username } = this.props;
 
     return (
       <div className={`uk-container uk-margin-top uk-padding uk-padding-remove-top ${indexStyles.white}`}>
@@ -50,13 +59,13 @@ class UserProfile extends React.Component {
         <div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
           <div>
             <span className={styles.userName}>{jsonMetadata.profile.name}</span>
-            <span className="uk-margin-small-left">@{this.props.userProfile.user.name}</span>
+            <span className="uk-margin-small-left">@{this.props.name}</span>
           </div>
         </div>
 
         {/* (Un)Follow button */}
-        {this.props.match.params.username !== this.props.authUsername &&
-          <FollowButton following={this.props.match.params.username} />}
+        {username !== this.props.authUsername &&
+          <FollowButton following={username} />}
 
         {/* Data count */}
         <UserDataCount username={username} />
@@ -78,27 +87,14 @@ class UserProfile extends React.Component {
 
 UserProfile.propTypes = {
   loadUserProfileInfo: PropTypes.func,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      username: PropTypes.string,
-    }),
-  }).isRequired,
+  username: PropTypes.string.isRequired,
   getFollowers: PropTypes.func,
   getFollowing: PropTypes.func,
   loadHaprampUserDetails: PropTypes.func,
-  userProfile: PropTypes.shape({
-    user: PropTypes.shape({
-      json_metadata: PropTypes.shape({
-        name: PropTypes.string,
-      }),
-      name: PropTypes.string.isRequired,
-      post_count: PropTypes.number.isRequired,
-    }),
-    blog: PropTypes.shape({
-      posts: PropTypes.arrayOf(PropTypes.string),
-    }),
-  }),
   authUsername: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  jsonMetadata: PropTypes.shape({}),
+  name: PropTypes.string.isRequired,
 };
 
 UserProfile.defaultProps = {
@@ -106,20 +102,21 @@ UserProfile.defaultProps = {
   getFollowers: () => { },
   getFollowing: () => { },
   loadHaprampUserDetails: () => { },
-  userProfile: {},
+  jsonMetadata: {},
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  userProfile: getUserProfile(state, ownProps.match.params.username),
+  userProfile: getUserProfile(state, ownProps.username),
   authUsername: getAuthUsername(state),
+  isLoading: isProfileMetaLoading(state, ownProps.username),
+  jsonMetadata: getUserJSONMetadata(state, ownProps.username),
+  name: getUserName(state, ownProps.username),
 });
 
-export default withRouter(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   loadUserProfileInfo,
   getUserFeeds,
   loadHaprampUserDetails,
   getFollowers,
   getFollowing,
-  follow,
-  unfollow,
-})(UserProfile));
+})(UserProfile);
