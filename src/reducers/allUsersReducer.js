@@ -46,3 +46,10 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+// Selectors
+export const getUserCommunities = (state, username) => _.get(
+  state.allUsers,
+  `haprampUsers[${username}].communities`,
+  [],
+);
