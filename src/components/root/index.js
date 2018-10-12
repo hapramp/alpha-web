@@ -16,7 +16,7 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import Header from '../header';
 import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
-import UserProfile from '../../profile/container';
+import UserProfile from '../../profile/UserProfileContainer';
 import Browse from '../browse';
 import CreateArticle from '../createArticle';
 import ContentSingle from '../contentSingle';
@@ -24,6 +24,7 @@ import OAuthCallback from '../OAuthCallback';
 import SignOut from '../SignOut';
 import Search from '../../search';
 import Register from '../../register/Register';
+import EditProfile from '../../profile/EditProfile';
 
 const Root = ({
   isRegistered, isLoggedIn, signOut, authUsername,
@@ -86,6 +87,8 @@ const Root = ({
       <Route exact path="/signout" render={() => <SignOut onSignOut={signOut} />} />
 
       <Route exact path="/search" component={Search} />
+
+      <Route exact path="/profile/edit" component={authRequiredComponent(EditProfile)} />
 
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />

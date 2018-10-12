@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+
+$editor-width: $bs-rhythmDiv * 75px;
+
+.editorInputContainer {
+  width: $editor-width;
+  margin-top: $bs-rhythmDiv * 8px;
+
+  @media screen and (max-width: $editor-width) {
+    width: 100%;
+  }
+}
+
+.inputContainer {
+  margin-bottom: $bs-rhythmDiv * 6px;
+  width: 100%;
+}
+
+.label {
+  font-family: "Roboto";
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.38);
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.inputField {
+  width: 100%;
+  height: $bs-rhythmDiv * 6px;
+  padding: $bs-rhythmDiv * 2px 0;
+  border: 0;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease-out;
+  font-size: $bs-rhythmDiv * 2px;
+  color: rgba(0, 0, 0, 0.38);
+  font-family: "Roboto";
+}
+
+.inputField:focus {
+  transition: all 0.3s ease-in;
+  border-bottom: 2px solid $primary-color;
+}
+
+.saveButton {
+  width: 90px;
+}
