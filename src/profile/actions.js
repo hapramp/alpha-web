@@ -44,3 +44,13 @@ export const getUserFeeds = username => (dispatch, getState, { haprampAPI }) => 
     })
     .catch(reason => dispatch({ type: actionTypes.USER_BLOG_LOAD_FAILED, reason, username }));
 };
+
+export const updateProfile = data => (dispatch, getState, { steemAPI }) => {
+  const url = steemAPI.sc2Api.sign(
+    'profile-update',
+    data,
+  );
+
+  const newWindow = window.open(url, '_blank');
+  newWindow.focus();
+};

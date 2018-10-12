@@ -7,17 +7,20 @@ import PropTypes from 'prop-types';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import UserCoverContainer from '../UserCoverContainer';
 import { getUserJSONMetadata, isProfileMetaLoading } from '../reducer';
-import { loadUserProfileInfo } from '../actions';
+import { loadUserProfileInfo, updateProfile } from '../actions';
 import { getAuthUsername } from '../../reducers/authUserReducer';
 
 import styles from './styles.scss';
 import inputStyles from '../../styles/globals.scss';
+
+const editableKeys = ['name', 'about', 'location', 'website'];
 
 class EditProfile extends React.Component {
   static propTypes = {
     username: PropTypes.string.isRequired,
     loadUserProfileInfo: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    updateProfile: PropTypes.func.isRequired,
   };
 
   state = {
@@ -37,14 +40,25 @@ class EditProfile extends React.Component {
     }
     this.setState({
       name: _.get(newProps, 'JSONMetadata.profile.name', ''),
-      bio: _.get(newProps, 'JSONMetadata.profile.about', ''),
+      about: _.get(newProps, 'JSONMetadata.profile.about', ''),
       location: _.get(newProps, 'JSONMetadata.profile.location', ''),
       website: _.get(newProps, 'JSONMetadata.profile.website', ''),
       coverImage: _.get(newProps, 'JSONMetadata.profile.cover_image', null),
     });
   }
 
-  onUpdate = () => { };
+  onUpdate = () => {
+    const updates = {};
+    editableKeys.forEach((key) => {
+      if (this.state[key] !== _.get(this.props, `JSONMetadata.profile.${key}`, '')) {
+        updates[key] = this.state[key];
+      }
+    });
+    if (Object.keys(updates).length === 0) {
+      return;
+    }
+    this.props.updateProfile(updates);
+  };
 
   changeContent = (event, key) => {
     const { value } = event.target;
@@ -54,7 +68,7 @@ class EditProfile extends React.Component {
   }
 
   changeName = event => this.changeContent(event, 'name');
-  changeBio = event => this.changeContent(event, 'bio');
+  changeAbout = event => this.changeContent(event, 'about');
   changeLocation = event => this.changeContent(event, 'location');
   changeWebsite = event => this.changeContent(event, 'website');
 
@@ -88,8 +102,8 @@ class EditProfile extends React.Component {
               <div>
                 <input
                   className={styles.inputField}
-                  onChange={this.changeBio}
-                  value={this.state.bio}
+                  onChange={this.changeAbout}
+                  value={this.state.about}
                 />
               </div>
             </div>
@@ -135,7 +149,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  loadUserProfileInfo,
+  loadUserProfileInfo, updateProfile,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
