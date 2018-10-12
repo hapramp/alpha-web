@@ -17,6 +17,7 @@ import UserDataCount from './UserDataCount';
 import { getUserProfile, isProfileMetaLoading, getUserJSONMetadata, getUserName } from '../reducer';
 import UserCommunities from './UserCommunities';
 import UserBlog from './UserBlog';
+import EditProfileButton from '../EditProfile/EditProfileButton';
 
 class UserProfile extends React.Component {
   componentDidMount() {
@@ -64,8 +65,15 @@ class UserProfile extends React.Component {
         </div>
 
         {/* (Un)Follow button */}
-        {username !== this.props.authUsername &&
-          <FollowButton following={username} />}
+        {
+          username === this.props.authUsername
+            ? (
+              <div className="uk-text-center">
+                <EditProfileButton />
+              </div>
+            )
+            : <FollowButton following={username} />
+      }
 
         {/* Data count */}
         <UserDataCount username={username} />

@@ -83,7 +83,7 @@ class EditProfile extends React.Component {
       return <div className="uk-position-center">Loading...</div>;
     }
     return (
-      <div className={inputStyles.white}>
+      <div className={`uk-container uk-margin-top uk-padding uk-padding-remove-top ${inputStyles.white}`}>
         <UserCoverContainer username={username} coverImageUrl={this.state.coverImage} />
         <div className="uk-flex uk-flex-center">
           <div className={styles.editorInputContainer}>
