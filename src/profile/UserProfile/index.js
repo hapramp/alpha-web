@@ -6,7 +6,6 @@ import { withRouter } from 'react-router';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
-import PostCard from '../../post/PostCard';
 import {
   getUserFeeds, loadUserProfileInfo,
 } from '../actions';
@@ -18,12 +17,12 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import UserDataCount from './UserDataCount';
 import { getUserProfile } from '../reducer';
 import UserCommunities from './UserCommunities';
+import UserBlog from './UserBlog';
 
 class UserProfile extends React.Component {
   componentDidMount() {
     const { username } = this.props.match.params;
     this.props.loadUserProfileInfo(username);
-    this.props.getUserFeeds(username);
     this.props.getFollowers(username);
     this.props.getFollowing(username);
     this.props.loadHaprampUserDetails(username);
@@ -72,15 +71,7 @@ class UserProfile extends React.Component {
         <UserCommunities username={username} />
 
         {/* User posts */}
-        <div className={['uk-flex', 'uk-flex-center', indexStyles.white, styles.userPostsContainer].join(' ')}>
-          <div className={[styles.blogContainer].join(' ')}>
-            <div className={['uk-margin-medium-top', 'uk-margin-medium-bottom', styles.blogHeader].join(' ')}>LATEST</div>
-            {this.props.userProfile
-              .blog
-              .posts
-              .map(item => <PostCard key={item} postPermlink={item} border />)}
-          </div>
-        </div>
+        <UserBlog username={username} />
       </div>);
   }
 }
@@ -92,7 +83,6 @@ UserProfile.propTypes = {
       username: PropTypes.string,
     }),
   }).isRequired,
-  getUserFeeds: PropTypes.func,
   getFollowers: PropTypes.func,
   getFollowing: PropTypes.func,
   loadHaprampUserDetails: PropTypes.func,
@@ -113,7 +103,6 @@ UserProfile.propTypes = {
 
 UserProfile.defaultProps = {
   loadUserProfileInfo: () => { },
-  getUserFeeds: () => { },
   getFollowers: () => { },
   getFollowing: () => { },
   loadHaprampUserDetails: () => { },

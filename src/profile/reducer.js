@@ -102,3 +102,5 @@ export const getUserProfile = (state, username) => _.get(
   `[${username}]`,
   getEmptyProfileData(),
 );
+
+export const getUserBlogPosts = (state, username) => getUserProfile(state, username).blog.posts;
