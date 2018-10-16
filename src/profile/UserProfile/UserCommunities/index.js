@@ -12,17 +12,19 @@ import PlusButton from '../../../components/buttons/PlusButton';
 
 const UserCommunities = ({ communities, username, authUsername }) => (
   <div className="uk-flex uk-flex-center uk-margin-large-bottom">
-    <div>
+    <div className={styles.interestsContainer}>
       <div className={`uk-margin-top uk-margin-bottom ${styles.interestsHeader}`}>INTERESTS</div>
       <div className="uk-grid">
         {communities
           .map(community => (
-            <CommunityButton
-              key={community.id}
-              community={community}
-              isSelected
-              style={{ marginBottom: 24 }}
-            />
+            <div className="uk-width-1-4@s uk-width-1-3 uk-margin-bottom">
+              <CommunityButton
+                key={community.id}
+                community={community}
+                isSelected
+                className={`${styles.communityContainer}`}
+              />
+            </div>
           ))
         }
         {
