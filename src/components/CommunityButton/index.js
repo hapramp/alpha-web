@@ -39,7 +39,7 @@ export default class CommunityButton extends React.Component {
           style={{
             backgroundColor: (isSelected || hovering) ? community.color : 'transparent',
             borderColor: community.color,
-            padding: 30,
+            padding: 24,
           }}
           onMouseEnter={this.activateHover}
           onMouseLeave={this.deactivateHover}
