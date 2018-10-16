@@ -20,9 +20,12 @@
   margin-bottom: 33px;
 }
 
+.communityContainer * img {
+  height: unset;
+}
+
 .communityButton {
   width: 80px !important;
-  height: 80px !important;
   margin: auto;
 }
 

@@ -5,29 +5,23 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import { getUserCommunities } from '../../../reducers/allUsersReducer';
 
+import CommunityButton from '../../../components/CommunityButton';
+
 const UserCommunities = ({ communities }) => (
   <div className="uk-flex uk-flex-center uk-margin-large-bottom">
     <div>
       <div className={`uk-margin-top uk-margin-bottom ${styles.interestsHeader}`}>INTERESTS</div>
-      <div className="uk-flex">
+      <div className="uk-grid">
         {communities
           .map(community => (
-            <div
+            <CommunityButton
               key={community.id}
-              className="uk-flex uk-flex-column uk-text-center uk-margin-right"
-            >
-              <div>
-                <img
-                  className={styles.communityImage}
-                  src={community.image_uri}
-                  alt={community.name[0]}
-                />
-              </div>
-              <div className="uk-margin-small-top">
-                {community.name}
-              </div>
-            </div>
-          ))}
+              community={community}
+              isSelected
+              style={{ marginBottom: 24 }}
+            />
+          ))
+        }
       </div>
     </div>
   </div>
