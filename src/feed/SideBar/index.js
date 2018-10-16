@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
-import UserAvatar from '../../components/UserAvatar';
 import appIcon from './app_icon.png';
+
+import CommunityButton from '../../components/CommunityButton';
+import UserAvatar from '../../components/UserAvatar';
 
 const Sidebar = props => (
   <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
@@ -37,18 +39,25 @@ const Sidebar = props => (
       </div>
       <div className={`uk-margin-top ${styles.communitiesHeader}`}>COMMUNITIES</div>
       <div>
-        {props.communities.map(community => (
-          <Link key={community.id} to={`/feed/${community.tag}`}>
-            <div
-              className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${
-                props.location.pathname.split('/')[2] === community.tag ? styles.active : ''
-                }`}
-            >
-              <img src={community.image_uri} className={`uk-border-circle ${styles.communityImage}`} alt="" />
-              <span className="uk-margin-left">{community.name}</span>
-            </div>
-          </Link>
-        ))}
+        {props.communities.map((community) => {
+          const isActive = props.location.pathname.split('/')[2] === community.tag;
+          return (
+            <Link key={community.id} to={`/feed/${community.tag}`}>
+              <div
+                className={`uk-margin-top uk-flex ${styles.communityContainer} ${indexStyles.transition} ${
+                  isActive ? styles.active : ''
+                  }`}
+              >
+                <CommunityButton
+                  community={community}
+                  isSelected={isActive}
+                  className={styles.communityButton}
+                />
+                <span className={`uk-margin-left ${styles.communityLabel}`}>{community.name}</span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   </div>

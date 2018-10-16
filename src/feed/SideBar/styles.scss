@@ -32,3 +32,18 @@
   opacity: 1;
   font-weight: 500;
 }
+
+.communityButton * img {
+  width: 24px;
+  height: 24px;
+}
+
+.communityButton > div {
+  padding: 12px !important;
+}
+
+.communityLabel {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
