@@ -23,7 +23,7 @@ import ContentSingle from '../contentSingle';
 import OAuthCallback from '../OAuthCallback';
 import SignOut from '../SignOut';
 import Search from '../../search';
-import Register from '../../register/Register';
+import SelectCommunities from '../../register/SelectCommunities';
 import EditProfile from '../../profile/EditProfile';
 
 const Root = ({
@@ -35,7 +35,7 @@ const Root = ({
       <Route
         exact
         path="/select-communities"
-        component={authRequiredComponent(Register)}
+        component={authRequiredComponent(SelectCommunities)}
       />
       {!isRegistered && <Redirect to="/select-communities" />}
 

@@ -1,0 +1,16 @@
+.container {
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  text-align: center;
+  position: inside;
+  transition: all 0.3s ease-in;
+  display: flex;
+  padding: 30px;
+}
+
+.communityIcon {
+  width: 32px;
+  height: 32px;
+}

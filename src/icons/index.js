@@ -2,7 +2,7 @@
 export const getIconReal = path => require(__dirname + path);
 /* eslint-enable */
 
-const getIcon = (name, type) => getIconReal(`/${type}/${name}.svg`);
+export const getIcon = (name, type) => getIconReal(`/${type}/${name}.svg`);
 
 const communityIconMap = {
   art: 'art',
