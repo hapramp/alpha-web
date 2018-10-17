@@ -12,8 +12,8 @@ import UserAvatar from '../../components/UserAvatar';
 
 const Sidebar = props => (
   <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
-    <div style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 188px)' }}>
-      <div>
+    <div className={`${styles.flexTill985} ${styles.sideBarMidContainer}`} style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 188px)' }}>
+      <div className={`${styles.flexTill985}`}>
         {props.username && (
           <Link to="/feed">
             <div
@@ -22,7 +22,7 @@ const Sidebar = props => (
                 }`}
             >
               <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
-              <span className="uk-margin-left">Feed</span>
+              <span className={`uk-margin-left ${styles.communityLabel}`}>Feed</span>
             </div>
           </Link>
         )}
@@ -33,12 +33,12 @@ const Sidebar = props => (
               }`}
           >
             <img src={appIcon} className={`uk-border-circle ${styles.communityImage}`} alt="" />
-            <span className="uk-margin-left">New</span>
+            <span className={`uk-margin-left ${styles.communityLabel}`}>New</span>
           </div>
         </Link>
       </div>
-      <div className={`uk-margin-top ${styles.communitiesHeader}`}>COMMUNITIES</div>
-      <div>
+      <div className={`uk-margin-top ${styles.communitiesHeader} ${styles.hideTill985}`}>COMMUNITIES</div>
+      <div className={`${styles.flexTill985}`}>
         {props.communities.map((community) => {
           const isActive = props.location.pathname.split('/')[2] === community.tag;
           return (
