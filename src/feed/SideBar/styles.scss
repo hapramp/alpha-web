@@ -2,7 +2,34 @@
 
 .sideBarContainer {
 	position: fixed;
-	width: 240px;
+  width: 240px;
+  
+  @media screen and (max-width: 985px) {
+    width: 100%;
+    left: 0;
+    margin-top: 0 !important;
+    padding: 15px !important;
+    height: 120px;
+    overflow-y: hidden;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding-top: 0 !important;
+    height: 90px;
+  }
+
+}
+
+.sideBarMidContainer {
+  @media screen and (min-width: 825px) and (max-width: 985px) {
+    justify-content: center;
+    margin-right: 30px;
+  }
+
+  @media screen and (max-width: 825px) {
+    height: 150px;
+  }
+
 }
 
 .communityImage img {
@@ -21,16 +48,57 @@
 
 .active {
   border-right: 4px solid $primary-color !important;
+
+  @media screen and (max-width: 985px) {
+    border-right: 0 !important;
+    font-weight: 400
+   }
+
+}
+
+.flexTill985 {
+  @media screen and (max-width: 985px) {
+    display: flex;
+  }
+}
+
+.hideTill985 {
+  @media screen and (max-width: 985px) {
+    display: none;
+  }
 }
 
 .communityContainer {
   opacity: 0.7;
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (max-width: 985px) {
+    width: 80px;
+    flex-direction: column;
+    align-items: center;
+    word-break: break-all;
+    text-align: center
+  }
+
 }
 
 .communityContainer:hover, .communityContainer.active {
   border-right: 4px solid $primary-light-color;
   opacity: 1;
   font-weight: 500;
+
+  @media screen and (max-width: 985px) {
+   border-right: 0;
+   font-weight: 400
+  }
+}
+
+.communityButton {
+  @media screen and (max-width: 985px) {
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .communityButton * img {
@@ -46,4 +114,13 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
+
+  @media screen and (max-width: 985px) {
+    margin-left: 0 !important;
+    margin-top: 4px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: $fs-x-small;
+  }
 }

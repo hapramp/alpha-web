@@ -1,7 +1,31 @@
 .feedPosts {
     width: 600px;
+    
+    @media screen and (max-width: 985px) {
+        margin-top: 160px !important
+    }
+
+    @media screen and (max-width: 480px) {
+        margin-top:  112px !important;
+      }
+}
+
+.justifyCenterOn985 {
+    @media screen and (max-width: 985px) {
+        justify-content: center
+    }
 }
 
 .sidebarContainer {
     width: 275px;
+    justify-content: center;
+
+    @media screen and (max-width: 985px) {
+        width: calc(100vw - 110px);
+    }
+
+    @media screen and (max-width: 960px) {
+    width: calc(100vw - 90px);
+    }
+    
 }
