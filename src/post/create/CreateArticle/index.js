@@ -60,7 +60,10 @@ class CreateArticle extends React.Component {
           value={this.props.createArticle.title}
         />
         <div className={['uk-margin-top'].join(' ')}>
-          <Editor handleContentChange={this.handleContentChange} />
+          <Editor
+            handleContentChange={this.handleContentChange}
+            uploadCallback={this.uploadCallback}
+          />
         </div>
       </div>);
   }

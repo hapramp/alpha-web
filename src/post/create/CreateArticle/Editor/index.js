@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import { getEditorConfig } from '../constants';
 import styles from './styles.scss';
+
 import Inline from './Inline';
+import BlockToggle from './BlockToggle';
 
 const CustomEditor = ({ handleContentChange, uploadCallback }) => (
   <Editor
@@ -14,6 +16,9 @@ const CustomEditor = ({ handleContentChange, uploadCallback }) => (
       ...getEditorConfig({ uploadCallback }),
       inline: {
         component: Inline,
+      },
+      blockType: {
+        component: BlockToggle,
       },
     }}
     toolbarClassName={styles.editorActionBar}

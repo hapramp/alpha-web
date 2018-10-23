@@ -24,7 +24,7 @@ export default class Inline extends React.Component {
       onClick={this.onChange(property, !active)}
       onKeyUp={() => {}}
       role="button"
-      tabIndex={0}
+      tabIndex={-1}
     >
       <img src={getIcon(icon, 'outline')} alt="B" />
     </div>
