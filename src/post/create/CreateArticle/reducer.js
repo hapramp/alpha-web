@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/createArticleActions';
+import { actionTypes } from './actions';
 
 const initialState = { title: '', content: '' };
 

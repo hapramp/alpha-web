@@ -8,7 +8,7 @@ import userProfileReducer from '../profile/reducer';
 import communitiesReducer from './communitiesReducer';
 import userFeedReducer from './userFeedReducer';
 import allUserReducer from './allUsersReducer';
-import createArticleReducer from './createArticleReducer';
+import createArticleReducer from '../post/create/CreateArticle/reducer';
 import allPostsReducer from '../post/reducer';
 import repliesReducer from '../post/Replies/reducer';
 import followReducer from '../follow/reducer';

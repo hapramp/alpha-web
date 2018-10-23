@@ -1,26 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Editor } from 'react-draft-wysiwyg';
 import PropTypes from 'prop-types';
-// import draftToHtml from 'draftjs-to-html';  // To convert to HTML
+import draftToHtml from 'draftjs-to-html'; // To convert to HTML
 
+import Editor from './Editor';
 import styles from './styles.scss';
-import createPostStyles from '../../post/create/CreatePost/styles.scss';
-import indexStyles from '../../styles/globals.scss';
-import { setTitle, setContent } from '../../actions/createArticleActions';
-import UserAvatar from '../UserAvatar';
-
-/*
-TODO:
- - Implement draft saving
- */
+import indexStyles from '../../../styles/globals.scss';
+import { setTitle, setContent } from './actions';
+import UserAvatar from '../../../components/UserAvatar';
 
 class CreateArticle extends React.Component {
   static getContinueSection() {
     return (
       <div className={['uk-flex'].join(' ')}>
         <div className={['uk-flex', 'uk-flex-column', 'uk-flex-center', 'uk-link'].join(' ')}>
-          <span className={[createPostStyles.publishButton, indexStyles.hoverEffect, indexStyles.transition].join(' ')}>
+          <span className={[indexStyles.hoverEffect, indexStyles.transition].join(' ')}>
             CONTINUE
           </span>
         </div>
@@ -65,16 +59,28 @@ class CreateArticle extends React.Component {
           onChange={this.handleTitleChange}
           value={this.props.createArticle.title}
         />
-        <div className={['uk-margin-large-top'].join(' ')}>
-          <Editor
-            placeholder="Write your story here..."
-            onChange={this.handleContentChange}
-          />
+        <div className={['uk-margin-top'].join(' ')}>
+          <Editor handleContentChange={this.handleContentChange} />
         </div>
       </div>);
   }
 
+  uploadCallback = (e) => {
+    // TODO: Do the actual upload and return link
+    const reader = new FileReader();
+    reader.readAsDataURL(e);
+    return new Promise((resolve) => {
+      reader.onload = (f) => {
+        console.log(f);
+        resolve({
+          data: { link: f.target.result },
+        });
+      };
+    });
+  }
+
   handleContentChange(content) {
+    console.log(draftToHtml(content));
     this.props.setContent(content);
   }
 
@@ -86,7 +92,6 @@ class CreateArticle extends React.Component {
     return (
       <div className={['uk-container', 'uk-margin-large-top'].join(' ')}>
         <div className={['uk-padding', indexStyles.white].join(' ')}>
-          {this.getTopSection()}
           {this.getEditorSection()}
         </div>
       </div>);

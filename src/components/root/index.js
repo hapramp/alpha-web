@@ -18,7 +18,7 @@ import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
 import UserProfile from '../../profile/UserProfileContainer';
 import Browse from '../browse';
-import CreateArticle from '../createArticle';
+import CreateArticle from '../../post/create/CreateArticle';
 import ContentSingle from '../contentSingle';
 import OAuthCallback from '../OAuthCallback';
 import SignOut from '../SignOut';
