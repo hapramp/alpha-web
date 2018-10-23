@@ -15,3 +15,24 @@
   padding-left: 16px;
   border-left: 4px solid $background-color;
 }
+
+.inputBox {
+  top: calc(100vh - 321px) !important;
+  left: 0 !important;
+}
+
+.toggleButton div {
+  border: none !important;
+}
+
+.toggleButton div:hover {
+  box-shadow: none !important;
+}
+
+.toggleButton {
+  border: none !important;
+}
+
+.toggleButton:hover {
+  box-shadow: none !important;
+}
