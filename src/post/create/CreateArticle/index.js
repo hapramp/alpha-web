@@ -6,7 +6,7 @@ import draftToHtml from 'draftjs-to-html'; // To convert to HTML
 import Editor from './Editor';
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
-import { setTitle, setContent } from './actions';
+import { setTitle, setContent, uploadImage } from './actions';
 import UserAvatar from '../../../components/UserAvatar';
 
 class CreateArticle extends React.Component {
@@ -68,19 +68,10 @@ class CreateArticle extends React.Component {
       </div>);
   }
 
-  uploadCallback = (e) => {
-    // TODO: Do the actual upload and return link
-    const reader = new FileReader();
-    reader.readAsDataURL(e);
-    return new Promise((resolve) => {
-      reader.onload = (f) => {
-        console.log(f);
-        resolve({
-          data: { link: f.target.result },
-        });
-      };
-    });
-  }
+  uploadCallback = e => this.props.uploadImage(e)
+    .then(({ url }) => ({
+      data: { link: url },
+    }));
 
   handleContentChange(content) {
     console.log(draftToHtml(content));
@@ -112,6 +103,7 @@ CreateArticle.propTypes = {
   createArticle: PropTypes.shape({
     title: PropTypes.string,
   }),
+  uploadImage: PropTypes.func.isRequired,
 };
 
 CreateArticle.defaultProps = {
@@ -133,5 +125,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  setTitle, setContent,
+  setTitle, setContent, uploadImage,
 })(CreateArticle);
