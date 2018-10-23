@@ -13,3 +13,9 @@
     justify-content: flex-start !important;
   }
 }
+
+.editorWrapper {
+  position: relative;
+  padding-bottom: 80px;
+  min-height: calc(100vh - 378px);
+}

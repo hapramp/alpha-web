@@ -13,6 +13,7 @@ const CustomEditor = ({ handleContentChange, uploadCallback }) => (
   <Editor
     placeholder="Write your story here..."
     onChange={handleContentChange}
+    wrapperClassName={styles.editorWrapper}
     toolbar={{
       ...getEditorConfig({ uploadCallback }),
       inline: {
