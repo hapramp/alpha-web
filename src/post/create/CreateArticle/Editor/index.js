@@ -7,6 +7,7 @@ import styles from './styles.scss';
 
 import Inline from './Inline';
 import BlockToggle from './BlockToggle';
+import ListToggle from './ListToggle';
 
 const CustomEditor = ({ handleContentChange, uploadCallback }) => (
   <Editor
@@ -19,6 +20,9 @@ const CustomEditor = ({ handleContentChange, uploadCallback }) => (
       },
       blockType: {
         component: BlockToggle,
+      },
+      list: {
+        component: ListToggle,
       },
     }}
     toolbarClassName={styles.editorActionBar}
