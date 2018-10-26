@@ -31,6 +31,7 @@ class CreateArticle extends React.Component {
           <Editor
             handleContentChange={this.handleContentChange}
             uploadCallback={this.uploadCallback}
+            editorState={this.props.createArticle.content}
           />
           <Link to="/create/article/next">
             <PrimaryButton className={styles.nextButton}>
@@ -69,6 +70,7 @@ CreateArticle.propTypes = {
   setTitle: PropTypes.func,
   createArticle: PropTypes.shape({
     title: PropTypes.string,
+    content: PropTypes.shape({}),
   }),
   uploadImage: PropTypes.func.isRequired,
 };
@@ -78,6 +80,7 @@ CreateArticle.defaultProps = {
   setTitle: () => {},
   createArticle: {
     title: '',
+    content: {},
   },
 };
 

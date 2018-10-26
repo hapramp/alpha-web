@@ -1,10 +1,11 @@
+import { EditorState } from 'draft-js';
 import _ from 'lodash';
 
 import { actionTypes } from './actions';
 
 const initialState = {
   title: '',
-  content: '',
+  content: EditorState.createEmpty(),
   communities: [],
   tags: [],
 };

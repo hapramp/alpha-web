@@ -9,10 +9,11 @@ import Inline from './Inline';
 import BlockToggle from './BlockToggle';
 import ListToggle from './ListToggle';
 
-const CustomEditor = ({ handleContentChange, uploadCallback }) => (
+const CustomEditor = ({ handleContentChange, uploadCallback, editorState }) => (
   <Editor
     placeholder="Write your story here..."
-    onChange={handleContentChange}
+    onEditorStateChange={handleContentChange}
+    editorState={editorState}
     wrapperClassName={styles.editorWrapper}
     toolbar={{
       ...getEditorConfig({ uploadCallback }),
@@ -33,11 +34,13 @@ const CustomEditor = ({ handleContentChange, uploadCallback }) => (
 CustomEditor.propTypes = {
   handleContentChange: PropTypes.func,
   uploadCallback: PropTypes.func,
+  editorState: PropTypes.shape({}),
 };
 
 CustomEditor.defaultProps = {
   handleContentChange: () => {},
   uploadCallback: () => {},
+  editorState: {},
 };
 
 export default CustomEditor;
