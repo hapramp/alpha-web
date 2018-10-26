@@ -17,3 +17,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export const getAllCommunities = state => state.communities.communities || [];

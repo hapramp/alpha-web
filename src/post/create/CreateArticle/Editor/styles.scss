@@ -2,16 +2,12 @@
   bottom: 0;
   left: 0;
   position: absolute;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   right: 0;
   padding: 16px 8px 8px 8px !important;
   flex-flow: row !important;
   overflow-x: auto;
   height: 40px;
-
-  @media screen and (max-width: 850px) {
-    justify-content: flex-start !important;
-  }
 }
 
 .editorWrapper {

@@ -25,6 +25,7 @@ import SignOut from '../SignOut';
 import Search from '../../search';
 import SelectCommunities from '../../register/SelectCommunities';
 import EditProfile from '../../profile/EditProfile';
+import ArticleNext from '../../post/create/CreateArticle/ArticleNext';
 
 const Root = ({
   isRegistered, isLoggedIn, signOut, authUsername,
@@ -61,6 +62,7 @@ const Root = ({
       {/* Content Creation Views */}
       <Route exact path="/create/post" component={authRequiredComponent(CreatePost)} />
       <Route exact path="/create/article" component={authRequiredComponent(CreateArticle)} />
+      <Route exact path="/create/article/next" component={authRequiredComponent(ArticleNext)} />
       <Redirect path="/create" to="/create/post" />
 
       {/* Profile redirect logic */}

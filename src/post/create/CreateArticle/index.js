@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Editor from './Editor';
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
 import { setTitle, setContent, uploadImage } from './actions';
+import PrimaryButton from '../../../components/buttons/PrimaryButton';
 
 class CreateArticle extends React.Component {
   constructor(props) {
@@ -20,16 +22,21 @@ class CreateArticle extends React.Component {
       <div>
         <input
           placeholder="Title"
-          className={['uk-input', 'uk-form-large', styles.titleInput].join(' ')}
+          className={`uk-input uk-form-large ${styles.titleInput}`}
           type="text"
           onChange={this.handleTitleChange}
           value={this.props.createArticle.title}
         />
-        <div className={['uk-margin-top'].join(' ')}>
+        <div className="uk-margin-top uk-position-relative">
           <Editor
             handleContentChange={this.handleContentChange}
             uploadCallback={this.uploadCallback}
           />
+          <Link to="/create/article/next">
+            <PrimaryButton className={styles.nextButton}>
+              Next
+            </PrimaryButton>
+          </Link>
         </div>
       </div>);
   }
