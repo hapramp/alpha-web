@@ -63,7 +63,7 @@ export const uploadMedia = (media, haprampAPI) => {
   return Promise.resolve();
 };
 
-const addFooter = (body, author, permlink) => {
+export const addFooter = (body, author, permlink) => {
   const webLink = `https://alpha.1ramp.io/@${author}/${permlink}`;
   return `${body}\n
   <div id="1ramp-footer" />

@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       return { ...state, tags: _.uniq(tags) };
 
     case actionTypes.REMOVE_TAG:
-      tags = state.tags.filter(tag => tag === action.tag);
+      tags = state.tags.filter(tag => tag !== action.tag);
       return { ...state, tags };
 
     default:
@@ -43,4 +43,25 @@ export default (state = initialState, action) => {
   }
 };
 
+// Selectors
 export const getSelectedCommunities = state => state.createArticle.communities;
+
+export const getActiveTags = state => state.createArticle.tags || [];
+
+export const isArticlePublishable = (state) => {
+  const articleState = state.createArticle;
+
+  // TODO: Also check for content
+  if (
+    articleState.title.length === 0
+    || articleState.communities.length === 0
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+export const getArticleContent = state => state.createArticle.content;
+
+export const getArticleTitle = state => state.createArticle.title;
