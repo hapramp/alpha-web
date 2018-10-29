@@ -5,6 +5,7 @@
 import steem from 'steem';
 import Promise from 'bluebird';
 import _ from 'lodash';
+import getSlug from 'speakingurl';
 
 import sc2 from '../lib/sc2';
 import constants from './constants';
@@ -57,6 +58,20 @@ const createJsonMetadataFromTags = (tags) => {
     tags,
     app: appName,
   };
+};
+
+// https://github.com/busyorg/busy/blob/dfb438859b192677d34192dd4a5c24d42118f4b0/src/client/vendor/steemitHelpers.js
+const slug = text => getSlug(text.replace(/[<>]/g, ''), { truncate: 128 });
+
+const checkPermLinkLength = (permlink) => {
+  let newPermlink = permlink;
+  if (newPermlink.length > 255) {
+    // STEEMIT_MAX_PERMLINK_LENGTH
+    newPermlink = permlink.substring(permlink.length - 255, permlink.length);
+  }
+  // only letters numbers and dashes shall survive
+  newPermlink = permlink.toLowerCase().replace(/[^a-z0-9-]+/g, '');
+  return permlink;
 };
 
 steem.api.setOptions({ url: 'https://api.steemit.com' });
@@ -131,6 +146,37 @@ class SteemAPI {
       transaction,
       steem.auth.signTransaction(transaction, [postingKey]),
     ));
+  }
+
+  static createPermlink(title, author, parentAuthor, parentPermlink) {
+    let permlink;
+    const timeStr = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '');
+    if (title && title.trim() !== '') {
+      let s = slug(title);
+      if (s === '') {
+        s = `${timeStr}-post`;
+      }
+
+      return this.loadPost(author, s)
+        .then((content) => {
+          console.log(content);
+          let prefix;
+          if (content.posts[0].body !== '') {
+            // make sure slug is unique
+            prefix = `${timeStr}-`;
+          } else {
+            prefix = '';
+          }
+          permlink = prefix + s;
+          return checkPermLinkLength(permlink);
+        })
+        .catch((err) => {
+          console.warn('Error while getting content', err);
+          return timeStr;
+        });
+    }
+    permlink = `re-${parentAuthor}-${parentPermlink.replace(/(-\d{8}t\d{9}z)/g, '')}-${timeStr}`;
+    return Promise.resolve(checkPermLinkLength(permlink));
   }
 
   static getUserAccount(username) {
@@ -278,14 +324,14 @@ SteemAPI.sc2Operations = {
   // Getting URL for logging in to the app. Opens SteemConnect OAuth page
   getLoginURL: state => SteemAPI.sc2Api.getLoginURL(state || {}),
   // Create a post given the parameters
-  createPost: (author, body, tags, content, permlink) =>
+  createPost: (author, body, tags, content, permlink, title = '') =>
     new Promise((resolve, reject) => {
       const commentObj = {
         parentAuthor: '',
         parentPermlink: 'hapramp',
         author,
         permlink,
-        title: '',
+        title,
         body,
         jsonMetadata: {
           tags,

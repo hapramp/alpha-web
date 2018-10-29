@@ -9,7 +9,7 @@ const CommunitySelector = ({
   <div {...props} className={`${className} ${styles.container}`}>
     <div style={{ color: 'rgba(0, 0, 0, 0.38)', marginBottom: 8 }}>
       <span style={{ fontSize: 14 }}>
-        Select Community
+        Select Communities (Max 3)
       </span>
     </div>
     <div style={{ height: 24 }}>

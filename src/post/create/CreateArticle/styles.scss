@@ -1,0 +1,44 @@
+@import "../../../styles/_variables.scss";
+
+.userSection {
+  height: 72px;
+  padding-right: 16px;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.topSection {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.titleInput {
+  border: none;
+  padding-left: 16px;
+  border-left: 4px solid $background-color;
+}
+
+.inputBox {
+  top: calc(100vh - 360px) !important;
+  left: calc(50vw - 104px) !important;
+}
+
+.toggleButton div {
+  border: none !important;
+}
+
+.toggleButton div:hover {
+  box-shadow: none !important;
+}
+
+.toggleButton {
+  border: none !important;
+}
+
+.toggleButton:hover {
+  box-shadow: none !important;
+}
+
+.nextButton {
+  position: absolute;
+  right: 16px;
+  bottom: 18px;
+}

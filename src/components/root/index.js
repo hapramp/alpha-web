@@ -18,13 +18,14 @@ import Feed from '../../feed';
 import CreatePost from '../../post/create/CreatePost';
 import UserProfile from '../../profile/UserProfileContainer';
 import Browse from '../browse';
-import CreateArticle from '../createArticle';
+import CreateArticle from '../../post/create/CreateArticle';
 import ContentSingle from '../contentSingle';
 import OAuthCallback from '../OAuthCallback';
 import SignOut from '../SignOut';
 import Search from '../../search';
 import SelectCommunities from '../../register/SelectCommunities';
 import EditProfile from '../../profile/EditProfile';
+import ArticleNext from '../../post/create/CreateArticle/ArticleNext';
 import BottomBar from '../bottomBar';
 
 
@@ -94,6 +95,7 @@ const Root = ({
       {/* Content Creation Views */}
       <Route exact path="/create/post" component={authRequiredComponent(CreatePost)} />
       <Route exact path="/create/article" component={authRequiredComponent(CreateArticle)} />
+      <Route exact path="/create/article/next" component={authRequiredComponent(ArticleNext)} />
       <Redirect path="/create" to="/create/post" />
 
       {/* Profile redirect logic */}
