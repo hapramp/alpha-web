@@ -26,9 +26,42 @@ import Search from '../../search';
 import SelectCommunities from '../../register/SelectCommunities';
 import EditProfile from '../../profile/EditProfile';
 import ArticleNext from '../../post/create/CreateArticle/ArticleNext';
+import BottomBar from '../bottomBar';
+
+
+const bottomBarWhitelistURLs = [
+  '^/feed/.*$',
+  '^/@.*$',
+];
+
+const bottomBarBlacklistURLs = [
+  '^/@.*?/.*$',
+];
+const showBottomBar = (location, authUsername) => {
+  // Special case for not showing bottom bar on other's profiles
+  if (
+    (location.match('^/@.*?') !== null) // is a profile root
+    && (location.match('^/@.*?/.*$') === null) // is not post
+    && location !== `/@${authUsername}`
+  ) {
+    return false;
+  }
+
+  const hasWhitelist = bottomBarWhitelistURLs.reduce(
+    (acc, curr) => acc || (location.match(curr) !== null),
+    false,
+  );
+
+  const hasBlackList = bottomBarBlacklistURLs.reduce(
+    (acc, curr) => acc || (location.match(curr) !== null),
+    false,
+  );
+
+  return hasWhitelist && !hasBlackList;
+};
 
 const Root = ({
-  isRegistered, isLoggedIn, signOut, authUsername,
+  isRegistered, isLoggedIn, signOut, authUsername, bottomBarVisible,
 }) => (
   <div style={{ backgroundColor: '#FAFAFA' }}>
     <Header />
@@ -95,6 +128,7 @@ const Root = ({
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />
     </Switch>
+    {bottomBarVisible && <BottomBar />}
   </div>
 );
 
@@ -103,12 +137,14 @@ Root.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   signOut: PropTypes.func.isRequired,
   authUsername: PropTypes.string.isRequired,
+  bottomBarVisible: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   isRegistered: isUserRegisteredOn1Ramp(state),
   isLoggedIn: isUserLoggedIn(state),
   authUsername: getAuthUsername(state),
+  bottomBarVisible: showBottomBar(ownProps.location.pathname, getAuthUsername(state)),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
