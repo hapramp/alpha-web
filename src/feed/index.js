@@ -5,7 +5,6 @@ import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 import UserFeed from './UserFeed';
 import TagFeed from './TagFeed';
 import NewFeed from './NewFeed';
-import AddContentButton from '../components/addContentButton';
 import Sidebar from './SideBar';
 import styles from './styles.scss';
 
@@ -28,7 +27,6 @@ const Feed = () => (
         <Route exact path="/feed/new" component={NewFeed} />
         <Route exact path="/feed/:tag" component={TagFeed} />
       </Switch>
-      <AddContentButton />
     </div>
   </div>
 );
