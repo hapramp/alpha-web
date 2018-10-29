@@ -8,6 +8,9 @@ const initialState = {
   content: EditorState.createEmpty(),
   communities: [],
   tags: [],
+  create: {
+    creating: false,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -38,6 +41,18 @@ export default (state = initialState, action) => {
       tags = state.tags.filter(tag => tag !== action.tag);
       return { ...state, tags };
 
+    case actionTypes.CREATE_INIT:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          creating: true,
+        },
+      };
+
+    case actionTypes.CREATE_DONE:
+      return initialState;
+
     default:
       return state;
   }
@@ -56,6 +71,10 @@ export const isArticlePublishable = (state) => {
     articleState.title.length === 0
     || articleState.communities.length === 0
   ) {
+    return false;
+  }
+
+  if (articleState.create.creating) {
     return false;
   }
 

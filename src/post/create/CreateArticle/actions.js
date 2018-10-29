@@ -1,4 +1,5 @@
 import { stateToHTML } from 'draft-js-export-html';
+import { push } from 'connected-react-router';
 
 import { getAuthUsername } from '../../../reducers/authUserReducer';
 import { getArticleContent, getActiveTags, getSelectedCommunities, getArticleTitle } from './reducer';
@@ -53,13 +54,32 @@ export const createArticle = () => async (dispatch, getState, { steemAPI, notify
   const contentHTML = stateToHTML(articleContent.getCurrentContent());
   const contentHTMLWithFooter = addFooter(contentHTML, author, permlink);
 
-  dispatch({ type: actionTypes.CREATE_INIT });
+  dispatch({
+    type: actionTypes.CREATE_INIT,
+    author,
+    tags,
+    communities,
+    title,
+    content: contentHTMLWithFooter,
+    permlink,
+    allTags,
+  });
 
   return steemAPI.sc2Operations.createPost(
     author, contentHTMLWithFooter, allTags,
     articleContent, permlink, title,
   ).then(() => {
     notify.success('Article created!');
-    // TODO: Redirect to post using router
+    dispatch(push(`/@${author}/${permlink}`));
+    return dispatch({
+      type: actionTypes.CREATE_DONE,
+      author,
+      tags,
+      communities,
+      title,
+      content: contentHTMLWithFooter,
+      permlink,
+      allTags,
+    });
   });
 };
