@@ -11,7 +11,7 @@ import CommunityButton from '../../../components/CommunityButton';
 import PlusButton from '../../../components/buttons/PlusButton';
 
 const UserCommunities = ({ communities, username, authUsername }) => (
-  <div className="uk-flex uk-flex-center uk-margin-large-bottom">
+  <div className={`uk-flex uk-flex-center ${styles.communityWrapper}`}>
     <div className={styles.interestsContainer}>
       <div className={`uk-margin-top uk-margin-bottom ${styles.interestsHeader}`}>INTERESTS</div>
       <div className="uk-grid">

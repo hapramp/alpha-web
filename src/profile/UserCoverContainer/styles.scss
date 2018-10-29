@@ -1,20 +1,30 @@
 .profileCoverContainer {
-  margin: 0 -40px;
   height: 300px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   background-size: cover;
+  width: 100vw;
 }
 
-.profileImage img {
+.profileImage {
   width: 150px;
   height: 150px;
+  display: inline-block;
+  background-size: cover;
   margin-top: -75px;
   position: relative;
+  background-position: center;
 }
 
-.profileImageNoCover img {
-  width: 150px;
-  position: relative;
+.coverPlaceholder {
+  background-color: #3f72af1c;
+  height: 48px;
+  width: 100vw;
+  min-height: 176px;
+  color: #0000001c;
+  display: flex;
+  font-size: 48px;
+  justify-content: center;
+  line-height: 110px;
 }

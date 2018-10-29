@@ -16,7 +16,7 @@ const secureUserFeed = connectedRouterRedirect({
 
 const Feed = () => (
   <div className="uk-container">
-    <div uk-grid="true" className={`${styles.justifyCenterOn985}`}>
+    <div uk-grid="true" className={`${styles.justifyCenterOn985} ${styles.feedWrapper}`}>
       <div className={styles.sidebarContainer}>
         <Sidebar />
       </div>

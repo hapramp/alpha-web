@@ -11,13 +11,13 @@ const UserAvatar = ({
 }) => {
   const realSize = allowedSizes.filter(i => i === size)[0] || 'medium';
   return (
-    <Link to={`/@${username}`} {...props}>
-      <img
-        src={`https://steemitimages.com/u/${username}/avatar/${realSize}`}
-        className="uk-border-circle"
-        alt=""
-      />
-    </Link>
+    <Link
+      to={`/@${username}`}
+      {...props}
+      style={{
+      backgroundImage: `url(https://steemitimages.com/u/${username}/avatar/${realSize})`,
+    }}
+    />
   );
 };
 

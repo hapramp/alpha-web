@@ -11,15 +11,18 @@ const UserCoverContainer = ({ username, coverImageUrl }) => {
         username={username}
         size="medium"
         className={
-          coverImageUrl
-          ? styles.profileImage
-          : styles.profileImageNoCover
+          `${styles.profileImage} uk-border-circle`
         }
       />
     </div>
   );
   if (!coverImageUrl) {
-    return <AvatarSection />;
+    return (
+      <div>
+        <div className={`${styles.coverPlaceholder}`}>No Cover Image</div>
+        <AvatarSection />
+      </div>
+    );
   }
   return [
     <div

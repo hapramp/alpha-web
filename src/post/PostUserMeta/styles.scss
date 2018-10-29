@@ -13,11 +13,9 @@
 .userImage {
   width: 48px;
   height: 48px;
-}
-
-.userImage img {
-  width: 48px;
-  height: 48px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 100%;
 }
 
 .userNameContainer {

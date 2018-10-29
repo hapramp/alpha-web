@@ -3,6 +3,10 @@
 .header {
   height: 72px;
   background-color: $primary-color;
+
+  @media screen and (max-width: 480px) {
+    padding: 0 !important;
+  }
 }
 
 .header * {
@@ -39,10 +43,14 @@
   color: $primary-color;
 }
 
-.userImage img {
+.userImage {
   width: 32px;
   height: 32px;
   min-width: 32px;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
 }
 
 .dropDownHoverable * {

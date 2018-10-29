@@ -1,19 +1,21 @@
 @import "../../../styles/variables.scss";
 
 .userPostsContainer {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  //border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .blogHeader {
   color: $primary-color;
   font-size: $fs-base * 1.5;
-  font-weight: 1000;
+  font-weight: 700;
+
+  @media screen and (max-width: 640px) {
+    margin-left: 16px;
+  }
+
 }
 
 .blogContainer {
-  width: 560px;
-
-  @media screen and (max-width: 560px) {
-    width: 100%;
-  }
+  max-width: 600px;
+  margin-bottom: 56px;
 }

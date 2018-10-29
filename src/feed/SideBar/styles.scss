@@ -3,7 +3,7 @@
 .sideBarContainer {
 	position: fixed;
   width: 240px;
-  
+
   @media screen and (max-width: 985px) {
     width: 100%;
     left: 0;
@@ -32,14 +32,10 @@
 
 }
 
-.communityImage img {
-  width: 48px;
-  height: 48px;
-}
-
 .communityImage {
   width: 48px;
   height: 48px;
+  background-position: center;
 }
 
 .communitiesHeader {
