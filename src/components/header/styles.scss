@@ -42,6 +42,7 @@
 .userImage img {
   width: 32px;
   height: 32px;
+  min-width: 32px;
 }
 
 .dropDownHoverable * {
@@ -56,4 +57,8 @@
 
 .flexImportant {
   display: flex !important;
+}
+
+.flexNoWrap {
+  flex-wrap: nowrap;
 }
