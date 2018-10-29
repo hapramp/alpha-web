@@ -1,6 +1,6 @@
 export default {
   BACKEND_URL: {
-    V2: 'https://api.hapramp.com/api/v2',
+    V2: 'https://testapi.hapramp.com/api/v2',
   },
   MESSAGES: {
     AUTH: {
