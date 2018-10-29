@@ -77,7 +77,7 @@ class Header extends React.Component {
               Hapramp
             </Link>
           </div>
-          <div className="uk-navbar-right">
+          <div className={`uk-navbar-right ${styles.flexNoWrap}`}>
             <div className="uk-navbar-item">
               <Link to="/search" uk-icon="icon: search" />
             </div>

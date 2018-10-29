@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import PostCard from '../../../post/PostCard';
 
 import styles from './styles.scss';
-import indexStyles from '../../../styles/globals.scss';
+// import indexStyles from '../../../styles/globals.scss';
 import { getUserBlogPosts } from '../../reducer';
 import { getUserFeeds } from '../../actions';
 
@@ -26,7 +26,7 @@ class UserBlog extends React.Component {
 
   render() {
     return (
-      <div className={`uk-flex uk-flex-center ${indexStyles.white} ${styles.userPostsContainer}`}>
+      <div className={`uk-flex uk-flex-center ${styles.userPostsContainer}`}>
         <div className={styles.blogContainer}>
           <div className={`uk-margin-medium-top uk-margin-medium-bottom ${styles.blogHeader}`}>LATEST</div>
           {this.props.posts.map(item => (

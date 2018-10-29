@@ -52,40 +52,46 @@ class UserProfile extends React.Component {
     const { username } = this.props;
 
     return (
-      <div className={`uk-container uk-margin-top uk-padding uk-padding-remove-top ${indexStyles.white}`}>
+      <div className="uk-margin-top">
         {/* Cover image and user avatar */}
-        <UserCoverImage username={username} coverImageUrl={jsonMetadata.profile.cover_image} />
 
-        {/* Name and username */}
-        <div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
-          <div>
-            <span className={styles.userName}>{jsonMetadata.profile.name}</span>
-            <span className="uk-margin-small-left">@{this.props.name}</span>
-          </div>
-        </div>
+        <div className={`${indexStyles.white}`}>
+          <UserCoverImage username={username} coverImageUrl={jsonMetadata.profile.cover_image} />
 
-        {/* (Un)Follow button */}
-        {
-          username === this.props.authUsername
-            ? (
-              <div className="uk-text-center">
-                <EditProfileButton />
+          <div className={`${indexStyles.white} ${styles.userMeta}`}>
+
+            {/* Name and username */}
+            <div className={['uk-text-center', 'uk-margin-top'].join(' ')}>
+              <div>
+                <span className={styles.userName}>{jsonMetadata.profile.name}</span>
+                <span className="uk-margin-small-left">@{this.props.name}</span>
               </div>
-            )
-            : <FollowButton following={username} />
-      }
+            </div>
 
-        {/* Data count */}
-        <UserDataCount username={username} />
+            {/* (Un)Follow button */}
+            {
+              username === this.props.authUsername
+                ? (
+                  <div className="uk-text-center">
+                    <EditProfileButton />
+                  </div>
+                )
+                : <FollowButton following={username} />
+            }
 
-        {/* User Bio */}
-        <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-flex', 'uk-flex-center'].join(' ')}>
-          <div className={['uk-text-center', styles.bio].join(' ')}>
-            {jsonMetadata.profile.about || 'No bio provided.'}
+            {/* Data count */}
+            <UserDataCount username={username} />
+
+            {/* User Bio */}
+            <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-flex', 'uk-flex-center'].join(' ')}>
+              <div className={['uk-text-center', styles.bio].join(' ')}>
+                {jsonMetadata.profile.about || 'No bio provided.'}
+              </div>
+            </div>
+
+            <UserCommunities username={username} />
           </div>
         </div>
-
-        <UserCommunities username={username} />
 
         {/* User posts */}
         <UserBlog username={username} />

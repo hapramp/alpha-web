@@ -1,6 +1,10 @@
+.feedWrapper {
+  margin-bottom: 56px !important;
+}
+
 .feedPosts {
     width: 600px;
-    
+
     @media screen and (max-width: 985px) {
         margin-top: 160px !important
     }
@@ -27,5 +31,5 @@
     @media screen and (max-width: 960px) {
     width: calc(100vw - 90px);
     }
-    
+
 }
