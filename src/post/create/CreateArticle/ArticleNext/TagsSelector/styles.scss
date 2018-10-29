@@ -1,0 +1,30 @@
+@import '../../../../../styles/variables';
+
+.tagContainer {
+  font-size: 14px;
+  line-height: 21px;
+  padding: 4px 8px;
+  background-color: $background-color;
+  border-radius: 21px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  height: 14px;
+  margin-left: 8px;
+}
+
+.inputContainer {
+  padding: 4px 8px;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: 2px solid rgba(0, 0, 0, 0.38);
+  margin-left: 16px;
+  transition: all 0.3s ease-out;
+}
+
+.inputContainer:focus {
+  border-left: 4px solid $primary-color;
+  transition: all 0.3s ease-in;
+}
