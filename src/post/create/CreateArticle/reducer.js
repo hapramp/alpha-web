@@ -10,6 +10,7 @@ const initialState = {
   tags: [],
   create: {
     creating: false,
+    error: null,
   },
 };
 
@@ -47,6 +48,17 @@ export default (state = initialState, action) => {
         create: {
           ...state.create,
           creating: true,
+          error: null,
+        },
+      };
+
+    case actionTypes.CREATE_ERROR:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          creating: false,
+          error: action.reason,
         },
       };
 

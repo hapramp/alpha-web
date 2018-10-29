@@ -14,6 +14,7 @@ export const actionTypes = {
   REMOVE_TAG: 'CREATE_ARTICLE.TAGS.REMOVE',
   CREATE_INIT: 'CREATE_ARTICLE.INIT',
   CREATE_DONE: 'CREATE_ARTICLE.DONE',
+  CREATE_ERROR: 'CREATE_ARTICLE.ERROR',
 };
 
 export const setContent = content => ({ type: actionTypes.SET_CONTENT, content });
@@ -80,6 +81,20 @@ export const createArticle = () => async (dispatch, getState, { steemAPI, notify
       content: contentHTMLWithFooter,
       permlink,
       allTags,
+    });
+  }).catch((reason) => {
+    console.error('[CREATE POST ERROR]', reason);
+    notify.danger('Failed to create post');
+    return dispatch({
+      type: actionTypes.CREATE_ERROR,
+      author,
+      tags,
+      communities,
+      title,
+      content: contentHTMLWithFooter,
+      permlink,
+      allTags,
+      reason,
     });
   });
 };
