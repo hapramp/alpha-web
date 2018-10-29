@@ -16,7 +16,7 @@ class AddContentButton extends React.Component {
     const style = { transform: this.props.isClicked ? 'rotate(135deg)' : '' };
     return (
       <div
-        className={['uk-align-right', 'uk-margin-right', 'uk-margin-bottom',
+        className={['uk-margin-right', 'uk-margin-bottom',
           'uk-text-center', styles.addContent].join(' ')}
       >
         {this.props.isClicked &&

@@ -1,10 +1,29 @@
 @import "../../styles/_variables.scss";
 
 .addContent {
-  position: fixed !important;
-  right: 15%;
-  bottom: 0;
-  width: 100px;
+
+  @media screen and (min-width: 985px) {
+    position: fixed !important;
+    right: 15%;
+    bottom: 0;
+    width: 100px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    right: 150px;
+  }
+
+  @media screen and (max-width: 1220px) {
+    right: 70px;
+  }
+
+  @media screen and (max-width: 1100px) {
+    right: 20px;
+  }
+
+  @media screen and (max-width: 985px) {
+    margin: 0 !important;
+  }
 }
 
 .addButton {
@@ -15,6 +34,12 @@
   border-radius: 50%;
   cursor: pointer;
   padding: 15px;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.12), 0 0 12px 0 rgba(0,0,0,0.12);
+
+  @media screen and (max-width: 985px) {
+    padding: 10px;
+    background: #3F72AF;
+  }
 }
 
 .contentType {
