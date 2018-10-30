@@ -6,7 +6,6 @@
     position: fixed !important;
     right: 15%;
     bottom: 0;
-    width: 100px;
   }
 
   @media screen and (max-width: 1400px) {
@@ -18,7 +17,7 @@
   }
 
   @media screen and (max-width: 1100px) {
-    right: 20px;
+    right: 56px;
   }
 
   @media screen and (max-width: 985px) {
@@ -35,6 +34,7 @@
   cursor: pointer;
   padding: 15px;
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.12), 0 0 12px 0 rgba(0,0,0,0.12);
+  -webkit-tap-highlight-color: transparent;
 
   @media screen and (max-width: 985px) {
     padding: 10px;
@@ -42,9 +42,29 @@
   }
 }
 
+.contentTypeContainer {
+  position: absolute;
+  bottom: 56px;
+  transform: translate(-50%,0);
+  left: 50%;
+}
+
 .contentType {
-  background-color: $primary-light-color;
-  padding: $bs-rhythmDiv $bs-rhythmDiv * 3px;
   border-radius: 24px;
   cursor: pointer;
+  padding-right: 36px;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  line-height: 48px;
+  background: #FFFFFF;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.12), 0 4px 4px 0 rgba(0,0,0,0.12);
+}
+
+.iconContainer {
+  width: 48px;
+  height: 48px;
+  background-color: $primary-color;
+  border-radius: 50%;
+  line-height: 48px;
 }

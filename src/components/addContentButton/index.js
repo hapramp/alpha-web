@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
 import { resetClicked, toggleClicked } from '../../actions/addContentActions';
+import { getIcon } from '../../icons';
 
 class AddContentButton extends React.Component {
   componentWillUnmount() {
@@ -14,18 +15,30 @@ class AddContentButton extends React.Component {
 
   render() {
     const style = { transform: this.props.isClicked ? 'rotate(135deg)' : '' };
+    const articleIcon = getIcon('blog', 'solid');
+    const postIcon = getIcon('photo', 'solid');
     return (
       <div
         className={['uk-margin-right', 'uk-margin-bottom',
           'uk-text-center', styles.addContent].join(' ')}
       >
         {this.props.isClicked &&
-        <div className={[indexStyles.transition].join(' ')}>
+        <div className={[indexStyles.transition, styles.contentTypeContainer].join(' ')}>
           <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
-            <Link to="/create/article">Article</Link>
+            <Link to="/create/article" className="uk-flex">
+              <div className={`${styles.iconContainer}`}>
+                <img src={articleIcon} alt="" />
+              </div>
+              <span className="uk-margin-small-left">Article</span>
+            </Link>
           </div>
           <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
-            <Link to="/create/post">Post</Link>
+            <Link to="/create/post" className="uk-flex">
+              <div className={`${styles.iconContainer}`}>
+                <img src={postIcon} alt="" />
+              </div>
+              <span className="uk-margin-small-left">Post</span>
+            </Link>
           </div>
         </div>}
         <span
