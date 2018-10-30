@@ -42,7 +42,7 @@ class UserFeed extends React.Component {
 
   render() {
     return (
-      <div className={`uk-margin-top ${styles.feedPosts}`}>
+      <div className={`uk-margin-small-top ${styles.feedPosts}`}>
         {
           this.props.userFeed.posts && this.props.userFeed.posts.map(post =>
             <PostCard key={post} postPermlink={post} />)

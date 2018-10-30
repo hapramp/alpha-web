@@ -33,7 +33,7 @@ class CreateReply extends React.Component {
 
   render() {
     return (
-      <div className={['uk-flex', 'uk-margin-right', 'uk-margin-top'].join(' ')}>
+      <div className={['uk-flex', styles.createReplyContainer].join(' ')}>
         <img className={['uk-border-circle', styles.postingUserImage].join(' ')} alt={localStorage.getItem('username')} src={localStorage.getItem('avatar')} />
         <span className={[styles.commentInputContainer].join(' ')}>
           <input ref={this.setInputRef} className={[styles.commentInput].join(' ')} />

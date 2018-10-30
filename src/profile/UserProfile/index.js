@@ -52,7 +52,7 @@ class UserProfile extends React.Component {
     const { username } = this.props;
 
     return (
-      <div className="uk-margin-top">
+      <div className="uk-margin-small-top">
         {/* Cover image and user avatar */}
 
         <div className={`${indexStyles.white}`}>

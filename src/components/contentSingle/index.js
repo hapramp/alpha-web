@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { loadPost } from '../../post/actions';
 import PostSingle from '../../post/PostSingle';
+import styles from './styles.scss';
 
 class ContentSingle extends React.Component {
   constructor(props) {
@@ -13,11 +14,11 @@ class ContentSingle extends React.Component {
 
   render() {
     if (!this.props.post) {
-      return <div className={['uk-container', 'uk-margin-top'].join(' ')}>Loading...</div>;
+      return <div className={[styles.contentSingleContainer, 'uk-margin-small-top'].join(' ')}>Loading...</div>;
     }
 
     return (
-      <div className={['uk-container', 'uk-margin-top'].join(' ')}>
+      <div className={`uk-margin-small-top ${styles.contentSingleContainer}`}>
         <PostSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} />
       </div>
     );
