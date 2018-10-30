@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import SearchBar from './SearchBar/SearchBar.component';
 import SearchResults from './SearchResults/SearchResults.component';
+import NewFeedWithLabel from './NewFeedWithLabel';
 import * as selectors from './search.reducer';
 import { searchUser as searchUserAPI, resetSearchState } from './search.actions';
 
@@ -26,7 +27,7 @@ class Search extends React.Component {
           <div className="uk-width-1-1@s uk-width-2-3@m uk-width-1-2@l">
             <SearchBar onSearch={isLoading ? () => { } : history.push} />
             <Switch>
-              <Route exact path="/search" component={SearchResults} />
+              <Route exact path="/search" component={NewFeedWithLabel} />
               <Route
                 exact
                 path="/search/:query"
