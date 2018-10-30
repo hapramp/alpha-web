@@ -64,6 +64,7 @@ export default {
       getUserFeed: username => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/user/${username}`),
       getFeedsByBlog: blog => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}`),
       getTagFeed: tag => getPromiseForUrl(`${constants.BACKEND_URL.V2}/curation/tag/${tag}`),
+      getExploreFeed: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/all`),
     },
     communities: {
       getAllCommunities: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/communities`),

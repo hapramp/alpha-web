@@ -63,3 +63,20 @@ export const loadNewPosts = () => (dispatch, getState, { steemAPI }) => {
     },
   );
 };
+
+export const loadExplorePosts = () => (dispatch, getState, { haprampAPI }) => {
+  dispatch({ type: actionTypes.FEED_LOADING, feedType: 'explore' });
+  return haprampAPI.v2.feed.getExploreFeed()
+    .then((results) => {
+      dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: results });
+      return dispatch({
+        type: actionTypes.FEED_LOADED,
+        results: results.filter(post => !!post.author).map(post => `${post.author}/${post.permlink}`),
+        feedType: 'explore',
+      });
+    })
+    .catch((reason) => {
+      console.log('[FEED EXPLORE ERROR]', reason);
+      return dispatch({ type: actionTypes.FEED_LOADING_FAILED, feedType: 'explore', reason });
+    });
+};

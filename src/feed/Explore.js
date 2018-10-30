@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import styles from './styles.scss';
 import * as userFeedActions from '../actions/userFeedActions';
 import PostCard from '../post/PostCard';
 
-class UserFeed extends React.Component {
+class ExploreFeed extends React.Component {
   static propTypes = {
     userFeed: PropTypes.shape({
       posts: PropTypes.arrayOf(PropTypes.shape),
       loading: PropTypes.bool,
     }),
-    loadNewPosts: PropTypes.func.isRequired,
+    loadExplorePosts: PropTypes.func.isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
@@ -27,18 +28,18 @@ class UserFeed extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.loadNewPosts();
+    this.props.loadExplorePosts();
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.location.pathname !== this.props.location.pathname) {
-      this.props.loadNewPosts();
+      this.props.loadExplorePosts();
     }
   }
 
   render() {
     return (
-      <div className="uk-margin-top">
+      <div className={`uk-margin-top ${styles.feedPosts}`}>
         {
           this.props.userFeed.posts && this.props.userFeed.posts.map(post =>
             <PostCard key={post} postPermlink={post} />)
@@ -49,15 +50,15 @@ class UserFeed extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userFeed: state.userFeed.new,
+  userFeed: state.userFeed.explore,
   username: state.authUser.username,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    loadNewPosts: userFeedActions.loadNewPosts,
+    loadExplorePosts: userFeedActions.loadExplorePosts,
   },
   dispatch,
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserFeed);
+export default connect(mapStateToProps, mapDispatchToProps)(ExploreFeed);

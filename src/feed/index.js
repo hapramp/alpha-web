@@ -4,8 +4,8 @@ import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 
 import UserFeed from './UserFeed';
 import TagFeed from './TagFeed';
-import NewFeed from './NewFeed';
 import Sidebar from './SideBar';
+import ExploreFeed from './Explore';
 import styles from './styles.scss';
 
 const secureUserFeed = connectedRouterRedirect({
@@ -24,7 +24,7 @@ const Feed = () => (
         <Redirect exact strict from="/feed" to="/feed/" />
         <Route exact path="/feed/" component={secureUserFeed(UserFeed)} />
         <Redirect exact strict from="/feed/explore" to="/feed/explore/" />
-        <Route exact path="/feed/explore/" component={NewFeed} />
+        <Route exact path="/feed/explore/" component={ExploreFeed} />
         <Route exact path="/feed/:tag" component={TagFeed} />
       </Switch>
     </div>

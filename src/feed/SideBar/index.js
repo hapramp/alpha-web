@@ -31,7 +31,11 @@ const Sidebar = props => (
               props.location.pathname === '/feed/explore/' ? styles.active : ''
               }`}
           >
-            <img src={getIcon('compass-directions', 'outline')} className={`uk-border-circle ${styles.communityImage}`} alt="" />
+            <img
+              src={getIcon('compass-directions', 'outline')}
+              className={`uk-border-circle ${styles.communityImage} ${props.location.pathname === '/feed/explore/' ? styles.activeExploreImage : ''}`}
+              alt=""
+            />
             <span className={`uk-margin-left ${styles.communityLabel}`}>Explore</span>
           </div>
         </Link>

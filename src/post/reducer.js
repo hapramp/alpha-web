@@ -16,7 +16,12 @@ export default (state = initialState, action) => {
       action.posts.map((oldPost) => {
         const post = { ...oldPost };
         if (typeof (post.json_metadata) === 'string') {
-          post.json_metadata = JSON.parse(post.json_metadata);
+          try {
+            post.json_metadata = JSON.parse(post.json_metadata);
+          } catch (error) {
+            console.log('[POST JSON METADATA PARSE ERROR]', error, post);
+            post.json_metadata = {};
+          }
         }
         posts[`${post.author}/${post.permlink}`] = post;
         return post;
