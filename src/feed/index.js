@@ -23,8 +23,8 @@ const Feed = () => (
       <Switch>
         <Redirect exact strict from="/feed" to="/feed/" />
         <Route exact path="/feed/" component={secureUserFeed(UserFeed)} />
-        <Redirect exact strict from="/feed/new" to="/feed/new/" />
-        <Route exact path="/feed/new" component={NewFeed} />
+        <Redirect exact strict from="/feed/explore" to="/feed/explore/" />
+        <Route exact path="/feed/explore/" component={NewFeed} />
         <Route exact path="/feed/:tag" component={TagFeed} />
       </Switch>
     </div>

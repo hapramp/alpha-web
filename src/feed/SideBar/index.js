@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
-import appIcon from './app_icon.png';
-
 import CommunityButton from '../../components/CommunityButton';
 import UserAvatar from '../../components/UserAvatar';
+import { getIcon } from '../../icons';
 
 const Sidebar = props => (
   <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
@@ -26,14 +25,14 @@ const Sidebar = props => (
             </div>
           </Link>
         )}
-        <Link to="/feed/new/">
+        <Link to="/feed/explore/">
           <div
             className={`uk-margin-top ${styles.communityContainer} ${indexStyles.transition} ${
-              props.location.pathname === '/feed/new/' ? styles.active : ''
+              props.location.pathname === '/feed/explore/' ? styles.active : ''
               }`}
           >
-            <img src={appIcon} className={`uk-border-circle ${styles.communityImage}`} alt="" />
-            <span className={`uk-margin-left ${styles.communityLabel}`}>New</span>
+            <img src={getIcon('compass-directions', 'outline')} className={`uk-border-circle ${styles.communityImage}`} alt="" />
+            <span className={`uk-margin-left ${styles.communityLabel}`}>Explore</span>
           </div>
         </Link>
       </div>

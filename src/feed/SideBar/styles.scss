@@ -52,6 +52,10 @@
 
 }
 
+.active img {
+  background-color: $primary-light-color;
+}
+
 .flexTill985 {
   @media screen and (max-width: 985px) {
     display: flex;

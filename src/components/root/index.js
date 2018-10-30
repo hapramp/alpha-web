@@ -81,7 +81,7 @@ const Root = ({
         if (isLoggedIn) {
           return <Redirect to="/feed" />;
         }
-          return <Redirect to="/feed/new" />;
+          return <Redirect to="/feed/explore/" />;
         }
       }
       />
