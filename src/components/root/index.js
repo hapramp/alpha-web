@@ -121,7 +121,7 @@ const Root = ({
 
       <Route exact path="/signout" render={() => <SignOut onSignOut={signOut} />} />
 
-      <Route exact path="/search" component={Search} />
+      <Route path="/search" component={Search} />
 
       <Route exact path="/profile/edit" component={authRequiredComponent(EditProfile)} />
 

@@ -1,7 +1,13 @@
 import actionTypes from './search.actionTypes';
 import steemAPI from '../utils/steem';
+import { getSearchTerm } from './search.reducer';
 
-export const searchUser = text => (dispatch) => {
+export const searchUser = text => (dispatch, getState) => {
+  const searchText = getSearchTerm(getState());
+  if (text === searchText) {
+    return;
+  }
+
   dispatch({ type: actionTypes.USER.INIT, text });
   steemAPI.steem.api.lookupAccounts(text, 10, (err, result) => {
     if (err) {

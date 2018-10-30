@@ -1,12 +1,21 @@
 import actionTypes from './search.actionTypes';
 
-const initialState = { searching: false, error: null, result: null };
+const initialState = {
+  searching: false,
+  error: null,
+  result: null,
+  test: '',
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.USER.INIT:
       return {
-        ...state, searching: true, result: null, error: null,
+        ...state,
+        searching: true,
+        result: null,
+        error: null,
+        text: action.text,
       };
 
     case actionTypes.USER.DONE:
@@ -32,3 +41,5 @@ export const isSearching = state => state.searching;
 export const hasErrorred = state => state.error !== null;
 
 export const getResult = state => state.result;
+
+export const getSearchTerm = state => state.search.text;
