@@ -1,6 +1,12 @@
 .postSingleContainer {
   max-width: 800px;
   width: 100vw;
+
+  > div {
+    @media screen and (min-width: 700px) {
+      padding: 24px;
+    }
+  }
 }
 
 .cutomTag {

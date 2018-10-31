@@ -6,7 +6,7 @@ import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 
 const Reply = props => (
-  <div className="uk-margin-bottom">
+  <div className="uk-margin-medium-bottom">
     <div>
       <img
         className={['uk-border-circle', styles.userImage].join(' ')}

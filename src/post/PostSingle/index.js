@@ -22,7 +22,7 @@ class PostSingle extends React.Component {
     return (
       <div className={['uk-margin-bottom', styles.postSingleContainer].join(' ')}>
         <div
-          className={['uk-padding-remove', indexStyles.white].join(' ')}
+          className={[indexStyles.white].join(' ')}
         >
           <PostUserMeta
             profile={{

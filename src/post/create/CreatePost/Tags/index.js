@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Tags = ({ tags }) => (
-  <div style={{ height: 28 }}>
+  <div className="uk-margin-small-bottom uk-flex uk-flex-wrap">
     {
       tags.length === 0
       ? (
@@ -13,12 +13,14 @@ const Tags = ({ tags }) => (
       : (
         tags.map(tag => (
           <span
+            className="uk-margin-small-bottom"
             key={tag}
             style={{
               backgroundColor: '#fafafa',
               color: 'rgba(0, 0, 0, 0.54)',
               marginRight: 8,
               padding: '4px 10px',
+              borderRadius: '40px',
             }}
           >
             {tag}
