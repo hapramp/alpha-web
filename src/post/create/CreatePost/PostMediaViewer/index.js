@@ -23,7 +23,7 @@ const PostMediaViewer = (props) => {
               width="240px"
             />
             <div
-              className={`uk-overlay uk-overlay-default uk-position-top-right ${styles.topOverlay}`}
+              className={`uk-overlay-default uk-position-top-right ${styles.topOverlay}`}
               onClick={props.removeMedia}
               role="button"
               tabIndex={-1}

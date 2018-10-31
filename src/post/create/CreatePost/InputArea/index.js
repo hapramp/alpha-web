@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextareaAutosize from 'react-autosize-textarea';
 
 import styles from './styles.scss';
 
 const getTargetValue = callback => e => callback(e.target.value);
 
 const InputArea = ({
-  onChange, value, className, ...props
+  className, value, onChange, ...props
 }) => (
   <div className={className} {...props}>
-    <textarea
+    <TextareaAutosize
       className={styles.inputArea}
       onChange={getTargetValue(onChange)}
       value={value}

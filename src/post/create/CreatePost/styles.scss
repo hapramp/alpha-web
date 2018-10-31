@@ -2,14 +2,28 @@
 
 .createPostModal {
   background: white;
-  width: 1020px;
+  max-width: 1020px;
   padding: 56px;
-  margin-top: 34px;
+  margin-top: 16px;
+  width: 100vw;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 1200px) {
+    padding: 32px;
+  }
+
+  @media screen and (max-width: 805px) {
+    padding: 24px;
+  }
 }
 
-.userAvatar img {
+.userAvatar {
   width: 56px;
+  min-width: 56px;
   height: 56px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
 }
 
 .publishButton {
@@ -59,5 +73,5 @@
   margin-left: 25px;
   width: 750px;
   flex-grow: 1;
-  margin-bottom: 40px;
+  margin-bottom: 32px;min-height: 120px;
 }

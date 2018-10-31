@@ -8,11 +8,11 @@ const CommunitySelector = ({
 }) => (
   <div {...props} className={`${className} ${styles.container}`}>
     <div style={{ color: 'rgba(0, 0, 0, 0.38)', marginBottom: 8 }}>
-      <span style={{ fontSize: 14 }}>
+      <span className={`${styles.communityHeader}`}>
         Select Communities (Max 3)
       </span>
     </div>
-    <div style={{ height: 24 }}>
+    <div className="uk-flex uk-flex-wrap">
       {
         communities.map(community => (
           <span
@@ -20,7 +20,7 @@ const CommunitySelector = ({
             style={{
               padding: '4px 10px',
             }}
-            className={`${styles.communityLabel} ${selectedCommunities.includes(community.id) ? styles.communitySelected : styles.communityNormal}`}
+            className={`${styles.communityLabel} ${selectedCommunities.includes(community.id) ? styles.communitySelected : styles.communityNormal} uk-margin-small-bottom`}
             onClick={() => onClick(community)}
             onKeyUp={e => e.keyCode === 13 && onClick(community)}
             role="switch"
