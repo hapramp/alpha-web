@@ -10,8 +10,9 @@ import Replies from '../Replies';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import PostBody from '../PostBody';
+import styles from './styles.scss';
 
-class ArticleSingle extends React.Component {
+class PostSingle extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -19,11 +20,9 @@ class ArticleSingle extends React.Component {
   render() {
     const { body, author, permlink } = this.props.post;
     return (
-      <div uk-grid="true" className={['uk-margin-bottom'].join(' ')}>
-        <div className={['uk-width-1-6@m', 'uk-text-center', 'uk-width-1-4@l'].join(' ')} />
+      <div className={['uk-margin-bottom', styles.postSingleContainer].join(' ')}>
         <div
-          className={['uk-width-1-1@s', 'uk-width-2-3@m', 'uk-width-1-2@l',
-            'uk-padding-remove', indexStyles.white].join(' ')}
+          className={['uk-padding-remove', indexStyles.white].join(' ')}
         >
           <PostUserMeta
             profile={{
@@ -42,11 +41,10 @@ class ArticleSingle extends React.Component {
           />
           <CustomTags
             tags={this.props.post.json_metadata.tags}
-            className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}
+            className={[styles.cutomTag].join(' ')}
           />
           <ActionBar post={this.props.post} />
           <Replies
-            className={['uk-margin-medium-left', 'uk-margin-medium-right'].join(' ')}
             parentAuthor={this.props.post.author}
             parentPermlink={this.props.post.permlink}
           />
@@ -55,7 +53,7 @@ class ArticleSingle extends React.Component {
   }
 }
 
-ArticleSingle.propTypes = {
+PostSingle.propTypes = {
   postingUser: PropTypes.shape({
     json_metadata: PropTypes.shape({
       profile: PropTypes.shape({
@@ -78,7 +76,7 @@ ArticleSingle.propTypes = {
   }),
 };
 
-ArticleSingle.defaultProps = {
+PostSingle.defaultProps = {
   postingUser: {},
   post: {},
 };
@@ -93,4 +91,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(ArticleSingle);
+export default connect(mapStateToProps)(PostSingle);

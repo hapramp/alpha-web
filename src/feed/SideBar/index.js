@@ -10,7 +10,7 @@ import UserAvatar from '../../components/UserAvatar';
 import { getIcon } from '../../icons';
 
 const Sidebar = props => (
-  <div className={`uk-margin-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
+  <div className={`uk-margin-small-top uk-padding uk-padding-remove-right ${indexStyles.white} ${styles.sideBarContainer}`}>
     <div className={`${styles.flexTill985} ${styles.sideBarMidContainer}`} style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 188px)' }}>
       <div className={`${styles.flexTill985}`}>
         {props.username && (

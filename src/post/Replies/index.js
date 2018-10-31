@@ -20,16 +20,18 @@ class Replies extends React.Component {
     }
     return (
       <div className={[this.props.className, 'uk-margin-large-top', 'uk-margin-bottom'].join(' ')}>
-        {this.props.replies.loading && <div className={['uk-text-center', styles.status].join(' ')}>Loading...</div>}
-        {Object.values(this.props.replies.replies)
-          .map(reply => <Reply reply={reply} key={reply.id} />)}
-        {this.props.replies.pendingReplies
-          .map(reply => <PendingReply reply={reply} key={reply.body} />)}
-        {!this.props.replies.loading &&
+        <CreateReply post={this.props.rootPost} />
+        <div className={`${styles.repliesContainer}`}>
+          {this.props.replies.loading && <div className={['uk-text-center', styles.status].join(' ')}>Loading...</div>}
+          {Object.values(this.props.replies.replies)
+            .map(reply => <Reply reply={reply} key={reply.id} />)}
+          {this.props.replies.pendingReplies
+            .map(reply => <PendingReply reply={reply} key={reply.body} />)}
+          {!this.props.replies.loading &&
           !Object.keys(this.props.replies.replies).length &&
           !this.props.replies.pendingReplies.length &&
           <div className={['uk-text-center', styles.status].join(' ')}>No replies</div>}
-        <CreateReply post={this.props.rootPost} />
+        </div>
       </div>);
   }
 }
