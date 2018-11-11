@@ -6,7 +6,7 @@ import { fixUser } from '../../utils/defaultFixUtils';
 import indexStyles from '../../styles/globals.scss';
 import CustomTags from '../CustomTags';
 import ActionBar from '../ActionBar';
-import Replies from '../Replies';
+import Replies from '../Replies/RootReplies';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import PostBody from '../PostBody';
@@ -43,7 +43,7 @@ class PostSingle extends React.Component {
             tags={this.props.post.json_metadata.tags}
             className={[styles.cutomTag].join(' ')}
           />
-          <ActionBar post={this.props.post} />
+          <ActionBar post={this.props.post} withLink={false} />
           <Replies
             parentAuthor={this.props.post.author}
             parentPermlink={this.props.post.permlink}

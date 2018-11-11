@@ -29,8 +29,8 @@ class ActionBar extends React.Component {
 
   getCommentSection() {
     const child = [
-      <i className={['uk-margin-small-right', 'fas', 'fa-comment-alt'].join(' ')} key={0} />,
-      <span className={[styles.actionText].join(' ')} key={1} >
+      <i className="uk-margin-small-right fas fa-comment-alt" key={0} />,
+      <span className={styles.actionText} key={1} >
         {this.props.post.children} Comment{this.props.post.children === 1 ? '' : 's'}
       </span>,
     ];
@@ -38,22 +38,23 @@ class ActionBar extends React.Component {
       return (
         <Link
           to={`/@${this.props.post.author}/${this.props.post.permlink}`}
-          className={['uk-flex', styles.action].join(' ')}
+          className={`uk-flex ${styles.action}`}
         >
           {child}
-        </Link>);
+        </Link>
+      );
     }
     return (
-      <div className={['uk-flex', styles.action].join(' ')}>
+      <div className={`uk-flex ${styles.action}`}>
         {child}
       </div>);
   }
 
   getCollapsedActionSection(finalRating, userRating) {
     return (
-      <div className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-around'].join(' ')}>
+      <div className="uk-margin-top uk-margin-bottom uk-padding-small uk-flex uk-flex-around">
         <span
-          className={['uk-flex', indexStyles.pointer, styles.action].join(' ')}
+          className={`uk-flex ${indexStyles.pointer} ${styles.action}`}
           onClick={this.toggleFullRate}
           onTouchStart={this.handleRatePress}
           onTouchEnd={this.handleRateRelease}
@@ -64,15 +65,15 @@ class ActionBar extends React.Component {
           tabIndex={0}
           aria-checked
         >
-          <i className={['uk-margin-small-right', userRating ? ['fas', indexStyles.primaryText].join(' ') : 'far', 'fa-star'].join(' ')} />
-          <span className={[styles.actionText].join(' ')}>
+          <i className={`uk-margin-small-right ${userRating ? `fas ${indexStyles.primaryText}` : 'far'} fa-star`} />
+          <span className={styles.actionText}>
             {finalRating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}
           </span>
         </span>
         {this.getCommentSection()}
-        <span className={['uk-flex', styles.action].join(' ')}>
-          <i className={['uk-margin-small-right', 'fas', 'fa-dollar-sign'].join(' ')} />
-          <span className={[styles.actionText].join(' ')}>{this.props.post.pending_payout_value}</span>
+        <span className={`uk-flex ${styles.action}`}>
+          <i className="uk-margin-small-right fas fa-dollar-sign" />
+          <span className={styles.actionText}>{this.props.post.pending_payout_value}</span>
         </span>
       </div>);
   }
@@ -82,33 +83,34 @@ class ActionBar extends React.Component {
     if (userRating) {
       ratingSection = (
         <span
-          className={['uk-margin-medium-left', 'uk-margin-right', indexStyles.pointer, styles.action].join(' ')}
+          className={`uk-margin-medium-left uk-margin-right ${indexStyles.pointer} ${styles.action}`}
           onClick={this.onRateClick}
           role="switch"
           onKeyDown={this.onRateClick}
           tabIndex={0}
           aria-checked={false}
         >
-          <i className={['uk-margin-small-right', 'far', 'fa-star', styles.cancelRatingButton].join(' ')} data-rating="0" />
-        </span>);
+          <i className={`uk-margin-small-right far fa-star ${styles.cancelRatingButton}`} data-rating="0" />
+        </span>
+      );
     }
     return (
       <div
-        className={['uk-margin-top', 'uk-margin-bottom', 'uk-padding-small', 'uk-flex', 'uk-flex-between'].join(' ')}
+        className="uk-margin-top uk-margin-bottom uk-padding-small uk-flex uk-flex-between"
         onMouseLeave={this.disableRatingView}
       >
-        <span className={['uk-margin-left'].join(' ')}>
+        <span className="uk-margin-left">
           {[1, 2, 3, 4, 5].map(i => (
             <span
               key={i}
-              className={['uk-margin-small-right', indexStyles.pointer, styles.action].join(' ')}
+              className={`uk-margin-small-right ${indexStyles.pointer} ${styles.action}`}
               onClick={this.onRateClick}
               role="radio"
               onKeyDown={this.onRateClick}
               tabIndex={0}
               aria-checked={i === userRating}
             >
-              <i className={['uk-margin-small-right', i <= userRating ? ['fas', indexStyles.primaryText].join(' ') : 'far', 'fa-star'].join(' ')} data-rating={i} />
+              <i className={`uk-margin-small-right ${i <= userRating ? `fas ${indexStyles.primaryText}` : 'far'} fa-star`} data-rating={i} />
             </span>))}
         </span>
         {ratingSection}

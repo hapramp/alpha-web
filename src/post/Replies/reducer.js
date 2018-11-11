@@ -86,3 +86,6 @@ export default (oldState = initialState, action) => {
       return state;
   }
 };
+
+// Selectors
+export const getRepliesForPermlink = (state, fullPermlink) => state.replies[fullPermlink];

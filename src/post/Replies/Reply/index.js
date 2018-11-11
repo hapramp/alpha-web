@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Replies from '../';
 import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 
@@ -9,18 +10,29 @@ const Reply = props => (
   <div className="uk-margin-bottom">
     <div>
       <img
-        className={['uk-border-circle', styles.userImage].join(' ')}
+        className={`uk-border-circle ${styles.userImage}`}
         src={props.postingUser.json_metadata.profile.profile_image}
         alt={props.postingUser.name}
       />
-      <span className={[styles.userName].join(' ')}>{props.postingUser.json_metadata.profile.name}</span>
+      <span className={styles.userName}>
+        {props.postingUser.json_metadata.profile.name}
+      </span>
     </div>
     <div
-      className={[styles.replyBody].join(' ')}
+      className={styles.replyBody}
       dangerouslySetInnerHTML={{
         __html: window.markdownToHtmlConverter.makeHtml(props.reply.body),
       }}
     />
+    {
+      props.reply.children > 0 && (
+        <Replies
+          showNoReplies={false}
+          parentAuthor={props.reply.author}
+          parentPermlink={props.reply.permlink}
+        />
+      )
+    }
   </div>
 );
 
@@ -35,7 +47,10 @@ Reply.propTypes = {
     }),
   }),
   reply: PropTypes.shape({
-    body: PropTypes.string.isRequired,
+    body: PropTypes.string,
+    children: PropTypes.number,
+    author: PropTypes.string,
+    permlink: PropTypes.string,
   }).isRequired,
 };
 

@@ -55,3 +55,6 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+// Selectors
+export const getPostByPermlink = (state, fullPermlink) => state.allPosts.posts[fullPermlink];

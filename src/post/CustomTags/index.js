@@ -7,9 +7,9 @@ import styles from './styles.scss';
 import { getOtherTags } from '../../utils/communityUtils';
 
 const CustomTags = ({ className, tags }) => (
-  <div className={[className].join(' ')}>
+  <div className={className}>
     {getOtherTags(tags).map(tag => (
-      <span className={['uk-margin-small-right', styles.tagText].join(' ')} key={tag}>
+      <span className={`uk-margin-small-right ${styles.tagText}`} key={tag}>
         <span className={indexStyles.secondaryText}>#</span>
         {tag}
       </span>))}
