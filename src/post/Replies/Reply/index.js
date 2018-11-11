@@ -1,22 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import TimeAgo from 'react-time-ago';
 
 import Replies from '../';
 import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 
 const Reply = props => (
-  <div className="uk-margin-bottom">
-    <div>
-      <img
-        className={`uk-border-circle ${styles.userImage}`}
-        src={props.postingUser.json_metadata.profile.profile_image}
-        alt={props.postingUser.name}
-      />
-      <span className={styles.userName}>
-        {props.postingUser.json_metadata.profile.name}
-      </span>
+  <div className={styles.container}>
+    <div className={styles.headerContainer}>
+      <Link to={`/@${props.reply.author}`}>
+        <img
+          className={`uk-border-circle ${styles.userImage}`}
+          src={props.postingUser.json_metadata.profile.profile_image}
+          alt={props.postingUser.name}
+        />
+        <span className={styles.userName}>
+          {props.postingUser.json_metadata.profile.name}
+        </span>
+      </Link>
+      &nbsp;|&nbsp;<TimeAgo>{new Date(`${props.reply.created}Z`)}</TimeAgo>
     </div>
     <div
       className={styles.replyBody}
@@ -51,6 +56,7 @@ Reply.propTypes = {
     children: PropTypes.number,
     author: PropTypes.string,
     permlink: PropTypes.string,
+    created: PropTypes.string,
   }).isRequired,
 };
 
