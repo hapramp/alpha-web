@@ -6,10 +6,9 @@ import Replies from './';
 
 class RootReplies extends React.Component {
   static propTypes = {
-    parentAuthor: PropTypes.string.isRequired,
-    parentPermlink: PropTypes.string.isRequired,
     className: PropTypes.string,
     rootPost: PropTypes.shape().isRequired,
+    permlinks: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
@@ -22,8 +21,7 @@ class RootReplies extends React.Component {
         <CreateReply post={this.props.rootPost} />
         <Replies
           showNoReplies
-          parentAuthor={this.props.parentAuthor}
-          parentPermlink={this.props.parentPermlink}
+          permlinks={this.props.permlinks}
         />
       </div>
     );

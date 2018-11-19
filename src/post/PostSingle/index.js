@@ -44,10 +44,11 @@ class PostSingle extends React.Component {
             className={[styles.cutomTag].join(' ')}
           />
           <ActionBar post={this.props.post} withLink={false} />
-          <Replies
-            parentAuthor={this.props.post.author}
-            parentPermlink={this.props.post.permlink}
-          />
+          <div style={{ padding: '0 24px' }}>
+            <Replies
+              permlinks={this.props.post.replies}
+            />
+          </div>
         </div>
       </div>);
   }
@@ -73,6 +74,7 @@ PostSingle.propTypes = {
     }),
     permlink: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
+    replies: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 

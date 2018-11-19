@@ -8,6 +8,9 @@ export const fixUser = (oldUser, username) => {
     user.json_metadata = user.json_metadata || {};
     user.json_metadata.profile = { name: username };
   } else {
+    if (!user.json_metadata.profile) {
+      user.json_metadata.profile = {};
+    }
     user = _.clone(user);
     user.json_metadata.profile.name = user.json_metadata.profile.name || username;
   }

@@ -32,12 +32,15 @@ const Reply = props => (
     />
     <CommentActionBar post={props.reply} />
     {
-      props.reply.children > 0 && (
-        <Replies
-          showNoReplies={false}
-          parentAuthor={props.reply.author}
-          parentPermlink={props.reply.permlink}
-        />
+      props.reply.replies.length > 0 && (
+        <div className="uk-flex">
+          <div style={{ width: 40 }} key={0} />
+          <Replies
+            showNoReplies={false}
+            permlinks={props.reply.replies}
+            key={props.reply.permlink}
+          />
+        </div>
       )
     }
   </div>
@@ -55,7 +58,7 @@ Reply.propTypes = {
   }),
   reply: PropTypes.shape({
     body: PropTypes.string,
-    children: PropTypes.number,
+    replies: PropTypes.arrayOf(PropTypes.string),
     author: PropTypes.string,
     permlink: PropTypes.string,
     created: PropTypes.string,
