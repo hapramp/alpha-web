@@ -119,6 +119,19 @@ class SteemAPI {
     });
   }
 
+  static getContentState(parentPermlink = 'hapramp', author, permlink) {
+    return new Promise((resolve, reject) => {
+      const cb = (err, success) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(success);
+        }
+      };
+      steem.api.getState(`${parentPermlink}/@${author}/${permlink}`, cb);
+    });
+  }
+
   static handleBroadcastMessagesComment(message, extetion, postingKey, username, callback) {
     SteemAPI.preCompileTransactionComment(message, postingKey)
       .then((response) => {

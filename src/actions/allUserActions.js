@@ -9,6 +9,11 @@ export const actionTypes = {
   LOAD_HAPRAMP_USER_ERROR: 'ALL_USERS.HAPRAMP.LOAD.ERROR',
 };
 
+export const getUserAccountsAction = users => ({
+  type: actionTypes.LOAD_USERS_DONE,
+  results: users,
+});
+
 export const loadUserAccounts = usernames => (dispatch, getState, { steemAPI }) => {
   const { fetchingUsers } = getState().allUsers;
   const pendingUsernames = _.uniq(usernames.filter(username => !fetchingUsers[username]));
@@ -17,7 +22,7 @@ export const loadUserAccounts = usernames => (dispatch, getState, { steemAPI }) 
   }
   dispatch({ type: actionTypes.LOAD_USERS_INIT, usernames: pendingUsernames });
   return steemAPI.getUserAccounts(pendingUsernames)
-    .then(results => dispatch({ type: actionTypes.LOAD_USERS_DONE, results }))
+    .then(results => dispatch(getUserAccountsAction(results)))
     .catch(error => dispatch({
       type: actionTypes.LOAD_USERS_ERROR, reason: error, usernames: pendingUsernames,
     }));
