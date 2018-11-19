@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import TimeAgo from 'react-time-ago';
 
 import Replies from '../';
+import CommentActionBar from './CommentActionBar';
 import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 
@@ -29,6 +30,7 @@ const Reply = props => (
         __html: window.markdownToHtmlConverter.makeHtml(props.reply.body),
       }}
     />
+    <CommentActionBar post={props.reply} />
     {
       props.reply.children > 0 && (
         <Replies
