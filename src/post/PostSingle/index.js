@@ -44,7 +44,7 @@ class PostSingle extends React.Component {
             className={[styles.cutomTag].join(' ')}
           />
           <ActionBar post={this.props.post} withLink={false} />
-          <div style={{ padding: '0 24px' }}>
+          <div style={{ padding: '0 24px 24px 24px' }}>
             <Replies
               permlinks={this.props.post.replies}
             />

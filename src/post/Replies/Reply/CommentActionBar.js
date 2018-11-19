@@ -41,7 +41,6 @@ class CommentActionBar extends React.Component {
   render() {
     const positiveVotes = this.props.post.active_votes.filter(a => a.percent > 0);
     const hasVoted = positiveVotes.map(a => a.voter).includes(this.props.authUsername);
-    console.log(positiveVotes, this.props.authUsername, hasVoted);
     return (
       <div className={`uk-flex ${styles.actionBarContainer}`}>
         <div className={styles.actionContainer}>

@@ -36,7 +36,7 @@ const Reply = props => (
     {
       props.reply.replies.length > 0 && (
         <div className="uk-flex">
-          <div style={{ width: 40 }} key={0} />
+          <div style={{ width: 40 }} />
           <Replies
             showNoReplies={false}
             permlinks={props.reply.replies}
