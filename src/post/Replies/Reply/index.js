@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TimeAgo from 'react-time-ago';
+import { bindActionCreators } from 'redux';
 
+import { ratePost } from '../../ActionBar/actions';
 import Replies from '../';
 import CommentActionBar from './CommentActionBar';
 import { fixUser } from '../../../utils/defaultFixUtils';
@@ -30,7 +32,7 @@ const Reply = props => (
         __html: window.markdownToHtmlConverter.makeHtml(props.reply.body),
       }}
     />
-    <CommentActionBar post={props.reply} />
+    <CommentActionBar post={props.reply} ratePost={props.ratePost} />
     {
       props.reply.replies.length > 0 && (
         <div className="uk-flex">
@@ -63,6 +65,7 @@ Reply.propTypes = {
     permlink: PropTypes.string,
     created: PropTypes.string,
   }).isRequired,
+  ratePost: PropTypes.func.isRequired,
 };
 
 Reply.defaultProps = {
@@ -77,4 +80,6 @@ const mapStateToprops = (state, ownprops) => {
   };
 };
 
-export default connect(mapStateToprops)(Reply);
+const mapDispatchToProps = dispatch => bindActionCreators({ ratePost }, dispatch);
+
+export default connect(mapStateToprops, mapDispatchToProps)(Reply);
