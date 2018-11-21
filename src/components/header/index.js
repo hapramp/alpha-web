@@ -74,7 +74,7 @@ class Header extends React.Component {
           <div className="uk-navbar-left">
             <Link className={['uk-navbar-item', 'uk-logo'].join(' ')} to="/">
               <img src={logo} alt="Hapramp" className={styles.logo} />
-              Hapramp
+              1Ramp
             </Link>
           </div>
           <div className={`uk-navbar-right ${styles.flexNoWrap}`}>
