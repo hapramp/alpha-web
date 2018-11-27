@@ -1,5 +1,3 @@
-.createReplyContainer {
-}
 .postingUserImage {
 	height: 32px;
 	width: 32px;
@@ -16,7 +14,8 @@
 	height: 30px;
 	padding: 8px 20px 8px 20px;
 	border-radius: 32px;
-	width: calc(100% - 40px);
+  width: 100%;
+  max-width: 424px;
 	flex-grow: 1;
 	display: flex;
 }

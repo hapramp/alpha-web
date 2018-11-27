@@ -4,7 +4,7 @@
 
 .userImage {
 	width: 28px;
-	height: 28px;
+  height: 28px;
 }
 
 .userImage img {
@@ -43,4 +43,24 @@
 
 .actionCount {
   margin-left: 8px;
+}
+
+.replyInputContainer {
+  margin: 8px 0 16px 40px;
+}
+
+.replyInputInput {
+  flex-grow: 1;
+  outline: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.replyInputInput:focus {
+  outline: none;
+}
+
+.replyInputInputButton {
+  height: 16px;
+  margin: 4px 0 0 16px;
 }

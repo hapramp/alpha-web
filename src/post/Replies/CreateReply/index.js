@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
 import { addReply } from '../actions';
+import { getIcon } from '../../../icons';
+
 
 class CreateReply extends React.Component {
   constructor(props) {
@@ -24,20 +26,22 @@ class CreateReply extends React.Component {
     if (!body.length) {
       return;
     }
-    this.replyInput.value = '';
     this.props.addReply(this.props.post.author, this.props.post.permlink, body)
-      .catch(() => {
-        this.replyInput.value = body;
+      .then(() => {
+        this.replyInput.value = '';
       });
   }
 
   render() {
+    /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <div className={['uk-flex', styles.createReplyContainer].join(' ')}>
         <img className={['uk-border-circle', styles.postingUserImage].join(' ')} alt={localStorage.getItem('username')} src={localStorage.getItem('avatar')} />
         <span className={[styles.commentInputContainer].join(' ')}>
           <input ref={this.setInputRef} className={[styles.commentInput].join(' ')} />
-          <i
+          <img
+            src={getIcon('comment_add', 'outline')}
+            alt="Send"
             className={['far', 'fa-paper-plane', indexStyles.pointer, styles.sendIcon].join(' ')}
             onClick={this.postReply}
             onKeyDown={this.postReply}
@@ -46,6 +50,7 @@ class CreateReply extends React.Component {
           />
         </span>
       </div>);
+    /* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */
   }
 }
 
@@ -58,7 +63,7 @@ CreateReply.propTypes = {
 };
 
 CreateReply.defaultProps = {
-  addReply: () => {},
+  addReply: () => { },
   post: {
     author: '',
     permlink: '',

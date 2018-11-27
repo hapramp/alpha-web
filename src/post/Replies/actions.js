@@ -1,3 +1,5 @@
+import { loadState } from '../actions';
+
 export const actionTypes = {
   REPLIES_LOAD_INIT: 'REPLIES.LOAD.INIT',
   REPLIES_LOAD_DONE: 'REPLIES.LOAD.DONE',
@@ -36,11 +38,12 @@ export const addReply = (parentAuthor, parentPermlink, body) =>
     return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, username, body)
       .then((result) => {
         dispatch(loadReplies(parentAuthor, parentPermlink));
-        notify.success('Reply posted.');
         return dispatch({
           type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result, username,
         });
       })
+      .then(() => dispatch(loadState('hapramp', parentAuthor, parentPermlink)))
+      .then(() => notify.success('Reply posted.'))
       .catch(reason => dispatch({
         type: actionTypes.ADD_REPLY_ERROR,
         parentAuthor,

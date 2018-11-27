@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { getAuthUsername } from '../../../reducers/authUserReducer';
 import { getIcon } from '../../../icons';
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
 
-class CommentActionBar extends React.Component {
+export default class CommentActionBar extends React.Component {
   static propTypes = {
     post: PropTypes.shape({
       author: PropTypes.string.isRequired,
@@ -18,6 +16,7 @@ class CommentActionBar extends React.Component {
     }),
     authUsername: PropTypes.string,
     ratePost: PropTypes.func,
+    onReplyClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -26,6 +25,7 @@ class CommentActionBar extends React.Component {
     },
     authUsername: '',
     ratePost: () => {},
+    onReplyClick: () => {},
   }
 
   upVote = () => {
@@ -36,6 +36,13 @@ class CommentActionBar extends React.Component {
   unUpVote = () => {
     const { author, permlink } = this.props.post;
     this.props.ratePost(author, permlink, 0);
+  }
+
+  toggleReplyBar = () => {
+    const { authUsername } = this.props;
+    if (authUsername) {
+      this.props.onReplyClick();
+    }
   }
 
   render() {
@@ -62,7 +69,13 @@ class CommentActionBar extends React.Component {
           <img src={getIcon('dollor', 'outline')} alt="" />
           <span className={styles.actionContainer}>{this.props.post.pending_payout_value}</span>
         </div>
-        <div className={styles.actionContainer}>
+        <div
+          className={styles.actionContainer}
+          onClick={this.toggleReplyBar}
+          onKeyUp={() => {}}
+          role="button"
+          tabIndex={-1}
+        >
           <img
             src={getIcon('reply', 'outline')}
             alt=""
@@ -73,9 +86,3 @@ class CommentActionBar extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  authUsername: getAuthUsername(state),
-});
-
-export default connect(mapStateToProps)(CommentActionBar);
