@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .postingUserImage {
 	height: 32px;
 	width: 32px;
@@ -30,6 +32,6 @@
 }
 
 .sendIcon {
-	padding: 4px;
-	font-size: 18px;
+  font-size: 18px;
+  color: $secondary-color;
 }

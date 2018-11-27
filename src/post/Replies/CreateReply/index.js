@@ -32,22 +32,37 @@ class CreateReply extends React.Component {
       });
   }
 
+  handleInputKeyUp = (event) => {
+    if (event.keyCode === 13) {
+      this.postReply();
+    }
+  }
+
   render() {
     /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
-      <div className={['uk-flex', styles.createReplyContainer].join(' ')}>
-        <img className={['uk-border-circle', styles.postingUserImage].join(' ')} alt={localStorage.getItem('username')} src={localStorage.getItem('avatar')} />
-        <span className={[styles.commentInputContainer].join(' ')}>
-          <input ref={this.setInputRef} className={[styles.commentInput].join(' ')} />
-          <img
+      <div className="uk-flex">
+        <img
+          className={`uk-border-circle ${styles.postingUserImage}`}
+          alt={localStorage.getItem('username')}
+          src={localStorage.getItem('avatar')}
+        />
+        <span className={styles.commentInputContainer}>
+          <input
+            ref={this.setInputRef}
+            className={styles.commentInput}
+            onKeyUp={this.handleInputKeyUp}
+          />
+          <span
             src={getIcon('comment_add', 'outline')}
-            alt="Send"
-            className={['far', 'fa-paper-plane', indexStyles.pointer, styles.sendIcon].join(' ')}
+            className={`${indexStyles.pointer} ${styles.sendIcon}`}
             onClick={this.postReply}
             onKeyDown={this.postReply}
             role="button"
             tabIndex={0}
-          />
+          >
+            Send
+          </span>
         </span>
       </div>);
     /* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */

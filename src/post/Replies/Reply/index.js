@@ -59,7 +59,7 @@ class Reply extends React.Component {
     } = this.props;
     const { showReplyInput } = this.state;
     return (
-      <div className={styles.container} style={{ marginBottom: this.props.bottomMargin ? 32 : 0 }}>
+      <div className={styles.container} style={{ marginBottom: this.props.bottomMargin ? 32 : 8 }}>
         <div className={styles.headerContainer}>
           <Link to={`/@${reply.author}`}>
             <img
