@@ -19,6 +19,7 @@ class Replies extends React.Component {
       pendingReplies: PropTypes.arrayOf(PropTypes.shape()),
     }),
     permlinks: PropTypes.arrayOf(PropTypes.string), // eslint-disable-line
+    bottomMargin: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -28,6 +29,7 @@ class Replies extends React.Component {
       pendingReplies: [],
     },
     permlinks: [],
+    bottomMargin: false,
   };
 
   render() {
@@ -35,7 +37,13 @@ class Replies extends React.Component {
       <div className={styles.repliesContainer}>
         {
           Object.values(this.props.replies)
-            .map(reply => <Reply reply={reply} key={reply.id} />)
+            .map(reply => (
+              <Reply
+                reply={reply}
+                key={reply.id}
+                bottomMargin={this.props.bottomMargin}
+              />
+            ))
         }
         {
           /*

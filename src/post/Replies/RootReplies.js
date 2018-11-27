@@ -22,6 +22,7 @@ class RootReplies extends React.Component {
         <Replies
           showNoReplies
           permlinks={this.props.permlinks}
+          bottomMargin
         />
       </div>
     );

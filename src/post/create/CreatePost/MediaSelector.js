@@ -30,7 +30,8 @@ export default class MediaSelector extends React.Component {
         <span
           onClick={this.onImageClick}
           uk-icon="icon: image"
-          style={{ marginLeft: 4, cursor: 'pointer' }}
+          style={{ cursor: 'pointer' }}
+          className="uk-margin-small-bottom"
           role="button"
           tabIndex="-1"
           onKeyUp={() => { }}

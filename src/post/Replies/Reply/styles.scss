@@ -17,7 +17,6 @@
 	font-size: 14px;
 	line-height: 20px;
   color: rgba(0, 0, 0, 0.54);
-  margin-bottom: 4px;
 }
 
 .userName {
@@ -25,12 +24,15 @@
 }
 
 .replyBody {
-	font-style: italic;
 	font-weight: 500;
-	margin-left: 40px;
-	font-size: 14px;
-	color:rgba(0,0,0,0.38);
-	line-height:16px;
+	font-size: 16px;
+	line-height: 20px;
+  margin: 8px 0 8px 40px;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.replyBody p {
+  margin: 4px;
 }
 
 .actionBarContainer {

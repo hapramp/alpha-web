@@ -33,11 +33,13 @@ class Reply extends React.Component {
     }).isRequired,
     ratePost: PropTypes.func.isRequired,
     authUsername: PropTypes.string,
+    bottomMargin: PropTypes.bool,
   };
 
   static defaultProps = {
     postingUser: null,
     authUsername: '',
+    bottomMargin: false,
   };
 
   constructor(props) {
@@ -57,7 +59,7 @@ class Reply extends React.Component {
     } = this.props;
     const { showReplyInput } = this.state;
     return (
-      <div className={styles.container}>
+      <div className={styles.container} style={{ marginBottom: this.props.bottomMargin ? 32 : 0 }}>
         <div className={styles.headerContainer}>
           <Link to={`/@${reply.author}`}>
             <img

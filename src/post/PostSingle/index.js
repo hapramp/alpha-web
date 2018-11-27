@@ -22,7 +22,7 @@ class PostSingle extends React.Component {
     return (
       <div className={['uk-margin-bottom', styles.postSingleContainer].join(' ')}>
         <div
-          className={['uk-padding-remove', indexStyles.white].join(' ')}
+          className={[indexStyles.white].join(' ')}
         >
           <PostUserMeta
             profile={{
@@ -44,7 +44,7 @@ class PostSingle extends React.Component {
             className={[styles.cutomTag].join(' ')}
           />
           <ActionBar post={this.props.post} withLink={false} />
-          <div style={{ padding: '0 24px 24px 24px' }}>
+          <div>
             <Replies
               permlinks={this.props.post.replies}
             />
