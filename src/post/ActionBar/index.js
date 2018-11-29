@@ -97,7 +97,7 @@ class ActionBar extends React.Component {
           {
             displayUsers.map(user => (
               <div>
-                <UserAvatar username={user} />
+                <UserAvatar username={user} tooltip />
               </div>
             ))
           }
