@@ -57,7 +57,7 @@ class ActionBar extends React.Component {
     return (
       <div className={`uk-margin-top uk-margin-bottom uk-flex uk-flex-between ${styles.ratingBarContainer}`}>
         <span
-          className={`uk-flex ${indexStyles.pointer} ${styles.action}`}
+          className={`uk-flex ${indexStyles.pointer}`}
           onClick={this.toggleFullRate}
           onTouchStart={this.handleRatePress}
           onTouchEnd={this.handleRateRelease}
@@ -118,14 +118,14 @@ class ActionBar extends React.Component {
   getRatingView(userRating) {
     return (
       <div
-        className={`uk-flex uk-margin-top uk-margin-bottom uk-flex uk-flex-between ${styles.ratingBarContainer}`}
+        className={`uk-flex uk-margin-top uk-margin-bottom uk-flex ${styles.ratingBarContainer}`}
         onMouseLeave={this.disableRatingView}
       >
-        <span className="uk-margin-left">
+        <span>
           {[1, 2, 3, 4, 5].map(i => (
             <span
               key={i}
-              className={`uk-margin-small-right ${indexStyles.pointer} ${styles.action}`}
+              className={`uk-margin-small-right ${indexStyles.pointer}`}
               onClick={this.onRateClick}
               role="radio"
               onKeyDown={this.onRateClick}

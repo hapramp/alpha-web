@@ -1,7 +1,8 @@
 @import "../../styles/_variables.scss";
 
-.action i {
-  font-size: 28px;
+.action img {
+  height: 16px;
+  width: 16px;
 }
 
 .largeIcon {
@@ -39,4 +40,5 @@
 
 .ratingBarContainer {
   height: 30px;
+  align-items: center;
 }
