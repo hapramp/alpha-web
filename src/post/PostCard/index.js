@@ -23,7 +23,7 @@ const Post = (props) => {
 
   /* Render */
   return (
-    <div className={['uk-margin-bottom', props.border ? styles.postContainerBorder : '', indexStyles.white, styles.postContainer].join(' ')}>
+    <div className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer}`}>
       {/* Top section */}
       <PostUserMeta
         profile={{

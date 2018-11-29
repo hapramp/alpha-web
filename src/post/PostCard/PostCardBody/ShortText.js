@@ -10,7 +10,7 @@ const ShortText = ({ body, className, length }) => {
     return (
       <div
         className={className}
-        style={{ margin: '24px 24px 0 24px' }}
+        style={{ margin: '32px 32px 0 32px' }}
         dangerouslySetInnerHTML={{ __html: ellipsis(getBodyTextOnly(body), length, { ellipsis: '…' }) }}
       />
     );
