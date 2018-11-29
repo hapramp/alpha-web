@@ -31,7 +31,7 @@ UserAvatar.propTypes = {
   username: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,
-  tooltip: PropTypes.string,
+  tooltip: PropTypes.bool,
 };
 
 UserAvatar.defaultProps = {
