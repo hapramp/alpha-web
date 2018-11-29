@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import indexStyles from '../../styles/globals.scss';
 import styles from './styles.scss';
 import { ratePost } from './actions';
+import { getAuthUsername } from '../../reducers/authUserReducer';
+import Icon from '../../icons/Icon';
+import UserAvatar from '../../components/UserAvatar';
 
 class ActionBar extends React.Component {
   constructor(props) {
@@ -29,9 +32,9 @@ class ActionBar extends React.Component {
 
   getCommentSection() {
     const child = [
-      <i className="uk-margin-small-right fas fa-comment-alt" key={0} />,
+      <Icon name="comment" />,
       <span className={styles.actionText} key={1} >
-        {this.props.post.children} Comment{this.props.post.children === 1 ? '' : 's'}
+        {this.props.post.children}
       </span>,
     ];
     if (this.props.withLink) {
@@ -52,7 +55,7 @@ class ActionBar extends React.Component {
 
   getCollapsedActionSection(finalRating, userRating) {
     return (
-      <div className="uk-margin-top uk-margin-bottom uk-padding-small uk-flex uk-flex-around">
+      <div className={`uk-margin-top uk-margin-bottom uk-flex uk-flex-between ${styles.ratingBarContainer}`}>
         <span
           className={`uk-flex ${indexStyles.pointer} ${styles.action}`}
           onClick={this.toggleFullRate}
@@ -65,38 +68,57 @@ class ActionBar extends React.Component {
           tabIndex={0}
           aria-checked
         >
-          <i className={`uk-margin-small-right ${userRating ? `fas ${indexStyles.primaryText}` : 'far'} fa-star`} />
-          <span className={styles.actionText}>
-            {finalRating} from {this.props.post.active_votes.filter(i => i.percent > 0).length}
+          <Icon name={userRating ? 'star_primary' : 'star'} type={userRating ? 'solid' : 'outline'} />
+          <span className={styles.actionText} style={{ fontWeight: 500 }}>
+            Rate{userRating ? 'd' : ''}
           </span>
         </span>
-        {this.getCommentSection()}
-        <span className={`uk-flex ${styles.action}`}>
-          <i className="uk-margin-small-right fas fa-dollar-sign" />
-          <span className={styles.actionText}>{this.props.post.pending_payout_value}</span>
+        <span>
+          {this.getRatingSection(finalRating)}
         </span>
       </div>);
   }
 
+  getRatingSection(finalRating) {
+    const positiveRatings = this.props.post.active_votes
+      .filter(vote => vote.percent > 0);
+    const displayUsers = positiveRatings
+      .sort((vote) => {
+        // TODO: following>follower>* sort
+        const { voter } = vote;
+        return voter;
+      })
+      .slice(0, 3)
+      .map(vote => vote.voter);
+    return (
+      <div className="uk-flex" style={{ alignItems: 'center' }}>
+        <div style={{ marginRight: 8, fontSize: 10, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
+        <div className={`uk-flex ${styles.ratingUserContainer}`}>
+          {
+            displayUsers.map(user => (
+              <div>
+                <UserAvatar username={user} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    );
+  }
+
+  getPayoutSection() {
+    return (
+      <span className={`uk-flex ${styles.action}`} style={{ marginLeft: 16 }}>
+        <Icon name="dollor" style={{ marginRight: -8 }} />
+        <span className={styles.actionText}>{this.props.post.pending_payout_value}</span>
+      </span>
+    );
+  }
+
   getRatingView(userRating) {
-    let ratingSection = <span />;
-    if (userRating) {
-      ratingSection = (
-        <span
-          className={`uk-margin-medium-left uk-margin-right ${indexStyles.pointer} ${styles.action}`}
-          onClick={this.onRateClick}
-          role="switch"
-          onKeyDown={this.onRateClick}
-          tabIndex={0}
-          aria-checked={false}
-        >
-          <i className={`uk-margin-small-right far fa-star ${styles.cancelRatingButton}`} data-rating="0" />
-        </span>
-      );
-    }
     return (
       <div
-        className="uk-margin-top uk-margin-bottom uk-padding-small uk-flex uk-flex-between"
+        className={`uk-flex uk-margin-top uk-margin-bottom uk-flex uk-flex-between ${styles.ratingBarContainer}`}
         onMouseLeave={this.disableRatingView}
       >
         <span className="uk-margin-left">
@@ -110,16 +132,20 @@ class ActionBar extends React.Component {
               tabIndex={0}
               aria-checked={i === userRating}
             >
-              <i className={`uk-margin-small-right ${i <= userRating ? `fas ${indexStyles.primaryText}` : 'far'} fa-star`} data-rating={i} />
+              <Icon name={i <= userRating ? 'star_primary' : 'star'} type={i <= userRating ? 'solid' : 'outline'} data-rating={i} />
             </span>))}
         </span>
-        {ratingSection}
       </div>);
   }
 
   toggleFullRate() {
     let rating = 5;
-    if (_.some(this.props.post.active_votes, i => i.voter === localStorage.getItem('username') && i.percent > 0)) {
+    if (
+      _.some(
+        this.props.post.active_votes,
+        i => i.voter === this.props.authUsername && i.percent > 0,
+      )
+    ) {
       // Already rated, remove rating
       rating = 0;
     }
@@ -162,15 +188,26 @@ class ActionBar extends React.Component {
 
     let userRating = null;
     this.props.post.active_votes.forEach((element) => {
-      if (element.voter === localStorage.getItem('username')) {
+      if (element.voter === this.props.authUsername) {
         userRating = element.percent / 2000;
       }
     });
 
+    let ratingSection;
     if (this.state.ratingActive) {
-      return this.getRatingView(userRating);
+      ratingSection = this.getRatingView(userRating);
+    } else {
+      ratingSection = this.getCollapsedActionSection(finalRating, userRating);
     }
-    return this.getCollapsedActionSection(finalRating, userRating);
+    return (
+      <div style={{ padding: '0px 32px 32px 32px' }}>
+        {ratingSection}
+        <div className={`uk-flex ${styles.commentPayoutContainer}`}>
+          {this.getCommentSection()}
+          {this.getPayoutSection()}
+        </div>
+      </div>
+    );
   }
 }
 
@@ -184,14 +221,18 @@ ActionBar.propTypes = {
     pending_payout_value: PropTypes.string.isRequired,
   }),
   withLink: PropTypes.bool,
+  authUsername: PropTypes.string,
 };
 
 ActionBar.defaultProps = {
   ratePost: () => {},
   post: {},
   withLink: true,
+  authUsername: null,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  authUsername: getAuthUsername(state),
+});
 
 export default connect(mapStateToProps, { ratePost })(ActionBar);

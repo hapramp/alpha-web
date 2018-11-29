@@ -20,4 +20,23 @@
   font-size: $fs-small;
   line-height: 16px;
   color: rgba(0, 0, 0, 0.54);
+  margin-left: 8px;
+}
+
+.ratingUserContainer > div:not(:last-child) {
+  margin-right: -14px;
+}
+
+.ratingUserContainer a {
+  border: 1px solid white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.commentPayoutContainer {
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.ratingBarContainer {
+  height: 30px;
 }
