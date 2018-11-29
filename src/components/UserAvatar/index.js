@@ -9,9 +9,11 @@ const allowedSizes = [
 ];
 
 const UserAvatar = ({
-  username, size, className, ...props
+  username, size, className, tooltip,
+  ...props
 }) => {
   const realSize = allowedSizes.filter(i => i === size)[0] || 'medium';
+  const tooltipProp = tooltip ? { 'uk-tooltip': `@${username}` } : {};
   return (
     <Link
       to={`/@${username}`}
@@ -20,6 +22,7 @@ const UserAvatar = ({
       style={{
         backgroundImage: `url(https://steemitimages.com/u/${username}/avatar/${realSize})`,
       }}
+      {...tooltipProp}
     />
   );
 };
@@ -28,12 +31,14 @@ UserAvatar.propTypes = {
   username: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,
+  tooltip: PropTypes.string,
 };
 
 UserAvatar.defaultProps = {
   username: '',
   size: 'medium',
   className: '',
+  tooltip: false,
 };
 
 export default UserAvatar;
