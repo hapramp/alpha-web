@@ -117,5 +117,9 @@ export default {
         }),
       },
     ).then(validateJsonResponse),
+    competitions: {
+      getAll: () => fetch(`${constants.BACKEND_URL.V2}/competitions`)
+        .then(validateJsonResponse),
+    },
   },
 };
