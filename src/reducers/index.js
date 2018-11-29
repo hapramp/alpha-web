@@ -14,6 +14,7 @@ import repliesReducer from '../post/Replies/reducer';
 import followReducer from '../follow/reducer';
 import searchReducer from '../search/search.reducer';
 import registerReducer from '../register/reducer';
+import competitionsReducer from '../competitions/reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -30,4 +31,5 @@ export default combineReducers({
   follow: followReducer,
   search: searchReducer,
   register: registerReducer,
+  competitions: competitionsReducer,
 });
