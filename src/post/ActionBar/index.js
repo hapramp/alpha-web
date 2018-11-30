@@ -32,8 +32,8 @@ class ActionBar extends React.Component {
 
   getCommentSection() {
     const child = [
-      <Icon name="comment" />,
-      <span className={styles.actionText} key={1} >
+      <Icon name="comment" key={0} />,
+      <span className={styles.actionText} key={1}>
         {this.props.post.children}
       </span>,
     ];
@@ -95,9 +95,9 @@ class ActionBar extends React.Component {
         <div style={{ marginRight: 8, fontSize: 10, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
         <div className={`uk-flex ${styles.ratingUserContainer}`}>
           {
-            displayUsers.map(user => (
-              <div>
-                <UserAvatar username={user} tooltip />
+            displayUsers.map(username => (
+              <div key={username}>
+                <UserAvatar username={username} tooltip />
               </div>
             ))
           }
