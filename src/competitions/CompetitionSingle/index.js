@@ -48,7 +48,10 @@ const CompetitionSingle = ({
         {/** Competition cover image */}
         {
           competition.image && (
-            <img src={competition.image} alt="" />
+            <div
+              style={{ backgroundImage: `url("${competition.image}")` }}
+              className={styles.image}
+            />
           )
         }
 

@@ -17,6 +17,13 @@
   }
 }
 
+.image {
+  padding-top: 56.25% !important; // 16:9
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .title {
   font-size: 36px;
   font-weight: 400;
