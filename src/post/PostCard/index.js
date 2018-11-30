@@ -34,7 +34,7 @@ const Post = (props) => {
         communities={getCommunitiesForPost(props.post)}
       />
       {/* Actual post */}
-      <PostCardBody post={props.post} />
+      <PostCardBody post={props.post} maintainAspectRatio={props.maintainAspectRatio} />
       <ActionBar post={props.post} withLink />
     </div>);
 };
@@ -43,11 +43,13 @@ Post.propTypes = {
   post: PropTypes.shape().isRequired,
   postingUser: PropTypes.shape(),
   border: PropTypes.bool,
+  maintainAspectRatio: PropTypes.bool,
 };
 
 Post.defaultProps = {
   border: false,
   postingUser: {},
+  maintainAspectRatio: false,
 };
 
 const mapStateToProps = (state, ownProps) => {

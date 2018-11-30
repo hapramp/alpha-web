@@ -67,7 +67,7 @@ const CompetitionSingle = ({
             <div><b>Total</b>: {getSumPrize(competition.prizes)}</div>
             {
               competition.prizes.map((prize, idx) => (
-                <div>
+                <div key={prize}>
                   <b>{ordinal.toOrdinal(idx + 1)} Prize</b>: {prize}
                 </div>
               ))
@@ -122,7 +122,7 @@ const CompetitionSingle = ({
           <div className="uk-grid">
             {
               competition.judges.map(judge => (
-                <div className={styles.judgeMeta}>
+                <div className={styles.judgeMeta} key={judge.username}>
                   <UserAvatar username={judge.username} size="small" />
                   <div>{judge.username}</div>
                 </div>
@@ -142,7 +142,7 @@ const CompetitionSingle = ({
             postPermlinks.map(permlink => (
               <div key={permlink} className={`uk-width-1-2@m uk-margin-bottom ${styles.postCardWrapper}`}>
                 <div className={styles.postCardContainer}>
-                  <PostCard postPermlink={permlink} border />
+                  <PostCard postPermlink={permlink} border maintainAspectRatio />
                 </div>
               </div>
             ))
@@ -158,7 +158,11 @@ CompetitionSingle.propTypes = {
   postPermlinks: PropTypes.arrayOf(PropTypes.string).isRequired,
   fetchPosts: PropTypes.func.isRequired,
   fetchCompetitions: PropTypes.func.isRequired,
-  competition: PropTypes.shape().isRequired,
+  competition: PropTypes.shape(),
+};
+
+CompetitionSingle.defaultProps = {
+  competition: null,
 };
 
 const mapStateToProps = (state, ownProps) => ({
