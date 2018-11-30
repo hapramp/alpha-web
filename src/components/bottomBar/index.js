@@ -25,7 +25,7 @@ const BottomBar = props => (
         <BottomBarButtom buttonName="home" isActive={false} />
       </Link>
 
-      <Link to="/competition">
+      <Link to="/competitions">
         <BottomBarButtom buttonName="competition" isActive={false} />
       </Link>
 

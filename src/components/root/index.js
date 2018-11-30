@@ -34,6 +34,7 @@ import CompetitionSingle from '../../competitions/CompetitionSingle';
 const bottomBarWhitelistURLs = [
   '^/feed/.*$',
   '^/@.*$',
+  '^/competitions.*$',
 ];
 
 const bottomBarBlacklistURLs = [
