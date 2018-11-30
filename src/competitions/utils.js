@@ -27,4 +27,23 @@ export const getSumPrize = (prizes) => {
   return `${guessedUnit}${sum}`;
 };
 
-export const a = 10;
+
+export const getFormattedDate = (date, extraOptions = {}) => {
+  let dateObject = date;
+  if (typeof date === 'string') {
+    dateObject = new Date(`${date.substr(0, 19)}Z`);
+  }
+  const dateFormatOptions = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit',
+  };
+  const dateFormatter = new Intl.DateTimeFormat(
+    'en-US',
+    { ...dateFormatOptions, ...extraOptions },
+  );
+  return dateFormatter.format(dateObject);
+};

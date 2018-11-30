@@ -20,7 +20,8 @@ import steemAPI from './utils/steem';
 window.markdownToHtmlConverter = new showdown.Converter();
 
 // Add locale-specific relative date/time formatting rules.
-TimeAgo.locale(en);
+TimeAgo.addLocale(en);
+TimeAgo.default_locale = 'en-US';
 
 UIKit.use(Icons);
 

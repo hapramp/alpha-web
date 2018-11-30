@@ -1,0 +1,105 @@
+@import '../../styles/variables';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 800px;
+  width: 100vw;
+  padding: 8px;
+  >div {
+    @media screen and (min-width: 700px) {
+      padding: 24px;
+    }
+  }
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: $primary-color;
+}
+
+.twoSectionInfo {
+  display: flex;
+  font-size: 14px;
+  line-height: 20px;
+  img {
+    width: 20px;
+    margin-right: 16px;
+  }
+}
+
+.textParagraph {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  h3 {
+      font-weight: 500;
+  }
+  p {
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+.hashTagText {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: auto;
+  span {
+    color: $primary-color;
+    font-weight: 600;
+  }
+  img {
+    cursor: pointer;
+    height: 20px;
+    padding: 0 10px 0 6px;
+    vertical-align: text-top;
+  }
+}
+
+.judgesContainer {
+  h3 {
+    font-size: 18px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: bold;
+  }
+  a {
+    width: 56px;
+    height: 56px;
+  }
+  .judgeMeta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 16px;
+  }
+}
+
+.entryCount {
+  font-size: 18px;
+  font-weight: bold;
+  span {
+    color: $primary-color;
+  }
+}
+
+.postCardWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.postCardContainer {
+  width: 100%;
+  max-width: 360px;
+  >div {
+    border: 2px solid rgba(0, 0, 0, 0.12);
+  }
+}
