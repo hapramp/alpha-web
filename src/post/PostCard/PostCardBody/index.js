@@ -31,7 +31,7 @@ const PostCardBody = ({ post }) => {
       <Link to={`/@${post.author}/${post.permlink}`}>
         {image && <img src={image} style={{ width: '100%' }} alt="Post Cover" />}
         {post.title && <div className={styles.title}>{post.title}</div>}
-        <ShortText body={removeFooter(post.body)} />
+        <ShortText className={styles.bodyText} body={removeFooter(post.body)} />
       </Link>
     </div>
   );
