@@ -1,5 +1,5 @@
 import React from 'react';
-import TimeAgo from 'react-time-ago';
+import TimeAgo from 'react-time-ago/no-tooltip';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
