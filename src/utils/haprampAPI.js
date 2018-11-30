@@ -120,6 +120,10 @@ export default {
     competitions: {
       getAll: () => fetch(`${constants.BACKEND_URL.V2}/competitions`)
         .then(validateJsonResponse),
+      getCompetitionPosts: competitionId => fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}/posts`)
+        .then(validateJsonResponse),
+      getCompetitionWinners: competitionId => fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}/winners`)
+        .then(validateJsonResponse),
     },
   },
 };
