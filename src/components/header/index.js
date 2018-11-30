@@ -72,12 +72,15 @@ class Header extends React.Component {
           style={{ position: 'relative', zIndex: 980 }}
         >
           <div className="uk-navbar-left">
-            <Link className={['uk-navbar-item', 'uk-logo'].join(' ')} to="/">
+            <Link className={['uk-navbar-item', 'uk-logo', styles.brandName].join(' ')} to="/">
               <img src={logo} alt="Hapramp" className={styles.logo} />
               1Ramp
             </Link>
           </div>
           <div className={`uk-navbar-right ${styles.flexNoWrap}`}>
+            <div className={`uk-navbar-item ${styles.competitionText}`}>
+              <Link to="/competitions">Competitions</Link>
+            </div>
             <div className="uk-navbar-item">
               <Link to="/search" uk-icon="icon: search" />
             </div>

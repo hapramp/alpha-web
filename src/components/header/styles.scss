@@ -7,6 +7,10 @@
   @media screen and (max-width: 480px) {
     padding: 0 !important;
   }
+
+  .brandName {
+    color: white;
+  }
 }
 
 .header * {
@@ -21,6 +25,13 @@
 .header * a:focus {
   color: white;
   text-decoration: none;
+}
+
+.competitionText {
+  font-weight: 600;
+  @media screen and (max-width: 985px) {
+    display: none;
+  }
 }
 
 .logo {
