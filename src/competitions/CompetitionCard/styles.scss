@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 32px !important;
+  padding-bottom: 24px;
+}
+
+.competitionImage {
+  padding-top: 56.25%;
+  background-position: center;
+  background-size: cover;
+}
+
+.contentContainer {
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 24px;
+  color: $primary-color;
+  margin: 16px 0;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 20px;
+  height: 60px;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.ctaContainer {
+  display: flex;
+  font-size: 12px;
+  div {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}

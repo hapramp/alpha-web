@@ -27,7 +27,7 @@ import SelectCommunities from '../../register/SelectCommunities';
 import EditProfile from '../../profile/EditProfile';
 import ArticleNext from '../../post/create/CreateArticle/ArticleNext';
 import BottomBar from '../bottomBar';
-
+import CompetitionListing from '../../competitions/CompetitionListing';
 
 const bottomBarWhitelistURLs = [
   '^/feed/.*$',
@@ -124,6 +124,8 @@ const Root = ({
       <Route path="/search" component={Search} />
 
       <Route exact path="/profile/edit" component={authRequiredComponent(EditProfile)} />
+
+      <Route exact path="/competitions" component={CompetitionListing} />
 
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />
