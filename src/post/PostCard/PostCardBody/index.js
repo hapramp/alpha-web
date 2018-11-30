@@ -8,7 +8,7 @@ import ShortText from './ShortText';
 import styles from './styles.scss';
 import { removeFooter } from '../../PostBody';
 
-const PostCardBody = ({ post }) => {
+const PostCardBody = ({ post, maintainAspectRatio }) => {
   let jsonMetadata;
   try {
     if (typeof post.json_metadata === 'string') {
@@ -30,10 +30,18 @@ const PostCardBody = ({ post }) => {
     <div>
       <Link to={`/@${post.author}/${post.permlink}`}>
         {image && (
-          <div
-            style={{ backgroundImage: `url("${image}")`, width: '100%' }}
-            className={styles.cardImage}
-          />
+          maintainAspectRatio ? (
+            <div
+              style={{ backgroundImage: `url("${image}")`, width: '100%' }}
+              className={styles.cardImage}
+            />
+          ) : (
+            <img
+              src={image}
+              style={{ width: '100%' }}
+              alt=""
+            />
+          )
         )}
         {post.title && <div className={styles.title}>{post.title}</div>}
         <ShortText className={styles.bodyText} body={removeFooter(post.body)} />
@@ -44,10 +52,12 @@ const PostCardBody = ({ post }) => {
 
 PostCardBody.propTypes = {
   post: PropTypes.shape(),
+  maintainAspectRatio: PropTypes.bool,
 };
 
 PostCardBody.defaultProps = {
   post: {},
+  maintainAspectRatio: false,
 };
 
 export default PostCardBody;
