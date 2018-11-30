@@ -37,10 +37,8 @@ const getTime = (startsAt, endsAt) => {
   }
 
   return (
-    <div
-      className={`uk-margin-right ${styles.metaContainer}`}
-    >
-      <Icon name="saving" />
+    <div className={`uk-margin-right ${styles.metaContainer}`}>
+      <Icon name="clock" />
       {timeDisplay}
     </div>
   );
@@ -52,11 +50,11 @@ const CompetitionMeta = ({
   <div className="uk-flex">
     {getTime(startsAt, endsAt)}
     <div className={styles.metaContainer}>
-      <Icon name="dollor" />
+      <Icon name="money_bag" />
       <span>{getSumPrize(prizes)}</span>
     </div>
     <div className={styles.metaContainer}>
-      <Icon name="user" />
+      <Icon name="user_multiple" />
       <span>{participantCount}</span>
     </div>
   </div>
