@@ -35,7 +35,6 @@ PostUserMeta.propTypes = {
   className: PropTypes.string,
   profile: PropTypes.shape({
     username: PropTypes.string,
-    image: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
   created: PropTypes.string.isRequired,

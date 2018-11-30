@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.grayButton {
+  background-color: darken($background-color, 40%);
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.grayButton:hover {
+  background-color: darken($background-color, 60%);
+  transition: all 0.3s ease-out;
+}
+
+.disabled {
+  transition: all 0.3s ease-out;
+  cursor: unset;
+  color: $background-color;
+}
