@@ -22,7 +22,9 @@ const PostCardBody = ({ post, maintainAspectRatio }) => {
 
   let image = _.get(jsonMetadata, 'image[0]', '');
 
-  if (!image.length) {
+  if ( // Image is null for some rare cases - prevent crash
+    !image || !image.length
+  ) {
     image = _.get(getImagesFromBody(post.body), '[0]', '');
   }
 
