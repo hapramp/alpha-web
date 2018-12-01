@@ -47,6 +47,7 @@ class PostSingle extends React.Component {
           <div>
             <Replies
               permlinks={this.props.post.replies}
+              rootPost={this.props.post}
             />
           </div>
         </div>
