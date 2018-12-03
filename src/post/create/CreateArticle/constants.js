@@ -38,7 +38,7 @@ export const getEditorConfig = ({ uploadCallback }) => ({
     className: styles.toggleButton,
     popupClassName: `uk-position-fixed ${styles.inputBox}`,
   },
-  history: {
+  history: { // history button hidden on small screens (less than 610px) public/index.html
     className: styles.toggleButton,
     undo: { className: styles.toggleButton },
     redo: { className: styles.toggleButton },

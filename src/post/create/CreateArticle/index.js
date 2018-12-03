@@ -57,7 +57,7 @@ class CreateArticle extends React.Component {
 
   render() {
     return (
-      <div className="uk-container uk-margin-large-top">
+      <div className={`uk-container ${styles.editorContainer}`}>
         <div className={`uk-padding ${indexStyles.white}`}>
           {this.getEditorSection()}
         </div>

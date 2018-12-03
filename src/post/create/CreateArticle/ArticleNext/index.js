@@ -32,7 +32,7 @@ class ArticleNext extends React.Component {
 
   render() {
     return (
-      <div className={`uk-container uk-margin-top uk-padding ${indexStyles.white}`}>
+      <div className={`uk-container uk-padding ${indexStyles.white}`}>
         <CommunitySelector
           communities={this.props.communities}
           selectedCommunities={this.props.selectedCommunities}

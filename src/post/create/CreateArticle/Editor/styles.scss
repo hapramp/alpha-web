@@ -1,17 +1,26 @@
 .editorActionBar {
   bottom: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
+  z-index: 2;
   justify-content: flex-start !important;
   right: 0;
-  padding: 16px 8px 8px 8px !important;
+  padding: 16px 40px !important;
   flex-flow: row !important;
   overflow-x: auto;
   height: 40px;
+  overflow: inherit;
+  border: 0 !important;
+  margin-bottom: 0;
+
+  @media screen and (max-width: 530px) {
+    justify-content: center !important;
+
+  }
 }
 
 .editorWrapper {
   position: relative;
   padding-bottom: 80px;
-  min-height: calc(100vh - 378px);
+  min-height: calc(100vh - 364px);
 }
