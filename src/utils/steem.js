@@ -163,7 +163,11 @@ class SteemAPI {
 
   static createPermlink(title, author, parentAuthor, parentPermlink) {
     let permlink;
-    const timeStr = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '');
+
+    const timeStr = new Date().toISOString()
+      .replace(/[^a-zA-Z0-9]+/g, '')
+      .toLowerCase(); // permlink can't have capital case characters
+
     if (title && title.trim() !== '') {
       let s = slug(title);
       if (s === '') {
@@ -172,7 +176,6 @@ class SteemAPI {
 
       return this.loadPost(author, s)
         .then((content) => {
-          console.log(content);
           let prefix;
           if (content.posts[0].body !== '') {
             // make sure slug is unique
