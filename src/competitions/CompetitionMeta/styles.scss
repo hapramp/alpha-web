@@ -2,6 +2,10 @@
   font-size: 10px;
   line-height: 16px;
   margin-right: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   span {
     margin-left: 8px;
   }
