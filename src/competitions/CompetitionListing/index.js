@@ -19,7 +19,7 @@ const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) =>
   }, true);
 
   return (
-    <div className={`uk-container ${styles.container}`}>
+    <div className={`${styles.container}`}>
       <div className="uk-grid">
         {
           competitions.map(competition => (
