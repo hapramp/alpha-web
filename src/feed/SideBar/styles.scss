@@ -124,3 +124,9 @@
     font-size: $fs-x-small;
   }
 }
+
+@media screen and (max-width: 985px) {
+  .communitiesContainer > a:last-child {
+    margin-right: 24px;
+  }
+}

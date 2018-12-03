@@ -27,7 +27,7 @@ const CustomEditor = ({ handleContentChange, uploadCallback, editorState }) => (
         component: ListToggle,
       },
     }}
-    toolbarClassName={styles.editorActionBar}
+    toolbarClassName={`${styles.editorActionBar} uk-container`}
   />
 );
 
