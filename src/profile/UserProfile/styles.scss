@@ -3,6 +3,10 @@
 .userMeta {
   padding-left: 32px;
   padding-right: 32px;
+  @media screen and (max-width: 640px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .bio {

@@ -54,11 +54,11 @@ class Register extends React.Component {
     const { selectedCommunities } = this.state;
     return (
       <div className={`uk-container uk-margin-large uk-padding-large ${styles.container}`}>
-        <div className={styles.headerText}>PICK YOUR COMMUNITIES</div>
-        <div className="uk-grid" style={{ marginBottom: 40 }}>
+        <div className={`${styles.headerText} uk-text-center`}>PICK YOUR COMMUNITIES</div>
+        <div className={`uk-grid ${styles.communityWrapper}`} style={{ marginBottom: 40 }}>
           {
             allCommunities.map(community => (
-              <div className={`${styles.communityContainer} uk-width-1-4@s uk-width-1-2`} key={community.id}>
+              <div className={`${styles.communityContainer} uk-width-1-4@s`} key={community.id}>
                 <CommunityButton
                   isSelected={!!selectedCommunities.find(i => i === community.id)}
                   onClick={this.selectCommunity(community.id)}

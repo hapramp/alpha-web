@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import * as userFeedActions from '../actions/userFeedActions';
 import PostCard from '../post/PostCard';
 
+import styles from './styles.scss';
+
 class UserFeed extends React.Component {
   static propTypes = {
     userFeed: PropTypes.shape({
@@ -38,7 +40,7 @@ class UserFeed extends React.Component {
 
   render() {
     return (
-      <div className="uk-margin-top">
+      <div className={`uk-margin-top ${styles.feedContainer}`}>
         {
           this.props.userFeed.posts && this.props.userFeed.posts.map(post =>
             <PostCard key={post} postPermlink={post} />)

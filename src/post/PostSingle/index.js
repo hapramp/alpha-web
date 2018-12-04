@@ -34,6 +34,9 @@ class PostSingle extends React.Component {
             communities={getCommunitiesForPost(this.props.post)}
             className={['uk-padding'].join(' ')}
           />
+          <div className={styles.postTitle}>
+            {this.props.post.title}
+          </div>
           <PostBody
             body={body}
             author={author}
@@ -67,6 +70,7 @@ PostSingle.propTypes = {
   post: PropTypes.shape({
     author: PropTypes.string,
     created: PropTypes.string,
+    title: PropTypes.string,
     json_metadata: PropTypes.shape({
       content: PropTypes.shape({
         data: PropTypes.arrayOf(PropTypes.shape()),
