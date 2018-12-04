@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import CreateReply from './CreateReply';
 import Replies from './';
 
+import styles from './styles.scss';
+
 class RootReplies extends React.Component {
   static propTypes = {
     className: PropTypes.string,
@@ -17,7 +19,7 @@ class RootReplies extends React.Component {
 
   render() {
     return (
-      <div className={`${this.props.className} uk-margin-large-top uk-margin-bottom`}>
+      <div className={`${this.props.className} uk-margin-large-top uk-margin-bottom ${styles.rootRepliesStyle}`}>
         <CreateReply post={this.props.rootPost} />
         <Replies
           showNoReplies

@@ -18,6 +18,9 @@
 
 .communityContainer {
   margin-bottom: 33px;
+  @media screen and (max-width: 640px) {
+    width: inherit;
+  }
 }
 
 .communityContainer * img {
@@ -34,4 +37,10 @@
   text-align: center;
   color: rgba(0, 0, 0, 0.87);
   font-family: 'Roboto', monospace;
+}
+
+.communityWrapper {
+  @media screen and (max-width: 640px) {
+    margin-left: 0;
+  }
 }

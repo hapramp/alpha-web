@@ -92,7 +92,7 @@ class ActionBar extends React.Component {
       .map(vote => vote.voter);
     return (
       <div className="uk-flex" style={{ alignItems: 'center' }}>
-        <div style={{ marginRight: 8, fontSize: 10, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
+        <div style={{ marginRight: 8, fontSize: 12, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
         <div className={`uk-flex ${styles.ratingUserContainer}`}>
           {
             displayUsers.map(username => (
