@@ -4,17 +4,16 @@
   margin-bottom: 12px;
 }
 
-.userImage {
-	width: 28px;
+.userImage,
+.userImage img {
+	min-width: 28px;
+  min-height: 28px;
+  width: 28px;
   height: 28px;
 }
 
-.userImage img {
-	width: 28px;
-	height: 28px;
-}
-
 .headerContainer {
+  display: flex;
 	font-family: $fnt-primary;
 	font-size: 14px;
 	line-height: 20px;

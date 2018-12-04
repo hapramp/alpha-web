@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import TimeAgo from 'react-time-ago';
 import { bindActionCreators } from 'redux';
 
+import UserAvatar from '../../../components/UserAvatar';
 import { ratePost } from '../../ActionBar/actions';
 import Replies from '../';
 import CommentActionBar from './CommentActionBar';
@@ -61,16 +61,15 @@ class Reply extends React.Component {
     return (
       <div className={styles.container} style={{ marginBottom: this.props.bottomMargin ? 32 : 8 }}>
         <div className={styles.headerContainer}>
-          <Link to={`/@${reply.author}`}>
-            <img
-              className={`uk-border-circle ${styles.userImage}`}
-              src={postingUser.json_metadata.profile.profile_image}
-              alt={postingUser.name}
-            />
-            <span className={styles.userName}>
-              {postingUser.json_metadata.profile.name}
-            </span>
-          </Link>
+          <UserAvatar
+            className={`uk-border-circle ${styles.userImage}`}
+            src={postingUser.json_metadata.profile.profile_image}
+            username={postingUser.name}
+            alt={postingUser.name}
+          />
+          <span className={styles.userName}>
+            {postingUser.json_metadata.profile.name}
+          </span>
           &nbsp;|&nbsp;<TimeAgo>{new Date(`${reply.created}Z`)}</TimeAgo>
         </div>
         <div

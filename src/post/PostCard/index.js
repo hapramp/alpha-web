@@ -36,7 +36,8 @@ const Post = (props) => {
       {/* Actual post */}
       <PostCardBody post={props.post} maintainAspectRatio={props.maintainAspectRatio} />
       <ActionBar post={props.post} withLink />
-    </div>);
+    </div>
+  );
 };
 
 Post.propTypes = {

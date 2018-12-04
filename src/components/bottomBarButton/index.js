@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../../icons/Icon';
 import styles from './styles.scss';
-import { getIcon } from '../../icons';
 
 export default class bottomBarButtom extends React.Component {
   static propTypes = {
@@ -18,11 +18,10 @@ export default class bottomBarButtom extends React.Component {
     const {
       isActive, buttonName, ...remainingProps
     } = this.props;
-    const bottomIcon = getIcon(buttonName, 'outline');
     return (
       <div {...remainingProps}>
         <div>
-          <img src={bottomIcon} alt="" className={styles.communityIcon} />
+          <Icon name={buttonName} type="outline" className={styles.communityIcon} />
         </div>
       </div>
     );

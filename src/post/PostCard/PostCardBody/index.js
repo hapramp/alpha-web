@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { getImagesFromBody } from '../../utils';
 import ShortText from './ShortText';
+import Image from '../../../components/Image';
 import styles from './styles.scss';
 import { removeFooter } from '../../PostBody';
 
@@ -38,8 +39,10 @@ const PostCardBody = ({ post, maintainAspectRatio }) => {
               className={styles.cardImage}
             />
           ) : (
-            <img
+            <Image
               src={image}
+              steemitImagesConfig={{ enabled: true }}
+              lazyLoadProps={{ offset: 300 }}
               style={{ width: '100%' }}
               alt=""
             />

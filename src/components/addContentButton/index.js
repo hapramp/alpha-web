@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import Icon from '../../icons/Icon';
+
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
 import { resetClicked, toggleClicked } from '../../actions/addContentActions';
-import { getIcon } from '../../icons';
 
 class AddContentButton extends React.Component {
   componentWillUnmount() {
@@ -15,8 +16,6 @@ class AddContentButton extends React.Component {
 
   render() {
     const style = { transform: this.props.isClicked ? 'rotate(135deg)' : '' };
-    const articleIcon = getIcon('blog', 'solid');
-    const postIcon = getIcon('photo', 'solid');
     return (
       <div
         className={['uk-margin-right', 'uk-margin-bottom',
@@ -27,7 +26,7 @@ class AddContentButton extends React.Component {
           <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
             <Link to="/create/article" className="uk-flex">
               <div className={`${styles.iconContainer}`}>
-                <img src={articleIcon} alt="" />
+                <Icon name="blog" type="solid" />
               </div>
               <span className="uk-margin-small-left">Article</span>
             </Link>
@@ -35,7 +34,7 @@ class AddContentButton extends React.Component {
           <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
             <Link to="/create/post" className="uk-flex">
               <div className={`${styles.iconContainer}`}>
-                <img src={postIcon} alt="" />
+                <Icon name="photo" type="solid" />
               </div>
               <span className="uk-margin-small-left">Post</span>
             </Link>

@@ -27,7 +27,7 @@ const CompetitionSingle = ({
       fetchCompetitions();
       fetchPosts(competitionId);
     },
-    competitionId,
+    [competitionId],
   );
   if (!competition) {
     return <div>Loading...</div>;

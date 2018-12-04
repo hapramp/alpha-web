@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import UserAvatar from '../../../components/UserAvatar';
+
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
 import { addReply } from '../actions';
-import { getIcon } from '../../../icons';
+import { getAuthUsername } from '../../../reducers/authUserReducer';
 
 
 class CreateReply extends React.Component {
@@ -42,10 +44,9 @@ class CreateReply extends React.Component {
     /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <div className="uk-flex">
-        <img
+        <UserAvatar
           className={`uk-border-circle ${styles.postingUserImage}`}
-          alt={localStorage.getItem('username')}
-          src={localStorage.getItem('avatar')}
+          username={this.props.authUsername}
         />
         <span className={styles.commentInputContainer}>
           <input
@@ -54,7 +55,6 @@ class CreateReply extends React.Component {
             onKeyUp={this.handleInputKeyUp}
           />
           <span
-            src={getIcon('comment_add', 'outline')}
             className={`${indexStyles.pointer} ${styles.sendIcon}`}
             onClick={this.postReply}
             onKeyDown={this.postReply}
@@ -75,6 +75,7 @@ CreateReply.propTypes = {
     author: PropTypes.string,
     permlink: PropTypes.string,
   }),
+  authUsername: PropTypes.string,
 };
 
 CreateReply.defaultProps = {
@@ -83,6 +84,11 @@ CreateReply.defaultProps = {
     author: '',
     permlink: '',
   },
+  authUsername: null,
 };
 
-export default connect(null, { addReply })(CreateReply);
+const mapStateToProps = state => ({
+  authUsername: getAuthUsername(state),
+});
+
+export default connect(mapStateToProps, { addReply })(CreateReply);
