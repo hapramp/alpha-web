@@ -16,6 +16,7 @@ export const actionTypes = {
   LOG_OUT_DONE: 'LOGIN.LOGOUT.DONE.DONE',
   REGISTERED: 'LOGIN.REGISTER.REGISTERED',
   NOT_REGISTERED: 'LOGIN.REGISTER.NOT_REGISTERED',
+  LOGIN_HAPRAMP_DONE: 'LOGIN.HAPRAMP.DONE',
 };
 
 const updateUser = (data, dispatch) => {
@@ -42,6 +43,7 @@ export const setUserRegistered = registrationStatus => ({
 
 export const check1RampRegistrationStatus = () => (dispatch, getState, { haprampAPI }) =>
   haprampAPI.v2.users.getCurrentUserDetails()
+    .then(result => dispatch({ type: actionTypes.LOGIN_HAPRAMP_DONE, result }))
     .catch(() => dispatch(setUserRegistered(false)));
 
 export const login1Ramp = () => (dispatch, getState, { haprampAPI }) => {

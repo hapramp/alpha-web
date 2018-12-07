@@ -30,6 +30,8 @@ import BottomBar from '../bottomBar';
 // Competitions
 import CompetitionListing from '../../competitions/CompetitionListing';
 import CompetitionSingle from '../../competitions/CompetitionSingle';
+// Micro Community
+import MicroCommunitySingle from '../../microCommunities/MicroCommunitySingle';
 
 const bottomBarWhitelistURLs = [
   '^/feed/.*$',
@@ -130,6 +132,8 @@ const Root = ({
 
       <Route exact path="/competitions" component={CompetitionListing} />
       <Route exact path="/competitions/:competitionId" component={CompetitionSingle} />
+
+      <Route exact path="/community/:tag" component={MicroCommunitySingle} />
 
       {/* Unknown route - 404 */}
       <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />

@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 
+import MicroCommunityWidget from '../microCommunities/Widget';
 import UserFeed from './UserFeed';
 import TagFeed from './TagFeed';
 import Sidebar from './SideBar';
@@ -27,6 +28,9 @@ const Feed = () => (
         <Route exact path="/feed/explore/" component={ExploreFeed} />
         <Route exact path="/feed/:tag" component={TagFeed} />
       </Switch>
+      <div className={`${styles.widgetContainer} uk-margin-small-top`}>
+        <MicroCommunityWidget />
+      </div>
     </div>
   </div>
 );

@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+.tabContainer {
+  display: flex;
+  margin-bottom: 1px;
+  background-color: white;
+  div {
+    cursor: pointer;
+    padding: 16px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  div:hover {
+    border-bottom: 1px solid $primary-light-color;
+  }
+  div.active {
+    border-bottom: 1px solid $primary-color;
+  }
+}
+
+.postsContainer {
+  max-width: 592px;
+}
+
+.infoContainer {
+  background: white;
+  padding: 24px;
+  >div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.87);
+      margin-bottom: 16px;
+    }
+    .description {
+      text-align: center;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
