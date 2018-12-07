@@ -15,6 +15,7 @@ import followReducer from '../follow/reducer';
 import searchReducer from '../search/search.reducer';
 import registerReducer from '../register/reducer';
 import competitionsReducer from '../competitions/reducer';
+import microCommunitiesReducer from '../microCommunities/reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -32,4 +33,5 @@ export default combineReducers({
   search: searchReducer,
   register: registerReducer,
   competitions: competitionsReducer,
+  microCommunities: microCommunitiesReducer,
 });

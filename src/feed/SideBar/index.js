@@ -40,7 +40,7 @@ const Sidebar = props => (
           </div>
         </Link>
       </div>
-      <div className={`uk-margin-top ${styles.communitiesHeader} ${styles.hideTill985}`}>COMMUNITIES</div>
+      <div className={`uk-margin-top ${styles.communitiesHeader} ${styles.hideTill985}`}>INTERESTS</div>
       <div className={`${styles.flexTill985} ${styles.communitiesContainer}`}>
         {props.communities.map((community) => {
           const isActive = props.location.pathname.split('/')[2] === community.tag;

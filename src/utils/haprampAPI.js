@@ -125,5 +125,11 @@ export default {
       getCompetitionWinners: competitionId => fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}/winners`)
         .then(validateJsonResponse),
     },
+    microCommunities: {
+      getAll: () => fetch(`${constants.BACKEND_URL.V2}/micro-communities`)
+        .then(validateJsonResponse),
+      getPosts: (tag, sort = 'trending', limit = 10) => fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/posts/${sort}?limit=${limit}`)
+        .then(validateJsonResponse),
+    },
   },
 };

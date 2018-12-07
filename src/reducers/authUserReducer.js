@@ -23,6 +23,12 @@ export default (state = initialState, action) => {
       notify.success('Logged out');
       return initialState;
 
+    case loginActionTypes.LOGIN_HAPRAMP_DONE:
+      return {
+        ...state,
+        ...action.result,
+      };
+
     default:
       return state;
   }

@@ -42,3 +42,10 @@
     margin-left: -16px;
   }
 }
+
+.widgetContainer {
+  max-width: 245px;
+  @media screen and (max-width: 1296px) {
+    display: none;
+  }
+}
