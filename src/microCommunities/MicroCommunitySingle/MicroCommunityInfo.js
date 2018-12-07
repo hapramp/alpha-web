@@ -18,7 +18,7 @@ const MicroCommunityInfo = ({ microCommunity, hasJoined, join }) => (
           hasJoined
           ? (
             <GrayButton onClick={() => join(microCommunity.tag, true)}>
-              LEAVE
+              JOINED
             </GrayButton>
           ) : (
             <PrimaryButton onClick={() => join(microCommunity.tag)}>

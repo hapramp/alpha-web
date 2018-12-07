@@ -53,3 +53,9 @@ export const getUserCommunities = (state, username) => _.get(
   `haprampUsers[${username}].communities`,
   [],
 );
+
+export const getUserMicroCommunities = (state, username) => _.get(
+  state.allUsers,
+  `haprampUsers[${username}].micro_communities`,
+  [],
+);
