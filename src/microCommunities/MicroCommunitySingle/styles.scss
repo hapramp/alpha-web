@@ -47,4 +47,14 @@
       color: rgba(0, 0, 0, 0.54);
     }
   }
+
+  .button {
+    margin-bottom: 32px;
+    >* {
+      font-size: 10px;
+      padding: 8px 16px;
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+  }
 }
