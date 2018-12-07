@@ -39,7 +39,7 @@ class TagFeed extends React.Component {
 
   render() {
     return (
-      <div className={`uk-margin-top ${styles.feedPosts}`}>
+      <div className={styles.feedPosts}>
         {
           this.props.feed.posts && this.props.feed.posts.map(post =>
             <PostCard key={post} postPermlink={post} />)

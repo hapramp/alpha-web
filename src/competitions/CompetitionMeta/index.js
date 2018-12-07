@@ -48,14 +48,14 @@ const CompetitionMeta = ({
   prizes, startsAt, endsAt, participantCount,
 }) => (
   <div className="uk-flex">
-    {getTime(startsAt, endsAt)}
     <div className={styles.metaContainer}>
       <Icon name="money_bag" />
       <span>{getSumPrize(prizes)}</span>
     </div>
+    {getTime(startsAt, endsAt)}
     <div className={styles.metaContainer}>
       <Icon name="user_multiple" />
-      <span>{participantCount}</span>
+      <span>{participantCount} Participant{participantCount === 1 ? '' : 's'}</span>
     </div>
   </div>
 );

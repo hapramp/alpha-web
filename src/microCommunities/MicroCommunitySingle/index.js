@@ -26,10 +26,10 @@ const MicroCommunitySingle = ({ fetchAll, microCommunity }) => {
   return (
     <div className="uk-container">
       <div uk-grid="true" className="uk-margin-small-top">
-        <div className="uk-width-1-4@s">
+        <div className="uk-width-1-4@m">
           <Info microCommunity={microCommunity} />
         </div>
-        <div className="uk-width-3-4@m uk-width-1-2@l">
+        <div className={`uk-width-3-4@m uk-width-1-2@l ${styles.postsWrapper}`}>
           <div className={styles.postsContainer}>
             <Posts tag={microCommunity.tag} />
           </div>
