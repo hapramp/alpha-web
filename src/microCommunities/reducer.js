@@ -91,5 +91,5 @@ export const hasCurrentUserJoinedTag = (state, tag) => {
     'authUser.micro_communities',
     [],
   );
-  return userMicros.includes(micro => micro.tag === tag);
+  return userMicros.map(micro => micro.tag).includes(tag);
 };
