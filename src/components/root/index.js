@@ -82,13 +82,7 @@ const Root = ({
       <Route
         exact
         path="/"
-        render={() => {
-        if (isLoggedIn) {
-          return <Redirect to="/feed" />;
-        }
-          return <Redirect to="/feed/explore/" />;
-        }
-      }
+        render={() => <Redirect to="/feed/explore/" />}
       />
 
       {/* User feed */}
