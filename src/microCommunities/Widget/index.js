@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -20,10 +21,12 @@ const Widget = ({ microCommunities, fetchAll }) => {
       <div className="uk-flex uk-flex-wrap">
         {
           microCommunities.map(community => (
-            <div key={community.id} className={styles.communityChip}>
-              <img src={community.image_url} alt="" className="uk-border-circle" />
-              <span>{community.name}</span>
-            </div>
+            <Link to={`/community/${community.tag}`} key={community.id}>
+              <div className={styles.communityChip}>
+                <img src={community.image_url} alt="" className="uk-border-circle" />
+                <span>{community.name}</span>
+              </div>
+            </Link>
           ))
         }
       </div>
