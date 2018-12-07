@@ -17,6 +17,21 @@
   div.active {
     border-bottom: 1px solid $primary-color;
   }
+
+  @media screen and (max-width: 960px) {
+    min-width: 592px;
+  }
+
+  @media screen and (max-width: 600px) {
+    min-width: 100vw;
+  }
+}
+
+.postsWrapper {
+  @media screen and (max-width: 960px) {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .postsContainer {
@@ -26,6 +41,9 @@
 .infoContainer {
   background: white;
   padding: 24px;
+  position: fixed;
+  width: 280px;
+  box-sizing: border-box;
   >div {
     display: flex;
     flex-direction: column;
@@ -57,4 +75,15 @@
       letter-spacing: 0.5px;
     }
   }
+
+  @media screen and (max-width: 1200px) {
+    position: initial;
+    width: auto;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 100vw;
+    margin-left: -15px;
+  }
+
 }
