@@ -85,3 +85,11 @@ export const getPostsForMicroCommunity = (state, tag) => _.get(
   {},
 );
 
+export const hasCurrentUserJoinedTag = (state, tag) => {
+  const userMicros = _.get(
+    state,
+    'authUser.micro_communities',
+    [],
+  );
+  return userMicros.includes(micro => micro.tag === tag);
+};

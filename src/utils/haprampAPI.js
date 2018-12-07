@@ -130,6 +130,18 @@ export default {
         .then(validateJsonResponse),
       getPosts: (tag, sort = 'trending', limit = 10) => fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/posts/${sort}?limit=${limit}`)
         .then(validateJsonResponse),
+      join: tag => fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/join`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Token ${Cookie.get('1ramp_token')}`,
+        },
+      }).then(validateJsonResponse),
+      leave: tag => fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/join`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Token ${Cookie.get('1ramp_token')}`,
+        },
+      }).then(validateJsonResponse),
     },
   },
 };

@@ -1,4 +1,6 @@
 import { addPosts } from '../post/actions';
+import { update1RampUser } from '../actions/loginActions';
+import { getAuthUsername } from '../reducers/authUserReducer';
 
 const baseName = '@microCommunities';
 export const actionTypes = {
@@ -11,6 +13,11 @@ export const actionTypes = {
     init: `${baseName}/getPosts/init`,
     done: `${baseName}/getPosts/done`,
     error: `${baseName}/getPosts/error`,
+  },
+  join: {
+    init: `${baseName}/join/init`,
+    done: `${baseName}/join/done`,
+    error: `${baseName}/join/error`,
   },
 };
 
@@ -40,3 +47,23 @@ export const getMicroCommunityPosts = (tag, order) => (dispatch, getState, { hap
       });
     });
 };
+
+export const joinMicroCommunity = (tag, leave = false) =>
+  (dispatch, getState, { haprampAPI, notify }) => {
+    dispatch({ type: actionTypes.join.init, tag });
+    if (!getAuthUsername(getState())) {
+      notify.danger('Please login first!');
+      return dispatch({ type: actionTypes.join.error, tag });
+    }
+    const method = leave
+      ? haprampAPI.v2.microCommunities.leave
+      : haprampAPI.v2.microCommunities.join;
+    return method(tag)
+      .then((user) => {
+        dispatch(update1RampUser(user));
+        return dispatch({
+          type: actionTypes.join.done,
+          tag,
+        });
+      });
+  };
