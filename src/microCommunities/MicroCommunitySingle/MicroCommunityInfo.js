@@ -15,6 +15,7 @@ const MicroCommunityInfo = ({ microCommunity, hasJoined, join }) => (
       <div className={styles.tag}>#{microCommunity.tag}</div>
       <div className={styles.button}>
         {
+          // TODO: Show a loading indicator while joining/leaving
           hasJoined
           ? (
             <GrayButton onClick={() => join(microCommunity.tag, true)}>

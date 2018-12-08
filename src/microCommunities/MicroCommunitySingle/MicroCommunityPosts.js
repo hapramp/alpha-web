@@ -9,6 +9,7 @@ import { getMicroCommunityPosts } from '../actions';
 import { getPostsForMicroCommunity } from '../reducer';
 import styles from './styles.scss';
 
+// Component for the top label (trending, hot, new) in posts section
 const TabLabel = ({ tab, activeTab, changeTab }) => (
   <div
     className={tab === activeTab ? styles.active : ''}
@@ -28,15 +29,16 @@ TabLabel.propTypes = {
 };
 
 const MicroCommunityPosts = ({ tag, posts, fetchPosts }) => {
-  const [tab, changeTab] = useState('trending');
+  const [tab, changeTab] = useState('trending'); // Handles logic for tab change
 
   useEffect(
     () => {
       fetchPosts(tag, tab);
     },
-    [tab, tag],
+    [tab, tag], // Fetch posts when tag or tag changes
   );
 
+  // Get permlinks for current tab
   const permlinks = _.get(posts, `${tab}.posts`, []);
 
   return (
@@ -49,7 +51,7 @@ const MicroCommunityPosts = ({ tag, posts, fetchPosts }) => {
       <div>
         {
           permlinks.map(permlink => (
-            <PostCard postPermlink={permlink} />
+            <PostCard postPermlink={permlink} key={permlink} />
           ))
         }
       </div>

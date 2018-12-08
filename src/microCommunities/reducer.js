@@ -3,12 +3,12 @@ import _ from 'lodash';
 import { actionTypes } from './actions';
 
 const initialState = {
-  allMicroCommunities: {
+  allMicroCommunities: { // To store list of communities
     loading: false,
     error: null,
     microCommunities: [],
   },
-  posts: {},
+  posts: {}, // To store post related information for a community
 };
 
 export default (state = initialState, action) => {
@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
 
     case actionTypes.getPosts.done:
       newState = _.cloneDeep(state);
-      if (!newState.posts[action.tag]) {
+      if (!newState.posts[action.tag]) { // No entry for the tag, create one
         newState.posts[action.tag] = {
           trending: {
             loading: false,
@@ -86,6 +86,7 @@ export const getPostsForMicroCommunity = (state, tag) => _.get(
 );
 
 export const hasCurrentUserJoinedTag = (state, tag) => {
+  // Micro communities for the current user are in authReducer
   const userMicros = _.get(
     state,
     'authUser.micro_communities',

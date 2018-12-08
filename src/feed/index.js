@@ -29,6 +29,7 @@ const Feed = () => (
         <Route exact path="/feed/:tag" component={TagFeed} />
       </Switch>
       <div className={`${styles.widgetContainer} uk-margin-small-top`}>
+        {/** Currently visible for large screens only - need some design improvements */}
         <MicroCommunityWidget />
       </div>
     </div>

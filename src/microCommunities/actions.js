@@ -21,6 +21,9 @@ export const actionTypes = {
   },
 };
 
+/**
+ * Fetches all micro-communities registered
+ */
 export const getAllMicroCommunities = () => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.getAll.init });
   return haprampAPI.v2.microCommunities.getAll()
@@ -34,13 +37,20 @@ export const getAllMicroCommunities = () => (dispatch, getState, { haprampAPI })
     });
 };
 
+/**
+ * Fetches posts for a given micro-community tag and sort order
+ * @param {string} tag Hashtag for the community
+ * @param {string} order Sort order (any of trending, hot, created)
+ */
 export const getMicroCommunityPosts = (tag, order) => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.getPosts.init, tag, order });
   return haprampAPI.v2.microCommunities.getPosts(tag, order === 'new' ? 'created' : order)
     .then((result) => {
+      // Add all the posts to redux state
       dispatch(addPosts(result.posts));
       return dispatch({
         type: actionTypes.getPosts.done,
+        // Save post reference only with concerned redux state
         posts: result.posts.map(post => `${post.author}/${post.permlink}`),
         tag,
         order,
@@ -48,6 +58,11 @@ export const getMicroCommunityPosts = (tag, order) => (dispatch, getState, { hap
     });
 };
 
+/**
+ * Join/leave a community
+ * @param {string} tag Hashtag for the community
+ * @param {bool} leave If true, leave the community
+ */
 export const joinMicroCommunity = (tag, leave = false) =>
   (dispatch, getState, { haprampAPI, notify }) => {
     dispatch({ type: actionTypes.join.init, tag });
@@ -55,11 +70,13 @@ export const joinMicroCommunity = (tag, leave = false) =>
       notify.danger('Please login first!');
       return dispatch({ type: actionTypes.join.error, tag });
     }
+    // Decide whether to call leave or join API method
     const method = leave
       ? haprampAPI.v2.microCommunities.leave
       : haprampAPI.v2.microCommunities.join;
     return method(tag)
       .then((user) => {
+        // Update the current user state with latest micro-communities
         dispatch(update1RampUser(user));
         return dispatch({
           type: actionTypes.join.done,

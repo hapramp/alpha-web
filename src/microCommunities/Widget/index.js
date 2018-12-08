@@ -9,6 +9,7 @@ import { getAllMicroCommunities as fetchAllMicroCommunities } from '../actions';
 import { getAllMicroCommunities } from '../reducer';
 
 const Widget = ({ microCommunities, fetchAll }) => {
+  // Fetch all communities once
   useEffect(
     () => {
       fetchAll();
