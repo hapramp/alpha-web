@@ -174,10 +174,14 @@ class ActionBar extends React.Component {
     }
     let finalRating;
     if (this.props.post.active_votes.length) {
-      finalRating = this.props.post.active_votes
+      const goodVotes = this.props.post.active_votes
         .map(vote => vote.percent)
-        .reduce((total, num) => total + num) / 100 / 20 / this.props.post.active_votes
-          .filter(vote => vote.percent > 0).length;
+        .filter(percent => percent >= 20 * 100);
+      const scaledUpVotes = goodVotes
+        .map(percent => percent / 100.0 / 20.0)
+        .map(number => Math.ceil(number));
+      finalRating = scaledUpVotes
+        .reduce((total, num) => total + num) / goodVotes.length;
     } else {
       finalRating = 0.0;
     }
