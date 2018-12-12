@@ -180,8 +180,12 @@ class ActionBar extends React.Component {
       const scaledUpVotes = goodVotes
         .map(percent => percent / 100.0 / 20.0)
         .map(number => Math.ceil(number));
-      finalRating = scaledUpVotes
-        .reduce((total, num) => total + num) / goodVotes.length;
+      if (!goodVotes.length) {
+        finalRating = 0.0;
+      } else {
+        finalRating = scaledUpVotes
+          .reduce((total, num) => total + num) / goodVotes.length;
+      }
     } else {
       finalRating = 0.0;
     }
