@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import _ from 'lodash';
 
 import styles from './styles.scss';
@@ -23,20 +24,22 @@ const Post = (props) => {
 
   /* Render */
   return (
-    <div className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer}`}>
-      {/* Top section */}
-      <PostUserMeta
-        profile={{
-          name: _.get(user, 'json_metadata.profile.name', author),
-          username: author,
-        }}
-        created={props.post.created}
-        communities={getCommunitiesForPost(props.post)}
-      />
-      {/* Actual post */}
-      <PostCardBody post={props.post} maintainAspectRatio={props.maintainAspectRatio} />
-      <ActionBar post={props.post} withLink />
-    </div>
+    <LazyLoad height={600} once>
+      <div className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer}`}>
+        {/* Top section */}
+        <PostUserMeta
+          profile={{
+            name: _.get(user, 'json_metadata.profile.name', author),
+            username: author,
+          }}
+          created={props.post.created}
+          communities={getCommunitiesForPost(props.post)}
+        />
+        {/* Actual post */}
+        <PostCardBody post={props.post} maintainAspectRatio={props.maintainAspectRatio} />
+        <ActionBar post={props.post} withLink />
+      </div>
+    </LazyLoad>
   );
 };
 
