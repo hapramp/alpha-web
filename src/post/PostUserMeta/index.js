@@ -9,12 +9,12 @@ import UserAvatar from '../../components/UserAvatar';
 const PostUserMeta = ({
   className, profile, created, communities,
 }) => (
-  <div className={[className || '', 'uk-flex', styles.paddingModerate, styles.topSection].join(' ')}>
+  <div className={`${className} uk-flex ${styles.paddingModerate} ${styles.topSection}`}>
     <UserAvatar size="small" username={profile.username} className={styles.userImage} />
-    <div className={['uk-margin-left'].join(' ')}>
-      <div className={[styles.userNameContainer].join(' ')}>
+    <div className="uk-margin-left">
+      <div className={styles.userNameContainer}>
         <Link to={`/@${profile.username}`}>
-          <span className={styles.userName}>{profile.name}</span>
+          <span className={styles.userName}>{profile.username}</span>
         </Link> | <TimeAgo>{new Date(`${created}Z`)}</TimeAgo>
       </div>
       <div>
@@ -22,7 +22,7 @@ const PostUserMeta = ({
           <span
             key={community.tag}
             style={{ backgroundColor: community.color || 'black' }}
-            className={[styles.communityLabel].join(' ')}
+            className={styles.communityLabel}
           >
             <b>{community.name}</b>
           </span>))}
