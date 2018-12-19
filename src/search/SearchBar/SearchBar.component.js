@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
     if (searchText.length > 50) {
       return;
     }
-    this.setState({ ...this.state, searchText });
+    this.setState({ ...this.state, searchText: searchText.toLowerCase() });
   }
 
   handleInputKeyUp(event) {
