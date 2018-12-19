@@ -11,6 +11,9 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
 
+const getPayout = post => parseFloat(post.pending_payout_value)
+  + parseFloat(post.curator_payout_value) + parseFloat(post.total_payout_value);
+
 class ActionBar extends React.Component {
   constructor(props) {
     super(props);
@@ -107,10 +110,11 @@ class ActionBar extends React.Component {
   }
 
   getPayoutSection() {
+    const totalPayout = getPayout(this.props.post);
     return (
       <span className={`uk-flex ${styles.action}`} style={{ marginLeft: 16 }}>
         <Icon name="dollor" style={{ marginRight: -8 }} />
-        <span className={styles.actionText}>{this.props.post.pending_payout_value}</span>
+        <span className={styles.actionText}>{totalPayout}</span>
       </span>
     );
   }
@@ -233,7 +237,7 @@ ActionBar.propTypes = {
 };
 
 ActionBar.defaultProps = {
-  ratePost: () => {},
+  ratePost: () => { },
   post: {},
   withLink: true,
   authUsername: null,
