@@ -1,5 +1,4 @@
-import { actionTypes as allPostsActionTypes } from '../post/actions';
-import { loadUserAccounts } from '../actions/allUserActions';
+import { addPosts } from '../post/actions';
 
 export const actionTypes = {
   FEED_LOADING: 'FEED.LOAD.INIT',
@@ -11,8 +10,7 @@ export const loadFeedsForUser = username => (dispatch, getState, { haprampAPI })
   dispatch({ type: actionTypes.FEED_LOADING, feedType: 'user' });
   return haprampAPI.v2.feed.getUserFeed(username)
     .then((result) => {
-      dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result.posts });
-      dispatch(loadUserAccounts(result.posts.map(i => i.author)));
+      dispatch(addPosts(result.posts));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
@@ -31,8 +29,7 @@ export const loadFeedsForTag = tag => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING, feedType: tag });
   return haprampAPI.v2.feed.getTagFeed(tag)
     .then((result) => {
-      dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result });
-      dispatch(loadUserAccounts(result.map(i => i.author)));
+      dispatch(addPosts(result));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.map(post => `${post.author}/${post.permlink}`),
@@ -54,7 +51,7 @@ export const loadNewPosts = () => (dispatch, getState, { steemAPI }) => {
       if (error) {
         return dispatch({ type: actionTypes.FEED_LOADING_FAILED, feedType: 'new', reason: error });
       }
-      dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result });
+      dispatch(addPosts(result));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         feedType: 'new',
@@ -68,7 +65,7 @@ export const loadExplorePosts = () => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING, feedType: 'explore' });
   return haprampAPI.v2.feed.getExploreFeed()
     .then((results) => {
-      dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: results });
+      dispatch(addPosts(results));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         results: results.filter(post => !!post.author).map(post => `${post.author}/${post.permlink}`),

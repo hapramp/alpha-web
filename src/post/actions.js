@@ -19,7 +19,7 @@ export const loadState = (parentPermlink, author, permlink) => (dispatch, getSta
       const posts = Object.values(content);
       const users = Object.values(accounts);
       return Promise.all([
-        dispatch({ type: actionTypes.ADD_POSTS, posts }),
+        dispatch(addPosts(posts)),
         dispatch(getUserAccountsAction(users)),
       ]);
     });
