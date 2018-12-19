@@ -2,6 +2,9 @@
 
 .container {
   padding: 0 24px;
+  a {
+    color: $primary-color;
+  }
 }
 
 .bodyContainer {
