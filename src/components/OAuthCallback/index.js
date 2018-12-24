@@ -16,7 +16,7 @@ const OAuthCallback = (props) => {
   Cookie.set('username', username, { expires: expiresIn });
   steemAPI.sc2Api.setAccessToken(accessToken);
   getStore().dispatch(fakeLogin());
-  return <Redirect to="/feed" />;
+  return <Redirect to="/feed/explore" />;
 };
 
 OAuthCallback.propTypes = {

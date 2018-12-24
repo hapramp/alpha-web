@@ -11,8 +11,11 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
 
-const getPayout = post => parseFloat(post.pending_payout_value)
-  + parseFloat(post.curator_payout_value) + parseFloat(post.total_payout_value);
+const getPayout = post => (
+  parseFloat(post.pending_payout_value)
+  + parseFloat(post.curator_payout_value)
+  + parseFloat(post.total_payout_value)
+).toFixed(3);
 
 class ActionBar extends React.Component {
   constructor(props) {
