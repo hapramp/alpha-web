@@ -19,7 +19,7 @@ class RootReplies extends React.Component {
 
   render() {
     return (
-      <div className={`${this.props.className} uk-margin-large-top uk-margin-bottom ${styles.rootRepliesStyle}`}>
+      <div className={`${this.props.className} uk-margin-bottom ${styles.rootRepliesStyle}`}>
         <CreateReply post={this.props.rootPost} />
         <Replies
           showNoReplies
