@@ -49,4 +49,10 @@
   @media screen and (max-width: 1296px) {
     display: none;
   }
+  >div {
+    position: fixed;
+    >*:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
 }

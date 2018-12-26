@@ -1,0 +1,15 @@
+.container {
+  width: 245px;
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  background: white;
+  a {
+    white-space: nowrap;
+    margin: 2px 8px 2px;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
