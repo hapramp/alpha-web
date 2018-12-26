@@ -29,3 +29,5 @@ export default {
     },
   },
 };
+
+export const ownUrl = /^(localhost|alpha\.1ramp\.io)$/;

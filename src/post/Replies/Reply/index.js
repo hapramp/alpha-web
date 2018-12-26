@@ -12,6 +12,7 @@ import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 import { getAuthUsername } from '../../../reducers/authUserReducer';
 import CreateReply from '../CreateReply';
+import { getCompleteHTML } from '../../utils';
 
 class Reply extends React.Component {
   static propTypes = {
@@ -75,7 +76,7 @@ class Reply extends React.Component {
         <div
           className={styles.replyBody}
           dangerouslySetInnerHTML={{
-            __html: window.markdownToHtmlConverter.makeHtml(reply.body),
+            __html: getCompleteHTML(reply.body),
           }}
         />
         <CommentActionBar
