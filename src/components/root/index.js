@@ -103,16 +103,23 @@ const Root = ({
         path="/profile"
         render={() => (
           isLoggedIn
-          ? <Redirect to={`/@${authUsername}`} />
-          : <Redirect to="/" />
+            ? <Redirect to={`/@${authUsername}`} />
+            : <Redirect to="/" />
         )
-      }
+        }
       />
 
       {/* Profile section */}
       <Route exact path="/@:username" component={UserProfile} />
 
       {/* Single content */}
+      <Route
+        exact
+        path="/:parentPermlink/@:username/:permlink"
+        render={
+          ({ match }) => <Redirect to={`/@${match.params.username}/${match.params.permlink}`} />
+        }
+      />
       <Route exact path="/@:username/:permlink" component={ContentSingle} />
 
       {/* OAuth Callback */}

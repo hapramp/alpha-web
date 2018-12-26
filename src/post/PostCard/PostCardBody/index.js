@@ -2,12 +2,12 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import embedjs from 'embedjs';
 
-import { getImagesFromBody } from '../../utils';
+import { getImagesFromBody, removeFooter } from '../../utils';
 import ShortText from './ShortText';
 import Image from '../../../components/Image';
 import styles from './styles.scss';
-import { removeFooter } from '../../PostBody';
 
 const PostCardBody = ({ post, maintainAspectRatio }) => {
   let jsonMetadata;
@@ -29,6 +29,12 @@ const PostCardBody = ({ post, maintainAspectRatio }) => {
     image = _.get(getImagesFromBody(post.body), '[0]', '');
   }
 
+  // If video, show it
+  const embeds = embedjs.getAll(post.body);
+  if (_.has(embeds, '[0].thumbnail')) {
+    image = embeds[0].thumbnail;
+  }
+
   return (
     <div>
       <Link to={`/@${post.author}/${post.permlink}`}>
@@ -42,7 +48,7 @@ const PostCardBody = ({ post, maintainAspectRatio }) => {
             <Image
               src={image}
               steemitImagesConfig={{ enabled: true }}
-              lazyLoadProps={{ offset: 300 }}
+              lazyLoadProps={{ offset: 300, height: 300 }}
               style={{ width: '100%' }}
               alt=""
             />
