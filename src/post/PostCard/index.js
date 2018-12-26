@@ -10,8 +10,28 @@ import indexStyles from '../../styles/globals.scss';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 
+import Icon from '../../icons/Icon';
 import ActionBar from '../ActionBar';
 import PostCardBody from '../../post/PostCard/PostCardBody';
+
+
+const PrizeSection = ({ rank, prize }) => {
+  if (!rank) {
+    return <div />;
+  }
+  return (
+    <div className={styles.prizeContainer}>
+      <Icon name="award" />
+      <span className={styles.rank}>#{rank}</span>
+      <span>{prize}</span>
+    </div>
+  );
+};
+PrizeSection.propTypes = {
+  rank: PropTypes.number.isRequired,
+  prize: PropTypes.string.isRequired,
+};
+
 
 const Post = (props) => {
   if (!props.post) {
@@ -26,6 +46,11 @@ const Post = (props) => {
   return (
     <LazyLoad height={600} once>
       <div className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer}`}>
+        {
+          props.showPrize
+          && props.post.rank
+          && <PrizeSection rank={props.post.rank} prize={props.post.prize} />
+        }
         {/* Top section */}
         <PostUserMeta
           profile={{
@@ -48,12 +73,14 @@ Post.propTypes = {
   postingUser: PropTypes.shape(),
   border: PropTypes.bool,
   maintainAspectRatio: PropTypes.bool,
+  showPrize: PropTypes.bool,
 };
 
 Post.defaultProps = {
   border: false,
   postingUser: {},
   maintainAspectRatio: false,
+  showPrize: false,
 };
 
 const mapStateToProps = (state, ownProps) => {

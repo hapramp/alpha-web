@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import ordinal from 'ordinal-js';
+import _ from 'lodash';
 
 import PostCard from '../../post/PostCard';
 import PostUserMeta from '../../post/PostUserMeta';
@@ -14,12 +15,12 @@ import indexStyles from '../../styles/globals.scss';
 import styles from './styles.scss';
 
 import { getSumPrize, getFormattedDate } from '../utils';
-import { getPostsForCompetition, getAllCompetitions } from '../actions';
+import { getPostsForCompetition, getAllCompetitions, getCompetitionWinners } from '../actions';
 import { getCompetitionPostPermlinks, getCompetitionById } from '../reducer';
 
 const CompetitionSingle = ({
   match, postPermlinks, fetchPosts, fetchCompetitions,
-  competition,
+  competition, fetchWinners,
 }) => {
   const { competitionId } = match.params;
   useEffect(
@@ -29,6 +30,17 @@ const CompetitionSingle = ({
     },
     [competitionId],
   );
+
+  const isWinnersAnnounced = _.get(competition, 'winners_announced', false);
+  useEffect(
+    () => {
+      if (isWinnersAnnounced) {
+        fetchWinners(competitionId);
+      }
+    },
+    [competitionId, isWinnersAnnounced],
+  );
+
   if (!competition) {
     return <div>Loading...</div>;
   }
@@ -142,7 +154,7 @@ const CompetitionSingle = ({
             postPermlinks.map(permlink => (
               <div key={permlink} className={`uk-width-1-2@m uk-margin-bottom ${styles.postCardWrapper}`}>
                 <div className={styles.postCardContainer}>
-                  <PostCard postPermlink={permlink} border maintainAspectRatio />
+                  <PostCard postPermlink={permlink} border maintainAspectRatio showPrize />
                 </div>
               </div>
             ))
@@ -159,6 +171,7 @@ CompetitionSingle.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   fetchCompetitions: PropTypes.func.isRequired,
   competition: PropTypes.shape(),
+  fetchWinners: PropTypes.func.isRequired,
 };
 
 CompetitionSingle.defaultProps = {
@@ -171,7 +184,11 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
-  { fetchPosts: getPostsForCompetition, fetchCompetitions: getAllCompetitions },
+  {
+    fetchPosts: getPostsForCompetition,
+    fetchCompetitions: getAllCompetitions,
+    fetchWinners: getCompetitionWinners,
+  },
   dispatch,
 );
 

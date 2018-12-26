@@ -54,3 +54,13 @@
 	background-color: $primary-color;
 	color: white;
 }
+
+.prizeContainer {
+  padding: 16px 32px 0;
+  >*:not(:last-child) {
+    margin-right: 8px;
+  }
+  .rank {
+    color: $primary-color;
+  }
+}

@@ -13,8 +13,17 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_POSTS:
       posts = _.cloneDeep(state.posts);
-      action.posts.map((oldPost) => {
-        const post = { ...oldPost };
+      action.posts.map((newPost) => {
+        const oldPost = posts[`${newPost.author}/${newPost.permlink}`];
+
+        /**
+         * Do not ignore the old keys which are not with the current one.
+         * Mainly because when fetching the competition results form API,
+         *  if winners are fetched before post, the prize related keys
+         *  will be overwritten when updating the post here.
+         */
+        const post = { ...newPost, ...oldPost };
+
         if (typeof (post.json_metadata) === 'string') {
           try {
             post.json_metadata = JSON.parse(post.json_metadata);
@@ -23,6 +32,7 @@ export default (state = initialState, action) => {
             post.json_metadata = {};
           }
         }
+
         posts[`${post.author}/${post.permlink}`] = post;
         return post;
       });
@@ -49,7 +59,7 @@ export default (state = initialState, action) => {
       notify.info(`Rating done for post by ${action.author}.`);
       return state;
 
-      // TODO: Handle post upvote error case
+    // TODO: Handle post upvote error case
 
     default:
       return state;

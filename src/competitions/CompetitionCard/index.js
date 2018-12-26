@@ -31,9 +31,11 @@ const CompetitionCard = ({ competition }) => (
     }
 
     <div className={styles.contentContainer}>
-      <div className={styles.title}>
-        {competition.title}
-      </div>
+      <Link to={`/competitions/${competition.id}`}>
+        <div className={styles.title}>
+          {competition.title}
+        </div>
+      </Link>
 
       <CompetitionMeta
         prizes={competition.prizes}

@@ -13,6 +13,11 @@ export const actionTypes = {
     done: `${baseName}/get_posts/done`,
     error: `${baseName}/get_posts/error`,
   },
+  getWinners: {
+    init: `${baseName}/get_winners/init`,
+    done: `${baseName}/get_winners/done`,
+    error: `${baseName}/get_winners/error`,
+  },
 };
 
 export const getAllCompetitions = () => (dispatch, getState, { haprampAPI }) => {
@@ -34,4 +39,21 @@ export const getPostsForCompetition = competitionId => (dispatch, getState, { ha
       });
     })
     .catch(reason => dispatch({ type: actionTypes.getPosts.error, reason, competitionId }));
+};
+
+export const getCompetitionWinners = competitionId => (dispatch, getState, { haprampAPI }) => {
+  dispatch({ type: actionTypes.getWinners.init, competitionId });
+  return haprampAPI.v2.competitions.getCompetitionWinners(competitionId)
+    .then((results) => {
+      dispatch(addPosts(results));
+      return dispatch({
+        type: actionTypes.getWinners.done,
+        competitionId,
+        results: results.map(post => `${post.author}/${post.permlink}`),
+      });
+    })
+    .catch((reason) => {
+      console.error('[Get Competition Winners]', reason);
+      return dispatch({ type: actionTypes.getWinners.error, competitionId, reason });
+    });
 };
