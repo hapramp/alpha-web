@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 
 import MicroCommunityWidget from '../microCommunities/Widget';
+import ExternalLinksWidget from '../components/ExternalLinksWidget';
 import UserFeed from './UserFeed';
 import TagFeed from './TagFeed';
 import Sidebar from './SideBar';
@@ -30,7 +31,10 @@ const Feed = () => (
       </Switch>
       <div className={`${styles.widgetContainer} uk-margin-small-top`}>
         {/** Currently visible for large screens only - need some design improvements */}
-        <MicroCommunityWidget />
+        <div>
+          <MicroCommunityWidget />
+          <ExternalLinksWidget />
+        </div>
       </div>
     </div>
   </div>
