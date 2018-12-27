@@ -103,7 +103,7 @@ export default ({ large = true, noImage = false, sanitizeErrors = [], secureLink
               webkitallowfullscreen: 'webkitallowfullscreen', // deprecated but required for vimeo : https://vimeo.com/forums/help/topic:278181
               mozallowfullscreen: 'mozallowfullscreen', // deprecated but required for vimeo
               src,
-              width: large ? '640' : '480',
+              width: '100%',
               height: large ? '360' : '270',
             },
           };
