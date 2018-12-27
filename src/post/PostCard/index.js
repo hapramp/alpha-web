@@ -33,6 +33,27 @@ PrizeSection.propTypes = {
 };
 
 
+const VotePercentByUser = ({ votes, username }) => {
+  const voterVote = votes.find(vote => vote.voter === username);
+  if (!voterVote) {
+    return <div />;
+  }
+  const percent = voterVote.percent / 100;
+  return (
+    <progress
+      className={`uk-progress ${styles.progressBar}`}
+      value={percent}
+      max="100"
+      uk-tooltip={`${percent.toFixed(2)}% vote by ${username}`}
+    />
+  );
+};
+VotePercentByUser.propTypes = {
+  votes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  username: PropTypes.string.isRequired,
+};
+
+
 const Post = (props) => {
   if (!props.post) {
     return <div>Loading...</div>;
@@ -50,6 +71,14 @@ const Post = (props) => {
           props.showPrize
           && props.post.rank
           && <PrizeSection rank={props.post.rank} prize={props.post.prize} />
+        }
+        {
+          props.showPercentByUser && (
+            <VotePercentByUser
+              votes={props.post.active_votes}
+              username={props.showPercentByUser}
+            />
+          )
         }
         {/* Top section */}
         <PostUserMeta
@@ -74,6 +103,7 @@ Post.propTypes = {
   border: PropTypes.bool,
   maintainAspectRatio: PropTypes.bool,
   showPrize: PropTypes.bool,
+  showPercentByUser: PropTypes.string,
 };
 
 Post.defaultProps = {
@@ -81,6 +111,7 @@ Post.defaultProps = {
   postingUser: {},
   maintainAspectRatio: false,
   showPrize: false,
+  showPercentByUser: null,
 };
 
 const mapStateToProps = (state, ownProps) => {

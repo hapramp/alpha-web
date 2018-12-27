@@ -31,7 +31,7 @@ const MicroCommunitySingle = ({ fetchAll, microCommunity }) => {
         </div>
         <div className={`uk-width-3-4@m uk-width-1-2@l ${styles.postsWrapper}`}>
           <div className={styles.postsContainer}>
-            <Posts tag={microCommunity.tag} />
+            <Posts tag={microCommunity.tag} communityUsername={microCommunity.username} />
           </div>
         </div>
       </div>
