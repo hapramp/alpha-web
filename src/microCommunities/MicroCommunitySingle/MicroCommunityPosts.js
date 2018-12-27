@@ -29,7 +29,7 @@ TabLabel.propTypes = {
 };
 
 const MicroCommunityPosts = ({ tag, posts, fetchPosts }) => {
-  const [tab, changeTab] = useState('trending'); // Handles logic for tab change
+  const [tab, changeTab] = useState('selects'); // Handles logic for tab change
 
   useEffect(
     () => {
@@ -44,6 +44,7 @@ const MicroCommunityPosts = ({ tag, posts, fetchPosts }) => {
   return (
     <div>
       <div className={styles.tabContainer}>
+        <TabLabel activeTab={tab} changeTab={changeTab} tab="selects" />
         <TabLabel activeTab={tab} changeTab={changeTab} tab="trending" />
         <TabLabel activeTab={tab} changeTab={changeTab} tab="new" />
         <TabLabel activeTab={tab} changeTab={changeTab} tab="hot" />

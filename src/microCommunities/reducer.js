@@ -61,6 +61,10 @@ export default (state = initialState, action) => {
             loading: false,
             posts: [],
           },
+          selects: {
+            loading: false,
+            posts: [],
+          },
         };
       }
       newState.posts[action.tag][action.order].posts = action.posts;
