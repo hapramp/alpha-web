@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
          *  if winners are fetched before post, the prize related keys
          *  will be overwritten when updating the post here.
          */
-        const post = { ...newPost, ...oldPost };
+        const post = { ...oldPost, ...newPost };
 
         if (typeof (post.json_metadata) === 'string') {
           try {
