@@ -20,42 +20,38 @@ class Header extends React.Component {
     if (this.props.isLoggedIn) {
       return (
         <div className="uk-navbar-item">
-          <div className="uk-navbar-item">
-            <Link to="/notifications" uk-icon="icon: bell" />
+          <div
+            style={{ cursor: 'pointer' }}
+            alt="You"
+            role="checkbox" // eslint-disable-line
+            aria-checked="false"
+          >
+            <UserAvatar size="small" username={username} to="#" className={styles.userImage} />
           </div>
-          <div className="uk-navbar-item">
-            <div
-              style={{ cursor: 'pointer' }}
-              alt="You"
-              role="checkbox" // eslint-disable-line
-              aria-checked="false"
-            >
-              <UserAvatar size="small" username={username} to="#" className={styles.userImage} />
-            </div>
-            <div uk-dropdown="mode: click">
-              <ul className="uk-nav uk-dropdown-nav">
-                <li className={styles.dropDownHoverable}>
-                  <Link to="/profile" className={[styles.flexImportant].join(' ')}>
-                    <div uk-icon="user" style={{ marginRight: '8px' }} />
-                    <div>Profile</div>
-                  </Link>
-                </li>
-                <li className={styles.dropDownHoverable}>
-                  <Link to="/signout" className={[styles.flexImportant].join(' ')}>
-                    <div uk-icon="sign-out" style={{ marginRight: '8px' }} />
-                    <div>Sign Out</div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          <div uk-dropdown="mode: click">
+            <ul className="uk-nav uk-dropdown-nav">
+              <li className={styles.dropDownHoverable}>
+                <Link to="/profile" className={[styles.flexImportant].join(' ')}>
+                  <div uk-icon="user" style={{ marginRight: '8px' }} />
+                  <div>Profile</div>
+                </Link>
+              </li>
+              <li className={styles.dropDownHoverable}>
+                <Link to="/signout" className={[styles.flexImportant].join(' ')}>
+                  <div uk-icon="sign-out" style={{ marginRight: '8px' }} />
+                  <div>Sign Out</div>
+                </Link>
+              </li>
+            </ul>
           </div>
-        </div>);
+        </div>
+      );
     }
     return (
       <div className="uk-navbar-item">
         <a href={steemAPI.sc2Api.getLoginURL()}>
           <button className={['uk-button uk-button-small', styles.signIn, baseStyles.hoverEffect,
-              baseStyles.transition].join(' ')}
+            baseStyles.transition].join(' ')}
           >SIGN IN
           </button>
         </a>
@@ -67,7 +63,7 @@ class Header extends React.Component {
       <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
         <nav
           className={['uk-navbar-container', 'uk-navbar-transparent', 'uk-margin', 'uk-padding',
-          'uk-padding-remove-vertical', styles.header].join(' ')}
+            'uk-padding-remove-vertical', styles.header].join(' ')}
           uk-navbar="true"
           style={{ position: 'relative', zIndex: 980 }}
         >
@@ -99,7 +95,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   isLoggedIn: false,
-  loadCommunities: () => {},
+  loadCommunities: () => { },
   username: null,
 };
 
