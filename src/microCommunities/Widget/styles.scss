@@ -6,12 +6,47 @@
   color: rgba(0, 0, 0, 0.54);
   width: 245px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 1296px) {
+    width: 600px;
+  }
+
+  @media screen and (max-width: 985px) {
+    width: 100vw;
+    top: 35px;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 65px;
+    background: transparent;
+    padding-right: 0;
+    padding-left: 0;
+    overflow-y: hidden;
+  }
+}
+
+.microCommunityContainer {
+  @media screen and (max-width: 985px) {
+    flex-wrap: nowrap;
+    overflow: scroll;
+    height: 92px;
+
+    > a {
+      margin-right: 16px;
+    }
+
+    >a:first-child {
+      margin-left: 16px;
+    }
+  }
 }
 
 .title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 24px;
+  @media screen and (max-width: 985px) {
+   display: none;
+  }
 }
 
 .communityChip {
@@ -21,11 +56,19 @@
   background-color: $background-color;
   padding-right: 12px;
   margin: 0 8px 8px 0;
+  align-items: center;
   img {
     height: 28px;
     width: 28px;
   }
   span {
     margin-left: 4px;
+  }
+
+  @media screen and (max-width: 985px) {
+    display: flex;
+    white-space: nowrap;
+    background-color:white;
+    padding-right: 40px;
   }
 }

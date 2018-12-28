@@ -9,13 +9,10 @@
     left: 0;
     margin-top: 0 !important;
     padding: 15px !important;
-    height: 120px;
-    overflow-y: hidden;
-  }
-
-  @media screen and (max-width: 480px) {
     padding-top: 0 !important;
     height: 90px;
+    overflow-y: hidden;
+    z-index: 1;
   }
 
 }
@@ -118,9 +115,6 @@
   @media screen and (max-width: 985px) {
     margin-left: 0 !important;
     margin-top: 4px;
-  }
-
-  @media screen and (max-width: 480px) {
     font-size: $fs-x-small;
   }
 }

@@ -19,7 +19,7 @@ const Widget = ({ microCommunities, fetchAll }) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Communities</div>
-      <div className="uk-flex uk-flex-wrap">
+      <div className={`uk-flex uk-flex-wrap ${styles.microCommunityContainer}`}>
         {
           microCommunities.map(community => (
             <Link to={`/community/${community.tag}`} key={community.id}>

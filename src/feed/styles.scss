@@ -3,16 +3,16 @@
 }
 
 .feedPosts {
-    width: 600px;
-    margin-top: 10px;
+  width: 600px;
+  margin-top: 10px;
 
-    @media screen and (max-width: 985px) {
-        margin-top: 160px !important
-    }
+  @media screen and (max-width: 985px) {
+      margin-top: 156px !important
+  }
 
-    @media screen and (max-width: 480px) {
-        margin-top:  112px !important;
-      }
+  @media screen and (max-width: 1296px) {
+    margin-top: 184px;
+  }
 }
 
 .justifyCenterOn985 {
@@ -22,16 +22,16 @@
 }
 
 .sidebarContainer {
-    width: 275px;
-    justify-content: center;
+  width: 275px;
+  justify-content: center;
 
-    @media screen and (max-width: 985px) {
-        width: calc(100vw - 110px);
-    }
+  @media screen and (max-width: 985px) {
+      width: calc(100vw - 110px);
+  }
 
-    @media screen and (max-width: 960px) {
-    width: calc(100vw - 90px);
-    }
+  @media screen and (max-width: 960px) {
+  width: calc(100vw - 90px);
+  }
 
 }
 
@@ -46,13 +46,34 @@
 
 .widgetContainer {
   max-width: 245px;
-  @media screen and (max-width: 1296px) {
-    display: none;
-  }
+
   >div {
     position: fixed;
+
     >*:not(:last-child) {
       margin-bottom: 16px;
+    }
+  }
+
+  @media screen and (max-width: 1296px) {
+    >div {
+      position: absolute !important;
+      left: 355px;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    >div {
+      position: absolute !important;
+      left: 345px;
+    }
+  }
+
+  @media screen and (max-width: 985px) {
+    >div {
+      position: absolute !important;
+      left: 0;
+      top: 140px;
     }
   }
 }
