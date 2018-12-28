@@ -1,6 +1,6 @@
 {
   "name": "alpha-web",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "private": false,
   "engines": {
     "node": "<=9 >=8"
