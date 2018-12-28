@@ -62,6 +62,6 @@ export const getCompetitionWinners = competitionId => (dispatch, getState, { hap
 };
 
 export const participateInCompetition = tag => (dispatch) => {
-  dispatch(addArticleTag([tag]));
+  dispatch(addArticleTag(tag));
   return dispatch(push('/create/article'));
 };
