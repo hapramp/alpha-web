@@ -8,8 +8,13 @@
     padding: 0 !important;
   }
 
+  @media screen and (max-width: 1296px) {
+    height: 48px
+  }
+
   .brandName {
     color: white;
+    font-size: 18px;
   }
 }
 
@@ -38,6 +43,11 @@
   height: 48px;
   width: 56px;
   padding: 0 8px 0 0;
+  @media screen and (max-width: 1296px) {
+    height: 40px;
+    width: 48px;
+    padding: 0;
+  }
 }
 
 .signIn {
