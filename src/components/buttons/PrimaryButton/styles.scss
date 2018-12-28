@@ -15,7 +15,8 @@
   transition: all 0.3s ease-out;
 }
 
-.disabled {
+.disabled, .disabled:hover {
   transition: all 0.3s ease-out;
+  background-color: $primary-light-color;
   cursor: unset;
 }

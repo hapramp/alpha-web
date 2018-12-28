@@ -10,17 +10,22 @@ import PostCard from '../../post/PostCard';
 import PostUserMeta from '../../post/PostUserMeta';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
+import PrimaryButton from '../../components/buttons/PrimaryButton';
 
 import indexStyles from '../../styles/globals.scss';
 import styles from './styles.scss';
 
-import { getSumPrize, getFormattedDate } from '../utils';
-import { getPostsForCompetition, getAllCompetitions, getCompetitionWinners } from '../actions';
+import { getSumPrize, getFormattedDate, isParticipatePossible } from '../utils';
+import {
+  getPostsForCompetition, getAllCompetitions, getCompetitionWinners,
+  participateInCompetition,
+} from '../actions';
 import { getCompetitionPostPermlinks, getCompetitionById } from '../reducer';
+import { getAuthUsername } from '../../reducers/authUserReducer';
 
 const CompetitionSingle = ({
   match, postPermlinks, fetchPosts, fetchCompetitions,
-  competition, fetchWinners,
+  competition, fetchWinners, participate, authUsername,
 }) => {
   const { competitionId } = match.params;
   useEffect(
@@ -44,6 +49,8 @@ const CompetitionSingle = ({
   if (!competition) {
     return <div>Loading...</div>;
   }
+
+  const canParticipate = isParticipatePossible(competition.starts_at, competition.ends_at);
   return (
     <div className={`${styles.wrapper} ${indexStyles.white}`}>
       <div className={styles.container}>
@@ -104,8 +111,8 @@ const CompetitionSingle = ({
         <div className={styles.textParagraph}>
           <h3>Description</h3>
           <p dangerouslySetInnerHTML={{
-              __html: window.markdownToHtmlConverter.makeHtml(competition.description),
-            }}
+            __html: window.markdownToHtmlConverter.makeHtml(competition.description),
+          }}
           />
         </div>
 
@@ -113,10 +120,22 @@ const CompetitionSingle = ({
         <div className={styles.textParagraph}>
           <h3>Rules</h3>
           <p dangerouslySetInnerHTML={{
-              __html: window.markdownToHtmlConverter.makeHtml(competition.rules),
-            }}
+            __html: window.markdownToHtmlConverter.makeHtml(competition.rules),
+          }}
           />
         </div>
+
+        {
+          authUsername && canParticipate && (
+            <div className={styles.participateButton}>
+              <PrimaryButton
+                onClick={() => participate(competition.participating_tag)}
+              >
+                Participate
+              </PrimaryButton>
+            </div>
+          )
+        }
 
         {/** Hashtag info */}
         <div className={styles.hashTagText}>
@@ -172,15 +191,19 @@ CompetitionSingle.propTypes = {
   fetchCompetitions: PropTypes.func.isRequired,
   competition: PropTypes.shape(),
   fetchWinners: PropTypes.func.isRequired,
+  participate: PropTypes.func.isRequired,
+  authUsername: PropTypes.string,
 };
 
 CompetitionSingle.defaultProps = {
   competition: null,
+  authUsername: null,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   postPermlinks: getCompetitionPostPermlinks(state, ownProps.match.params.competitionId),
   competition: getCompetitionById(state, ownProps.match.params.competitionId),
+  authUsername: getAuthUsername(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -188,6 +211,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     fetchPosts: getPostsForCompetition,
     fetchCompetitions: getAllCompetitions,
     fetchWinners: getCompetitionWinners,
+    participate: participateInCompetition,
   },
   dispatch,
 );

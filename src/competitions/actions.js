@@ -1,4 +1,7 @@
+import { push } from 'connected-react-router';
+
 import { addPosts } from '../post/actions';
+import { addTag as addArticleTag } from '../post/create/CreateArticle/actions';
 
 const baseName = '@competitions';
 
@@ -56,4 +59,9 @@ export const getCompetitionWinners = competitionId => (dispatch, getState, { hap
       console.error('[Get Competition Winners]', reason);
       return dispatch({ type: actionTypes.getWinners.error, competitionId, reason });
     });
+};
+
+export const participateInCompetition = tag => (dispatch) => {
+  dispatch(addArticleTag([tag]));
+  return dispatch(push('/create/article'));
 };

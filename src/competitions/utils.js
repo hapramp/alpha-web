@@ -47,3 +47,10 @@ export const getFormattedDate = (date, extraOptions = {}) => {
   );
   return dateFormatter.format(dateObject);
 };
+
+export const isParticipatePossible = (startsAt, endsAt) => {
+  const startDate = new Date(`${startsAt.substr(0, 19)}Z`);
+  const endDate = new Date(`${endsAt.substr(0, 19)}Z`);
+  const now = new Date();
+  return (now >= startDate) && (now < endDate);
+};
