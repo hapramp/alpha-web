@@ -6,7 +6,14 @@ const getEmptyProfileData = () => ({
   loading: false,
   user: null,
   error: null,
-  blog: { count: 0, posts: [] },
+  blog: {
+    count: 0,
+    posts: [],
+    loading: false,
+    lastAuthor: null,
+    lastPermlink: null,
+    hasMore: true,
+  },
   follower: { count: 0, accounts: [] },
   following: { count: 0, accounts: [] },
 });
@@ -61,14 +68,24 @@ export default (state = initialState, action) => {
       nextState[username] = currentUser;
       return nextState;
 
+    case actionTypes.USER_BLOG_LOADING:
+      currentUser.blog.loading = true;
+      nextState[username] = currentUser;
+      return nextState;
+
     case actionTypes.USER_BLOG_LOADED:
-      currentUser.blog.count = action.results.length;
-      currentUser.blog.posts = action.results;
+      currentUser.blog.posts = _.uniq(currentUser.blog.posts.concat(action.results));
+      currentUser.blog.count = currentUser.blog.posts.length;
+      currentUser.blog.lastAuthor = action.lastAuthor;
+      currentUser.blog.lastPermlink = action.lastPermlink;
+      currentUser.blog.loading = false;
+      currentUser.blog.hasMore = action.results.length !== 0;
       nextState[username] = currentUser;
       return nextState;
 
     case actionTypes.USER_BLOG_LOAD_FAILED:
       currentUser.error = action.reason;
+      currentUser.blog.loading = false;
       nextState[username] = currentUser;
       return nextState;
 
@@ -117,3 +134,15 @@ export const getUserName = (state, username) => _.get(
 );
 
 export const isProfileMetaLoading = (state, username) => !getUserProfile(state, username).user;
+
+export const isBlogLoading = (state, username) => getUserProfile(state, username).blog.loading;
+
+export const hasMoreFeed = (state, username) => getUserProfile(state, username).blog.hasMore;
+
+export const getLastPost = (state, username) => {
+  const prof = getUserProfile(state, username);
+  return [
+    prof.blog.lastAuthor,
+    prof.blog.lastPermlink,
+  ];
+};
