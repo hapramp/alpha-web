@@ -55,6 +55,7 @@
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-draft-wysiwyg": "^1.12.11",
+    "react-infinite-scroller": "^1.2.4",
     "react-lazyload": "^2.3.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
