@@ -27,7 +27,7 @@
 .microCommunityContainer {
   @media screen and (max-width: 985px) {
     flex-wrap: nowrap;
-    overflow: scroll;
+    overflow-x: auto;
     height: 92px;
 
     > a {

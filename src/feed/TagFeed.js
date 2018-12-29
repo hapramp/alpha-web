@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import PostLoading from '../post/PostLoading';
 import styles from './styles.scss';
 import * as userFeedActions from '../actions/userFeedActions';
 import PostCard from '../post/PostCard';
@@ -16,12 +17,14 @@ const TagFeed = (props) => {
     },
     [tag],
   );
-
   return (
     <div className={styles.feedPosts}>
       {
         props.feed.posts && props.feed.posts.map(post =>
           <PostCard key={post} postPermlink={post} />)
+      }
+      {
+        props.feed.loading && <PostLoading />
       }
     </div>
   );

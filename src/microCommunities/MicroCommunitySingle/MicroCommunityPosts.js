@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import PostCard from '../../post/PostCard';
+import PostLoading from '../../post/PostLoading';
 import { getMicroCommunityPosts } from '../actions';
 import { getPostsForMicroCommunity } from '../reducer';
 import styles from './styles.scss';
@@ -59,7 +60,7 @@ const MicroCommunityPosts = ({
           pageStart={0}
           loadMore={() => fetchPosts(tag, tab)}
           hasMore={hasMore}
-          loader={<div className="loader" key={0}>Loading ...</div>}
+          loader={<PostLoading />}
         >
           {
             permlinks.map(permlink => (
