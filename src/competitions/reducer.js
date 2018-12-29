@@ -101,3 +101,9 @@ export const getCompetitionPosts = (state, competitionId) => {
 
 export const getCompetitionById = (state, competitionId) => state
   .competitions.competitions.find(competition => competition.id === competitionId);
+
+export const isPostsLoading = (state, competitionId) => _.get(
+  state,
+  `competitions.competitionPosts.${competitionId}.loading`,
+  false,
+);

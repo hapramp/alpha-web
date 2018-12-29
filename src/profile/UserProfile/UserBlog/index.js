@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 
+import PostLoading from '../../../post/PostLoading';
 import PostCard from '../../../post/PostCard';
 
 import styles from './styles.scss';
@@ -26,7 +27,7 @@ const UserBlog = (props) => {
           pageStart={0}
           loadMore={() => props.getUserFeeds(props.username)}
           hasMore={props.hasMore}
-          loader={<div className="loader" key={0}>Loading ...</div>}
+          loader={<PostLoading />}
         >
           {props.posts.map(item => (
             <PostCard

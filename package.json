@@ -51,6 +51,7 @@
     "raf": "3.4.0",
     "react": "^16.7.0-alpha.0",
     "react-autosize-textarea": "^5.0.0",
+    "react-content-loader": "^3.4.1",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.7.0-alpha.0",

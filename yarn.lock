@@ -6819,6 +6819,11 @@ react-autosize-textarea@^5.0.0:
     line-height "^0.3.1"
     prop-types "^15.5.6"
 
+react-content-loader@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.4.1.tgz#8eb273c630ffb36cb92f4383be811828eb8e1e66"
+  integrity sha512-lco6voFNwAGFBhVtczjyBuUKcBV1m8Ce3GNNEHm6maOCTIqGQePnomkwkfgcnpT9izZdAbpgeE8O4J/X+OG3JA==
+
 react-copy-to-clipboard@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.1.tgz#8eae107bb400be73132ed3b6a7b4fb156090208e"

@@ -7,6 +7,7 @@ import * as userFeedActions from '../actions/userFeedActions';
 import PostCard from '../post/PostCard';
 
 import styles from './styles.scss';
+import PostLoading from '../post/PostLoading';
 
 class UserFeed extends React.Component {
   static propTypes = {
@@ -44,6 +45,9 @@ class UserFeed extends React.Component {
         {
           this.props.userFeed.posts && this.props.userFeed.posts.map(post =>
             <PostCard key={post} postPermlink={post} />)
+        }
+        {
+          this.props.userFeed.loading && <PostLoading />
         }
       </div>
     );

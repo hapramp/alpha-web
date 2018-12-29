@@ -61,7 +61,7 @@ export const loadFeedsForTag = tag => (dispatch, getState, { haprampAPI }) => {
 export const loadNewPosts = () => (dispatch, getState, { steemAPI }) => {
   dispatch({ type: actionTypes.FEED_LOADING, feedType: 'new' });
   return steemAPI.steem.api.getDiscussionsByCreated(
-    { tag: 'hapramp', limit: '25' },
+    { tag: 'hapramp', limit: '50' },
     (error, result) => {
       if (error) {
         return dispatch({ type: actionTypes.FEED_LOADING_FAILED, feedType: 'new', reason: error });

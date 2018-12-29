@@ -10,6 +10,7 @@ import * as allUserActions from '../actions/allUserActions';
 import { hasMoreFeed } from '../reducers/userFeedReducer';
 import PostCard from '../post/PostCard';
 import { getAuthUsername } from '../reducers/authUserReducer';
+import PostLoading from '../post/PostLoading';
 
 const UserFeed = (props) => {
   useEffect(
@@ -26,7 +27,7 @@ const UserFeed = (props) => {
         pageStart={0}
         loadMore={() => props.loadFeedsForUser(props.authUsername)}
         hasMore={props.hasMore}
-        loader={<div className="loader" key={0}>Loading ...</div>}
+        loader={<PostLoading />}
       >
         {
           props.userFeed.posts && props.userFeed.posts.map(post =>

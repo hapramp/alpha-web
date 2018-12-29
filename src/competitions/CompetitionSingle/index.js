@@ -7,6 +7,7 @@ import ordinal from 'ordinal-js';
 import _ from 'lodash';
 
 import PostCard from '../../post/PostCard';
+import PostLoading from '../../post/PostLoading';
 import PostUserMeta from '../../post/PostUserMeta';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
@@ -20,12 +21,13 @@ import {
   getPostsForCompetition, getAllCompetitions, getCompetitionWinners,
   participateInCompetition,
 } from '../actions';
-import { getCompetitionPostPermlinks, getCompetitionById } from '../reducer';
+import { getCompetitionPostPermlinks, getCompetitionById, isPostsLoading } from '../reducer';
 import { getAuthUsername } from '../../reducers/authUserReducer';
 
 const CompetitionSingle = ({
   match, postPermlinks, fetchPosts, fetchCompetitions,
   competition, fetchWinners, participate, authUsername,
+  ...props
 }) => {
   const { competitionId } = match.params;
   useEffect(
@@ -178,6 +180,15 @@ const CompetitionSingle = ({
               </div>
             ))
           }
+          {
+            props.isPostsLoading && (
+              <div className={`uk-width-1-2@m uk-margin-bottom ${styles.postCardWrapper}`}>
+                <div className={styles.postCardContainer}>
+                  <PostLoading />
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
@@ -193,6 +204,7 @@ CompetitionSingle.propTypes = {
   fetchWinners: PropTypes.func.isRequired,
   participate: PropTypes.func.isRequired,
   authUsername: PropTypes.string,
+  isPostsLoading: PropTypes.bool.isRequired,
 };
 
 CompetitionSingle.defaultProps = {
@@ -204,6 +216,7 @@ const mapStateToProps = (state, ownProps) => ({
   postPermlinks: getCompetitionPostPermlinks(state, ownProps.match.params.competitionId),
   competition: getCompetitionById(state, ownProps.match.params.competitionId),
   authUsername: getAuthUsername(state),
+  isPostsLoading: isPostsLoading(state, ownProps.match.params.competitionId),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
