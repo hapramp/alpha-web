@@ -69,6 +69,12 @@
     display: flex;
     white-space: nowrap;
     background-color:white;
-    padding-right: 40px;
+    padding: 0 16px;
+    img {
+      display: none;
+    }
+    span {
+      margin: 0;
+    }
   }
 }
