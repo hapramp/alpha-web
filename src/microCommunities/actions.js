@@ -1,6 +1,9 @@
 import { addPosts } from '../post/actions';
 import { update1RampUser } from '../actions/loginActions';
 import { getAuthUsername } from '../reducers/authUserReducer';
+import { isFeedLoading, getLastPost } from './reducer';
+
+const PAGINATION_SIZE = 30;
 
 const baseName = '@microCommunities';
 export const actionTypes = {
@@ -42,9 +45,24 @@ export const getAllMicroCommunities = () => (dispatch, getState, { haprampAPI })
  * @param {string} tag Hashtag for the community
  * @param {string} order Sort order (any of trending, hot, created)
  */
-export const getMicroCommunityPosts = (tag, order) => (dispatch, getState, { haprampAPI }) => {
+export const getMicroCommunityPosts = (tag, _order) => (dispatch, getState, { haprampAPI }) => {
+  const state = getState();
+  const order = _order === 'new' ? 'created' : _order;
+
+  if (isFeedLoading(state, tag, order)) {
+    return Promise.resolve();
+  }
+
+  const [startAuthor, startPermlink] = getLastPost(state, tag, order);
+
   dispatch({ type: actionTypes.getPosts.init, tag, order });
-  return haprampAPI.v2.microCommunities.getPosts(tag, order === 'new' ? 'created' : order)
+  return haprampAPI.v2.microCommunities.getPosts(
+    tag,
+    order === 'new' ? 'created' : order,
+    PAGINATION_SIZE,
+    startAuthor,
+    startPermlink,
+  )
     .then((result) => {
       // Add all the posts to redux state
       dispatch(addPosts(result.posts));
@@ -54,6 +72,8 @@ export const getMicroCommunityPosts = (tag, order) => (dispatch, getState, { hap
         posts: result.posts.map(post => `${post.author}/${post.permlink}`),
         tag,
         order,
+        lastAuthor: result.last_author,
+        lastPermlink: result.last_permlink,
       });
     });
 };

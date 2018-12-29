@@ -52,22 +52,40 @@ export default (state = initialState, action) => {
           trending: {
             loading: false,
             posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
           },
-          new: {
+          created: {
             loading: false,
             posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
           },
           hot: {
             loading: false,
             posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
           },
           selects: {
             loading: false,
             posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
           },
         };
       }
-      newState.posts[action.tag][action.order].posts = action.posts;
+      console.log(action);
+      newState.posts[action.tag][action.order].posts = newState
+        .posts[action.tag][action.order].posts.concat(action.posts);
+      newState.posts[action.tag][action.order].loading = false;
+      newState.posts[action.tag][action.order].lastAuthor = action.lastAuthor;
+      newState.posts[action.tag][action.order].lastPermlink = action.lastPermlink;
+      newState.posts[action.tag][action.order].hasMore = action.posts.length !== 0;
       return newState;
 
     default:
@@ -97,4 +115,19 @@ export const hasCurrentUserJoinedTag = (state, tag) => {
     [],
   );
   return userMicros.map(micro => micro.tag).includes(tag);
+};
+
+export const isFeedLoading = (state, tag, order) => _.get(
+  state.microCommunities,
+  `posts.${tag}.${order}.loading`,
+  false,
+);
+
+export const getLastPost = (state, tag, order) => {
+  const posts = _.get(
+    state.microCommunities,
+    `posts.${tag}.${order}`,
+    false,
+  );
+  return [posts.lastAuthor, posts.lastPermlink];
 };
