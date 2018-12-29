@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import PostCard from '../../post/PostCard';
 import { getMicroCommunityPosts } from '../actions';
@@ -41,7 +42,9 @@ const MicroCommunityPosts = ({
   );
 
   // Get permlinks for current tab
-  const permlinks = _.get(posts, `${tab}.posts`, []);
+  const tabReal = tab === 'new' ? 'created' : tab;
+  const permlinks = _.get(posts, `${tabReal}.posts`, []);
+  const hasMore = _.get(posts, `${tabReal}.hasMore`, false);
 
   return (
     <div>
@@ -52,15 +55,22 @@ const MicroCommunityPosts = ({
         <TabLabel activeTab={tab} changeTab={changeTab} tab="hot" />
       </div>
       <div className={styles.postCardListContainer}>
-        {
-          permlinks.map(permlink => (
-            <PostCard
-              postPermlink={permlink}
-              key={permlink}
-              showPercentByUser={communityUsername}
-            />
-          ))
-        }
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={() => fetchPosts(tag, tab)}
+          hasMore={hasMore}
+          loader={<div className="loader" key={0}>Loading ...</div>}
+        >
+          {
+            permlinks.map(permlink => (
+              <PostCard
+                postPermlink={permlink}
+                key={permlink}
+                showPercentByUser={communityUsername}
+              />
+            ))
+          }
+        </InfiniteScroll>
       </div>
     </div>
   );

@@ -137,8 +137,12 @@ export default {
     microCommunities: {
       getAll: () => fetch(`${constants.BACKEND_URL.V2}/micro-communities`)
         .then(validateJsonResponse),
-      getPosts: (tag, sort = 'trending', limit = 10) => fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/posts/${sort}?limit=${limit}`)
-        .then(validateJsonResponse),
+      getPosts: (tag, sort = 'trending', limit = 10, startAuthor = null, startPermlink = null) => {
+        const authorParam = startAuthor ? `&start_author=${startAuthor}` : '';
+        const permlinkParam = startAuthor ? `&start_permlink=${startPermlink}` : '';
+        return fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/posts/${sort}?limit=${limit}${authorParam}${permlinkParam}`)
+          .then(validateJsonResponse);
+      },
       join: tag => fetch(`${constants.BACKEND_URL.V2}/micro-communities/${tag}/join`, {
         method: 'POST',
         headers: {
