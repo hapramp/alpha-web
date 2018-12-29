@@ -1,5 +1,8 @@
 import { actionTypes as allUserActionTypes } from '../actions/allUserActions';
 import { actionTypes as allPostsActionTypes } from '../post/actions';
+import { isBlogLoading, getLastPost } from './reducer';
+
+const PAGINATION_SIZE = 30;
 
 export const actionTypes = {
   LOAD_USER_INFO: 'USER_PROFILE.LOAD.INIT',
@@ -32,14 +35,24 @@ export const getFollowCount = username => (dispatch, getState, { steemAPI }) =>
     .catch(reason => dispatch({ type: actionTypes.FOLLOW_COUNT_FAILED, reason, username }));
 
 export const getUserFeeds = username => (dispatch, getState, { haprampAPI }) => {
+  const state = getState();
+
+  if (isBlogLoading(state, username)) {
+    return Promise.resolve();
+  }
+
+  const [startAuthor, startPermlink] = getLastPost(state, username);
+
   dispatch({ type: actionTypes.USER_BLOG_LOADING, username });
-  return haprampAPI.v2.feed.getFeedsByBlog(username)
+  return haprampAPI.v2.feed.getFeedsByBlog(username, PAGINATION_SIZE, startAuthor, startPermlink)
     .then((result) => {
       dispatch({ type: allPostsActionTypes.ADD_POSTS, posts: result.posts, username });
       return dispatch({
         type: actionTypes.USER_BLOG_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
         username,
+        lastAuthor: result.last_author,
+        lastPermlink: result.last_permlink,
       });
     })
     .catch(reason => dispatch({ type: actionTypes.USER_BLOG_LOAD_FAILED, reason, username }));

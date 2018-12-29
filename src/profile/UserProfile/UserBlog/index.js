@@ -1,49 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import PostCard from '../../../post/PostCard';
 
 import styles from './styles.scss';
 // import indexStyles from '../../../styles/globals.scss';
-import { getUserBlogPosts } from '../../reducer';
+import { getUserBlogPosts, hasMoreFeed } from '../../reducer';
 import { getUserFeeds } from '../../actions';
 
-class UserBlog extends React.Component {
-  static propTypes = {
-    getUserFeeds: PropTypes.func,
-    username: PropTypes.string.isRequired,
-    posts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  };
-
-  static defaultProps = {
-    getUserFeeds: () => { },
-  }
-  componentDidMount() {
-    this.props.getUserFeeds(this.props.username);
-  }
-
-  render() {
-    return (
-      <div className={`uk-flex uk-flex-center ${styles.userPostsContainer}`}>
-        <div className={styles.blogContainer}>
-          <div className={`uk-margin-medium-top uk-margin-medium-bottom ${styles.blogHeader}`}>LATEST</div>
-          {this.props.posts.map(item => (
+const UserBlog = (props) => {
+  useEffect(
+    () => {
+      props.getUserFeeds(props.username);
+    },
+    [props.username],
+  );
+  return (
+    <div className={`uk-flex uk-flex-center ${styles.userPostsContainer}`}>
+      <div className={styles.blogContainer}>
+        <div className={`uk-margin-medium-top uk-margin-medium-bottom ${styles.blogHeader}`}>LATEST</div>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={() => props.getUserFeeds(props.username)}
+          hasMore={props.hasMore}
+          loader={<div className="loader" key={0}>Loading ...</div>}
+        >
+          {props.posts.map(item => (
             <PostCard
               key={item}
               postPermlink={item}
               border
             />
           ))}
-        </div>
+        </InfiniteScroll>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+UserBlog.propTypes = {
+  getUserFeeds: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  posts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  hasMore: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => ({
   posts: getUserBlogPosts(state, ownProps.username),
+  hasMore: hasMoreFeed(state, ownProps.username),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
