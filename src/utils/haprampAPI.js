@@ -21,6 +21,12 @@ const validateJsonResponse = (response) => {
   return Promise.reject(response.statusText);
 };
 
+const getPaginatedPromise = (baseURL, limit, startAuthor, startPermlink, options = {}) => {
+  const startAuthorParam = startAuthor ? `&start_author=${startAuthor}` : '';
+  const startPermlinkParam = startPermlink ? `&start_permlink=${startPermlink}` : '';
+  return getPromiseForUrl(`${baseURL}?limit=${limit}${startAuthorParam}${startPermlinkParam}`, options);
+};
+
 export default {
   v2: {
     post: {
@@ -61,9 +67,12 @@ export default {
       },
     },
     feed: {
-      getUserFeed: username => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/user/${username}`),
-      getFeedsByBlog: blog => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}`),
-      getTagFeed: tag => getPromiseForUrl(`${constants.BACKEND_URL.V2}/curation/tag/${tag}`),
+      getUserFeed: (username, limit = 20, startAuthor = null, startPermlink = null) =>
+        getPaginatedPromise(`${constants.BACKEND_URL.V2}/feeds/user/${username}`, limit, startAuthor, startPermlink),
+      getFeedsByBlog: (blog, limit = 20, startAuthor = null, startPermlink = null) =>
+        getPaginatedPromise(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}`, limit, startAuthor, startPermlink),
+      getTagFeed: (tag, limit = 20, startAuthor = null, startPermlink = null) =>
+        getPaginatedPromise(`${constants.BACKEND_URL.V2}/curation/tag/${tag}`, limit, startAuthor, startPermlink),
       getExploreFeed: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/all`),
     },
     communities: {

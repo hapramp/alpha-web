@@ -1,60 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import styles from './styles.scss';
 import * as userFeedActions from '../actions/userFeedActions';
 import * as allUserActions from '../actions/allUserActions';
+import { hasMoreFeed } from '../reducers/userFeedReducer';
 import PostCard from '../post/PostCard';
+import { getAuthUsername } from '../reducers/authUserReducer';
 
-class UserFeed extends React.Component {
-  static propTypes = {
-    userFeed: PropTypes.shape({
-      posts: PropTypes.arrayOf(PropTypes.shape),
-      loading: PropTypes.bool,
-    }),
-    loadFeedsForUser: PropTypes.func,
-    username: PropTypes.string,
-  };
-
-  static defaultProps = {
-    userFeed: {
-      posts: [],
-      loading: false,
+const UserFeed = (props) => {
+  useEffect(
+    () => {
+      if (props.authUsername) {
+        props.loadFeedsForUser(props.authUsername);
+      }
     },
-    loadFeedsForUser: () => {},
-    username: null,
-  };
-
-  constructor(props) {
-    super(props);
-    if (this.props.username) {
-      this.props.loadFeedsForUser(this.props.username);
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.username !== this.props.username) {
-      this.props.loadFeedsForUser(newProps.username);
-    }
-  }
-
-  render() {
-    return (
-      <div className={`uk-margin-small-top ${styles.feedPosts}`}>
+    [props.authUsername],
+  );
+  return (
+    <div className={styles.feedPosts}>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={() => props.loadFeedsForUser(props.authUsername)}
+        hasMore={props.hasMore}
+        loader={<div className="loader" key={0}>Loading ...</div>}
+      >
         {
-          this.props.userFeed.posts && this.props.userFeed.posts.map(post =>
+          props.userFeed.posts && props.userFeed.posts.map(post =>
             <PostCard key={post} postPermlink={post} />)
         }
-      </div>
-    );
-  }
-}
+      </InfiniteScroll>
+    </div>
+  );
+};
+
+
+UserFeed.propTypes = {
+  userFeed: PropTypes.shape({
+    posts: PropTypes.arrayOf(PropTypes.shape),
+    loading: PropTypes.bool,
+  }),
+  loadFeedsForUser: PropTypes.func,
+  authUsername: PropTypes.string,
+  hasMore: PropTypes.bool.isRequired,
+};
+
+UserFeed.defaultProps = {
+  userFeed: {
+    posts: [],
+    loading: false,
+  },
+  loadFeedsForUser: () => { },
+  authUsername: null,
+};
 
 const mapStateToProps = state => ({
   userFeed: state.userFeed.user,
-  username: state.authUser.username,
+  authUsername: getAuthUsername(state),
+  hasMore: hasMoreFeed(state, 'user'),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

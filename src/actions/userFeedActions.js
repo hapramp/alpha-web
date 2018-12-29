@@ -1,4 +1,7 @@
 import { addPosts } from '../post/actions';
+import { getLastPost, isLoading } from '../reducers/userFeedReducer';
+
+const PAGINATION_SIZE = 30;
 
 export const actionTypes = {
   FEED_LOADING: 'FEED.LOAD.INIT',
@@ -7,21 +10,33 @@ export const actionTypes = {
 };
 
 export const loadFeedsForUser = username => (dispatch, getState, { haprampAPI }) => {
-  dispatch({ type: actionTypes.FEED_LOADING, feedType: 'user' });
-  return haprampAPI.v2.feed.getUserFeed(username)
+  const state = getState();
+  const feedType = 'user';
+
+  if (isLoading(state, feedType)) {
+    return Promise.resolve();
+  }
+
+  const [startAuthor, startPermlink] = getLastPost(state, feedType);
+
+  dispatch({ type: actionTypes.FEED_LOADING, feedType });
+  return haprampAPI.v2.feed.getUserFeed(username, PAGINATION_SIZE, startAuthor, startPermlink)
     .then((result) => {
       dispatch(addPosts(result.posts));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         results: result.posts.map(post => `${post.author}/${post.permlink}`),
-        feedType: 'user',
+        feedType,
+        lastAuthor: result.last_author,
+        lastPermlink: result.last_permlink,
         username,
       });
     })
     .catch(reason => dispatch({
       type: actionTypes.FEED_LOADING_FAILED,
       reason,
-      feedType: 'user',
+      feedType,
+      username,
     }));
 };
 
