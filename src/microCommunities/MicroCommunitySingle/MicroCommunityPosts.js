@@ -58,9 +58,9 @@ const MicroCommunityPosts = ({
       <div className={styles.postCardListContainer}>
         <InfiniteScroll
           pageStart={0}
-          loadMore={() => fetchPosts(tag, tab)}
+          loadMore={() => fetchPosts(tag, tab, false)}
           hasMore={hasMore}
-          loader={<PostLoading />}
+          loader={<PostLoading key={0} />}
         >
           {
             permlinks.map(permlink => (

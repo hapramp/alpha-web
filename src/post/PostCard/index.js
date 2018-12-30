@@ -65,7 +65,7 @@ const Post = (props) => {
 
   /* Render */
   return (
-    <LazyLoad height={700} once>
+    <LazyLoad height={800} once>
       <div className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer}`}>
         {
           props.showPrize

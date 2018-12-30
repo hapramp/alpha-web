@@ -45,38 +45,39 @@ export const getAllMicroCommunities = () => (dispatch, getState, { haprampAPI })
  * @param {string} tag Hashtag for the community
  * @param {string} order Sort order (any of trending, hot, created)
  */
-export const getMicroCommunityPosts = (tag, _order) => (dispatch, getState, { haprampAPI }) => {
-  const state = getState();
-  const order = _order === 'new' ? 'created' : _order;
+export const getMicroCommunityPosts = (tag, _order, refresh = true) =>
+  (dispatch, getState, { haprampAPI }) => {
+    const state = getState();
+    const order = _order === 'new' ? 'created' : _order;
 
-  if (isFeedLoading(state, tag, order)) {
-    return Promise.resolve();
-  }
+    if (isFeedLoading(state, tag, order)) {
+      return Promise.resolve();
+    }
 
-  const [startAuthor, startPermlink] = getLastPost(state, tag, order);
+    const [startAuthor, startPermlink] = refresh ? [null, null] : getLastPost(state, tag, order);
 
-  dispatch({ type: actionTypes.getPosts.init, tag, order });
-  return haprampAPI.v2.microCommunities.getPosts(
-    tag,
-    order === 'new' ? 'created' : order,
-    PAGINATION_SIZE,
-    startAuthor,
-    startPermlink,
-  )
-    .then((result) => {
-      // Add all the posts to redux state
-      dispatch(addPosts(result.posts));
-      return dispatch({
-        type: actionTypes.getPosts.done,
-        // Save post reference only with concerned redux state
-        posts: result.posts.map(post => `${post.author}/${post.permlink}`),
-        tag,
-        order,
-        lastAuthor: result.last_author,
-        lastPermlink: result.last_permlink,
+    dispatch({ type: actionTypes.getPosts.init, tag, order });
+    return haprampAPI.v2.microCommunities.getPosts(
+      tag,
+      order === 'new' ? 'created' : order,
+      PAGINATION_SIZE,
+      startAuthor,
+      startPermlink,
+    )
+      .then((result) => {
+        // Add all the posts to redux state
+        dispatch(addPosts(result.posts));
+        return dispatch({
+          type: actionTypes.getPosts.done,
+          // Save post reference only with concerned redux state
+          posts: result.posts.map(post => `${post.author}/${post.permlink}`),
+          tag,
+          order,
+          lastAuthor: result.last_author,
+          lastPermlink: result.last_permlink,
+        });
       });
-    });
-};
+  };
 
 /**
  * Join/leave a community
