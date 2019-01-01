@@ -11,11 +11,14 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
 
-const getPayout = post => (
-  parseFloat(post.pending_payout_value)
-  + parseFloat(post.curator_payout_value)
-  + parseFloat(post.total_payout_value)
-).toFixed(3);
+const RATE_MOUSE_TIMER = 500;
+
+const getPayout = post =>
+  (
+    parseFloat(post.pending_payout_value) +
+    parseFloat(post.curator_payout_value) +
+    parseFloat(post.total_payout_value)
+  ).toFixed(3);
 
 class ActionBar extends React.Component {
   constructor(props) {
@@ -26,6 +29,8 @@ class ActionBar extends React.Component {
     this.onRateClick = this.onRateClick.bind(this);
     this.handleRatePress = this.handleRatePress.bind(this);
     this.handleRateRelease = this.handleRateRelease.bind(this);
+    this.handleRateMouseEnter = this.handleRateMouseEnter.bind(this);
+    this.handleRateMouseLeave = this.handleRateMouseLeave.bind(this);
     this.buttonPressTimer = null;
     this.toggleFullRate = this.toggleFullRate.bind(this);
   }
@@ -45,18 +50,12 @@ class ActionBar extends React.Component {
     ];
     if (this.props.withLink) {
       return (
-        <Link
-          to={`/@${this.props.post.author}/${this.props.post.permlink}`}
-          className={`uk-flex ${styles.action}`}
-        >
+        <Link to={`/@${this.props.post.author}/${this.props.post.permlink}`} className={`uk-flex ${styles.action}`}>
           {child}
         </Link>
       );
     }
-    return (
-      <div className={`uk-flex ${styles.action}`}>
-        {child}
-      </div>);
+    return <div className={`uk-flex ${styles.action}`}>{child}</div>;
   }
 
   getCollapsedActionSection(finalRating, userRating) {
@@ -67,6 +66,8 @@ class ActionBar extends React.Component {
           onClick={this.toggleFullRate}
           onTouchStart={this.handleRatePress}
           onTouchEnd={this.handleRateRelease}
+          onMouseEnter={this.handleRateMouseEnter}
+          onMouseLeave={this.handleRateMouseLeave}
           onMouseDown={this.handleRatePress}
           onMouseUp={this.handleRateRelease}
           onKeyUp={this.handleRateRelease}
@@ -79,15 +80,13 @@ class ActionBar extends React.Component {
             Rate{userRating ? 'd' : ''}
           </span>
         </span>
-        <span>
-          {this.getRatingSection(finalRating)}
-        </span>
-      </div>);
+        <span>{this.getRatingSection(finalRating)}</span>
+      </div>
+    );
   }
 
   getRatingSection(finalRating) {
-    const positiveRatings = this.props.post.active_votes
-      .filter(vote => vote.percent > 0);
+    const positiveRatings = this.props.post.active_votes.filter(vote => vote.percent > 0);
     const displayUsers = positiveRatings
       .sort((vote) => {
         // TODO: following>follower>* sort
@@ -98,15 +97,15 @@ class ActionBar extends React.Component {
       .map(vote => vote.voter);
     return (
       <div className="uk-flex" style={{ alignItems: 'center' }}>
-        <div style={{ marginRight: 8, fontSize: 12, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
+        <div style={{ marginRight: 8, fontSize: 12, color: 'rgba(0, 0, 0, 0.87)' }}>
+          {finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}
+        </div>
         <div className={`uk-flex ${styles.ratingUserContainer}`}>
-          {
-            displayUsers.map(username => (
-              <div key={username}>
-                <UserAvatar username={username} tooltip />
-              </div>
-            ))
-          }
+          {displayUsers.map(username => (
+            <div key={username}>
+              <UserAvatar username={username} tooltip />
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -139,20 +138,22 @@ class ActionBar extends React.Component {
               tabIndex={0}
               aria-checked={i === userRating}
             >
-              <Icon name={i <= userRating ? 'star_primary' : 'star'} type={i <= userRating ? 'solid' : 'outline'} data-rating={i} />
-            </span>))}
+              <Icon
+                name={i <= userRating ? 'star_primary' : 'star'}
+                type={i <= userRating ? 'solid' : 'outline'}
+                data-rating={i}
+              />
+            </span>
+          ))}
         </span>
-      </div>);
+      </div>
+    );
   }
 
   toggleFullRate() {
     let rating = 5;
-    if (
-      _.some(
-        this.props.post.active_votes,
-        i => i.voter === this.props.authUsername && i.percent > 0,
-      )
-    ) {
+    const activeVotes = this.props.post.active_votes;
+    if (_.some(activeVotes, i => i.voter === this.props.authUsername && i.percent > 0)) {
       // Already rated, remove rating
       rating = 0;
     }
@@ -172,7 +173,17 @@ class ActionBar extends React.Component {
   }
 
   handleRatePress() {
-    this.buttonPressTimer = setTimeout(this.enableRatingView, 500);
+    if (this.mouseEnterTimer) clearTimeout(this.mouseEnterTimer);
+
+    this.buttonPressTimer = setTimeout(this.enableRatingView, RATE_MOUSE_TIMER);
+  }
+
+  handleRateMouseLeave() {
+    clearTimeout(this.mouseEnterTimer);
+  }
+
+  handleRateMouseEnter() {
+    this.mouseEnterTimer = setTimeout(this.enableRatingView, RATE_MOUSE_TIMER);
   }
 
   render() {
@@ -180,8 +191,9 @@ class ActionBar extends React.Component {
       return <div>...</div>;
     }
     let finalRating;
-    if (this.props.post.active_votes.length) {
-      const goodVotes = this.props.post.active_votes
+    const activeVotes = this.props.post.active_votes;
+    if (activeVotes.length) {
+      const goodVotes = activeVotes
         .map(vote => vote.percent)
         .filter(percent => percent >= 20 * 100);
       const scaledUpVotes = goodVotes
@@ -190,8 +202,7 @@ class ActionBar extends React.Component {
       if (!goodVotes.length) {
         finalRating = 0.0;
       } else {
-        finalRating = scaledUpVotes
-          .reduce((total, num) => total + num) / goodVotes.length;
+        finalRating = scaledUpVotes.reduce((total, num) => total + num) / goodVotes.length;
       }
     } else {
       finalRating = 0.0;
@@ -240,7 +251,7 @@ ActionBar.propTypes = {
 };
 
 ActionBar.defaultProps = {
-  ratePost: () => { },
+  ratePost: () => {},
   post: {},
   withLink: true,
   authUsername: null,
@@ -250,4 +261,7 @@ const mapStateToProps = state => ({
   authUsername: getAuthUsername(state),
 });
 
-export default connect(mapStateToProps, { ratePost })(ActionBar);
+export default connect(
+  mapStateToProps,
+  { ratePost },
+)(ActionBar);
