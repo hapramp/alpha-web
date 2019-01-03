@@ -26,6 +26,8 @@ class ActionBar extends React.Component {
     this.onRateClick = this.onRateClick.bind(this);
     this.handleRatePress = this.handleRatePress.bind(this);
     this.handleRateRelease = this.handleRateRelease.bind(this);
+    this.handleRateHover = this.handleRateHover.bind(this);
+    this.handleRateLeave = this.handleRateLeave.bind(this);
     this.buttonPressTimer = null;
     this.toggleFullRate = this.toggleFullRate.bind(this);
   }
@@ -172,7 +174,16 @@ class ActionBar extends React.Component {
   }
 
   handleRatePress() {
+    if (this.mouseHoverTimer) clearTimeout(this.mouseHoverTimer);
     this.buttonPressTimer = setTimeout(this.enableRatingView, 500);
+  }
+
+  handleRateLeave() {
+    clearTimeout(this.mouseHoverTimer);
+  }
+
+  handleRateHover() {
+    this.mouseHoverTimer = setTimeout(this.enableRatingView, 500);
   }
 
   render() {
