@@ -70,6 +70,8 @@ class ActionBar extends React.Component {
           onTouchStart={this.handleRatePress}
           onTouchEnd={this.handleRateRelease}
           onMouseDown={this.handleRatePress}
+          onMouseEnter={this.handleRateHover}
+          onMouseLeave={this.handleRateLeave}
           onMouseUp={this.handleRateRelease}
           onKeyUp={this.handleRateRelease}
           role="switch"
