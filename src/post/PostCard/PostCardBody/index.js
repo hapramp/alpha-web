@@ -48,7 +48,7 @@ const PostCardBody = ({ post, maintainAspectRatio }) => {
             <Image
               src={image}
               steemitImagesConfig={{ enabled: true }}
-              lazyLoadProps={{ offset: 300, height: 300 }}
+              lazyLoadProps={{ offset: 800, height: 300 }}
               style={{ width: '100%' }}
               alt=""
             />

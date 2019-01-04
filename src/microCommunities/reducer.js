@@ -45,6 +45,43 @@ export default (state = initialState, action) => {
         },
       };
 
+    case actionTypes.getPosts.init:
+      newState = _.cloneDeep(state);
+      if (!newState.posts[action.tag]) { // No entry for the tag, create one
+        newState.posts[action.tag] = {
+          trending: {
+            loading: false,
+            posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
+          },
+          created: {
+            loading: false,
+            posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
+          },
+          hot: {
+            loading: false,
+            posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
+          },
+          selects: {
+            loading: false,
+            posts: [],
+            lastAuthor: null,
+            lastPermlink: null,
+            hasMore: true,
+          },
+        };
+      }
+      newState.posts[action.tag][action.order].loading = true;
+      return newState;
+
     case actionTypes.getPosts.done:
       newState = _.cloneDeep(state);
       if (!newState.posts[action.tag]) { // No entry for the tag, create one
@@ -79,9 +116,8 @@ export default (state = initialState, action) => {
           },
         };
       }
-      console.log(action);
-      newState.posts[action.tag][action.order].posts = newState
-        .posts[action.tag][action.order].posts.concat(action.posts);
+      newState.posts[action.tag][action.order].posts = _.uniq(newState
+        .posts[action.tag][action.order].posts.concat(action.posts));
       newState.posts[action.tag][action.order].loading = false;
       newState.posts[action.tag][action.order].lastAuthor = action.lastAuthor;
       newState.posts[action.tag][action.order].lastPermlink = action.lastPermlink;
