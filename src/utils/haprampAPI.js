@@ -73,7 +73,8 @@ export default {
         getPaginatedPromise(`${constants.BACKEND_URL.V2}/feeds/blog/${blog}`, limit, startAuthor, startPermlink),
       getTagFeed: (tag, limit = 20, startAuthor = null, startPermlink = null) =>
         getPaginatedPromise(`${constants.BACKEND_URL.V2}/curation/tag/${tag}`, limit, startAuthor, startPermlink),
-      getExploreFeed: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/feeds/all`),
+      getExploreFeed: (limit = 20, startAuthor = null, startPermlink = null) =>
+        getPaginatedPromise(`${constants.BACKEND_URL.V2}/feeds/all`, limit, startAuthor, startPermlink),
     },
     communities: {
       getAllCommunities: () => getPromiseForUrl(`${constants.BACKEND_URL.V2}/communities`),
