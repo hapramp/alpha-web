@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { addPosts } from '../post/actions';
 import { getLastPost, isLoading } from '../reducers/userFeedReducer';
 
@@ -76,15 +78,30 @@ export const loadNewPosts = () => (dispatch, getState, { steemAPI }) => {
   );
 };
 
-export const loadExplorePosts = () => (dispatch, getState, { haprampAPI }) => {
-  dispatch({ type: actionTypes.FEED_LOADING, feedType: 'explore' });
-  return haprampAPI.v2.feed.getExploreFeed()
+export const loadExplorePosts = (refresh = true) => (dispatch, getState, { haprampAPI }) => {
+  const state = getState();
+  const feedType = 'explore';
+
+  if (isLoading(state, feedType)) {
+    return Promise.resolve();
+  }
+
+  let [startAuthor, startPermlink] = [null, null];
+
+  if (!refresh) {
+    [startAuthor, startPermlink] = getLastPost(state, feedType);
+  }
+
+  dispatch({ type: actionTypes.FEED_LOADING, feedType });
+  return haprampAPI.v2.feed.getExploreFeed(PAGINATION_SIZE, startAuthor, startPermlink)
     .then((results) => {
       dispatch(addPosts(results));
       return dispatch({
         type: actionTypes.FEED_LOADED,
         results: results.filter(post => !!post.author).map(post => `${post.author}/${post.permlink}`),
         feedType: 'explore',
+        lastAuthor: _.get(results, `[${results.length - 1}].author`),
+        lastPermlink: _.get(results, `[${results.length - 1}].permlink`),
       });
     })
     .catch((reason) => {
