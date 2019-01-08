@@ -1,0 +1,16 @@
+.editorWrite {
+  textarea {
+    resize: none;
+    font-size: 16px;
+  }
+  .previewContainer {
+    span {
+      font-size: 24px;
+    }
+    .previewBody {
+      border: 1px solid #ddd;
+      min-height: 132px;
+      padding: 10px;
+    }
+  }
+}
