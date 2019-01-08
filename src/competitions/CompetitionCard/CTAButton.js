@@ -5,7 +5,14 @@ import PropTypes from 'prop-types';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import GrayButton from '../../components/buttons/GrayButton';
 
-const CTAButton = ({ startsAt, endsAt }) => {
+const CTAButton = ({ startsAt, endsAt, winnersAnnounced }) => {
+  if (winnersAnnounced) {
+    return (
+      <PrimaryButton>
+        See Winners
+      </PrimaryButton>
+    );
+  }
   const startDate = new Date(`${startsAt.substr(0, 19)}Z`);
   const endDate = new Date(`${endsAt.substr(0, 19)}Z`);
   const now = new Date();
@@ -19,7 +26,7 @@ const CTAButton = ({ startsAt, endsAt }) => {
   } else if (startDate < now) {
     return (
       <PrimaryButton>
-        Started <ReactTimeAgo>{startDate}</ReactTimeAgo>
+        Participate
       </PrimaryButton>
     );
   }
@@ -33,6 +40,11 @@ const CTAButton = ({ startsAt, endsAt }) => {
 CTAButton.propTypes = {
   startsAt: PropTypes.string.isRequired,
   endsAt: PropTypes.string.isRequired,
+  winnersAnnounced: PropTypes.bool,
+};
+
+CTAButton.defaultProps = {
+  winnersAnnounced: false,
 };
 
 export default CTAButton;
