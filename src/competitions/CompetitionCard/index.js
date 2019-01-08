@@ -21,37 +21,41 @@ const CompetitionCard = ({ competition }) => (
       }}
     />
 
-    {
-      competition.image && (
-        <div
-          style={{ backgroundImage: `url("${competition.image}")` }}
-          className={styles.competitionImage}
-        />
-      )
-    }
+    <Link to={`/competitions/${competition.id}`}>
+      {
+        competition.image && (
+          <div
+            style={{ backgroundImage: `url("${competition.image}")` }}
+            className={styles.competitionImage}
+          />
+        )
+      }
 
-    <div className={styles.contentContainer}>
-      <Link to={`/competitions/${competition.id}`}>
+      <div className={styles.contentContainer}>
         <div className={styles.title}>
           {competition.title}
         </div>
-      </Link>
 
-      <CompetitionMeta
-        prizes={competition.prizes}
-        startsAt={competition.starts_at}
-        endsAt={competition.ends_at}
-        participantCount={competition.participant_count}
-      />
+        <CompetitionMeta
+          prizes={competition.prizes}
+          startsAt={competition.starts_at}
+          endsAt={competition.ends_at}
+          participantCount={competition.participant_count}
+        />
 
-      <p className={styles.description}>
-        {ellipsis(competition.description, 182)}
-      </p>
+        <p className={styles.description}>
+          {ellipsis(competition.description, 182)}
+        </p>
 
-      <Link to={`/competitions/${competition.id}`} className={styles.ctaContainer}>
-        <CTAButton startsAt={competition.starts_at} endsAt={competition.ends_at} />
-      </Link>
-    </div>
+        <div className={styles.ctaContainer}>
+          <CTAButton
+            startsAt={competition.starts_at}
+            endsAt={competition.ends_at}
+            winnersAnnounced={competition.winners_announced}
+          />
+        </div>
+      </div>
+    </Link>
   </div>
 );
 
