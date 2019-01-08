@@ -115,7 +115,7 @@ export const getFollowingCount = (state, username) => _.get(
 
 export const getUserProfile = (state, username) => _.get(
   state.userProfile,
-  `[${username}]`,
+  `['${username}']`,
   getEmptyProfileData(),
 );
 
