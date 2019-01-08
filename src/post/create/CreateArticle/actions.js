@@ -2,7 +2,10 @@ import { stateToHTML } from 'draft-js-export-html';
 import { push } from 'connected-react-router';
 
 import { getAuthUsername } from '../../../reducers/authUserReducer';
-import { getArticleContent, getActiveTags, getSelectedCommunities, getArticleTitle } from './reducer';
+import {
+  getArticleContent, getActiveTags, getSelectedCommunities,
+  getArticleTitle, isMarkdownEditorActive, getMarkdownText,
+} from './reducer';
 import { getAllTags, addFooter } from '../CreatePost/actions';
 import { getAllCommunities } from '../../../reducers/communitiesReducer';
 
@@ -15,6 +18,9 @@ export const actionTypes = {
   CREATE_INIT: 'CREATE_ARTICLE.INIT',
   CREATE_DONE: 'CREATE_ARTICLE.DONE',
   CREATE_ERROR: 'CREATE_ARTICLE.ERROR',
+  SET_MARKDOWN_TEXT: 'CREATE_ARTICLE.MARKDOWN.TEXT.SET',
+  ACTIVATE_MARDOWN_EDITOR: 'CREATE_ARTICLE.MARKDOWN.ACTIVE.SET',
+  DEACTIVATE_MARDOWN_EDITOR: 'CREATE_ARTICLE.MARKDOWN.ACTIVE.UNSET',
 };
 
 export const setContent = content => ({ type: actionTypes.SET_CONTENT, content });
@@ -50,21 +56,20 @@ export const createArticle = () => async (dispatch, getState, { steemAPI, notify
 
   const allTags = getAllTags(communities, tags, allCommunities);
 
-  const permlink = await steemAPI.createPermlink(title, author, '', '');
-
-  const contentHTML = stateToHTML(articleContent.getCurrentContent());
-  const contentHTMLWithFooter = addFooter(contentHTML, author, permlink);
-
   dispatch({
     type: actionTypes.CREATE_INIT,
     author,
     tags,
     communities,
     title,
-    content: contentHTMLWithFooter,
-    permlink,
     allTags,
   });
+
+  const permlink = await steemAPI.createPermlink(title, author, '', '');
+
+  const contentHTML = isMarkdownEditorActive(state) ?
+    getMarkdownText(state) : stateToHTML(articleContent.getCurrentContent());
+  const contentHTMLWithFooter = addFooter(contentHTML, author, permlink);
 
   return steemAPI.sc2Operations.createPost(
     author, contentHTMLWithFooter, allTags,
@@ -98,3 +103,12 @@ export const createArticle = () => async (dispatch, getState, { steemAPI, notify
     });
   });
 };
+
+export const setMarkdownText = text => dispatch => dispatch({
+  type: actionTypes.SET_MARKDOWN_TEXT,
+  text,
+});
+
+export const setMarkdownEditorActive = (state = true) => dispatch => dispatch({
+  type: state ? actionTypes.ACTIVATE_MARDOWN_EDITOR : actionTypes.DEACTIVATE_MARDOWN_EDITOR,
+});

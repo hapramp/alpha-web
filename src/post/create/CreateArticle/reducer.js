@@ -6,6 +6,8 @@ import { actionTypes } from './actions';
 const initialState = {
   title: '',
   content: EditorState.createEmpty(),
+  markdownText: '',
+  markdownEditorActive: false,
   communities: [],
   tags: [],
   create: {
@@ -62,6 +64,24 @@ export default (state = initialState, action) => {
         },
       };
 
+    case actionTypes.ACTIVATE_MARDOWN_EDITOR:
+      return {
+        ...state,
+        markdownEditorActive: true,
+      };
+
+    case actionTypes.DEACTIVATE_MARDOWN_EDITOR:
+      return {
+        ...state,
+        markdownEditorActive: false,
+      };
+
+    case actionTypes.SET_MARKDOWN_TEXT:
+      return {
+        ...state,
+        markdownText: action.text,
+      };
+
     case actionTypes.CREATE_DONE:
       return initialState;
 
@@ -96,3 +116,7 @@ export const isArticlePublishable = (state) => {
 export const getArticleContent = state => state.createArticle.content;
 
 export const getArticleTitle = state => state.createArticle.title;
+
+export const getMarkdownText = state => state.createArticle.markdownText;
+
+export const isMarkdownEditorActive = state => state.createArticle.markdownEditorActive;

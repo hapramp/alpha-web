@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import Editor from './Editor';
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
-import { setTitle, setContent, uploadImage } from './actions';
+import { setTitle, setContent, uploadImage, setMarkdownEditorActive } from './actions';
+import { isMarkdownEditorActive } from './reducer';
 import PrimaryButton from '../../../components/buttons/PrimaryButton';
+import MarkdownEditor from './MarkdownEditor';
 
 class CreateArticle extends React.Component {
   constructor(props) {
@@ -27,12 +29,21 @@ class CreateArticle extends React.Component {
           onChange={this.handleTitleChange}
           value={this.props.createArticle.title}
         />
+        <div className="uk-margin-top">
+          <input className="uk-checkbox" type="checkbox" checked={this.props.showMarkdownEditor} onClick={event => this.props.setMarkdownActive(event.target.checked)} />
+          <span className="uk-margin-left">Use Markdown Editor</span>
+        </div>
         <div className="uk-margin-top uk-position-relative">
-          <Editor
-            handleContentChange={this.handleContentChange}
-            uploadCallback={this.uploadCallback}
-            editorState={this.props.createArticle.content}
-          />
+          {
+            this.props.showMarkdownEditor ? (
+              <MarkdownEditor />
+            ) : (
+              <Editor
+                handleContentChange={this.handleContentChange}
+                uploadCallback={this.uploadCallback}
+                editorState={this.props.createArticle.content}
+              />
+            )}
           <Link to="/create/article/next">
             <PrimaryButton className={styles.nextButton}>
               Next
@@ -73,21 +84,26 @@ CreateArticle.propTypes = {
     content: PropTypes.shape({}),
   }),
   uploadImage: PropTypes.func.isRequired,
+  showMarkdownEditor: PropTypes.bool,
+  setMarkdownActive: PropTypes.func,
 };
 
 CreateArticle.defaultProps = {
-  setContent: () => {},
-  setTitle: () => {},
+  setContent: () => { },
+  setTitle: () => { },
   createArticle: {
     title: '',
     content: {},
   },
+  setMarkdownActive: PropTypes.func,
+  showMarkdownEditor: () => { },
 };
 
 const mapStateToProps = state => ({
   createArticle: state.createArticle,
+  showMarkdownEditor: isMarkdownEditorActive(state),
 });
 
 export default connect(mapStateToProps, {
-  setTitle, setContent, uploadImage,
+  setTitle, setContent, uploadImage, setMarkdownActive: setMarkdownEditorActive,
 })(CreateArticle);

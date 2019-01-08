@@ -67,8 +67,8 @@ const PostBody = ({
 PostBody.propTypes = {
   className: PropTypes.string,
   body: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  permlink: PropTypes.string.isRequired,
+  author: PropTypes.string,
+  permlink: PropTypes.string,
   minify: PropTypes.bool,
   history: PropTypes.shape().isRequired,
 };
@@ -76,6 +76,8 @@ PostBody.propTypes = {
 PostBody.defaultProps = {
   className: '',
   minify: false,
+  author: '',
+  permlink: '',
 };
 
 export default withRouter(PostBody);
