@@ -17,9 +17,17 @@ const getPayout = post => (
   + parseFloat(post.total_payout_value)
 ).toFixed(3);
 
+const preventContextMenu = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+};
+
 class ActionBar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.rateContainerRef = React.createRef();
+
     this.state = { ratingActive: false };
     this.enableRatingView = this.enableRatingView.bind(this);
     this.disableRatingView = this.disableRatingView.bind(this);
@@ -77,6 +85,11 @@ class ActionBar extends React.Component {
           role="switch"
           tabIndex={0}
           aria-checked
+          ref={(ref) => {
+            if (ref) {
+              ref.addEventListener('contextmenu', preventContextMenu, false);
+            }
+          }}
         >
           <Icon name={userRating ? 'star_primary' : 'star'} type={userRating ? 'solid' : 'outline'} />
           <span className={styles.actionText} style={{ fontWeight: 500 }}>
