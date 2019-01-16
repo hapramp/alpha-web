@@ -18,6 +18,7 @@ import { getUserProfile, isProfileMetaLoading, getUserJSONMetadata, getUserName 
 import UserCommunities from './UserCommunities';
 import UserBlog from './UserBlog';
 import EditProfileButton from '../EditProfile/EditProfileButton';
+import UserProfileMetaTags from './UserProfileMetaTags';
 
 class UserProfile extends React.Component {
   componentDidMount() {
@@ -54,7 +55,7 @@ class UserProfile extends React.Component {
     return (
       <div className="uk-margin-small-top">
         {/* Cover image and user avatar */}
-
+        <UserProfileMetaTags user={{ name: username, json_metadata: jsonMetadata }} />
         <div className={`${indexStyles.white}`}>
           <UserCoverImage username={username} coverImageUrl={jsonMetadata.profile.cover_image} />
 

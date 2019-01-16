@@ -11,6 +11,7 @@ import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import PostBody from '../PostBody';
 import styles from './styles.scss';
+import PostMetaTags from './PostMetaTags';
 
 class PostSingle extends React.Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class PostSingle extends React.Component {
     const { body, author, permlink } = this.props.post;
     return (
       <div className={['uk-margin-bottom', styles.postSingleContainer].join(' ')}>
+        <PostMetaTags post={this.props.post} postingUser={this.props.postingUser} />
         <div
           className={[indexStyles.white].join(' ')}
         >

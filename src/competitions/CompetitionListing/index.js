@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet-async';
 
 import {
   getAllCompetitions as getAllCompetitionsSelector,
@@ -20,6 +21,16 @@ const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) =>
 
   return (
     <div className={`${styles.container}`}>
+      <Helmet>
+        <title>Competitions | 1Ramp</title>
+        <meta name="title" content="Competitions | 1Ramp" />
+        <meta name="twitter:title" content="Competitions | 1Ramp" />
+        <meta name="og:title" content="Competitions | 1Ramp" />
+        <meta name="description" content="Participate in contests and win exciting prizes" />
+        <meta name="twitter:description" content="Participate in contests and win exciting prizes" />
+        <meta name="og:description" content="Participate in contests and win exciting prizes" />
+        <meta name="og:url" content="https://alpha.1ramp.io/competitions" />
+      </Helmet>
       <div className="uk-grid">
         {
           competitions.map(competition => (

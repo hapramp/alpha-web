@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import MicroCommunityMetaTags from './MicroCommunityMetaTags';
 import Info from './MicroCommunityInfo';
 import Posts from './MicroCommunityPosts';
 import { getAllMicroCommunities } from '../actions';
@@ -25,6 +26,7 @@ const MicroCommunitySingle = ({ fetchAll, microCommunity }) => {
   }
   return (
     <div className="uk-container">
+      <MicroCommunityMetaTags community={microCommunity} />
       <div uk-grid="true" className="uk-margin-small-top">
         <div className="uk-width-1-4@m">
           <Info microCommunity={microCommunity} />

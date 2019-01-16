@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet-async';
 
 import PostLoading from '../post/PostLoading';
 import styles from './styles.scss';
@@ -17,8 +18,18 @@ const TagFeed = (props) => {
     },
     [tag],
   );
+  const capitalizedTag = tag[0].toUpperCase() + tag.slice(1);
   return (
     <div className={styles.feedPosts}>
+      <Helmet>
+        <title>{capitalizedTag} | 1Ramp</title>
+        <meta name="description" content={`${capitalizedTag} on 1Ramp`} />
+        <meta name="twitter:title" content={`${capitalizedTag} | 1Ramp`} />
+        <meta name="og:title" content={`${capitalizedTag} | 1Ramp`} />
+        <meta name="twitter:description" content={`${capitalizedTag} on 1Ramp`} />
+        <meta name="og:description" content={`${capitalizedTag} on 1Ramp`} />
+        <meta name="og:url" content={`https://alpha.1ramp.io/feed/${props.match.params.tag}`} />
+      </Helmet>
       {
         props.feed.posts && props.feed.posts.map(post =>
           <PostCard key={post} postPermlink={post} />)

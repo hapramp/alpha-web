@@ -9,6 +9,7 @@ import en from 'javascript-time-ago/locale/en';
 import showdown from 'showdown';
 import Cookie from 'js-cookie';
 import { ConnectedRouter } from 'connected-react-router';
+import Helmet, { HelmetProvider } from 'react-helmet-async';
 
 // import registerServiceWorker from './registerServiceWorker';
 import Root from './components/root';
@@ -47,11 +48,29 @@ if (accessToken) {
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Root />
-    </ConnectedRouter>
-  </Provider>,
+  <HelmetProvider>
+    {/* Default meta tags */}
+    <Helmet>
+      <meta name="title" content="Social media for creators - share content and earn rewards!" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="@the1ramp" />
+      <meta name="twitter:title" content="1Ramp" />
+      <meta name="twitter:description" content="Social media for creators - share content and earn rewards!" />
+      <meta name="twitter:creator" content="@the1ramp" />
+      <meta name="twitter:img:src" content="https://steemitimages.com/u/the1ramp/avatar/large" />
+      <meta name="og:title" content="1Ramp" />
+      <meta name="og:type" content="website" />
+      <meta name="og:url" content="https://alpha.1ramp.io" />
+      <meta name="og:image" content="https://steemitimages.com/u/the1ramp/avatar/large" />
+      <meta name="og:description" content="Social media for creators - share content and earn rewards!" />
+      <meta name="og:site_name" content="1Ramp" />
+    </Helmet>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Root />
+      </ConnectedRouter>
+    </Provider>
+  </HelmetProvider>,
   document.getElementById('root'),
 );
 // registerServiceWorker();

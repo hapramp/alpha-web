@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
+import Helmet from 'react-helmet-async';
 
 import styles from './styles.scss';
 import * as userFeedActions from '../actions/userFeedActions';
@@ -23,6 +24,10 @@ const UserFeed = (props) => {
   );
   return (
     <div className={styles.feedPosts}>
+      <Helmet>
+        <title>My Feed | 1Ramp</title>
+        <meta name="og:url" content="https://alpha.1ramp.io/feed" />
+      </Helmet>
       <InfiniteScroll
         pageStart={0}
         loadMore={() => props.loadFeedsForUser(props.authUsername)}

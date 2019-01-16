@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
+import Helmet from 'react-helmet-async';
 
 import styles from './styles.scss';
 import * as userFeedActions from '../actions/userFeedActions';
@@ -20,6 +21,13 @@ const ExploreFeed = ({
   );
   return (
     <div className={styles.feedPosts}>
+      <Helmet>
+        <title>Explore | 1Ramp</title>
+        <meta name="description" content="Explore what creators are sharing across all communities" />
+        <meta name="twitter:description" content="Explore what creators are sharing across all communities" />
+        <meta name="og:description" content="Explore what creators are sharing across all communities" />
+        <meta name="og:url" content="https://alpha.1ramp.io/feed/explore" />
+      </Helmet>
       <InfiniteScroll
         pageStart={0}
         loadMore={() => loadExplorePosts(false)}

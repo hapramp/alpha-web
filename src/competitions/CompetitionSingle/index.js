@@ -12,6 +12,7 @@ import PostUserMeta from '../../post/PostUserMeta';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
+import CompetitionMetaTags from './CompetitionMetaTags';
 
 import indexStyles from '../../styles/globals.scss';
 import styles from './styles.scss';
@@ -55,6 +56,7 @@ const CompetitionSingle = ({
   const canParticipate = isParticipatePossible(competition.starts_at, competition.ends_at);
   return (
     <div className={`${styles.wrapper} ${indexStyles.white}`}>
+      <CompetitionMetaTags competition={competition} />
       <div className={styles.container}>
         {/** Competition header with metadata */}
         <PostUserMeta
