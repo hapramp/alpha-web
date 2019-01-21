@@ -20,7 +20,7 @@ const Sidebar = props => (
                 props.location.pathname === '/feed/' ? styles.active : ''
                 }`}
             >
-              <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" />
+              <UserAvatar username={props.username} className={`uk-border-circle ${styles.communityImage}`} size="small" noLink />
               <span className={`uk-margin-left ${styles.communityLabel}`}>Feed</span>
             </div>
           </Link>
