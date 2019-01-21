@@ -10,12 +10,15 @@ import { ratePost } from './actions';
 import { getAuthUsername } from '../../reducers/authUserReducer';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
+import PostRatings from '../PostRatings';
 
-const getPayout = post => (
+const getPayoutValue = post => (
   parseFloat(post.pending_payout_value)
   + parseFloat(post.curator_payout_value)
   + parseFloat(post.total_payout_value)
-).toFixed(3);
+);
+
+const getPayout = post => getPayoutValue(post).toFixed(3);
 
 const preventContextMenu = (event) => {
   event.preventDefault();
@@ -28,7 +31,7 @@ class ActionBar extends React.Component {
 
     this.rateContainerRef = React.createRef();
 
-    this.state = { ratingActive: false };
+    this.state = { ratingActive: false, showPostRatings: false };
     this.enableRatingView = this.enableRatingView.bind(this);
     this.disableRatingView = this.disableRatingView.bind(this);
     this.onRateClick = this.onRateClick.bind(this);
@@ -38,6 +41,7 @@ class ActionBar extends React.Component {
     this.handleRateLeave = this.handleRateLeave.bind(this);
     this.buttonPressTimer = null;
     this.toggleFullRate = this.toggleFullRate.bind(this);
+    this.togglePostRatings = this.togglePostRatings.bind(this);
   }
 
   onRateClick(event) {
@@ -114,13 +118,20 @@ class ActionBar extends React.Component {
       .slice(0, 3)
       .map(vote => vote.voter);
     return (
-      <div className="uk-flex" style={{ alignItems: 'center' }}>
+      <div
+        className="uk-flex"
+        style={{ alignItems: 'center', cursor: 'pointer' }}
+        onClick={this.togglePostRatings}
+        tabIndex={-1}
+        onKeyUp={() => {}}
+        role="button"
+      >
         <div style={{ marginRight: 8, fontSize: 12, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
         <div className={`uk-flex ${styles.ratingUserContainer}`}>
           {
             displayUsers.map(username => (
               <div key={username}>
-                <UserAvatar username={username} tooltip />
+                <UserAvatar username={username} noLink tooltip={false} />
               </div>
             ))
           }
@@ -160,6 +171,10 @@ class ActionBar extends React.Component {
             </span>))}
         </span>
       </div>);
+  }
+
+  togglePostRatings() {
+    this.setState(state => ({ ...state, showPostRatings: !state.showPostRatings }));
   }
 
   toggleFullRate() {
@@ -247,6 +262,12 @@ class ActionBar extends React.Component {
           {this.getCommentSection()}
           {this.getPayoutSection()}
         </div>
+        <PostRatings
+          showRatings={this.state.showPostRatings}
+          onClose={this.togglePostRatings}
+          ratings={this.props.post.active_votes}
+          postValue={getPayoutValue(this.props.post)}
+        />
       </div>
     );
   }
