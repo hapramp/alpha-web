@@ -1,6 +1,7 @@
 @import "../../styles/_variables.scss";
 
 .container {
+  overflow-x: hidden;
   padding: 0 24px;
   a {
     color: $primary-color;
