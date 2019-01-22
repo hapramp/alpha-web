@@ -16,7 +16,9 @@ const OAuthCallback = (props) => {
   Cookie.set('username', username, { expires: expiresIn });
   steemAPI.sc2Api.setAccessToken(accessToken);
   getStore().dispatch(fakeLogin());
-  return <Redirect to="/feed/explore" />;
+  // state is passed by the application when initiating sign in, redirect to the same path
+  const state = params.get('state') || '';
+  return <Redirect to={state} />;
 };
 
 OAuthCallback.propTypes = {
