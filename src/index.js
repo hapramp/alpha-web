@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Icons from 'uikit/dist/js/uikit-icons';
 import UIKit from 'uikit';
-import * as firebase from 'firebase';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import showdown from 'showdown';
@@ -27,18 +26,6 @@ TimeAgo.default_locale = 'en-US';
 UIKit.use(Icons);
 
 const store = getStore();
-
-// Initialize firebase
-const config = {
-  apiKey: 'AIzaSyBVUoUB41eL2GS_ERrG5bAfrjr1bukCu2g',
-  authDomain: 'hapramp-625c8.firebaseapp.com',
-  databaseURL: 'https://hapramp-625c8.firebaseio.com',
-  projectId: 'hapramp-625c8',
-  storageBucket: 'hapramp-625c8.appspot.com',
-  messagingSenderId: '574002232827',
-};
-firebase.initializeApp(config);
-window.firebaseStorage = firebase.storage();
 
 // Login user
 const accessToken = Cookie.get('access_token');

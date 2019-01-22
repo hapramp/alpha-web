@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet-async';
 
 import Editor from './Editor';
 import styles from './styles.scss';
@@ -22,6 +23,10 @@ class CreateArticle extends React.Component {
   getEditorSection() {
     return (
       <div>
+        <Helmet>
+          <link rel="stylesheet" type="text/css" href="https://unpkg.com/medium-draft/dist/medium-draft.css" />
+          <link rel="stylesheet" href="/react-draft-wysiwyg.css" />
+        </Helmet>
         <input
           placeholder="Title"
           className={`uk-input uk-form-large ${styles.titleInput}`}

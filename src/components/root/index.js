@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
+import Loadable from 'react-loadable';
 
 import { authRequiredComponent } from '../../utils/decorators';
 import { logout } from '../../actions/loginActions';
@@ -14,24 +15,70 @@ import {
 import { getAuthUsername } from '../../reducers/authUserReducer';
 
 import Header from '../header';
-import Feed from '../../feed';
-import CreatePost from '../../post/create/CreatePost';
-import UserProfile from '../../profile/UserProfileContainer';
-import Browse from '../browse';
-import CreateArticle from '../../post/create/CreateArticle';
-import ContentSingle from '../contentSingle';
-import OAuthCallback from '../OAuthCallback';
-import SignOut from '../SignOut';
-import Search from '../../search';
-import SelectCommunities from '../../register/SelectCommunities';
-import EditProfile from '../../profile/EditProfile';
-import ArticleNext from '../../post/create/CreateArticle/ArticleNext';
 import BottomBar from '../bottomBar';
-// Competitions
-import CompetitionListing from '../../competitions/CompetitionListing';
-import CompetitionSingle from '../../competitions/CompetitionSingle';
-// Micro Community
-import MicroCommunitySingle from '../../microCommunities/MicroCommunitySingle';
+
+const Loading = () => <div>Loading...</div>;
+
+const SelectCommunities = Loadable({
+  loader: () => import('../../register/SelectCommunities'),
+  loading: Loading,
+});
+const Feed = Loadable({
+  loader: () => import('../../feed'),
+  loading: Loading,
+});
+const Browse = Loadable({
+  loader: () => import('../browse'),
+  loading: Loading,
+});
+const CreatePost = Loadable({
+  loader: () => import('../../post/create/CreatePost'),
+  loading: Loading,
+});
+const CreateArticle = Loadable({
+  loader: () => import('../../post/create/CreateArticle'),
+  loading: Loading,
+});
+const ArticleNext = Loadable({
+  loader: () => import('../../post/create/CreateArticle/ArticleNext'),
+  loading: Loading,
+});
+const UserProfile = Loadable({
+  loader: () => import('../../profile/UserProfileContainer'),
+  loading: Loading,
+});
+const ContentSingle = Loadable({
+  loader: () => import('../contentSingle'),
+  loading: Loading,
+});
+const OAuthCallback = Loadable({
+  loader: () => import('../OAuthCallback'),
+  loading: Loading,
+});
+const SignOut = Loadable({
+  loader: () => import('../SignOut'),
+  loading: Loading,
+});
+const Search = Loadable({
+  loader: () => import('../../search'),
+  loading: Loading,
+});
+const EditProfile = Loadable({
+  loader: () => import('../../profile/EditProfile'),
+  loading: Loading,
+});
+const CompetitionListing = Loadable({
+  loader: () => import('../../competitions/CompetitionListing'),
+  loading: Loading,
+});
+const CompetitionSingle = Loadable({
+  loader: () => import('../../competitions/CompetitionSingle'),
+  loading: Loading,
+});
+const MicroCommunitySingle = Loadable({
+  loader: () => import('../../microCommunities/MicroCommunitySingle'),
+  loading: Loading,
+});
 
 const bottomBarWhitelistURLs = [
   '^/feed/.*$',
