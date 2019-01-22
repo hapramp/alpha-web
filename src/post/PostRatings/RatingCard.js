@@ -6,6 +6,11 @@ import UserAvatar from '../../components/UserAvatar';
 import styles from './styles.scss';
 
 const RatingCard = ({ ratingObject, ratio }) => {
+  /**
+   * Calculating the vote value here reduces it being calculated
+   * for every vote in advance. In this way, it only gets
+   * calculated when the actual rating card is rendered.
+   */
   const ratingValue = ratingObject.rshares * ratio;
   return (
     <div className={styles.ratingCard}>

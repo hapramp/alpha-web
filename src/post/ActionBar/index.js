@@ -31,7 +31,12 @@ class ActionBar extends React.Component {
 
     this.rateContainerRef = React.createRef();
 
+    /**
+     * ratingActive: set true to render 5 stars
+     * showPostRating: set true to show current ratings modal
+     */
     this.state = { ratingActive: false, showPostRatings: false };
+
     this.enableRatingView = this.enableRatingView.bind(this);
     this.disableRatingView = this.disableRatingView.bind(this);
     this.onRateClick = this.onRateClick.bind(this);
@@ -263,7 +268,7 @@ class ActionBar extends React.Component {
           {this.getPayoutSection()}
         </div>
         <PostRatings
-          showRatings={this.state.showPostRatings}
+          showRatings={this.state.showPostRatings} // Modal pops up only when set to true
           onClose={this.togglePostRatings}
           ratings={this.props.post.active_votes}
           postValue={getPayoutValue(this.props.post)}

@@ -22,6 +22,12 @@ const UserAvatar = ({
     },
     ...tooltipProp,
   };
+  /**
+   * if noLink is true, the component should not contain the link that leads to the
+   * user's profile
+   *
+   * return a div instead of Link if set to true
+   */
   if (!noLink) {
     childProps.to = `/@${username}`;
   }
