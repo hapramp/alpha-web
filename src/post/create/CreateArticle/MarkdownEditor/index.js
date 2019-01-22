@@ -45,12 +45,17 @@ class MarkdownEditor extends React.Component {
         if (error) {
           return;
         }
+        /**
+         * Find out the current cursor status and insert the image
+         * markdown accordingly
+         */
         const startPos = this.textAreaRef.selectionStart;
         const endPos = this.textAreaRef.selectionEnd;
         const imageText = `![](${url})\n`;
+        // Update the editor state based on new text
         onChange(`${bodyMarkdown.substring(0, startPos)}${imageText}${bodyMarkdown.substring(endPos, bodyMarkdown.length)}`);
-        this.setState({ ...this.state, isImageUploading: false });
-      });
+      })
+      .finally(() => this.setState({ ...this.state, isImageUploading: false }));
   }
 
   render() {
