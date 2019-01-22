@@ -6,6 +6,7 @@ import en from 'javascript-time-ago/locale/en';
 import Cookie from 'js-cookie';
 import { ConnectedRouter } from 'connected-react-router';
 import Helmet, { HelmetProvider } from 'react-helmet-async';
+import { ToastContainer } from 'react-toastify';
 
 // import registerServiceWorker from './registerServiceWorker';
 import Root from './components/root';
@@ -49,6 +50,7 @@ ReactDOM.render(
         <Root />
       </ConnectedRouter>
     </Provider>
+    <ToastContainer position="bottom-left" autoClose={4000} />
   </HelmetProvider>,
   document.getElementById('root'),
 );
