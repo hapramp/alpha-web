@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
@@ -83,7 +83,7 @@ const Post = (props) => {
         {/* Top section */}
         <PostUserMeta
           profile={{
-            name: _.get(user, 'json_metadata.profile.name', author),
+            name: get(user, 'json_metadata.profile.name', author),
             username: author,
           }}
           created={props.post.created}

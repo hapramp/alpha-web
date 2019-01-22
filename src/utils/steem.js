@@ -4,7 +4,7 @@
 
 import steem from 'steem';
 import Promise from 'bluebird';
-import _ from 'lodash';
+import extend from 'lodash/extend';
 import getSlug from 'speakingurl';
 
 import sc2 from '../lib/sc2';
@@ -29,7 +29,7 @@ const getFollowJsonData = (userToFollow, follow) => JSON.stringify([
 ]);
 
 const getCommentBeneficiaries = (permlink, username) => {
-  const beneficiariesObject = _.extend({}, {
+  const beneficiariesObject = extend({}, {
     author: username,
     permlink,
     max_accepted_payout: '1000000.000 SBD',

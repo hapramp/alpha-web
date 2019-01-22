@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
+import some from 'lodash/some';
 import PropTypes from 'prop-types';
 
 import indexStyles from '../../styles/globals.scss';
@@ -185,7 +185,7 @@ class ActionBar extends React.Component {
   toggleFullRate() {
     let rating = 5;
     if (
-      _.some(
+      some(
         this.props.post.active_votes,
         i => i.voter === this.props.authUsername && i.percent > 0,
       )

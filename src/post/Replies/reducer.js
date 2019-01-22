@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { actionTypes } from './actions';
 
@@ -26,7 +26,7 @@ const initialState = {};
 export default (oldState = initialState, action) => {
   const key = `${action.parentAuthor}/${action.parentPermlink}`;
 
-  const state = _.cloneDeep(oldState);
+  const state = cloneDeep(oldState);
 
   if (key === 'undefined/undefined') { // TODO: Find out why
     return state;

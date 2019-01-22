@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet-async';
-import _ from 'lodash';
+import get from 'lodash/get';
 import PropTypes from 'prop-types';
 
 import { getBodyTextOnly, getImagesFromBody } from '../utils';
@@ -26,16 +26,16 @@ const PostMetaTags = ({ post, postingUser }) => {
     jsonMetadata = {};
   }
 
-  let image = _.get(jsonMetadata, 'image[0]', '');
+  let image = get(jsonMetadata, 'image[0]', '');
 
   if ( // Image is null for some rare cases - prevent crash
     !image || !image.length
   ) {
-    image = _.get(getImagesFromBody(body), '[0]', '');
+    image = get(getImagesFromBody(body), '[0]', '');
   }
 
-  const twitterHandle = _.get(postingUser, 'json_metadata.profile.twitter', false);
-  const tags = _.get(jsonMetadata, 'tags', []);
+  const twitterHandle = get(postingUser, 'json_metadata.profile.twitter', false);
+  const tags = get(jsonMetadata, 'tags', []);
 
   return (
     <Helmet>

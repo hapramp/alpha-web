@@ -1,14 +1,14 @@
 import React from 'react';
-import _ from 'lodash';
+import get from 'lodash/get';
 import Helmet from 'react-helmet-async';
 import PropTypes from 'prop-types';
 
 const UserProfileMetaTags = ({ user }) => {
   const { json_metadata, name } = user; // name is username
 
-  const fullName = _.get(json_metadata, 'profile.name', false);
-  const description = _.get(json_metadata, 'profile.about', '');
-  const twitterHandle = _.get(json_metadata, 'profile.twitter', false);
+  const fullName = get(json_metadata, 'profile.name', false);
+  const description = get(json_metadata, 'profile.about', '');
+  const twitterHandle = get(json_metadata, 'profile.twitter', false);
   const title = fullName ? `${fullName} (@${name})` : `@${name}`;
   const image = `https://steemitimages.com/u/${name}/avatar`;
 

@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import uniq from 'lodash/uniq';
+import get from 'lodash/get';
 
 import { actionTypes } from './actions';
 
@@ -23,7 +25,7 @@ const initialState = {};
 export default (state = initialState, action) => {
   const { username } = action;
 
-  const nextState = _.cloneDeep(state);
+  const nextState = cloneDeep(state);
 
   if (!nextState[username]) {
     nextState[username] = getEmptyProfileData();
@@ -74,7 +76,7 @@ export default (state = initialState, action) => {
       return nextState;
 
     case actionTypes.USER_BLOG_LOADED:
-      currentUser.blog.posts = _.uniq(currentUser.blog.posts.concat(action.results));
+      currentUser.blog.posts = uniq(currentUser.blog.posts.concat(action.results));
       currentUser.blog.count = currentUser.blog.posts.length;
       currentUser.blog.lastAuthor = action.lastAuthor;
       currentUser.blog.lastPermlink = action.lastPermlink;
@@ -95,25 +97,25 @@ export default (state = initialState, action) => {
 };
 
 // Selectors
-export const getPostCount = (state, username) => _.get(
+export const getPostCount = (state, username) => get(
   state.userProfile,
   `[${username}]user.post_count`,
   0,
 );
 
-export const getFollowerCount = (state, username) => _.get(
+export const getFollowerCount = (state, username) => get(
   state.userProfile,
   `[${username}]follower.count`,
   0,
 );
 
-export const getFollowingCount = (state, username) => _.get(
+export const getFollowingCount = (state, username) => get(
   state.userProfile,
   `[${username}]following.count`,
   0,
 );
 
-export const getUserProfile = (state, username) => _.get(
+export const getUserProfile = (state, username) => get(
   state.userProfile,
   `['${username}']`,
   getEmptyProfileData(),
@@ -121,13 +123,13 @@ export const getUserProfile = (state, username) => _.get(
 
 export const getUserBlogPosts = (state, username) => getUserProfile(state, username).blog.posts;
 
-export const getUserJSONMetadata = (state, username) => _.get(
+export const getUserJSONMetadata = (state, username) => get(
   getUserProfile(state, username),
   'user.json_metadata',
   {},
 );
 
-export const getUserName = (state, username) => _.get(
+export const getUserName = (state, username) => get(
   getUserProfile(state, username),
   'user.name',
   username,

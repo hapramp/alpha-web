@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import get from 'lodash/get';
+import has from 'lodash/has';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import embedjs from 'embedjs';
@@ -21,17 +22,17 @@ const PostCardBody = ({ post, maintainAspectRatio }) => {
     jsonMetadata = {};
   }
 
-  let image = _.get(jsonMetadata, 'image[0]', '');
+  let image = get(jsonMetadata, 'image[0]', '');
 
   if ( // Image is null for some rare cases - prevent crash
     !image || !image.length
   ) {
-    image = _.get(getImagesFromBody(post.body), '[0]', '');
+    image = get(getImagesFromBody(post.body), '[0]', '');
   }
 
   // If video, show it
   const embeds = embedjs.getAll(post.body);
-  if (_.has(embeds, '[0].thumbnail')) {
+  if (has(embeds, '[0].thumbnail')) {
     image = embeds[0].thumbnail;
   }
 

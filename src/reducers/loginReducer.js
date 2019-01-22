@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import clone from 'lodash/clone';
 
 import { actionTypes } from '../actions/loginActions';
 
@@ -8,7 +8,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   if (action.type.startsWith('LOGIN')) {
-    const newState = _.clone(state);
+    const newState = clone(state);
     if (action.message) {
       newState.messages.push(action.message);
     }

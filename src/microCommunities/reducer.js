@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import uniq from 'lodash/uniq';
+import get from 'lodash/get';
 
 import { actionTypes } from './actions';
 
@@ -46,7 +48,7 @@ export default (state = initialState, action) => {
       };
 
     case actionTypes.getPosts.init:
-      newState = _.cloneDeep(state);
+      newState = cloneDeep(state);
       if (!newState.posts[action.tag]) { // No entry for the tag, create one
         newState.posts[action.tag] = {
           trending: {
@@ -83,7 +85,7 @@ export default (state = initialState, action) => {
       return newState;
 
     case actionTypes.getPosts.done:
-      newState = _.cloneDeep(state);
+      newState = cloneDeep(state);
       if (!newState.posts[action.tag]) { // No entry for the tag, create one
         newState.posts[action.tag] = {
           trending: {
@@ -116,7 +118,7 @@ export default (state = initialState, action) => {
           },
         };
       }
-      newState.posts[action.tag][action.order].posts = _.uniq(newState
+      newState.posts[action.tag][action.order].posts = uniq(newState
         .posts[action.tag][action.order].posts.concat(action.posts));
       newState.posts[action.tag][action.order].loading = false;
       newState.posts[action.tag][action.order].lastAuthor = action.lastAuthor;
@@ -137,7 +139,7 @@ export const getMicroCommunityByTag = (state, tag) => state.microCommunities
   .allMicroCommunities.microCommunities
   .find(a => a.tag === tag);
 
-export const getPostsForMicroCommunity = (state, tag) => _.get(
+export const getPostsForMicroCommunity = (state, tag) => get(
   state.microCommunities,
   `posts.${tag}`,
   {},
@@ -145,7 +147,7 @@ export const getPostsForMicroCommunity = (state, tag) => _.get(
 
 export const hasCurrentUserJoinedTag = (state, tag) => {
   // Micro communities for the current user are in authReducer
-  const userMicros = _.get(
+  const userMicros = get(
     state,
     'authUser.micro_communities',
     [],
@@ -153,14 +155,14 @@ export const hasCurrentUserJoinedTag = (state, tag) => {
   return userMicros.map(micro => micro.tag).includes(tag);
 };
 
-export const isFeedLoading = (state, tag, order) => _.get(
+export const isFeedLoading = (state, tag, order) => get(
   state.microCommunities,
   `posts.${tag}.${order}.loading`,
   false,
 );
 
 export const getLastPost = (state, tag, order) => {
-  const posts = _.get(
+  const posts = get(
     state.microCommunities,
     `posts.${tag}.${order}`,
     false,

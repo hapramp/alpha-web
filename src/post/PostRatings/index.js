@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-import { take } from 'lodash';
+import take from 'lodash/take';
 import InfiniteScroll from 'react-infinite-scroller';
 import ScrollBar from 'react-custom-scrollbars';
 

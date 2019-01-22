@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import get from 'lodash/get';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -44,8 +44,8 @@ const MicroCommunityPosts = ({
 
   // Get permlinks for current tab
   const tabReal = tab === 'new' ? 'created' : tab;
-  const permlinks = _.get(posts, `${tabReal}.posts`, []);
-  const hasMore = _.get(posts, `${tabReal}.hasMore`, false);
+  const permlinks = get(posts, `${tabReal}.posts`, []);
+  const hasMore = get(posts, `${tabReal}.hasMore`, false);
 
   return (
     <div>

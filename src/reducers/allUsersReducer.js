@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import clone from 'lodash/clone';
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
 
 import { actionTypes } from '../actions/allUserActions';
 
@@ -10,22 +12,22 @@ export default (state = initialState, action) => {
   let fetchingUsers;
   switch (action.type) {
     case actionTypes.LOAD_USERS_INIT:
-      users = _.cloneDeep(state.fetchingUsers);
+      users = cloneDeep(state.fetchingUsers);
       action.usernames.forEach((username) => {
         users[username] = true;
       });
       return { ...state, fetchingUsers: users };
 
     case actionTypes.LOAD_USERS_ERROR:
-      users = _.clone(state.fetchingUsers);
+      users = clone(state.fetchingUsers);
       action.usernames.forEach((username) => {
         delete users[username];
       });
       return { ...state, fetchingUsers: users };
 
     case actionTypes.LOAD_USERS_DONE:
-      users = _.cloneDeep(state.users);
-      fetchingUsers = _.cloneDeep(state.fetchingUsers);
+      users = cloneDeep(state.users);
+      fetchingUsers = cloneDeep(state.fetchingUsers);
       action.results.forEach((oldUserDetail) => {
         const userDetail = { ...oldUserDetail };
         try {
@@ -39,7 +41,7 @@ export default (state = initialState, action) => {
       return { ...state, users, fetchingUsers };
 
     case actionTypes.LOAD_HAPRAMP_USER_DONE:
-      haprampUsers = _.cloneDeep(state.users);
+      haprampUsers = cloneDeep(state.users);
       haprampUsers[action.result.username] = action.result;
       return { ...state, haprampUsers };
     default:
@@ -48,13 +50,13 @@ export default (state = initialState, action) => {
 };
 
 // Selectors
-export const getUserCommunities = (state, username) => _.get(
+export const getUserCommunities = (state, username) => get(
   state.allUsers,
   `haprampUsers[${username}].communities`,
   [],
 );
 
-export const getUserMicroCommunities = (state, username) => _.get(
+export const getUserMicroCommunities = (state, username) => get(
   state.allUsers,
   `haprampUsers[${username}].micro_communities`,
   [],

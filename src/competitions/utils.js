@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import every from 'lodash/every';
 
 export const getSumPrize = (prizes) => {
   if (!prizes.length) {
@@ -8,7 +8,7 @@ export const getSumPrize = (prizes) => {
 
   const guessedUnit = prizes[0].replace(firstNumber, '');
 
-  const allHasSameUnit = _.every(
+  const allHasSameUnit = every(
     prizes,
     prize => prize.toLowerCase().includes(guessedUnit.toLowerCase()),
   );

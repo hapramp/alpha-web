@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import ordinal from 'ordinal-js';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import PostCard from '../../post/PostCard';
 import PostLoading from '../../post/PostLoading';
@@ -40,7 +40,7 @@ const CompetitionSingle = ({
     [competitionId],
   );
 
-  const isWinnersAnnounced = _.get(competition, 'winners_announced', false);
+  const isWinnersAnnounced = get(competition, 'winners_announced', false);
   useEffect(
     () => {
       if (isWinnersAnnounced) {

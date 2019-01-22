@@ -1,8 +1,9 @@
-import _ from 'lodash';
+import clone from 'lodash/clone';
+import cloneDeep from 'lodash/cloneDeep';
 
 /* eslint-disable import/prefer-default-export */
 export const fixUser = (oldUser, username) => {
-  let user = _.cloneDeep(oldUser);
+  let user = cloneDeep(oldUser);
   if (!user || !user.json_metadata) {
     user = user || {};
     user.json_metadata = user.json_metadata || {};
@@ -11,7 +12,7 @@ export const fixUser = (oldUser, username) => {
     if (!user.json_metadata.profile) {
       user.json_metadata.profile = {};
     }
-    user = _.clone(user);
+    user = clone(user);
     user.json_metadata.profile.name = user.json_metadata.profile.name || username;
   }
   const profileImageUrl = `https://steemitimages.com/u/${username}/avatar`;

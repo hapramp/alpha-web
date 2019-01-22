@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import filter from 'lodash/filter';
 import striptags from 'striptags';
 import Remarkable from 'remarkable';
 import sanitizeHtml from 'sanitize-html';
@@ -35,7 +35,7 @@ export const getImagesFromBody = (body) => {
   const bodyWithoutComments = bodyWithoutFooter.replace(htmlCommentRegex, '');
 
   bodyWithoutComments.replace(imageRegex, (img) => {
-    if (_.filter(image, i => i.indexOf(img) !== -1).length === 0) {
+    if (filter(image, i => i.indexOf(img) !== -1).length === 0) {
       image.push(img);
     }
   });

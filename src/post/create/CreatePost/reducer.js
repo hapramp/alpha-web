@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import some from 'lodash/some';
+import uniqBy from 'lodash/unionBy';
+import clone from 'lodash/clone';
 
 import { actionTypes } from './actions';
 
@@ -19,7 +21,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_COMMUNITY:
       community = state.community.slice();
-      if (_.some(community, i => i === action.community)) {
+      if (some(community, i => i === action.community)) {
         community = community.filter(i => i !== action.community);
       } else if (community.length < 3) {
         community.push(action.community);
@@ -40,7 +42,7 @@ export default (state = initialState, action) => {
       return { ...state, errors: [] };
 
     case actionTypes.SET_HASHTAGS:
-      return { ...state, hashtags: _.uniqBy(action.hashtags, i => i) };
+      return { ...state, hashtags: uniqBy(action.hashtags, i => i) };
 
     case actionTypes.POST_CREATED:
       return {
@@ -48,7 +50,7 @@ export default (state = initialState, action) => {
       };
 
     case actionTypes.POST_CREATE_RESET:
-      return _.clone(initialState);
+      return clone(initialState);
 
     case actionTypes.POST_CREATE_INIT:
       return { ...state, creating: true };

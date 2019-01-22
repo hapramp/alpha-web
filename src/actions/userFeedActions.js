@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import { addPosts } from '../post/actions';
 import { getLastPost, isLoading } from '../reducers/userFeedReducer';
@@ -100,8 +100,8 @@ export const loadExplorePosts = (refresh = true) => (dispatch, getState, { hapra
         type: actionTypes.FEED_LOADED,
         results: results.filter(post => !!post.author).map(post => `${post.author}/${post.permlink}`),
         feedType: 'explore',
-        lastAuthor: _.get(results, `[${results.length - 1}].author`),
-        lastPermlink: _.get(results, `[${results.length - 1}].permlink`),
+        lastAuthor: get(results, `[${results.length - 1}].author`),
+        lastPermlink: get(results, `[${results.length - 1}].permlink`),
       });
     })
     .catch((reason) => {

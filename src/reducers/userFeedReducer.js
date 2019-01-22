@@ -1,11 +1,13 @@
-import _ from 'lodash';
+import uniq from 'lodash/uniq';
+import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { actionTypes } from '../actions/userFeedActions';
 
 const initialState = {};
 
 export default (state = initialState, action) => {
-  const newState = _.cloneDeep(state);
+  const newState = cloneDeep(state);
   const type = action.feedType;
 
   if (!newState[type]) {
@@ -30,7 +32,7 @@ export default (state = initialState, action) => {
 
     case actionTypes.FEED_LOADED:
       newState[type].posts = newState[type].posts.concat(action.results);
-      newState[type].posts = _.uniq(newState[type].posts);
+      newState[type].posts = uniq(newState[type].posts);
       newState[type].loading = false;
       newState[type].error = null;
       newState[type].lastAuthor = action.lastAuthor;
@@ -49,18 +51,18 @@ export default (state = initialState, action) => {
 };
 
 // selectors
-export const hasMoreFeed = (state, type) => _.get(
+export const hasMoreFeed = (state, type) => get(
   state,
   `userFeed.${type}.hasMore`,
   false,
 );
 
 export const getLastPost = (state, type) => ([
-  _.get(state, `userFeed.${type}.lastAuthor`, null),
-  _.get(state, `userFeed.${type}.lastPermlink`, null),
+  get(state, `userFeed.${type}.lastAuthor`, null),
+  get(state, `userFeed.${type}.lastPermlink`, null),
 ]);
 
-export const isLoading = (state, type) => _.get(
+export const isLoading = (state, type) => get(
   state,
   `userFeed.${type}.loading`,
   false,

@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
+import uniq from 'lodash/uniq';
 
 import { actionTypes } from './actions';
 import { getPostByPermlink } from '../post/reducer';
@@ -25,11 +27,11 @@ export default (state = initialState, action) => {
 
     // Competition posts
     case actionTypes.getPosts.init:
-      newState = _.cloneDeep(state);
+      newState = cloneDeep(state);
       newState.competitionPosts[action.competitionId] = {
         loading: true,
         error: null,
-        posts: _.get(
+        posts: get(
           state,
           `state.competitionPosts.${action.competitionId}.posts`,
           [],
@@ -38,11 +40,11 @@ export default (state = initialState, action) => {
       return newState;
 
     case actionTypes.getPosts.done:
-      newState = _.cloneDeep(state);
+      newState = cloneDeep(state);
       newState.competitionPosts[action.competitionId] = {
         loading: false,
         posts: action.results,
-        winners: _.get(
+        winners: get(
           newState,
           `competitionPosts.${action.competitionId}.winners`,
           [],
@@ -51,7 +53,7 @@ export default (state = initialState, action) => {
       return newState;
 
     case actionTypes.getPosts.error:
-      newState = _.cloneDeep(state);
+      newState = cloneDeep(state);
       newState.competitionPosts[action.competitionId] = {
         loading: false,
         error: action.reason,
@@ -59,7 +61,7 @@ export default (state = initialState, action) => {
       return newState;
 
     case actionTypes.getWinners.done:
-      newState = _.cloneDeep(state);
+      newState = cloneDeep(state);
       newState.competitionPosts[action.competitionId].winners = action.results;
       return newState;
 
@@ -74,18 +76,18 @@ export const getAllCompetitions = state => state.competitions.competitions;
 export const isCompetitionsFetching = state => state.competitions.loading;
 
 export const getCompetitionPostPermlinks = (state, competitionId) => {
-  const winners = _.get(
+  const winners = get(
     state,
     `competitions.competitionPosts.${competitionId}.winners`,
     [],
   );
-  const posts = _.get(
+  const posts = get(
     state,
     `competitions.competitionPosts.${competitionId}.posts`,
     [],
   );
 
-  return _.uniq([...winners, ...posts]);
+  return uniq([...winners, ...posts]);
 };
 
 export const getCompetitionPosts = (state, competitionId) => {
@@ -102,7 +104,7 @@ export const getCompetitionPosts = (state, competitionId) => {
 export const getCompetitionById = (state, competitionId) => state
   .competitions.competitions.find(competition => competition.id === competitionId);
 
-export const isPostsLoading = (state, competitionId) => _.get(
+export const isPostsLoading = (state, competitionId) => get(
   state,
   `competitions.competitionPosts.${competitionId}.loading`,
   false,

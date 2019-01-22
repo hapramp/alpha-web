@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import uniq from 'lodash/uniq';
 
 export const actionTypes = {
   LOAD_USERS_INIT: 'ALL_USERS.STEEM.LOAD.INIT',
@@ -16,7 +16,7 @@ export const getUserAccountsAction = users => ({
 
 export const loadUserAccounts = usernames => (dispatch, getState, { steemAPI }) => {
   const { fetchingUsers } = getState().allUsers;
-  const pendingUsernames = _.uniq(usernames.filter(username => !fetchingUsers[username]));
+  const pendingUsernames = uniq(usernames.filter(username => !fetchingUsers[username]));
   if (!pendingUsernames.length) {
     return usernames;
   }

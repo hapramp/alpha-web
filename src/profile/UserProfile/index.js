@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import styles from './styles.scss';
 import indexStyles from '../../styles/globals.scss';
@@ -49,7 +49,7 @@ class UserProfile extends React.Component {
     }
     const { jsonMetadata } = this.props;
 
-    jsonMetadata.profile = _.get(jsonMetadata, 'profile', {});
+    jsonMetadata.profile = get(jsonMetadata, 'profile', {});
     const { username } = this.props;
 
     return (

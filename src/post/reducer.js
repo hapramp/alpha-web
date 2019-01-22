@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import some from 'lodash/some';
 
 import notify from '../utils/notification';
 import { actionTypes } from './actions';
@@ -12,7 +13,7 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case actionTypes.ADD_POSTS:
-      posts = _.cloneDeep(state.posts);
+      posts = cloneDeep(state.posts);
       action.posts.map((newPost) => {
         const oldPost = posts[`${newPost.author}/${newPost.permlink}`];
 
@@ -39,10 +40,10 @@ export default (state = initialState, action) => {
       return { ...state, posts };
 
     case actionTypes.VOTE_POST_INIT:
-      posts = _.cloneDeep(state.posts); // TODO: Reduce clone depth
+      posts = cloneDeep(state.posts); // TODO: Reduce clone depth
       key = `${action.author}/${action.permlink}`;
       currentUser = localStorage.getItem('username');
-      if (_.some(posts[key].active_votes, i => i.voter === currentUser)) {
+      if (some(posts[key].active_votes, i => i.voter === currentUser)) {
         posts[key].active_votes = posts[key].active_votes.map((oldVote) => {
           const vote = { ...oldVote };
           if (vote.voter === currentUser) {

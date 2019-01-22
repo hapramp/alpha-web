@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import uniq from 'lodash/uniq';
 
 export const actionTypes = {
   CHANGE_COMMUNITY: 'POST.CREATE.COMMUNITY.CHANGE',
@@ -48,7 +48,7 @@ export const getAllTags = (communities, hashtags, allCommunities) => {
   const findCommunity = id => allCommunities.filter(i => i.id === id)[0].tag;
   const findCommunityStripTag = id => findCommunity(id).replace('hapramp-', '');
 
-  return _.uniq([
+  return uniq([
     'hapramp', // hapramp is the first tag
     ...communities.map(findCommunity), // all the communities (hapramp-*)
     ...hashtags, // hashtags entered by user

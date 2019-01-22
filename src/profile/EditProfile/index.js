@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'lodash';
+import get from 'lodash/get';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -39,18 +39,18 @@ class EditProfile extends React.Component {
       this.makeNetworkRequests(newProps.username);
     }
     this.setState({
-      name: _.get(newProps, 'JSONMetadata.profile.name', ''),
-      about: _.get(newProps, 'JSONMetadata.profile.about', ''),
-      location: _.get(newProps, 'JSONMetadata.profile.location', ''),
-      website: _.get(newProps, 'JSONMetadata.profile.website', ''),
-      coverImage: _.get(newProps, 'JSONMetadata.profile.cover_image', null),
+      name: get(newProps, 'JSONMetadata.profile.name', ''),
+      about: get(newProps, 'JSONMetadata.profile.about', ''),
+      location: get(newProps, 'JSONMetadata.profile.location', ''),
+      website: get(newProps, 'JSONMetadata.profile.website', ''),
+      coverImage: get(newProps, 'JSONMetadata.profile.cover_image', null),
     });
   }
 
   onUpdate = () => {
     const updates = {};
     editableKeys.forEach((key) => {
-      if (this.state[key] !== _.get(this.props, `JSONMetadata.profile.${key}`, '')) {
+      if (this.state[key] !== get(this.props, `JSONMetadata.profile.${key}`, '')) {
         updates[key] = this.state[key];
       }
     });

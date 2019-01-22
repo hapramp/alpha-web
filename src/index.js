@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Icons from 'uikit/dist/js/uikit-icons';
-import UIKit from 'uikit';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Cookie from 'js-cookie';
@@ -18,8 +16,6 @@ import steemAPI from './utils/steem';
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.addLocale(en);
 TimeAgo.default_locale = 'en-US';
-
-UIKit.use(Icons);
 
 const store = getStore();
 

@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { actionTypes } from './actions';
 
@@ -20,7 +21,7 @@ const initialState = {};
  */
 
 export default (state = initialState, action) => {
-  const newState = _.clone(state);
+  const newState = cloneDeep(state);
   let following;
   let follower;
   switch (action.type) {
@@ -135,7 +136,7 @@ export default (state = initialState, action) => {
 
 // Selectors
 
-export const isFollowing = (state, follower, following) => _.get(
+export const isFollowing = (state, follower, following) => get(
   state.follow,
   `[${follower}].following.results[${following}]`,
   false,
