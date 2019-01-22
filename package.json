@@ -65,7 +65,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "lint": "eslint .",
-    "precommit": "yarn lint"
+    "precommit": "yarn lint",
+    "analyze": "source-map-explorer build/static/js/main.*"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -134,6 +135,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "sass-loader": "^6.0.6",
+    "source-map-explorer": "^1.6.0",
     "style-loader": "0.19.0",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
