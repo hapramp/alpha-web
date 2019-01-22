@@ -5,7 +5,6 @@ import Icons from 'uikit/dist/js/uikit-icons';
 import UIKit from 'uikit';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
-import showdown from 'showdown';
 import Cookie from 'js-cookie';
 import { ConnectedRouter } from 'connected-react-router';
 import Helmet, { HelmetProvider } from 'react-helmet-async';
@@ -15,9 +14,6 @@ import Root from './components/root';
 import getStore, { history } from './utils/storeUtils';
 import { fakeLogin } from './actions/loginActions';
 import steemAPI from './utils/steem';
-
-// Markdown to HTML
-window.markdownToHtmlConverter = new showdown.Converter();
 
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.addLocale(en);

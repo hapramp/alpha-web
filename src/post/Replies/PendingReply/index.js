@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 
 import styles from './styles.scss';
+import { getCompleteHTML } from '../../utils';
 import { fixUser } from '../../../utils/defaultFixUtils';
 
 const PendingReply = props => (
@@ -18,7 +19,7 @@ const PendingReply = props => (
     <div
       className={[styles.replyBody].join(' ')}
       dangerouslySetInnerHTML={{
-        __html: window.markdownToHtmlConverter.makeHtml(props.reply.body),
+        __html: getCompleteHTML(props.reply.body),
       }}
     />
   </div>

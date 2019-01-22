@@ -24,6 +24,7 @@ import {
 } from '../actions';
 import { getCompetitionPostPermlinks, getCompetitionById, isPostsLoading } from '../reducer';
 import { getAuthUsername } from '../../reducers/authUserReducer';
+import { getCompleteHTML } from '../../post/utils';
 
 const CompetitionSingle = ({
   match, postPermlinks, fetchPosts, fetchCompetitions,
@@ -115,7 +116,7 @@ const CompetitionSingle = ({
         <div className={styles.textParagraph}>
           <h3>Description</h3>
           <p dangerouslySetInnerHTML={{
-            __html: window.markdownToHtmlConverter.makeHtml(competition.description),
+            __html: getCompleteHTML(competition.description),
           }}
           />
         </div>
@@ -124,7 +125,7 @@ const CompetitionSingle = ({
         <div className={styles.textParagraph}>
           <h3>Rules</h3>
           <p dangerouslySetInnerHTML={{
-            __html: window.markdownToHtmlConverter.makeHtml(competition.rules),
+            __html: getCompleteHTML(competition.rules),
           }}
           />
         </div>
