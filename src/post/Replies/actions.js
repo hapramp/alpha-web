@@ -36,12 +36,10 @@ export const addReply = (parentAuthor, parentPermlink, body) =>
       type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body, username,
     });
     return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, username, body)
-      .then((result) => {
-        dispatch(loadReplies(parentAuthor, parentPermlink));
-        return dispatch({
-          type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result, username,
-        });
-      })
+      .then(result => dispatch({
+        type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result, username,
+      }))
+      .then(() => dispatch(loadReplies(parentAuthor, parentPermlink)))
       .then(() => dispatch(loadState('hapramp', parentAuthor, parentPermlink)))
       .then(() => notify.success('Reply posted.'))
       .catch(reason => dispatch({

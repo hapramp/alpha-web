@@ -12,14 +12,11 @@
 }
 
 .commentInputContainer {
-	border: 1px solid rgba(0, 0, 0, 0.12);
-	height: 30px;
-	padding: 8px 20px 8px 20px;
+	padding: 8px;
 	border-radius: 32px;
   width: 100%;
   max-width: 424px;
 	flex-grow: 1;
-	display: flex;
 }
 
 .commentInput, .commentInput:focus {
@@ -31,7 +28,8 @@
 	color: rgba(0, 0, 0, 0.54);
 }
 
-.sendIcon {
-  font-size: 18px;
-  color: $secondary-color;
+.sendButton {
+  padding: 4px 24px;
+  margin-top: 8px;
+  height: fit-content;
 }
