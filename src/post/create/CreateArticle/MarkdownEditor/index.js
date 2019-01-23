@@ -14,12 +14,18 @@ class MarkdownEditor extends React.Component {
     bodyMarkdown: PropTypes.string,
     onChange: PropTypes.func,
     onImageUpload: PropTypes.func,
+    hidePreviewText: PropTypes.bool,
+    noBorder: PropTypes.bool,
+    startRows: PropTypes.number,
   };
 
   static defaultProps = {
     bodyMarkdown: '',
     onChange: '',
     onImageUpload: () => { },
+    hidePreviewText: false,
+    noBorder: false,
+    startRows: 5,
   };
 
   constructor(props) {
@@ -58,15 +64,17 @@ class MarkdownEditor extends React.Component {
   }
 
   render() {
-    const { bodyMarkdown, onChange } = this.props;
+    const {
+      bodyMarkdown, onChange, noBorder, startRows,
+    } = this.props;
     const { isImageUploading } = this.state;
     return (
-      <div className={`uk-margin-top ${styles.editorWrite}`}>
+      <div className={styles.editorWrite}>
         <AutosizeTextarea
           value={bodyMarkdown}
           onChange={event => onChange(event.target.value)}
-          className="uk-textarea uk-margin-bottom"
-          rows={5}
+          className={`uk-textarea uk-margin-bottom ${noBorder ? styles.noBorder : ''}`}
+          rows={startRows}
           innerRef={(ref) => { this.textAreaRef = ref; }}
         />
         <div className={styles.imageUploadContainer}>
@@ -74,8 +82,8 @@ class MarkdownEditor extends React.Component {
           { isImageUploading && <span className={styles.uploadingText}>Uploading image...</span>}
         </div>
         <div className={styles.previewContainer}>
-          <span>Preview</span>
-          <PostBody className={styles.previewBody} body={bodyMarkdown} />
+          {!this.props.hidePreviewText && <span>Preview</span>}
+          <PostBody className={`${styles.previewBody} ${noBorder ? styles.noBorder : ''}`} body={bodyMarkdown} />
         </div>
       </div>
     );
