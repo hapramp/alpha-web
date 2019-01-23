@@ -7,8 +7,8 @@ import Helmet from 'react-helmet-async';
 import Editor from './Editor';
 import styles from './styles.scss';
 import indexStyles from '../../../styles/globals.scss';
-import { setTitle, setContent, uploadImage, setMarkdownEditorActive } from './actions';
-import { isMarkdownEditorActive } from './reducer';
+import { setTitle, setContent, uploadImage, setMarkdownEditorActive, setMarkdownText } from './actions';
+import { isMarkdownEditorActive, getMarkdownText } from './reducer';
 import PrimaryButton from '../../../components/buttons/PrimaryButton';
 import MarkdownEditor from './MarkdownEditor';
 
@@ -41,7 +41,10 @@ class CreateArticle extends React.Component {
         <div className="uk-margin-top uk-position-relative">
           {
             this.props.showMarkdownEditor ? (
-              <MarkdownEditor />
+              <MarkdownEditor
+                bodyMarkdown={this.props.bodyMarkdown}
+                onChange={this.props.setMarkdownText}
+              />
             ) : (
               <Editor
                 handleContentChange={this.handleContentChange}
@@ -91,6 +94,8 @@ CreateArticle.propTypes = {
   uploadImage: PropTypes.func.isRequired,
   showMarkdownEditor: PropTypes.bool,
   setMarkdownActive: PropTypes.func,
+  bodyMarkdown: PropTypes.string.isRequired,
+  setMarkdownText: PropTypes.func.isRequired,
 };
 
 CreateArticle.defaultProps = {
@@ -107,8 +112,13 @@ CreateArticle.defaultProps = {
 const mapStateToProps = state => ({
   createArticle: state.createArticle,
   showMarkdownEditor: isMarkdownEditorActive(state),
+  bodyMarkdown: getMarkdownText(state),
 });
 
 export default connect(mapStateToProps, {
-  setTitle, setContent, uploadImage, setMarkdownActive: setMarkdownEditorActive,
+  setTitle,
+  setContent,
+  uploadImage,
+  setMarkdownActive: setMarkdownEditorActive,
+  setMarkdownText,
 })(CreateArticle);

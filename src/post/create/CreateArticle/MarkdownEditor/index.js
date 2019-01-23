@@ -7,8 +7,7 @@ import AutosizeTextarea from 'react-autosize-textarea';
 import MediaSelector from '../../CreatePost/MediaSelector';
 import PostBody from '../../../PostBody';
 import styles from './styles.scss';
-import { getMarkdownText } from '../reducer';
-import { setMarkdownText, uploadImage } from '../actions';
+import { uploadImage } from '../actions';
 
 class MarkdownEditor extends React.Component {
   static propTypes = {
@@ -83,13 +82,8 @@ class MarkdownEditor extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  bodyMarkdown: getMarkdownText(state),
-});
-
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onChange: setMarkdownText,
   onImageUpload: uploadImage,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarkdownEditor);
+export default connect(null, mapDispatchToProps)(MarkdownEditor);
