@@ -1,8 +1,11 @@
 import cloneDeep from 'lodash/cloneDeep';
 import some from 'lodash/some';
+import uniq from 'lodash/uniq';
+import get from 'lodash/get';
 
 import notify from '../utils/notification';
 import { actionTypes } from './actions';
+import { actionTypes as repliesActionTypes } from './Replies/actions';
 
 const initialState = { posts: {} };
 
@@ -24,6 +27,7 @@ export default (state = initialState, action) => {
          *  will be overwritten when updating the post here.
          */
         const post = { ...oldPost, ...newPost };
+        post.replies = uniq([...get(oldPost, 'replies', []), ...get(newPost, 'replies', [])]);
 
         if (typeof (post.json_metadata) === 'string') {
           try {
@@ -36,6 +40,16 @@ export default (state = initialState, action) => {
 
         posts[`${post.author}/${post.permlink}`] = post;
         return post;
+      });
+      return { ...state, posts };
+
+    case repliesActionTypes.REPLIES_LOAD_DONE:
+      key = `${action.parentAuthor}/${action.parentPermlink}`;
+      posts = cloneDeep(state.posts);
+      posts[key].replies = action.results.map((i) => {
+        const innerKey = `${i.author}/${i.permlink}`;
+        posts[innerKey] = i;
+        return innerKey;
       });
       return { ...state, posts };
 

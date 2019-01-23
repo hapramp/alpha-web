@@ -89,7 +89,7 @@ class Reply extends React.Component {
           showReplyInput && (
             <div className={styles.replyInputContainer}>
               {/** TODO: Insert auth user's avatar here */}
-              <CreateReply post={reply} />
+              <CreateReply post={reply} onReplyPosted={this.toggleReplyInput} />
             </div>
           )
         }

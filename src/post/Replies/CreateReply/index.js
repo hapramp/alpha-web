@@ -2,46 +2,50 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import PrimaryButton from '../../../components/buttons/PrimaryButton';
 import UserAvatar from '../../../components/UserAvatar';
+import MarkdownEditor from '../../create/CreateArticle/MarkdownEditor';
 
 import styles from './styles.scss';
-import indexStyles from '../../../styles/globals.scss';
 import { addReply } from '../actions';
 import { getAuthUsername } from '../../../reducers/authUserReducer';
-
 
 class CreateReply extends React.Component {
   constructor(props) {
     super(props);
-    this.replyInput = null;
+
+    this.state = {
+      replyContent: `@${this.props.post.author} `,
+      postingReply: false,
+    };
+
+    this.setReplyContent = this.setReplyContent.bind(this);
     this.postReply = this.postReply.bind(this);
-    this.setInputRef = (element) => { this.replyInput = element; };
-    this.replyInput = null;
+  }
+
+  setReplyContent(text) {
+    this.setState({ ...this.state, replyContent: text });
   }
 
   postReply() {
-    if (!this.replyInput) {
+    if (!this.state.replyContent) {
       return;
     }
-    let body = this.replyInput.value;
+    let body = this.state.replyContent;
     body = body.trim();
     if (!body.length) {
       return;
     }
+    this.setState({ ...this.state, postingReply: true });
     this.props.addReply(this.props.post.author, this.props.post.permlink, body)
       .then(() => {
-        this.replyInput.value = '';
+        this.setState({ ...this.state, postingReply: false });
+        this.setReplyContent('');
+        this.props.onReplyPosted(body);
       });
   }
 
-  handleInputKeyUp = (event) => {
-    if (event.keyCode === 13) {
-      this.postReply();
-    }
-  }
-
   render() {
-    /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <div className="uk-flex">
         <UserAvatar
@@ -49,23 +53,22 @@ class CreateReply extends React.Component {
           username={this.props.authUsername}
         />
         <span className={styles.commentInputContainer}>
-          <input
-            ref={this.setInputRef}
-            className={styles.commentInput}
-            onKeyUp={this.handleInputKeyUp}
+          <MarkdownEditor
+            bodyMarkdown={this.state.replyContent}
+            onChange={this.setReplyContent}
+            startRows={1}
+            hidePreviewText
           />
-          <span
-            className={`${indexStyles.pointer} ${styles.sendIcon}`}
-            onClick={this.postReply}
-            onKeyDown={this.postReply}
-            role="button"
-            tabIndex={0}
-          >
-            Send
-          </span>
         </span>
-      </div>);
-    /* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */
+        <PrimaryButton
+          className={styles.sendButton}
+          onClick={this.postReply}
+          disabled={this.state.postingReply}
+        >
+          Send
+        </PrimaryButton>
+      </div>
+    );
   }
 }
 
@@ -76,6 +79,7 @@ CreateReply.propTypes = {
     permlink: PropTypes.string,
   }),
   authUsername: PropTypes.string,
+  onReplyPosted: PropTypes.func,
 };
 
 CreateReply.defaultProps = {
@@ -85,6 +89,7 @@ CreateReply.defaultProps = {
     permlink: '',
   },
   authUsername: null,
+  onReplyPosted: () => { },
 };
 
 const mapStateToProps = state => ({
