@@ -2,10 +2,13 @@ import React from 'react';
 import ReactTimeAgo from 'react-time-ago/no-tooltip';
 import PropTypes from 'prop-types';
 
+import ParticipateButton from '../ParticipateButton';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import GrayButton from '../../components/buttons/GrayButton';
 
-const CTAButton = ({ startsAt, endsAt, winnersAnnounced }) => {
+const CTAButton = ({
+  startsAt, endsAt, winnersAnnounced, participatingTag,
+}) => {
   if (winnersAnnounced) {
     return (
       <PrimaryButton>
@@ -24,11 +27,7 @@ const CTAButton = ({ startsAt, endsAt, winnersAnnounced }) => {
       </GrayButton>
     );
   } else if (startDate < now) {
-    return (
-      <PrimaryButton>
-        Participate
-      </PrimaryButton>
-    );
+    return <ParticipateButton participatingTag={participatingTag} isLink />;
   }
   return (
     <PrimaryButton>
@@ -41,6 +40,7 @@ CTAButton.propTypes = {
   startsAt: PropTypes.string.isRequired,
   endsAt: PropTypes.string.isRequired,
   winnersAnnounced: PropTypes.bool,
+  participatingTag: PropTypes.string.isRequired,
 };
 
 CTAButton.defaultProps = {

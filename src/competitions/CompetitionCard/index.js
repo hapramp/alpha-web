@@ -52,6 +52,8 @@ const CompetitionCard = ({ competition }) => (
             startsAt={competition.starts_at}
             endsAt={competition.ends_at}
             winnersAnnounced={competition.winners_announced}
+            // participating tag needed for participate button
+            participatingTag={competition.participating_tag}
           />
         </div>
       </div>
