@@ -45,7 +45,7 @@ export default () => (
   <div className={styles.container}>
     {
       links.map(link => (
-        <a target="_blank" href={link.link}>{link.text}</a>
+        <a target="_blank" href={link.link} key={link.link}>{link.text}</a>
       ))
     }
   </div>

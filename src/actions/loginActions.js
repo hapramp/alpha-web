@@ -80,3 +80,6 @@ export const logout = () => (dispatch, getState, { steemAPI }) => {
   dispatch({ type: actionTypes.LOG_OUT_DONE });
   return steemAPI.sc2Api.revokeToken();
 };
+
+export const getLoginURL = state =>
+  (dispatch, getState, { steemAPI }) => steemAPI.sc2Api.getLoginURL(state);
