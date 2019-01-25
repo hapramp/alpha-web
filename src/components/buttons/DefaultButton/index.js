@@ -8,7 +8,7 @@ const DefaultButton = ({
   ...props
 }) => (
   <div
-    className={`${className} ${styles.primaryButton} ${disabled ? styles.disabled : ''}`}
+    className={`${styles.primaryButton} ${disabled ? styles.disabled : ''} ${className}`}
     style={{ ...style }}
     onClick={disabled ? () => {} : onClick}
     onKeyUp={onKeyUp}

@@ -8,7 +8,6 @@ const defaultOptions = {
 const messages = {};
 
 const notify = (message, options) => {
-  console.log(message, options);
   const { status, ...otherOptions } = options;
   switch (status) {
     case 'success':

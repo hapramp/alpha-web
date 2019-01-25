@@ -2,14 +2,12 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 
 import styles from './styles.scss';
-import baseStyles from '../../styles/_variables.scss';
 import logo from './logo.png';
 import { loadCommunities } from '../../actions/communityActions';
-import steemAPI from '../../utils/steem';
 import UserAvatar from '../UserAvatar';
+import SignInButton from '../buttons/SignInButton';
 
 class Header extends React.Component {
   componentWillMount() {
@@ -48,16 +46,9 @@ class Header extends React.Component {
         </div>
       );
     }
-    // Pass current path as state to that the app re-renders at the same path
-    const next = get(this.props, 'location.pathname', '');
     return (
       <div className="uk-navbar-item">
-        <a href={steemAPI.sc2Api.getLoginURL(next)}>
-          <button className={['uk-button uk-button-small', styles.signIn, baseStyles.hoverEffect,
-            baseStyles.transition].join(' ')}
-          >SIGN IN
-          </button>
-        </a>
+        <SignInButton className={`uk-button uk-button-small ${styles.signIn}`} />
       </div>);
   }
 
