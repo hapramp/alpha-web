@@ -11,8 +11,8 @@ import PostLoading from '../../post/PostLoading';
 import PostUserMeta from '../../post/PostUserMeta';
 import Icon from '../../icons/Icon';
 import UserAvatar from '../../components/UserAvatar';
-import PrimaryButton from '../../components/buttons/PrimaryButton';
 import CompetitionMetaTags from './CompetitionMetaTags';
+import ParticipateButton from '../ParticipateButton';
 
 import indexStyles from '../../styles/globals.scss';
 import styles from './styles.scss';
@@ -131,14 +131,12 @@ const CompetitionSingle = ({
         </div>
 
         {
-          authUsername && canParticipate && (
-            <div className={styles.participateButton}>
-              <PrimaryButton
-                onClick={() => participate(competition.participating_tag)}
-              >
-                Participate
-              </PrimaryButton>
-            </div>
+          // Render participate button if competition not ended
+          canParticipate && (
+            <ParticipateButton
+              participatingTag={competition.participating_tag}
+              style={{ marginLeft: 24 }}
+            />
           )
         }
 
