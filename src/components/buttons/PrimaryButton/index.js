@@ -22,7 +22,7 @@ const PrimaryButton = ({
 
 PrimaryButton.propTypes = {
   className: PropTypes.string,
-  style: PropTypes.objectOf(PropTypes.string),
+  style: PropTypes.shape({}),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
