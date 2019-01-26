@@ -16,6 +16,7 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 
 import Header from '../header';
 import BottomBar from '../bottomBar';
+import Onboard from '../../onboard/Onboard';
 
 const Loading = () => <div>Loading...</div>;
 
@@ -187,6 +188,7 @@ const Root = ({
       <Route exact path="*" render={() => <div className="uk-container uk-margin-top uk-text-center">Not found</div>} />
     </Switch>
     {bottomBarVisible && <BottomBar />}
+    <Onboard />
   </div>
 );
 

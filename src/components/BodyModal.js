@@ -49,7 +49,7 @@ BodyModal.defaultProps = {
   onAfterClose: noOp,
   style: {
     overlay: {
-      backgroundColor: 'rgba(242, 242, 242, 0.97)',
+      backgroundColor: '#fafafafa',
       zIndex: 1,
     },
     content: {

@@ -1,12 +1,11 @@
-import { overlayComponents, signInModalIndex } from './constants';
+import { overlayPages, signInModalIndex } from './constants';
 import { actionTypes } from './actions';
 
-const numberOfOverlayComponents = overlayComponents.length;
+const numberOfOverlayComponents = overlayPages.length;
 
 const initialState = {
   hasOnboarded: true,
   index: 0,
-  showSignIn: false,
 };
 
 export default (state = initialState, action) => {
@@ -24,17 +23,11 @@ export default (state = initialState, action) => {
       }
       return { ...state, index: nextIndex };
 
-    case actionTypes.showPrevious:
-      if (state.index > 0) {
-        nextIndex = state.index - 1;
-      }
-      return { ...state, index: nextIndex };
+    case actionTypes.showAtIndex:
+      return { ...state, hasOnboarded: false, index: action.index };
 
     case actionTypes.showSignIn:
-      return { ...state, showSignIn: true };
-
-    case actionTypes.hideSignIn:
-      return { ...state, showSignIn: false };
+      return { ...state, index: signInModalIndex, hasOnboarded: false };
 
     default:
       return state;
@@ -45,7 +38,7 @@ export const getOnboardState = state => state.onboard;
 
 export const shouldShowModal = (state) => {
   const onboardState = getOnboardState(state);
-  return !onboardState.hasOnboarded || onboardState.showSignIn;
+  return !onboardState.hasOnboarded;
 };
 
 export const getActiveModalIndex = (state) => {
@@ -56,21 +49,7 @@ export const getActiveModalIndex = (state) => {
   return signInModalIndex;
 };
 
-export const isModalActive = (state, index) => {
-  const onboardState = getOnboardState(state);
-  if (!onboardState.hasOnboarded) {
-    return getOnboardState(state).index === index;
-  }
-  /**
-   * No other than sign in modal can be shown if the
-   * user has already seen onboarding.
-   */
-  if (index !== signInModalIndex) {
-    return false;
-  }
-  /**
-   * Boils down to just sign in modal, see
-   * if it's enabled
-   */
-  return onboardState.showSignIn;
+export const shouldShowNextButton = (state) => {
+  const { index } = getOnboardState(state);
+  return index < numberOfOverlayComponents - 1;
 };

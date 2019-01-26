@@ -1,22 +1,17 @@
-import Cookies from 'js-cookie';
-
 import { startDelay } from './constants';
 
 export const actionTypes = {
   start: 'onboard/start',
   stop: 'onboard/stop',
   showNext: 'onboard/pages/showNext',
-  showPrevious: 'onboard/pages/showPrevious',
+  showAtIndex: 'onboard/pages/showAtIndex',
   showSignIn: 'onboard/signIn/show',
   hideSignIn: 'onboard/signIn/show',
 };
 
 export const startOnboarding = () => dispatch =>
   setTimeout(
-    () => {
-      Cookies.set('has_user_onboarded', true);
-      return dispatch({ type: actionTypes.start });
-    },
+    () => dispatch({ type: actionTypes.start }),
     startDelay,
   );
 
@@ -28,14 +23,11 @@ export const showNextPage = () => dispatch => dispatch({
   type: actionTypes.showNext,
 });
 
-export const showPreviousPage = () => dispatch => dispatch({
-  type: actionTypes.showPrevious,
+export const showPageAtIndex = index => dispatch => dispatch({
+  type: actionTypes.showAtIndex,
+  index,
 });
 
 export const showSignIn = () => dispatch => dispatch({
   type: actionTypes.showSignIn,
-});
-
-export const hideSignIn = () => dispatch => dispatch({
-  type: actionTypes.hideSignIn,
 });
