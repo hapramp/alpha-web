@@ -10,7 +10,7 @@ export const actionTypes = {
 };
 
 export const startOnboarding = () => dispatch =>
-  setTimeout(
+  setTimeout( // Start after some delay
     () => dispatch({ type: actionTypes.start }),
     startDelay,
   );
@@ -23,11 +23,19 @@ export const showNextPage = () => dispatch => dispatch({
   type: actionTypes.showNext,
 });
 
+/**
+ * Shows specefic page in the onboarding modal
+ * @param {int} index Index of page to show
+ */
 export const showPageAtIndex = index => dispatch => dispatch({
   type: actionTypes.showAtIndex,
   index,
 });
 
+/**
+ * Directly show log in modal; useful when guest triggers auth
+ * required actions such as rate or comment
+ */
 export const showSignIn = () => dispatch => dispatch({
   type: actionTypes.showSignIn,
 });

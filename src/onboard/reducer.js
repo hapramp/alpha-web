@@ -34,6 +34,7 @@ export default (state = initialState, action) => {
   }
 };
 
+// Selectors
 export const getOnboardState = state => state.onboard;
 
 export const shouldShowModal = (state) => {

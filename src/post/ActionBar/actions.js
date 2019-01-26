@@ -1,3 +1,5 @@
+import { showSignIn } from '../../onboard/actions';
+
 export const actionTypes = {
   ADD_POSTS: 'ALL_POSTS.ADD',
   DELETE_POSTS: 'ALL_POSTS.DELETE',
@@ -10,7 +12,7 @@ export const ratePost = (author, permlink, vote) => (dispatch, getState, { steem
   const { username } = getState().authUser;
   if (!username) {
     notify.danger('Please log in first!');
-    return Promise.reject();
+    return dispatch(showSignIn());
   }
   dispatch({
     type: actionTypes.VOTE_POST_INIT, author, permlink, vote,
