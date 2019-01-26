@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
-import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import take from 'lodash/take';
 import InfiniteScroll from 'react-infinite-scroller';
 import ScrollBar from 'react-custom-scrollbars';
 
+import BodyModal from '../../components/BodyModal';
 import Icon from '../../icons/Icon';
 import RatingCard from './RatingCard';
 import styles from './styles.scss';
 
 const itemsPerPage = 20;
-// Show modal at app root
-const parentSelector = () => document.getElementById('root');
-const preventParentScroll = () => {
-  document.body.style.overflow = 'hidden';
-};
-const enableParentScroll = () => {
-  document.body.removeAttribute('style');
-};
 const noOp = () => { };
 
 const PostRatings = ({
@@ -50,22 +42,10 @@ const PostRatings = ({
      * scrolling once the modal is active and enable
      * it again when done
      */
-    <Modal
+    <BodyModal
       isOpen={showRatings}
-      onAfterOpen={preventParentScroll}
       onRequestClose={onClose}
-      onAfterClose={enableParentScroll}
-      parentSelector={parentSelector}
       className={`uk-position-center ${styles.modalContainer}`}
-      style={{
-        overlay: {
-          backgroundColor: 'rgba(242, 242, 242, 0.97)',
-          zIndex: 1,
-        },
-        content: {
-          boxShadow: '0 4px 12px rgba(0,0,0,.15)',
-        },
-      }}
     >
       <div className={styles.heading}>
         <span>Ratings</span>
@@ -95,7 +75,7 @@ const PostRatings = ({
           </InfiniteScroll>
         </ScrollBar>
       </div>
-    </Modal>
+    </BodyModal>
   );
 };
 
