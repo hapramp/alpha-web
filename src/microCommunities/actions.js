@@ -1,5 +1,6 @@
 import { addPosts } from '../post/actions';
 import { update1RampUser } from '../actions/loginActions';
+import { showSignIn } from '../onboard/actions';
 import { getAuthUsername } from '../reducers/authUserReducer';
 import { isFeedLoading, getLastPost } from './reducer';
 
@@ -89,6 +90,7 @@ export const joinMicroCommunity = (tag, leave = false) =>
     dispatch({ type: actionTypes.join.init, tag });
     if (!getAuthUsername(getState())) {
       notify.danger('Please login first!');
+      dispatch(showSignIn());
       return dispatch({ type: actionTypes.join.error, tag });
     }
     // Decide whether to call leave or join API method

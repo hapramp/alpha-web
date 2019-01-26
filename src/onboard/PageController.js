@@ -8,6 +8,12 @@ import { showPageAtIndex } from './actions';
 import styles from './styles.scss';
 import { overlayPages } from './constants';
 
+/**
+ * This component renders the small blue ticks that appear
+ * at the bottom of the overboarding modal.
+ * The current index has active class and clicking
+ * them calls redux action to set the current index to it.
+ */
 const PageController = ({ activeIndex, setPage }) => (
   <div className={styles.pageController}>
     <div className={styles.dotWrapper}>

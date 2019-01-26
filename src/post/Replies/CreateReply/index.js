@@ -39,9 +39,11 @@ class CreateReply extends React.Component {
     this.setState({ ...this.state, postingReply: true });
     this.props.addReply(this.props.post.author, this.props.post.permlink, body)
       .then(() => {
-        this.setState({ ...this.state, postingReply: false });
         this.setReplyContent('');
         this.props.onReplyPosted(body);
+      })
+      .finally(() => {
+        this.setState({ ...this.state, postingReply: false });
       });
   }
 

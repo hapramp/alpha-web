@@ -1,4 +1,5 @@
 import { loadState } from '../actions';
+import { showSignIn } from '../../onboard/actions';
 
 export const actionTypes = {
   REPLIES_LOAD_INIT: 'REPLIES.LOAD.INIT',
@@ -30,6 +31,7 @@ export const addReply = (parentAuthor, parentPermlink, body) =>
     const { username } = getState().authUser;
     if (!username) {
       notify.danger('Please login first!');
+      dispatch(showSignIn());
       return Promise.reject();
     }
     dispatch({

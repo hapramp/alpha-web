@@ -1,3 +1,4 @@
+import { showSignIn } from '../onboard/actions';
 import { getAuthUsername } from '../reducers/authUserReducer';
 
 export const actionTypes = {
@@ -43,7 +44,7 @@ export const follow = username => (dispatch, getState, { steemAPI, notify }) => 
   const currentUser = getAuthUsername(getState());
   if (!currentUser) {
     notify.danger('Please login first!');
-    return Promise.reject();
+    return dispatch(showSignIn());
   }
 
   dispatch({ type: actionTypes.FOLLOW_INIT, following: username, follower: currentUser });
@@ -65,7 +66,7 @@ export const unfollow = username => (dispatch, getState, { steemAPI, notify }) =
   const currentUser = getAuthUsername(getState());
   if (!currentUser) {
     notify.danger('Please log in first!');
-    return Promise.reject();
+    return dispatch(showSignIn());
   }
 
   dispatch({ type: actionTypes.UNFOLLOW_INIT, following: username, follower: currentUser });

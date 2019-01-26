@@ -128,7 +128,7 @@ class ActionBar extends React.Component {
         style={{ alignItems: 'center', cursor: 'pointer' }}
         onClick={this.togglePostRatings}
         tabIndex={-1}
-        onKeyUp={() => {}}
+        onKeyUp={() => { }}
         role="button"
       >
         <div style={{ marginRight: 8, fontSize: 12, color: 'rgba(0, 0, 0, 0.87)' }}>{finalRating} star{finalRating === 1 ? '' : 's'} from {positiveRatings.length}</div>
@@ -267,12 +267,16 @@ class ActionBar extends React.Component {
           {this.getCommentSection()}
           {this.getPayoutSection()}
         </div>
-        <PostRatings
-          showRatings={this.state.showPostRatings} // Modal pops up only when set to true
-          onClose={this.togglePostRatings}
-          ratings={this.props.post.active_votes}
-          postValue={getPayoutValue(this.props.post)}
-        />
+        {
+          this.state.showPostRatings && (
+            <PostRatings
+              showRatings={this.state.showPostRatings} // Modal pops up only when set to true
+              onClose={this.togglePostRatings}
+              ratings={this.props.post.active_votes}
+              postValue={getPayoutValue(this.props.post)}
+            />
+          )
+        }
       </div>
     );
   }

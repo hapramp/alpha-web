@@ -25,6 +25,10 @@ class Onboard extends React.Component {
   constructor(props) {
     super(props);
 
+    /**
+     * If user is not signed in and (s)he has not already seen the onboarding,
+     * show the onboarding
+     */
     if (!Cookies.get(onboardCookieKey, false) && !Cookies.get('access_token', false)) {
       this.props.startOnboarding();
     }
@@ -32,6 +36,7 @@ class Onboard extends React.Component {
   }
 
   render() {
+    // Get the current active page component
     const ModalPage = overlayPages[this.props.activeModalIndex];
     return (
       <BodyModal
