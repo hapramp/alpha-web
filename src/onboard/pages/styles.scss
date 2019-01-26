@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+
+.signIn {
+  .title {
+    font-size: 40px;
+    color: $primary-color;
+    margin-top: 90px;
+  }
+  .signInButton {
+    border-radius: 0;
+    padding: 16px 40px;
+    margin-top: 90px;
+    width: fit-content;
+  }
+  .signUpHelp {
+    margin-top: 32px;
+    color: rgba(0, 0, 0, 0.7);
+    a {
+      margin-left: 8px;
+      color: $primary-color;
+    }
+  }
+}
+
+.oneRampIsYou {
+  display: flex;
+  height: 100%;
+  >div {
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+  .left {
+    background: #fcfdff;
+  }
+  .right {
+    padding: 48px;
+    .title {
+      font-size: 40px;
+      color: $primary-color;
+      margin-bottom: 32px;
+    }
+    .body {
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}

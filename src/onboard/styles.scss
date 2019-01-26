@@ -1,0 +1,59 @@
+@import '../styles/variables';
+
+.modalWrapper {
+  height: 500px;
+  background: white;
+  position: relative;
+  padding: 16px;
+  @media screen and (min-width: 800px) {
+    width: 800px;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .nextButton {
+    position: absolute;
+    padding: 16px;
+    right: 24px;
+    bottom: 8px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .pageController {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    .dotWrapper {
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+      display: flex;
+    }
+    .dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background: $primary-light-color;
+      margin-right: 16px;
+      cursor: pointer;
+    }
+    .dot.active {
+      background: $primary-color;
+      cursor: default;
+    }
+    .dot:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+}
