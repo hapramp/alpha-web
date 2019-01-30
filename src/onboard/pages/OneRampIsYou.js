@@ -6,14 +6,14 @@ import styles from './styles.scss';
 export default () => (
   <div className={styles.oneRampIsYou}>
     <div className={styles.left}>
-      <img src={leftImage} alt="1 Place for all" />
+      <img src={leftImage} alt="Participate in Contests" />
     </div>
     <div className={styles.right}>
       <div className={styles.title}>
-        1Ramp is you
+        Participate in Contests
       </div>
       <div className={styles.body}>
-        {"It's time you stop giving your creative work for free. Own your content, collaborate, and do what you love."}
+        {'Participate in contests and win exciting prizes.'}
       </div>
     </div>
   </div>

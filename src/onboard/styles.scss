@@ -8,6 +8,15 @@
     width: 800px;
   }
 
+  @media screen and (max-width: 800px) {
+    width: 100vw;
+    height: calc(100vh - 48px);
+    box-sizing: border-box;
+    margin-top: 48px;
+  }
+
+
+
   .closeButton {
     position: absolute;
     top: 16px;
