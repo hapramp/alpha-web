@@ -6,7 +6,7 @@ import PrimaryButton from '../.././components/buttons/PrimaryButton';
 import SignInButton from '../.././components/buttons/SignInButton';
 
 export default () => (
-  <div className={`uk-text-center ${styles.signIn}`}>
+  <div className={`uk-text-center uk-padding ${styles.signIn}`}>
     <div className={styles.title}>Start using 1Ramp!</div>
     <SignInButton ButtonComponent={PrimaryButton} className={`uk-align-center ${styles.signInButton}`}>
       Sign in using SteemConnect
