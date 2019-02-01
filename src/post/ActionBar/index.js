@@ -268,7 +268,7 @@ class ActionBar extends React.Component {
           {this.getPayoutSection()}
         </div>
         {
-          this.state.showPostRatings && (
+          this.state.showPostRatings && ( // Do not render the modal in body if not required
             <PostRatings
               showRatings={this.state.showPostRatings} // Modal pops up only when set to true
               onClose={this.togglePostRatings}

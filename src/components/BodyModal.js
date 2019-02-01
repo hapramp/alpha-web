@@ -21,6 +21,9 @@ const BodyModal = props => (
      * scrolled to bottom. To prevent this, disable document
      * scrolling once the modal is active and enable
      * it again when done
+     *
+     * Make sure to call parent onAfter* methods when handling
+     * them here
      */
     onAfterOpen={() => {
       if (props.onAfterOpen) {
@@ -47,7 +50,7 @@ BodyModal.propTypes = {
 BodyModal.defaultProps = {
   onAfterOpen: noOp,
   onAfterClose: noOp,
-  style: {
+  style: { // Default style
     overlay: {
       backgroundColor: '#fafafafa',
       zIndex: 1,
