@@ -4,8 +4,8 @@ import { actionTypes } from './actions';
 const numberOfOverlayComponents = overlayPages.length;
 
 const initialState = {
-  hasOnboarded: true,
-  index: 0,
+  hasOnboarded: true, // If set to false, the onboarding is shown
+  index: 0, // The current onboarding page in view
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
       return { ...state, hasOnboarded: true };
 
     case actionTypes.showNext:
+      // Make sure we are not at the last onboarding page
       if (state.index < numberOfOverlayComponents - 1) {
         nextIndex = state.index + 1;
       }
@@ -27,6 +28,8 @@ export default (state = initialState, action) => {
       return { ...state, hasOnboarded: false, index: action.index };
 
     case actionTypes.showSignIn:
+      // Helps display the sign in modal directly - used by
+      // different action creators
       return { ...state, index: signInModalIndex, hasOnboarded: false };
 
     default:
@@ -50,6 +53,10 @@ export const getActiveModalIndex = (state) => {
   return signInModalIndex;
 };
 
+/**
+ * Used to check if we need to show the next button
+ * @param {object} state Global state
+ */
 export const shouldShowNextButton = (state) => {
   const { index } = getOnboardState(state);
   return index < numberOfOverlayComponents - 1;
