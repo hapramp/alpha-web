@@ -63,3 +63,47 @@ $breakpoint-2: 660px;
     color: $primary-color;
   }
 }
+
+.winnerListWrapper {
+  width: 496px;
+
+  .modalHeader {
+    padding: 32px;
+    font-size: 24px;
+    background: white;
+    margin-bottom: 8px;
+  }
+
+  .winnerCard {
+    margin-bottom: 4px;
+    padding: 8px;
+    background: white;
+
+    .cardMeta {
+      margin-bottom: 8px;
+
+      .rank {
+        color: $primary-color;
+        margin-right: 8px;
+      }
+    }
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+
+      a {
+        min-height: 40px;
+        min-width: 40px;
+        margin-right: 8px;
+      }
+    }
+
+    .entries {
+      .entry {
+        margin-right: 16px;
+      }
+    }
+  }
+}
