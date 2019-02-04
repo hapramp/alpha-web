@@ -4,19 +4,27 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import take from 'lodash/take';
 
-import { isFetching, getWinners } from './reducer';
+import { getWinners } from './reducer';
 import { fetchLeaderboard } from './actions';
 import UserAvatar from '../../components/UserAvatar';
 import Icon from '../../icons/Icon';
 import styles from './styles.scss';
 import WinnerList from './WinnersList';
 
+/**
+ * A hook which toggles a boolean value.
+ * @param {boolean} initialState The default state of toggle
+ * @returns Array containing a boolean value and function to toggle it
+ */
 const useToggle = (initialState = false) => {
   const [state, changeState] = useState(initialState);
   return [state, () => changeState(!state)];
 };
 
-const Leaderboard = ({ getLeaderboard, isLoading, winners }) => {
+const Leaderboard = ({ getLeaderboard, winners }) => {
+  /**
+   * Load the leaderboard when the component mounts
+   */
   useEffect(
     () => {
       getLeaderboard();
@@ -26,14 +34,6 @@ const Leaderboard = ({ getLeaderboard, isLoading, winners }) => {
 
   const [isOpen, toggle] = useToggle();
 
-  if (isLoading) {
-    return (
-      <div>
-        Loading...
-      </div>
-    );
-  }
-
   return (
     <div className={`${styles.flexCenter} ${styles.leaderboardWrapper}`}>
       <div className={`${styles.flexCenter} ${styles.header}`}>
@@ -42,7 +42,7 @@ const Leaderboard = ({ getLeaderboard, isLoading, winners }) => {
       </div>
       <div className={`${styles.winners} ${styles.flexCenter}`}>
         {
-          take(winners, 3).map(winner => (
+          take(winners, 3).map(winner => ( // Take top 3 winners and display
             <div key={winner.author} className={`${styles.flexCenter} ${styles.userContainer}`}>
               <div className={styles.icon}>
                 <UserAvatar username={winner.author} />
@@ -57,25 +57,24 @@ const Leaderboard = ({ getLeaderboard, isLoading, winners }) => {
       <div
         className={styles.viewAll}
         onClick={toggle}
-        onKeyUp={() => {}}
+        onKeyUp={() => { }}
         role="button"
         tabIndex={-1}
       >
         View All
       </div>
-      { isOpen && <WinnerList winners={winners} onClose={toggle} /> }
+      {/* The modal for showing all winners from leaderboard */}
+      {isOpen && <WinnerList winners={winners} onClose={toggle} />}
     </div>
   );
 };
 
 Leaderboard.propTypes = {
   getLeaderboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
   winners: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 const mapStateToProps = state => ({
-  isLoading: isFetching(state),
   winners: getWinners(state),
 });
 

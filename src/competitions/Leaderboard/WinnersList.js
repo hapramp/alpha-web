@@ -7,6 +7,10 @@ import BodyModal from '../../components/BodyModal';
 import UserAvatar from '../../components/UserAvatar';
 import styles from './styles.scss';
 
+/**
+ * Component which shows all the winners from leaderboard
+ * in a modal
+ */
 const WinnerList = ({ winners, onClose }) => (
   <BodyModal
     isOpen

@@ -18,7 +18,7 @@ import Header from '../header';
 import BottomBar from '../bottomBar';
 import Onboard from '../../onboard/Onboard';
 
-const Loading = () => <div>Loading...</div>;
+const Loading = () => <div className="uk-text-center">Loading...</div>;
 
 const SelectCommunities = Loadable({
   loader: () => import('../../register/SelectCommunities'),
