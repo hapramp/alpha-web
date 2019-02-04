@@ -1,4 +1,4 @@
-export const baseName = '@competition/leaderboard';
+const baseName = '@competition/leaderboard';
 
 export const actionTypes = {
   fetch: {
@@ -8,6 +8,9 @@ export const actionTypes = {
   },
 };
 
+/**
+ * Fetches leaderboard and saves result in redux state
+ */
 export const fetchLeaderboard = () => (dispatch, getState, { haprampAPI }) => {
   dispatch({ type: actionTypes.fetch.init });
   return haprampAPI.v2.competitions.getLeaderboard()
