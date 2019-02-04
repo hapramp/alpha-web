@@ -134,6 +134,8 @@ export default {
         .then(validateJsonResponse),
       getCompetitionWinners: competitionId => fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}/winners`)
         .then(validateJsonResponse),
+      getLeaderboard: () => fetch(`${constants.BACKEND_URL.V2}/competitions/leaderboard`)
+        .then(validateJsonResponse),
     },
     microCommunities: {
       getAll: () => fetch(`${constants.BACKEND_URL.V2}/micro-communities`)

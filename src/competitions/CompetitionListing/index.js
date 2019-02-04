@@ -11,6 +11,7 @@ import {
 import { getAllCompetitions as getAllCompetitionsAction } from '../actions';
 import styles from './styles.scss';
 import CompetitionCard from '../CompetitionCard';
+import Leaderboard from '../Leaderboard';
 
 const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) => {
   useEffect(() => {
@@ -31,6 +32,9 @@ const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) =>
         <meta name="og:description" content="Participate in contests and win exciting prizes" />
         <meta name="og:url" content="https://alpha.1ramp.io/competitions" />
       </Helmet>
+      <div>
+        <Leaderboard />
+      </div>
       <div className="uk-grid">
         {
           competitions.map(competition => (

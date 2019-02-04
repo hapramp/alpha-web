@@ -1,0 +1,65 @@
+@import '../../styles/variables';
+
+$breakpoint: 1085px;
+$breakpoint-2: 660px;
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+}
+
+.leaderboardWrapper {
+  margin-bottom: 14px;
+  background: white;
+  padding: 24px;
+  position: relative;
+
+  .header {
+    margin-right: 60px;
+    @media screen and (max-width: $breakpoint) {
+      margin-right: 32px;
+    }
+    .icon {
+      margin-right: 8px;
+      img {
+        min-width: 32px;
+      }
+    }
+    .text {
+      font-size: 24px;
+      @media screen and (max-width: $breakpoint-2) {
+        display: none;
+      }
+    }
+  }
+
+  .winners {
+    .userContainer {
+      margin-right: 32px;
+      @media screen and (max-width: $breakpoint) {
+        margin-right: 8px;
+      }
+      .icon {
+        margin-right: 8px;
+        border-radius: 50%;
+        box-shadow: 0 0 4px rgb(200, 200, 200);
+        a {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .text {
+        @media screen and (max-width: $breakpoint) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .viewAll {
+    position: absolute;
+    right: 32px;
+    cursor: pointer;
+    color: $primary-color;
+  }
+}
