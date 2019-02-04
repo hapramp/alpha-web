@@ -9,6 +9,7 @@ import { fetchLeaderboard } from './actions';
 import UserAvatar from '../../components/UserAvatar';
 import Icon from '../../icons/Icon';
 import styles from './styles.scss';
+import WinnerList from './WinnersList';
 
 const useToggle = (initialState = false) => {
   const [state, changeState] = useState(initialState);
@@ -24,8 +25,6 @@ const Leaderboard = ({ getLeaderboard, isLoading, winners }) => {
   );
 
   const [isOpen, toggle] = useToggle();
-
-  console.log(isOpen);
 
   if (isLoading) {
     return (
@@ -64,6 +63,7 @@ const Leaderboard = ({ getLeaderboard, isLoading, winners }) => {
       >
         View All
       </div>
+      { isOpen && <WinnerList winners={winners} onClose={toggle} /> }
     </div>
   );
 };
