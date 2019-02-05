@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import take from 'lodash/take';
+import { Link } from 'react-router-dom';
 
 import { getWinners } from './reducer';
 import { fetchLeaderboard } from './actions';
@@ -37,7 +38,7 @@ const Leaderboard = ({ getLeaderboard, winners }) => {
   return (
     <div className={`${styles.flexCenter} ${styles.leaderboardWrapper}`}>
       <div className={`${styles.flexCenter} ${styles.header}`}>
-        <span className={styles.icon}><Icon name="medal" /></span>
+        <span className={styles.icon}><Icon name="trophy" type="solid" /></span>
         <span className={styles.text}>Leaderboard</span>
       </div>
       <div className={`${styles.winners} ${styles.flexCenter}`}>
@@ -48,7 +49,7 @@ const Leaderboard = ({ getLeaderboard, winners }) => {
                 <UserAvatar username={winner.author} />
               </div>
               <div className={styles.text}>
-                {winner.author}
+                <Link to={`/@${winner.author}`}>{winner.author}</Link>
               </div>
             </div>
           ))

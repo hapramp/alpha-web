@@ -5,6 +5,7 @@ import ScrollBar from 'react-custom-scrollbars';
 
 import BodyModal from '../../components/BodyModal';
 import UserAvatar from '../../components/UserAvatar';
+import Icon from '../../icons/Icon';
 import styles from './styles.scss';
 
 /**
@@ -18,7 +19,7 @@ const WinnerList = ({ winners, onClose }) => (
     className="uk-position-center"
   >
     <div className={styles.winnerListWrapper}>
-      <div className={styles.modalHeader}>
+      <div className={styles.modalHeader} uk-tooltip="From last 10 competitions">
         Leaderboard
       </div>
       <ScrollBar autoHeight autoHeightMax="65vh">
@@ -31,15 +32,21 @@ const WinnerList = ({ winners, onClose }) => (
               </div>
               <div className={styles.userInfo}>
                 <UserAvatar username={winner.author} />
-                @{winner.author}
+                <Link to={`/@${winner.author}`} className={styles.usernameLink}>@{winner.author}</Link>
               </div>
-              <div className={`${styles.entries} uk-grid`}>
+              <div className={`${styles.entries} uk-flex`}>
                 {
                   winner.entries.sort((a, b) => a.rank - b.rank)
                     .map(entry => (
                       <div key={entry.permlink} className={styles.entry}>
-                        <Link to={`/competitions/${entry.competition}`}>
-                          Rank {entry.rank} ({entry.prize})
+                        <Link to={`/competitions/${entry.competition}`} uk-tooltip={`${entry.prize}`}>
+                          {
+                            entry.rank <= 3 ? (
+                              <Icon name={`medal_${entry.rank}`} type="solid" />
+                            ) : (
+                              <span>Rank {entry.rank}</span>
+                            )
+                          }
                         </Link>
                       </div>
                     ))
