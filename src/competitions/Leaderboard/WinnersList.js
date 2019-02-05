@@ -8,6 +8,14 @@ import UserAvatar from '../../components/UserAvatar';
 import Icon from '../../icons/Icon';
 import styles from './styles.scss';
 
+const getTrophiesForEntries = (entries) => {
+  const ranks = { 1: 0, 2: 0, 3: 0 };
+  entries.forEach((entry) => {
+    ranks[entry.rank] += 1;
+  });
+  return Object.keys(ranks).map(rank => [rank, ranks[rank]]);
+};
+
 /**
  * Component which shows all the winners from leaderboard
  * in a modal
@@ -22,6 +30,7 @@ const WinnerList = ({ winners, onClose }) => (
       <div className={styles.modalHeader} uk-tooltip="From last 10 competitions">
         <span className={styles.icon}><Icon name="trophy" type="solid" /></span>
         <h4 className="uk-margin-small-left uk-display-inline">Leaderboard</h4>
+        <div className={styles.closeBtn}><Icon name="cancel" /></div>
       </div>
       <ScrollBar className={styles.scrollbar} autoHeight autoHeightMax="65vh">
         {
@@ -38,25 +47,35 @@ const WinnerList = ({ winners, onClose }) => (
 
               <div className={`${styles.entries} uk-flex`}>
                 {
-                  winner.entries.sort((a, b) => a.rank - b.rank)
-                    .map(entry => (
-                      <div key={entry.permlink} className={styles.entry}>
-                        <Link to={`/competitions/${entry.competition}`} uk-tooltip={`${entry.prize}`}>
-                          {
-                            entry.rank <= 3 ? (
-                              <Icon className={styles.medal} name={`medal_${entry.rank}`} type="solid" />
-                            ) : (
-                              <span>Rank {entry.rank}</span>
-                            )
-                          }
-                        </Link>
-                      </div>
-                    ))
+                  getTrophiesForEntries(winner.entries)
+                    .map((rank) => {
+                      if (rank[1] > 0) {
+                        return (
+                          <div className={`uk-flex uk-flex-column ${styles.entry}`}>
+                            <Icon
+                              className={styles.medal}
+                              name={`medal_${rank[0]}`}
+                              type="solid"
+                            />
+                            <span>{rank[1]}</span>
+                          </div>);
+                      }
+                      return '';
+                    })
                 }
               </div>
             </div>
           ))
         }
+        <div
+          className={styles.closeButton}
+          onClick={onClose}
+          role="button"
+          tabIndex={-1}
+          onKeyDown={() => { }}
+        >
+          <Icon name="cancel" />
+        </div>
       </ScrollBar>
     </div>
   </BodyModal>
