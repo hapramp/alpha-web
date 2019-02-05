@@ -68,8 +68,8 @@ $breakpoint-2: 660px;
   width: 496px;
 
   .modalHeader {
-    padding: 32px;
-    font-size: 24px;
+    padding: 24px;
+    font-size: 16px;
     background: white;
     margin-bottom: 8px;
   }
@@ -85,6 +85,7 @@ $breakpoint-2: 660px;
       .rank {
         color: $primary-color;
         margin-right: 8px;
+        font-size: 20px;
       }
     }
 
@@ -93,7 +94,7 @@ $breakpoint-2: 660px;
       align-items: center;
       margin-bottom: 16px;
 
-      a {
+      a:not(.usernameLink) {
         min-height: 40px;
         min-width: 40px;
         margin-right: 8px;

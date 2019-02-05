@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="39px" viewBox="0 0 30 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/solid/trophy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/solid/trophy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(1.000000, 1.000000)" fill="#B0C9E7" stroke="#000000" stroke-width="1.5">
+            <g id="award-trophy-1">
+                <path d="M24,30.25 L4,30.25 C1.92893219,30.25 0.25,31.9289322 0.25,34 C0.25,34.9945618 0.645088151,35.948389 1.34834957,36.6516504 C2.05161099,37.3549118 3.00543816,37.75 4,37.75 L24,37.75 C26.0710678,37.75 27.75,36.0710678 27.75,34 C27.75,31.9289322 26.0710678,30.25 24,30.25 Z" id="Path"></path>
+                <circle id="Oval" cx="14" cy="6.5" r="6.25"></circle>
+                <path d="M14,17.75 C10.1659534,17.7540472 6.50542706,16.1522647 3.90666667,13.3333333 L10.25,30.25 L17.75,30.25 L24.0933333,13.3333333 C21.4945729,16.1522647 17.8340466,17.7540472 14,17.75 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>
