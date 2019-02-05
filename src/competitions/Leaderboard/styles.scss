@@ -26,7 +26,7 @@ $breakpoint-2: 660px;
       }
     }
     .text {
-      font-size: 24px;
+      font-size: 20px;
       @media screen and (max-width: $breakpoint-2) {
         display: none;
       }
@@ -65,10 +65,19 @@ $breakpoint-2: 660px;
 }
 
 .winnerListWrapper {
-  width: 496px;
+  min-width: 600px;
+  background-color: white;
+  box-sizing: border-box;
+
+  .scrollbar {
+    >div {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
 
   .modalHeader {
-    padding: 24px;
+    padding: 32px 32px 16px 32px;
     font-size: 16px;
     background: white;
     margin-bottom: 8px;
@@ -76,16 +85,31 @@ $breakpoint-2: 660px;
 
   .winnerCard {
     margin-bottom: 4px;
-    padding: 8px;
     background: white;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+    padding-bottom: 24px;
+    padding-top: 24px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
 
     .cardMeta {
       margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
 
       .rank {
         color: $primary-color;
         margin-right: 8px;
         font-size: 20px;
+        flex-basis: 20%;
+      }
+
+      .score {
+        flex-basis: 20%;
+        text-align: right;
       }
     }
 
@@ -93,6 +117,7 @@ $breakpoint-2: 660px;
       display: flex;
       align-items: center;
       margin-bottom: 16px;
+      flex-basis: 60%;
 
       a:not(.usernameLink) {
         min-height: 40px;
@@ -102,8 +127,13 @@ $breakpoint-2: 660px;
     }
 
     .entries {
+      padding-left: 22%;
       .entry {
         margin-right: 16px;
+
+        .medal {
+          min-height: 40px;
+        }
       }
     }
   }
