@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="18px" height="24px" viewBox="0 0 18 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+<svg width="18px" height="25px" viewBox="0 0 18 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
     <title>Icons/solid/medal_1</title>
     <desc>Created with Sketch.</desc>
     <g id="Icons/solid/medal_1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="ranking-winner-ribbon-copy">
+        <g id="ranking-winner-ribbon-copy" transform="translate(0.000000, 1.000000)">
             <circle id="Oval" stroke="#F6AC32" stroke-width="1.5" fill="#DD8D2C" stroke-linecap="round" stroke-linejoin="round" cx="9" cy="9" r="8.25"></circle>
             <polyline id="Path" stroke="#F6AC32" stroke-width="1.5" fill="#DD8D2C" stroke-linecap="round" stroke-linejoin="round" points="12.75 16.349 14.25 23.25 9 20.25 3.75 23.25 5.25 16.349"></polyline>
             <polygon id="1" fill="#FFBE54" points="10.0424805 12 8.63134766 12 8.63134766 6.56054688 6.94677734 7.08300781 6.94677734 5.93554688 9.89111328 4.88085938 10.0424805 4.88085938"></polygon>

@@ -20,20 +20,22 @@ const WinnerList = ({ winners, onClose }) => (
   >
     <div className={styles.winnerListWrapper}>
       <div className={styles.modalHeader} uk-tooltip="From last 10 competitions">
-        Leaderboard
+        <span className={styles.icon}><Icon name="trophy" type="solid" /></span>
+        <h4 className="uk-margin-small-left uk-display-inline">Leaderboard</h4>
       </div>
-      <ScrollBar autoHeight autoHeightMax="65vh">
+      <ScrollBar className={styles.scrollbar} autoHeight autoHeightMax="65vh">
         {
           winners.map((winner, idx) => (
             <div key={winner.author} className={styles.winnerCard}>
               <div className={styles.cardMeta}>
                 <span className={styles.rank}>#{idx + 1}</span>
+                <div className={styles.userInfo}>
+                  <UserAvatar username={winner.author} />
+                  <Link to={`/@${winner.author}`} className={styles.usernameLink}>@{winner.author}</Link>
+                </div>
                 <span className={styles.score}>${winner.score}</span>
               </div>
-              <div className={styles.userInfo}>
-                <UserAvatar username={winner.author} />
-                <Link to={`/@${winner.author}`} className={styles.usernameLink}>@{winner.author}</Link>
-              </div>
+
               <div className={`${styles.entries} uk-flex`}>
                 {
                   winner.entries.sort((a, b) => a.rank - b.rank)
@@ -42,7 +44,7 @@ const WinnerList = ({ winners, onClose }) => (
                         <Link to={`/competitions/${entry.competition}`} uk-tooltip={`${entry.prize}`}>
                           {
                             entry.rank <= 3 ? (
-                              <Icon name={`medal_${entry.rank}`} type="solid" />
+                              <Icon className={styles.medal} name={`medal_${entry.rank}`} type="solid" />
                             ) : (
                               <span>Rank {entry.rank}</span>
                             )
