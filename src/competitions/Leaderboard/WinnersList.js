@@ -27,12 +27,22 @@ const WinnerList = ({ winners, onClose }) => (
     className="uk-position-center"
   >
     <div className={styles.winnerListWrapper}>
-      <div className={styles.modalHeader} uk-tooltip="From last 10 competitions">
+      <div className={styles.modalHeader}>
         <span className={styles.icon}><Icon name="trophy" type="solid" /></span>
-        <h4 className="uk-margin-small-left uk-display-inline">Leaderboard</h4>
-        <div className={styles.closeBtn}><Icon name="cancel" /></div>
+        <h4 className="uk-margin-small-left uk-display-inline" uk-tooltip="From last 10 competitions">
+          Leaderboard
+        </h4>
+        <div
+          className={styles.closeBtn}
+          onClick={() => onClose()}
+          role="button"
+          tabIndex={-1}
+          onKeyDown={() => { }}
+        >
+          <Icon name="cancel" />
+        </div>
       </div>
-      <ScrollBar className={styles.scrollbar} autoHeight autoHeightMax="65vh">
+      <ScrollBar className={styles.scrollbar} autoHeight autoHide autoHeightMax="65vh">
         {
           winners.map((winner, idx) => (
             <div key={winner.author} className={styles.winnerCard}>
@@ -51,31 +61,23 @@ const WinnerList = ({ winners, onClose }) => (
                     .map((rank) => {
                       if (rank[1] > 0) {
                         return (
-                          <div className={`uk-flex uk-flex-column ${styles.entry}`}>
+                          <div className={`uk-flex uk-flex-column ${styles.entry}`} key={rank[0]}>
                             <Icon
                               className={styles.medal}
                               name={`medal_${rank[0]}`}
                               type="solid"
                             />
                             <span>{rank[1]}</span>
-                          </div>);
+                          </div>
+                        );
                       }
-                      return '';
+                      return null;
                     })
                 }
               </div>
             </div>
           ))
         }
-        <div
-          className={styles.closeButton}
-          onClick={onClose}
-          role="button"
-          tabIndex={-1}
-          onKeyDown={() => { }}
-        >
-          <Icon name="cancel" />
-        </div>
       </ScrollBar>
     </div>
   </BodyModal>
