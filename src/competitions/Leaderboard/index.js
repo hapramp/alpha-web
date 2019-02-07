@@ -4,13 +4,20 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import take from 'lodash/take';
 import { Link } from 'react-router-dom';
+import Loadable from 'react-loadable';
 
 import { getWinners } from './reducer';
 import { fetchLeaderboard } from './actions';
 import UserAvatar from '../../components/UserAvatar';
 import Icon from '../../icons/Icon';
 import styles from './styles.scss';
-import WinnerList from './WinnersList';
+
+// Lazy load winners' list
+const Loading = () => <div>Loading...</div>;
+const WinnerList = Loadable({
+  loader: () => import('./WinnersList'),
+  loading: Loading,
+});
 
 /**
  * A hook which toggles a boolean value.
@@ -33,6 +40,10 @@ const Leaderboard = ({ getLeaderboard, winners }) => {
     [true],
   );
 
+  /**
+   * The toggle hook's value is used to display/hide
+   * the winner list modal
+   */
   const [isOpen, toggle] = useToggle();
 
   return (
@@ -43,7 +54,8 @@ const Leaderboard = ({ getLeaderboard, winners }) => {
       </div>
       <div className={`${styles.winners} ${styles.flexCenter}`}>
         {
-          take(winners, 3).map(winner => ( // Take top 3 winners and display
+          // Take top 3 winners and display; winners already sorted from API
+          take(winners, 3).map(winner => (
             <div key={winner.author} className={`${styles.flexCenter} ${styles.userContainer}`}>
               <div className={styles.icon}>
                 <UserAvatar username={winner.author} />
