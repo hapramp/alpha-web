@@ -80,6 +80,10 @@ const MicroCommunitySingle = Loadable({
   loader: () => import('../../microCommunities/MicroCommunitySingle'),
   loading: Loading,
 });
+const CreateCompetitionsRoute = Loadable({
+  loader: () => import('../../competitions/create/routes'),
+  loading: Loading,
+});
 
 const bottomBarWhitelistURLs = [
   '^/feed/.*$',
@@ -180,6 +184,7 @@ const Root = ({
       <Route exact path="/profile/edit" component={authRequiredComponent(EditProfile)} />
 
       <Route exact path="/competitions" component={CompetitionListing} />
+      <Route path="/competitions/~create" component={CreateCompetitionsRoute} />
       <Route exact path="/competitions/:competitionId" component={CompetitionSingle} />
 
       <Route exact path="/community/:tag" component={MicroCommunitySingle} />
