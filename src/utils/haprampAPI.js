@@ -128,7 +128,13 @@ export default {
       },
     ).then(validateJsonResponse),
     competitions: {
+      // Endpoints related to fetching contest related data
       getAll: () => fetch(`${constants.BACKEND_URL.V2}/competitions`)
+        .then(validateJsonResponse),
+      getCompetitions: (limit = 10, startAfterId = null) =>
+        fetch(`${constants.BACKEND_URL.V2}/competitions/~list?limit=${limit}${startAfterId ? `&start_after_id=${startAfterId}` : ''}`)
+          .then(validateJsonResponse),
+      getCompetition: competitionId => fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}`)
         .then(validateJsonResponse),
       getCompetitionPosts: competitionId => fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}/posts`)
         .then(validateJsonResponse),
@@ -136,6 +142,96 @@ export default {
         .then(validateJsonResponse),
       getLeaderboard: () => fetch(`${constants.BACKEND_URL.V2}/competitions/leaderboard`)
         .then(validateJsonResponse),
+
+      // Delete and update
+      deleteCompetition: competitionId => fetch(
+        `${constants.BACKEND_URL.V2}/competitions/${competitionId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+        },
+      ).then(validateJsonResponse),
+      updateCompetition: (competitionId, body) => fetch(
+        `${constants.BACKEND_URL.V2}/competitions/${competitionId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+          body: JSON.stringify(body),
+        },
+      ).then(validateJsonResponse),
+
+      // Endpoints related to creating contests
+      createCompetition: body => fetch(
+        `${constants.BACKEND_URL.V2}/competitions`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+          body: JSON.stringify(body),
+        },
+      ).then(validateJsonResponse),
+      getCompetitionPostBody: (competitionId, type) =>
+        /**
+         * Used to get body for Steem posts which are suitable for contest
+         * specefic actions
+         *
+         * 'type' can be
+         *  - announce: gets body for the post used to announce cretion of a new contest
+         *  - winners: gets a body which is suitable for declaring results for a contest
+         */
+        fetch(`${constants.BACKEND_URL.V2}/competitions/${competitionId}/body/${type}`)
+          .then(validateJsonResponse),
+      registerAnnouncementPermlink: (competitionId, blogType, author, permlink) => fetch(
+        /**
+         * Used to notify the backend about mapping for steem posts to competitions for
+         * different events: competition announcement and winner declaration.
+         *
+         * 'blogType' can be
+         *  - announce: For competition announcement blog
+         *  - declare_winners: For winner declaration blog
+         */
+        `${constants.BACKEND_URL.V2}/competitions/${competitionId}/register-permlink/${blogType}?permlink=${author}/${permlink}`,
+        {
+          headers: {
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+        },
+      ).then(validateJsonResponse),
+      setWinners: (competitionId, ranks) => fetch(
+        /**
+         * Updates rankings for a competition before announcing the results.
+         * The rankings are not made public until the results are declared.
+         */
+        `${constants.BACKEND_URL.V2}/competitions/${competitionId}/winners`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+          body: JSON.stringify({ ranks }),
+        },
+      ).then(validateJsonResponse),
+      announceResults: competitionId => fetch(
+        /**
+         * Marks competition as "results declared" and the rankings
+         * set using 'setWinners` is now public.
+         */
+        `${constants.BACKEND_URL.V2}/competitions/${competitionId}/winners/announce`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Token ${Cookie.get('1ramp_token')}`,
+          },
+        },
+      ).then(validateJsonResponse),
     },
     microCommunities: {
       getAll: () => fetch(`${constants.BACKEND_URL.V2}/micro-communities`)
