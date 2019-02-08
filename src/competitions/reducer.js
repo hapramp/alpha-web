@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import uniq from 'lodash/uniq';
@@ -12,7 +13,7 @@ const initialState = {
   competitionPosts: {},
 };
 
-export default (state = initialState, action) => {
+const competitionsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     // All competitions
@@ -70,19 +71,24 @@ export default (state = initialState, action) => {
   }
 };
 
-// selectors
-export const getAllCompetitions = state => state.competitions.competitions;
+export default combineReducers({
+  competitions: competitionsReducer,
+});
 
-export const isCompetitionsFetching = state => state.competitions.loading;
+// selectors
+export const getCompetitionsState = state => state.competitions;
+export const getAllCompetitions = state => getCompetitionsState(state).competitions.competitions;
+
+export const isCompetitionsFetching = state => getCompetitionsState(state).competitions.loading;
 
 export const getCompetitionPostPermlinks = (state, competitionId) => {
   const winners = get(
-    state,
+    getCompetitionsState(state),
     `competitions.competitionPosts.${competitionId}.winners`,
     [],
   );
   const posts = get(
-    state,
+    getCompetitionsState(state),
     `competitions.competitionPosts.${competitionId}.posts`,
     [],
   );
@@ -91,21 +97,21 @@ export const getCompetitionPostPermlinks = (state, competitionId) => {
 };
 
 export const getCompetitionPosts = (state, competitionId) => {
-  const postPermlinks = getCompetitionPostPermlinks(state, competitionId);
+  const postPermlinks = getCompetitionPostPermlinks(getCompetitionsState(state), competitionId);
 
   // Extract all posts from allPosts reducer
   const posts = postPermlinks
-    .map(permlink => getPostByPermlink(state, permlink))
+    .map(permlink => getPostByPermlink(getCompetitionsState(state), permlink))
     .filter(post => post); // Remove empty
 
   return posts;
 };
 
-export const getCompetitionById = (state, competitionId) => state
+export const getCompetitionById = (state, competitionId) => getCompetitionsState(state)
   .competitions.competitions.find(competition => competition.id === competitionId);
 
 export const isPostsLoading = (state, competitionId) => get(
-  state,
+  getCompetitionsState(state),
   `competitions.competitionPosts.${competitionId}.loading`,
   false,
 );
