@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import uniq from 'lodash/uniq';
 
+import leaderboardReducer from './Leaderboard/reducer';
 import { actionTypes } from './actions';
 import { getPostByPermlink } from '../post/reducer';
 
@@ -73,6 +74,7 @@ const competitionsReducer = (state = initialState, action) => {
 
 export default combineReducers({
   competitions: competitionsReducer,
+  leaderboard: leaderboardReducer,
 });
 
 // selectors

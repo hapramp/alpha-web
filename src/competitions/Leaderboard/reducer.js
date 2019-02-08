@@ -1,4 +1,5 @@
 import { actionTypes } from './actions';
+import { getCompetitionsState } from '../reducer';
 
 const initialState = {
   loading: false,
@@ -36,7 +37,8 @@ export default (state = initialState, action) => {
 };
 
 // Selectors
-export const getCompetitionsLeaderboardState = state => state.competitionsLeaderboard;
+export const getCompetitionsLeaderboardState = state =>
+  getCompetitionsState(state).leaderboard;
 
 export const isFetching = (state) => {
   const leaderboardState = getCompetitionsLeaderboardState(state);
