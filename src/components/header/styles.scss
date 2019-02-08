@@ -15,6 +15,7 @@
   .brandName {
     color: white;
     font-size: 18px;
+    height: fit-content;
   }
 }
 
@@ -45,7 +46,7 @@
   padding: 0 8px 0 0;
   @media screen and (max-width: 1296px) {
     height: 40px;
-    width: 48px;
+    width: 40px;
     padding: 0;
   }
 }
