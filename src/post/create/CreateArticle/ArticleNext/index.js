@@ -9,8 +9,6 @@ import TagsSelector from './TagsSelector';
 import DefaultButton from '../../../../components/buttons/DefaultButton';
 import PrimaryButton from '../../../../components/buttons/PrimaryButton';
 
-
-import { getAllCommunities } from '../../../../reducers/communitiesReducer';
 import { getSelectedCommunities, getActiveTags, isArticlePublishable } from '../reducer';
 import { changeCommunity, addTag, removeTag, createArticle } from '../actions';
 import indexStyles from '../../../../styles/globals.scss';
@@ -18,7 +16,6 @@ import styles from './styles.scss';
 
 class ArticleNext extends React.Component {
   static propTypes = {
-    communities: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     selectedCommunities: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     changeCommunity: PropTypes.func.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -34,7 +31,6 @@ class ArticleNext extends React.Component {
     return (
       <div className={`uk-container uk-padding ${indexStyles.white}`}>
         <CommunitySelector
-          communities={this.props.communities}
           selectedCommunities={this.props.selectedCommunities}
           onClick={c => this.props.changeCommunity(c.id)}
           className={styles.communitySelectorContainer}
@@ -66,7 +62,6 @@ class ArticleNext extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  communities: getAllCommunities(state),
   selectedCommunities: getSelectedCommunities(state),
   tags: getActiveTags(state),
   isPublishEnabled: isArticlePublishable(state),

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import styles from './styles.scss';
+import { getAllCommunities } from '../../../../reducers/communitiesReducer';
 
 const CommunitySelector = ({
   communities, selectedCommunities, onClick, className, ...props
@@ -49,4 +51,8 @@ CommunitySelector.defaultProps = {
   className: '',
 };
 
-export default CommunitySelector;
+const mapStateToProps = state => ({
+  communities: getAllCommunities(state),
+});
+
+export default connect(mapStateToProps)(CommunitySelector);
