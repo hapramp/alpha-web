@@ -90,10 +90,11 @@ const bottomBarWhitelistURLs = [
   '^/@.*$',
   '^/competitions.*$',
 ];
-
 const bottomBarBlacklistURLs = [
   '^/@.*?/.*$',
+  '^/competitions/~create.*$',
 ];
+
 const showBottomBar = (location, authUsername) => {
   // Special case for not showing bottom bar on other's profiles
   if (
