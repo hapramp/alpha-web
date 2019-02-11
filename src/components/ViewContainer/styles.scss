@@ -1,0 +1,12 @@
+.viewContainer {
+  max-width: 800px;
+  width: 100vw;
+  margin: 36px auto;
+  background: white;
+
+  > div {
+    @media screen and (min-width: 700px) {
+      padding: 24px;
+    }
+  }
+}
