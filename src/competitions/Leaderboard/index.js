@@ -24,7 +24,7 @@ const WinnerList = Loadable({
  * @param {boolean} initialState The default state of toggle
  * @returns Array containing a boolean value and function to toggle it
  */
-const useToggle = (initialState = false) => {
+export const useToggle = (initialState = false) => {
   const [state, changeState] = useState(initialState);
   return [state, () => changeState(!state)];
 };
