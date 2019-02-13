@@ -1,3 +1,4 @@
+// TODO: Judges
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -177,7 +178,9 @@ const NewCompetitionDetails = props => (
           input.type = 'file';
           input.accept = 'image/*';
           input.addEventListener('change', () => {
+            // Event listener for when an image is selected
             if (input.files.length > 0) {
+              // Take just the first one if multiple images are selected
               const [file] = input.files;
               props.uploadImage(file)
                 .then(({ url }) => {
