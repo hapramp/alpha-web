@@ -10,7 +10,7 @@ const allowedSizes = [
 
 const UserAvatar = ({
   username, size, className, tooltip,
-  noLink, ...props
+  noLink, style, ...props
 }) => {
   const realSize = allowedSizes.filter(i => i === size)[0] || 'medium';
   const tooltipProp = tooltip ? { 'uk-tooltip': `@${username}` } : {};
@@ -19,6 +19,7 @@ const UserAvatar = ({
     ...props,
     style: {
       backgroundImage: `url(https://steemitimages.com/u/${username}/avatar/${realSize})`,
+      ...style,
     },
     ...tooltipProp,
   };
@@ -43,6 +44,7 @@ UserAvatar.propTypes = {
   className: PropTypes.string,
   tooltip: PropTypes.bool,
   noLink: PropTypes.bool,
+  style: PropTypes.shape(),
 };
 
 UserAvatar.defaultProps = {
@@ -51,6 +53,7 @@ UserAvatar.defaultProps = {
   className: '',
   tooltip: false,
   noLink: false,
+  style: {},
 };
 
 export default UserAvatar;
