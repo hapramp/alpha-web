@@ -20,6 +20,7 @@ const initialState = {
     '',
     '',
   ],
+  judges: [],
   image: null,
 };
 
