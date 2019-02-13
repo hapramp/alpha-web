@@ -1,4 +1,3 @@
-// TODO: Judges
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -6,6 +5,7 @@ import { connect } from 'react-redux';
 import uniq from 'lodash/uniq';
 import PropTypes from 'prop-types';
 
+import UserAvatar from '../../../components/UserAvatar';
 import ViewContainer from '../../../components/ViewContainer';
 import InterestsSelector from '../../../post/create/CreatePost/CommunitySelector';
 import TagSelector from '../../../post/create/CreateArticle/ArticleNext/TagsSelector';
@@ -13,8 +13,8 @@ import Icon from '../../../icons/Icon';
 import DefaultButton from '../../../components/buttons/DefaultButton';
 import GrayButton from '../../../components/buttons/GrayButton';
 import PrimaryButton from '../../../components/buttons/PrimaryButton';
-import { getNewCompetitionField } from './reducer';
-import { changeField } from './actions';
+import { getNewCompetitionField, isCompetitionCreating } from './reducer';
+import { changeField, createCompetition } from './actions';
 import { uploadImage } from '../../../post/create/CreateArticle/actions';
 import styles from './styles.scss';
 import { getSumPrize } from '../../utils';
@@ -45,6 +45,18 @@ const NewCompetitionDetails = props => (
       tags={props.tags}
       addTag={tag => props.changeField('tags', uniq([...props.tags, tag.toLowerCase()]))}
       removeTag={tag => props.changeField('tags', props.tags.filter(t => t !== tag))}
+    />
+
+    {/* TagSelector can also be used as username selector for judges with appropriate logic */}
+    <TagSelector
+      tags={props.judges}
+      addTag={judge => props.changeField('judges', uniq([...props.judges, judge.toLowerCase()]))}
+      removeTag={judge => props.changeField('judges', props.judges.filter(t => t !== judge))}
+      PrefixComponent={UserAvatar}
+      disabled={props.judges.length === 3}
+      // Decide the props to pass to UserAvatar component
+      prefixPropsSelector={judge => ({ username: judge, size: 'small', style: { width: 28, marginRight: 8 } })}
+      headerText="Judges"
     />
 
     {/* Time range selector */}
@@ -201,7 +213,11 @@ const NewCompetitionDetails = props => (
           GO BACK
         </DefaultButton>
       </Link>
-      <PrimaryButton className={styles.button}>
+      <PrimaryButton
+        className={styles.button}
+        onClick={props.createCompetition}
+        disabled={props.isCompetitionCreating}
+      >
         PUBLISH
       </PrimaryButton>
     </div>
@@ -221,8 +237,11 @@ NewCompetitionDetails.propTypes = {
     time: PropTypes.string,
   }).isRequired,
   prizes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  judges: PropTypes.arrayOf(PropTypes.string).isRequired,
   image: PropTypes.string.isRequired,
   uploadImage: PropTypes.func.isRequired,
+  createCompetition: PropTypes.func.isRequired,
+  isCompetitionCreating: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -232,10 +251,12 @@ const mapStateToProps = state => ({
   endDate: getNewCompetitionField(state, 'endDate'),
   prizes: getNewCompetitionField(state, 'prizes'),
   image: getNewCompetitionField(state, 'image'),
+  judges: getNewCompetitionField(state, 'judges'),
+  isCompetitionCreating: isCompetitionCreating(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
-  { changeField, uploadImage },
+  { changeField, uploadImage, createCompetition },
   dispatch,
 );
 

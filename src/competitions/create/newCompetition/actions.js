@@ -15,7 +15,7 @@ export const changeField = (field, value) => dispatch => dispatch({
   type: actionTypes.changeField, field, value,
 });
 
-export const createCompetition = () => (dispatch, getState, { haprampAPI }) => {
+export const createCompetition = () => (dispatch, getState, { haprampAPI, notify }) => {
   const state = getState();
 
   const name = getNewCompetitionField(state, 'name');
@@ -47,17 +47,20 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI }) => {
     fields,
   });
 
+  let errorString = null;
+
   // Process dates
   let startDate;
   let endDate;
+  let startDateStr;
+  let endDateStr;
   try {
-    startDate = new Date(`${startDateObj.data}T${startDateObj.time}`);
-    endDate = new Date(`${endDateObj.data}T${endDateObj.time}`);
+    startDate = new Date(`${startDateObj.date}T${startDateObj.time}`);
+    startDateStr = startDate.toISOString();
+    endDate = new Date(`${endDateObj.date}T${endDateObj.time}`);
+    endDateStr = endDate.toISOString();
   } catch (error) {
-    return dispatch({
-      type: actionTypes.createCompetition.error,
-      reason: new Error(`Invalid dates entered: ${error}`),
-    });
+    errorString = `You've entered invalid date(s): ${error}`;
   }
 
   /**
@@ -69,30 +72,21 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI }) => {
     || description.length === 0
     || rules.length === 0
   ) {
-    return dispatch({
-      type: actionTypes.createCompetition.error,
-      reason: new Error('Name, description or rules are required'),
-    });
+    errorString = 'Name, description or rules are required';
   }
   // There should be 1 to 3 interests
   if (
     interests.length < 1
     || interests.length > 3
   ) {
-    return dispatch({
-      type: actionTypes.createCompetition.error,
-      reason: new Error('Please select 1 to 3 communities'),
-    });
+    errorString = 'Please select 1 to 3 communities';
   }
   // There should be 1 - 3 judges
   if (
     judges.length < 1
     || judges.length > 3
   ) {
-    return dispatch({
-      type: actionTypes.createCompetition.error,
-      reason: new Error('There shold be 1 to 3 judges'),
-    });
+    errorString = 'There should be 1 to 3 judges';
   }
   // Validation for dates
   const now = new Date();
@@ -100,9 +94,14 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI }) => {
     startDate < now
     || endDate <= startDate
   ) {
+    errorString = "Invalid dates: Competitions can't start in the past and the end date can't be before start date";
+  }
+
+  if (errorString) {
+    notify.danger(errorString);
     return dispatch({
       type: actionTypes.createCompetition.error,
-      reason: new Error("Invalid dates: Competitions can't start in the past and the end date can't be before start date"),
+      reason: new Error(errorString),
     });
   }
 
@@ -111,23 +110,24 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI }) => {
     image,
     title: name,
     description,
-    starts_at: startDate.toISOString(),
-    ends_at: endDate.toISOString(),
+    starts_at: startDateStr,
+    ends_at: endDateStr,
     rules,
     communities: interests,
     judge_usernames: judges,
+    prizes,
   }).then(({ id }) => {
     /**
      * TODO: Insert action to navigate to competition
      * announcement post creation page
      */
-    dispatch();
-    return dispatch({
+    dispatch({
       type: actionTypes.createCompetition.done,
       fields,
       id,
     });
   }).catch((reason) => {
+    notify.danger('Error creating competition');
     console.error('[Create Competition] Error creating competition', reason);
     return dispatch({
       type: actionTypes.createCompetition.error,
