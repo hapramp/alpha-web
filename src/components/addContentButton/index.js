@@ -36,7 +36,15 @@ class AddContentButton extends React.Component {
               <div className={`${styles.iconContainer}`}>
                 <Icon name="photo" type="solid" />
               </div>
-              <span className="uk-margin-small-left">Post</span>
+              <span className="uk-margin-small-left">Short Post</span>
+            </Link>
+          </div>
+          <div className={['uk-margin-bottom', styles.contentType].join(' ')}>
+            <Link to="/competitions/~create" className="uk-flex">
+              <div className={`${styles.iconContainer}`}>
+                <Icon name="competition_white" type="solid" />
+              </div>
+              <span className="uk-margin-small-left">Create a Contest</span>
             </Link>
           </div>
         </div>}
