@@ -41,11 +41,6 @@ const NewCompetitionDetails = props => (
         return null;
       }}
     />
-    <TagSelector
-      tags={props.tags}
-      addTag={tag => props.changeField('tags', uniq([...props.tags, tag.toLowerCase()]))}
-      removeTag={tag => props.changeField('tags', props.tags.filter(t => t !== tag))}
-    />
 
     {/* TagSelector can also be used as username selector for judges with appropriate logic */}
     <TagSelector
@@ -227,7 +222,6 @@ const NewCompetitionDetails = props => (
 NewCompetitionDetails.propTypes = {
   changeField: PropTypes.func.isRequired,
   interests: PropTypes.arrayOf(PropTypes.number).isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   startDate: PropTypes.shape({
     date: PropTypes.string,
     time: PropTypes.string,
@@ -245,7 +239,6 @@ NewCompetitionDetails.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  tags: getNewCompetitionField(state, 'tags'),
   interests: getNewCompetitionField(state, 'interests'),
   startDate: getNewCompetitionField(state, 'startDate'),
   endDate: getNewCompetitionField(state, 'endDate'),

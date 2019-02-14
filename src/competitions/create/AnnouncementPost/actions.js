@@ -76,7 +76,7 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
        * Redirect to the competition page
        */
       dispatch(push(`/competitions/${competitionId}`));
-      notify.success('Post created for competition');
+      notify.success('Post registered for competition');
       return dispatch({
         type: actionTypes.registerAndCreatePost.done,
         response,

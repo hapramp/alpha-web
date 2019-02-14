@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 import { getNewCompetitionField } from './reducer';
 
 export const baseName = '@competitions/create/newCompetition';
@@ -21,7 +23,6 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI, notify
   const name = getNewCompetitionField(state, 'name');
   const description = getNewCompetitionField(state, 'description');
   const rules = getNewCompetitionField(state, 'rules');
-  const tags = getNewCompetitionField(state, 'tags');
   const interests = getNewCompetitionField(state, 'interests');
   const startDateObj = getNewCompetitionField(state, 'startDate');
   const endDateObj = getNewCompetitionField(state, 'endDate');
@@ -33,7 +34,6 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI, notify
     name,
     description,
     rules,
-    tags,
     interests,
     startDateObj,
     endDateObj,
@@ -117,11 +117,10 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI, notify
     judge_usernames: judges,
     prizes,
   }).then(({ id }) => {
-    /**
-     * TODO: Insert action to navigate to competition
-     * announcement post creation page
-     */
-    dispatch({
+    notify.success('Competition created!');
+    notify.info('Please write a post to announce your competition on Steem');
+    dispatch(push(`/competitions/~create/post/${id}/announce`));
+    return dispatch({
       type: actionTypes.createCompetition.done,
       fields,
       id,

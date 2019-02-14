@@ -5,7 +5,6 @@ const initialState = {
   name: '',
   description: '',
   rules: '',
-  tags: [],
   interests: [],
   startDate: {
     date: '',
