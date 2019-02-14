@@ -19,7 +19,7 @@ import styles from './styles.scss';
 
 import { getSumPrize, getFormattedDate, isParticipatePossible } from '../utils';
 import {
-  getPostsForCompetition, getAllCompetitions, getCompetitionWinners,
+  getPostsForCompetition, getCompetitionById as fetchCompetitionById, getCompetitionWinners,
   participateInCompetition,
 } from '../actions';
 import { getCompetitionPostPermlinks, getCompetitionById, isPostsLoading } from '../reducer';
@@ -27,14 +27,14 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import { getCompleteHTML } from '../../post/utils';
 
 const CompetitionSingle = ({
-  match, postPermlinks, fetchPosts, fetchCompetitions,
+  match, postPermlinks, fetchPosts, fetchCompetition,
   competition, fetchWinners, participate, authUsername,
   ...props
 }) => {
   const { competitionId } = match.params;
   useEffect(
     () => {
-      fetchCompetitions();
+      fetchCompetition(competitionId);
       fetchPosts(competitionId);
     },
     [competitionId],
@@ -200,7 +200,7 @@ CompetitionSingle.propTypes = {
   match: PropTypes.shape().isRequired,
   postPermlinks: PropTypes.arrayOf(PropTypes.string).isRequired,
   fetchPosts: PropTypes.func.isRequired,
-  fetchCompetitions: PropTypes.func.isRequired,
+  fetchCompetition: PropTypes.func.isRequired,
   competition: PropTypes.shape(),
   fetchWinners: PropTypes.func.isRequired,
   participate: PropTypes.func.isRequired,
@@ -223,7 +223,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     fetchPosts: getPostsForCompetition,
-    fetchCompetitions: getAllCompetitions,
+    fetchCompetition: fetchCompetitionById,
     fetchWinners: getCompetitionWinners,
     participate: participateInCompetition,
   },
