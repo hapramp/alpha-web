@@ -7,6 +7,7 @@ import leaderboardReducer from './Leaderboard/reducer';
 import createReducer from './create/reducer';
 import { actionTypes } from './actions';
 import { getPostByPermlink } from '../post/reducer';
+import { getAuthUsername } from '../reducers/authUserReducer';
 
 const initialState = {
   loading: false,
@@ -201,3 +202,24 @@ export const getLastCompetitionId = (state) => {
  * @param {object} state Current state
  */
 export const hasMore = state => getCompetitionsState(state).competitions.hasMore;
+
+/**
+ * Checks if a competition with the given competition ID
+ * is present
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
+export const isCompetitionAvailable = (state, competitionId) =>
+  !!getCompetitionById(state, competitionId);
+
+export const isAnnounceAllowed = (state, competitionId) => {
+  const currentUser = getAuthUsername(state);
+  if (!currentUser) {
+    return false;
+  }
+  const competition = getCompetitionById(state, competitionId);
+  if (!competition) {
+    return false;
+  }
+  return currentUser === competition.user.username;
+};
