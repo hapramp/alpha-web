@@ -14,6 +14,7 @@ export default class TagsSelector extends React.Component {
     prefixPropsSelector: PropTypes.func,
     headerText: PropTypes.string,
     disabled: PropTypes.bool,
+    style: PropTypes.shape(),
   }
 
   static defaultProps = {
@@ -25,6 +26,7 @@ export default class TagsSelector extends React.Component {
     prefixPropsSelector: () => ({}),
     headerText: 'Tags',
     disabled: false,
+    style: {},
   }
 
   constructor(props) {
@@ -58,11 +60,11 @@ export default class TagsSelector extends React.Component {
   render() {
     const {
       tags, PrefixComponent, prefixPropsSelector, headerText,
-      disabled,
+      disabled, style,
     } = this.props;
     const { tagInputText } = this.state;
     return (
-      <div className={`${this.props.className} uk-container`}>
+      <div style={style} className={`${this.props.className} uk-container`}>
         <div className="uk-margin-small-bottom">
           <span>{headerText}</span>
         </div>
