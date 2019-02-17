@@ -9,6 +9,7 @@ import styles from './styles.scss';
 // import { getRepliesForPermlink } from './reducer';
 import { getPostByPermlink } from '../reducer';
 
+
 class Replies extends React.Component {
   static propTypes = {
     // loadReplies: PropTypes.func,

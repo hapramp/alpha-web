@@ -2,17 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TimeAgo from 'react-time-ago';
+import Loadable from 'react-loadable';
 import { bindActionCreators } from 'redux';
 
 import UserAvatar from '../../../components/UserAvatar';
 import { ratePost } from '../../ActionBar/actions';
-import Replies from '../';
 import CommentActionBar from './CommentActionBar';
 import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 import { getAuthUsername } from '../../../reducers/authUserReducer';
-import CreateReply from '../CreateReply';
 import { getCompleteHTML } from '../../utils';
+
+const Loading = () => <div>Loading...</div>;
+const CreateReply = Loadable({
+  loader: () => import('../CreateReply'),
+  loading: Loading,
+});
+
+const Replies = Loadable({
+  loader: () => import('../'),
+  loading: Loading,
+});
 
 class Reply extends React.Component {
   static propTypes = {
