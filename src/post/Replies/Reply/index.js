@@ -12,16 +12,16 @@ import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 import { getAuthUsername } from '../../../reducers/authUserReducer';
 import { getCompleteHTML } from '../../utils';
+import Loader from '../../../helpers';
 
-const Loading = () => <div>Loading...</div>;
 const CreateReply = Loadable({
   loader: () => import('../CreateReply'),
-  loading: Loading,
+  loading: Loader,
 });
 
 const Replies = Loadable({
   loader: () => import('../'),
-  loading: Loading,
+  loading: Loader,
 });
 
 class Reply extends React.Component {
