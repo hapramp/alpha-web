@@ -223,3 +223,46 @@ export const isAnnounceAllowed = (state, competitionId) => {
   }
   return currentUser === competition.user.username;
 };
+
+/**
+ * Returns true if a contest has ended
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
+export const hasCompetitionEnded = (state, competitionId) => {
+  const competition = getCompetitionById(state, competitionId);
+  const endDate = new Date(competition.ends_at);
+  const now = new Date();
+  return endDate < now;
+};
+
+export const isWinnersDeclared = (state, competitionId) => {
+  const competition = getCompetitionById(state, competitionId);
+  return competition.winners_announced;
+};
+
+/**
+ * Returns true if winners for a competitino can be declared
+ * i.e., all of the following conditions should meet
+ * - Competition should exist
+ * - Current user should be allowed to declare winners
+ * - Competition should have ended
+ * - Winners should not be declared aready
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
+export const isWinnerDeclareAllowed = (state, competitionId) => {
+  if (!isCompetitionAvailable(state, competitionId)) {
+    return false;
+  }
+
+  if (!isAnnounceAllowed(state, competitionId)) {
+    return false;
+  }
+
+  if (!hasCompetitionEnded(state, competitionId)) {
+    return false;
+  }
+
+  return !isWinnersDeclared(state, competitionId);
+};
