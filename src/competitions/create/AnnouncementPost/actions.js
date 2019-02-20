@@ -18,16 +18,28 @@ export const actionTypes = {
   },
 };
 
+/**
+ * Sets content for the annoucnement blog
+ * @param {string} content Markdown body
+ */
 export const setPostContent = content => dispatch => dispatch({
   type: actionTypes.setPostContent,
   content,
 });
 
+/**
+ * Set's blog title
+ * @param {string} title Title
+ */
 export const setTitle = title => dispatch => dispatch({
   type: actionTypes.setTitle,
   title,
 });
 
+/**
+ * Sets tags for announcement blog
+ * @param {array} tags Array of tags
+ */
 export const setTags = tags => dispatch => dispatch({
   type: actionTypes.setTags,
   tags: uniq(tags // Remove duplicates
@@ -35,6 +47,13 @@ export const setTags = tags => dispatch => dispatch({
     .filter(tag => tag.match(/^[a-z|A-Z]/))), // Should start with a character
 });
 
+/**
+ * Registers a competition permlink with backend for
+ * given announcement mode and publishes the blog on
+ * Steem
+ * @param {string} competitionId Competition ID
+ * @param {string} announcementMode Mode for annoncement
+ */
 export const registerAndCreatePost = (competitionId, announcementMode) =>
   async (dispatch, getState, { haprampAPI, steemAPI, notify }) => {
     const state = getState();
@@ -59,6 +78,7 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
 
     const permlink = await steemAPI.createPermlink(title, author, '', '');
 
+    // Start creating post
     return steemAPI.sc2Operations.createPost(
       author, body, tags, null, permlink,
       title,
@@ -100,6 +120,12 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
     });
   };
 
+/**
+ * Fetches default body for a post annoucnement and
+ * populates the input area
+ * @param {string} competitionId Competition ID
+ * @param {string} mode Mode for announcement
+ */
 export const fillAnnouncementPost = (competitionId, mode) =>
   async (dispatch, getState, { haprampAPI }) => {
     const realMode = mode === 'declare_winners' ? 'winners' : mode;

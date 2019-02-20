@@ -19,6 +19,8 @@ const RankAssigner = ({
   allRanks, permlink, setRank, competitionId,
   unsetRank,
 }) => {
+  const [open, setOpen] = useState(false);
+
   // Find out the rank data for current permlink
   const myRank = allRanks.find(r => r.permlink === permlink);
   if (myRank) {
@@ -37,8 +39,6 @@ const RankAssigner = ({
     );
   }
 
-  const [open, setOpen] = useState(false);
-
   // Find out the ranks which are not alloted to any posts
   const unassignedRanks = allRanks.filter(r => !r.permlink);
 
@@ -49,6 +49,7 @@ const RankAssigner = ({
       </PrimaryButton>
       {
         open && (
+          // Render buttons for assigning the available ranks the permlink
           <div>
             {
               unassignedRanks.map(r => (

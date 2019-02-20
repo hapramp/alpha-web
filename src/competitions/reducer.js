@@ -236,6 +236,11 @@ export const hasCompetitionEnded = (state, competitionId) => {
   return endDate < now;
 };
 
+/**
+ * Returns true if winners for a competition are announced
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
 export const isWinnersDeclared = (state, competitionId) => {
   const competition = getCompetitionById(state, competitionId);
   return competition.winners_announced;
