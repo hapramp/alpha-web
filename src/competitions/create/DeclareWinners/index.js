@@ -6,12 +6,17 @@ import { connect } from 'react-redux';
 import EntryList from './EntryList';
 import ViewContainer from '../../../components/ViewContainer';
 import { getCompetitionById } from '../../actions';
-import { isDeclarePossible as isWinnersDeclarePossible } from './reducer';
-import { isAnnounceAllowed as isCompetitionAnnounceAllowed } from '../../reducer';
+import { declareWinners as declareCompetitionWinners } from './actions';
+import {
+  isDeclarePossible as isWinnersDeclarePossible,
+  isDeclareInProgress,
+  isRankAssignPossible,
+} from './reducer';
 import PrimaryButton from '../../../components/buttons/PrimaryButton';
 
 const DeclareWinners = ({
   competitionId, fetchCompetition, isAnnounceAllowed, isDeclarePossible,
+  isDeclaring, declareWinners,
 }) => {
   /**
    * Load competition details and check if we
@@ -56,7 +61,8 @@ const DeclareWinners = ({
       <EntryList competitionId={competitionId} />
       <div>
         <PrimaryButton
-          disabled={!isDeclarePossible}
+          disabled={!isDeclarePossible && !isDeclaring}
+          onClick={() => declareWinners(competitionId)}
           style={{
             width: 'fit-content',
             padding: '8px 24px',
@@ -75,15 +81,19 @@ DeclareWinners.propTypes = {
   fetchCompetition: PropTypes.func.isRequired,
   isAnnounceAllowed: PropTypes.bool.isRequired,
   isDeclarePossible: PropTypes.bool.isRequired,
+  isDeclaring: PropTypes.bool.isRequired,
+  declareWinners: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  isAnnounceAllowed: isCompetitionAnnounceAllowed(state, ownProps.competitionId),
+  isAnnounceAllowed: isRankAssignPossible(state, ownProps.competitionId),
   isDeclarePossible: isWinnersDeclarePossible(state, ownProps.competitionId),
+  isDeclaring: isDeclareInProgress(state, ownProps.competitionId),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchCompetition: getCompetitionById,
+  declareWinners: declareCompetitionWinners,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeclareWinners);
