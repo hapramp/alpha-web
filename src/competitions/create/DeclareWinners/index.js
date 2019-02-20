@@ -8,10 +8,10 @@ import ViewContainer from '../../../components/ViewContainer';
 import { getCompetitionById } from '../../actions';
 import { declareWinners as declareCompetitionWinners } from './actions';
 import {
-  isDeclarePossible as isWinnersDeclarePossible,
   isDeclareInProgress,
-  isRankAssignPossible,
+  isDeclarePossible as isAllRanksSelected,
 } from './reducer';
+import { isWinnerDeclareAllowed } from '../../reducer';
 import PrimaryButton from '../../../components/buttons/PrimaryButton';
 
 const DeclareWinners = ({
@@ -86,8 +86,8 @@ DeclareWinners.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  isAnnounceAllowed: isRankAssignPossible(state, ownProps.competitionId),
-  isDeclarePossible: isWinnersDeclarePossible(state, ownProps.competitionId),
+  isAnnounceAllowed: isWinnerDeclareAllowed(state, ownProps.competitionId),
+  isDeclarePossible: isAllRanksSelected(state, ownProps.competitionId),
   isDeclaring: isDeclareInProgress(state, ownProps.competitionId),
 });
 

@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { actionTypes } from './actions';
-import { getCompetitionById, isAnnounceAllowed, isWinnersDeclared } from '../../reducer';
+import { getCompetitionById } from '../../reducer';
 import { getDeclareWinnersState } from '../reducer';
 
 const initialState = {
@@ -99,21 +99,6 @@ export const getAllRanks = (state, competitionId) => {
     // include the post assigned to the rank
     permlink: assignedRanks[idx + 1] || undefined,
   }));
-};
-
-/**
- * Returns true if it is possible for the user to assign
- * ranks to a competition, given it's ID
- * - Current user is the creator for the competition
- * - Results for the contest are not already declared
- * @param {object} state Current redux state
- * @param {string} competitionId Competition ID
- */
-export const isRankAssignPossible = (state, competitionId) => {
-  if (!isAnnounceAllowed(state, competitionId) || isWinnersDeclared(state, competitionId)) {
-    return false;
-  }
-  return true;
 };
 
 /**
