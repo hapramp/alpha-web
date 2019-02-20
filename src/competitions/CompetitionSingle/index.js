@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import ordinal from 'ordinal-js';
@@ -22,14 +23,18 @@ import {
   getPostsForCompetition, getCompetitionById as fetchCompetitionById, getCompetitionWinners,
   participateInCompetition,
 } from '../actions';
-import { getCompetitionPostPermlinks, getCompetitionById, isPostsLoading } from '../reducer';
+import {
+  getCompetitionPostPermlinks, getCompetitionById, isPostsLoading,
+  isWinnerDeclareAllowed,
+} from '../reducer';
 import { getAuthUsername } from '../../reducers/authUserReducer';
 import { getCompleteHTML } from '../../post/utils';
+import PrimaryButton from '../../components/buttons/PrimaryButton';
 
 const CompetitionSingle = ({
   match, postPermlinks, fetchPosts, fetchCompetition,
   competition, fetchWinners, participate, authUsername,
-  ...props
+  canDeclareResults, ...props
 }) => {
   const { competitionId } = match.params;
   useEffect(
@@ -139,6 +144,16 @@ const CompetitionSingle = ({
             />
           )
         }
+        {
+          // Render declare winners button if allowed
+          canDeclareResults && (
+            <Link to={`/competitions/~create/declare-winners/${competition.id}`}>
+              <PrimaryButton style={{ width: 'fit-content', padding: '8px 24px' }}>
+                Declare Results
+              </PrimaryButton>
+            </Link>
+          )
+        }
 
         {/** Hashtag info */}
         <div className={styles.hashTagText}>
@@ -206,6 +221,7 @@ CompetitionSingle.propTypes = {
   participate: PropTypes.func.isRequired,
   authUsername: PropTypes.string,
   isPostsLoading: PropTypes.bool.isRequired,
+  canDeclareResults: PropTypes.bool.isRequired,
 };
 
 CompetitionSingle.defaultProps = {
@@ -218,6 +234,7 @@ const mapStateToProps = (state, ownProps) => ({
   competition: getCompetitionById(state, ownProps.match.params.competitionId),
   authUsername: getAuthUsername(state),
   isPostsLoading: isPostsLoading(state, ownProps.match.params.competitionId),
+  canDeclareResults: isWinnerDeclareAllowed(state, ownProps.match.params.competitionId),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
