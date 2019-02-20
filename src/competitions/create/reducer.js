@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import { getCompetitionsState } from '../reducer';
 import newCompetitionReducer from './newCompetition/reducer';
 import announcementPostReducer from './AnnouncementPost/reducer';
+import declareWinnersReducer from './DeclareWinners/reducer';
 
 const createReducer = combineReducers({
   newCompetition: newCompetitionReducer,
   announce: announcementPostReducer,
+  declareWinners: declareWinnersReducer,
 });
 
 export default createReducer;
@@ -26,3 +28,5 @@ export const getCreateCompetitionState = state => getCompetitionsState(state).cr
 export const getNewCompetitionState = state => getCreateCompetitionState(state).newCompetition;
 
 export const getAnnouncementPostState = state => getCreateCompetitionState(state).announce;
+
+export const getDeclareWinnersState = state => getCreateCompetitionState(state).declareWinners;
