@@ -36,10 +36,21 @@ export const getAssignedRanksForCompetition = (state, competitionId) =>
 
 export const getAllRanks = (state, competitionId) => {
   const competition = getCompetitionById(state, competitionId);
+  if (!competition) {
+    return null;
+  }
   const assignedRanks = getAssignedRanksForCompetition(state, competitionId);
   return competition.prizes.map((prize, idx) => ({
     rank: idx + 1,
     prize,
     permlink: assignedRanks[idx + 1] || undefined,
   }));
+};
+
+export const isDeclarePossible = (state, competitionId) => {
+  const ranks = getAllRanks(state, competitionId);
+  if (!ranks) {
+    return false;
+  }
+  return ranks.filter(r => !r.permlink).length === 0; // All permlinks present
 };
