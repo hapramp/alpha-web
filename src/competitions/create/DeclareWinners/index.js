@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 import EntryList from './EntryList';
 import ViewContainer from '../../../components/ViewContainer';
 import { getCompetitionById } from '../../actions';
+import { isDeclarePossible as isWinnersDeclarePossible } from './reducer';
 import { isAnnounceAllowed as isCompetitionAnnounceAllowed } from '../../reducer';
+import PrimaryButton from '../../../components/buttons/PrimaryButton';
 
 const DeclareWinners = ({
-  competitionId, fetchCompetition, isAnnounceAllowed,
+  competitionId, fetchCompetition, isAnnounceAllowed, isDeclarePossible,
 }) => {
   /**
    * Load competition details and check if we
@@ -52,6 +54,18 @@ const DeclareWinners = ({
         Declaring winners for {competitionId}.
       </div>
       <EntryList competitionId={competitionId} />
+      <div>
+        <PrimaryButton
+          disabled={!isDeclarePossible}
+          style={{
+            width: 'fit-content',
+            padding: '8px 24px',
+            marginLeft: 'auto',
+          }}
+        >
+          Declare Results and Continue
+        </PrimaryButton>
+      </div>
     </ViewContainer>
   );
 };
@@ -60,10 +74,12 @@ DeclareWinners.propTypes = {
   competitionId: PropTypes.string.isRequired,
   fetchCompetition: PropTypes.func.isRequired,
   isAnnounceAllowed: PropTypes.bool.isRequired,
+  isDeclarePossible: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   isAnnounceAllowed: isCompetitionAnnounceAllowed(state, ownProps.competitionId),
+  isDeclarePossible: isWinnersDeclarePossible(state, ownProps.competitionId),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
