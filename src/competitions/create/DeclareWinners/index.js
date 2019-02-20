@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import EntryList from './EntryList';
 import ViewContainer from '../../../components/ViewContainer';
 import { getCompetitionById } from '../../actions';
 import { isAnnounceAllowed as isCompetitionAnnounceAllowed } from '../../reducer';
@@ -10,6 +11,10 @@ import { isAnnounceAllowed as isCompetitionAnnounceAllowed } from '../../reducer
 const DeclareWinners = ({
   competitionId, fetchCompetition, isAnnounceAllowed,
 }) => {
+  /**
+   * Load competition details and check if we
+   * are allowed to announce results
+   */
   const [loading, setLoading] = useState(true);
   useEffect(
     () => {
@@ -37,9 +42,16 @@ const DeclareWinners = ({
     );
   }
 
+  /**
+   * All conditions met, we can now declare results.
+   * Show a list of entries for the competition
+   */
   return (
     <ViewContainer>
-      Declaring winners for {competitionId}.
+      <div>
+        Declaring winners for {competitionId}.
+      </div>
+      <EntryList competitionId={competitionId} />
     </ViewContainer>
   );
 };

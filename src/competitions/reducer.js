@@ -198,7 +198,7 @@ export const getLastCompetitionId = (state) => {
 };
 
 /**
- * Fetched the hasMore variable
+ * Fetches the hasMore variable
  * @param {object} state Current state
  */
 export const hasMore = state => getCompetitionsState(state).competitions.hasMore;
