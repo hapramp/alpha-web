@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -17,38 +17,47 @@ import PostLoading from '../../post/PostLoading';
 
 const CompetitionListing = ({
   isFetching, competitions, getAllCompetitions, hasMore,
-}) => (
-  <div className={`${styles.container}`}>
-    <Helmet>
-      <title>Competitions | 1Ramp</title>
-      <meta name="title" content="Competitions | 1Ramp" />
-      <meta name="twitter:title" content="Competitions | 1Ramp" />
-      <meta name="og:title" content="Competitions | 1Ramp" />
-      <meta name="description" content="Participate in contests and win exciting prizes" />
-      <meta name="twitter:description" content="Participate in contests and win exciting prizes" />
-      <meta name="og:description" content="Participate in contests and win exciting prizes" />
-      <meta name="og:url" content="https://alpha.1ramp.io/competitions" />
-    </Helmet>
-    <div>
-      <Leaderboard />
+}) => {
+  const [hasFetchedOnce, setFetchedOnce] = useState(false);
+  return (
+    <div className={`${styles.container}`}>
+      <Helmet>
+        <title>Competitions | 1Ramp</title>
+        <meta name="title" content="Competitions | 1Ramp" />
+        <meta name="twitter:title" content="Competitions | 1Ramp" />
+        <meta name="og:title" content="Competitions | 1Ramp" />
+        <meta name="description" content="Participate in contests and win exciting prizes" />
+        <meta name="twitter:description" content="Participate in contests and win exciting prizes" />
+        <meta name="og:description" content="Participate in contests and win exciting prizes" />
+        <meta name="og:url" content="https://alpha.1ramp.io/competitions" />
+      </Helmet>
+      <div>
+        <Leaderboard />
+      </div>
+      <InfiniteScroller
+        pageStart={0}
+        loadMore={() => {
+          if (!isFetching) {
+            // Reload if fetching for the first time
+            getAllCompetitions(!hasFetchedOnce);
+            setFetchedOnce(true);
+          }
+        }}
+        hasMore={hasMore}
+        className="uk-grid"
+        loader={<div className="uk-width-1-2@m"><PostLoading /></div>}
+      >
+        {
+          competitions.map(competition => (
+            <div key={competition.id} className={`uk-width-1-2@m ${styles.competitionCardContainer}`}>
+              <CompetitionCard competition={competition} />
+            </div>
+          ))
+        }
+      </InfiniteScroller>
     </div>
-    <InfiniteScroller
-      pageStart={0}
-      loadMore={() => (!isFetching) && getAllCompetitions(false)}
-      hasMore={hasMore}
-      className="uk-grid"
-      loader={<div className="uk-width-1-2@m"><PostLoading /></div>}
-    >
-      {
-        competitions.map(competition => (
-          <div key={competition.id} className={`uk-width-1-2@m ${styles.competitionCardContainer}`}>
-            <CompetitionCard competition={competition} />
-          </div>
-        ))
-      }
-    </InfiniteScroller>
-  </div>
-);
+  );
+};
 
 CompetitionListing.propTypes = {
   isFetching: PropTypes.bool.isRequired,
