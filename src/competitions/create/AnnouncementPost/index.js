@@ -23,10 +23,10 @@ import { getCompetitionById } from '../../actions';
 
 const getInstructionString = (mode, competition) => {
   const { title } = competition;
-  if (mode === 'declare_winners') {
+  if (mode === 'announce') {
     return `Publish the contest announcement blog for "${title}".`;
   }
-  if (mode === 'declare_winners') {
+  if (mode === 'declare-winners') {
     return `Publish the winner announcement blog for "${title}".`;
   }
   return 'Publish competition blog.';
