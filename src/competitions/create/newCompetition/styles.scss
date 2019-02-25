@@ -22,6 +22,8 @@
 }
 
 .dateRangeContainer {
+  padding: 8px;
+  margin-bottom: 16px;
   .inputsContainer {
     width: 160px;
     font-size: 16px;
@@ -48,6 +50,7 @@
 }
 
 .prizesEntry {
+  padding: 8px;
   .importantMark {
     color: red;
   }
@@ -72,6 +75,7 @@
 }
 
 .imageContainer {
+  padding: 8px;
   .button {
     width: max-content;
     padding: 8px 24px;
