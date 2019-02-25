@@ -25,7 +25,7 @@ import {
 } from '../actions';
 import {
   getCompetitionPostPermlinks, getCompetitionById, isPostsLoading,
-  isWinnerDeclareAllowed,
+  isWinnerDeclareAllowed, isAnnouncePostAllowed, isDeclareWinnerPostAllowed,
 } from '../reducer';
 import { getAuthUsername } from '../../reducers/authUserReducer';
 import { getCompleteHTML } from '../../post/utils';
@@ -34,7 +34,8 @@ import PrimaryButton from '../../components/buttons/PrimaryButton';
 const CompetitionSingle = ({
   match, postPermlinks, fetchPosts, fetchCompetition,
   competition, fetchWinners, participate, authUsername,
-  canDeclareResults, ...props
+  canDeclareResults, canAnnounce, canDeclareWinnersPost,
+  ...props
 }) => {
   const { competitionId } = match.params;
   useEffect(
@@ -144,16 +145,40 @@ const CompetitionSingle = ({
             />
           )
         }
-        {
-          // Render declare winners button if allowed
-          canDeclareResults && (
-            <Link to={`/competitions/~create/declare-winners/${competition.id}`}>
-              <PrimaryButton style={{ width: 'fit-content', padding: '8px 24px' }}>
-                Declare Results
-              </PrimaryButton>
-            </Link>
-          )
-        }
+
+        {/* Buttons that only contest creator can see */}
+        <div className="uk-grid">
+          {
+            // Render declare winners button if allowed
+            canDeclareResults && (
+              <Link to={`/competitions/~create/declare-winners/${competition.id}`} className="uk-margin-small-bottom">
+                <PrimaryButton style={{ width: 'fit-content', padding: '8px 24px' }}>
+                  Declare Results
+                </PrimaryButton>
+              </Link>
+            )
+          }
+          {
+            // Render competition announcement post creation button
+            canAnnounce && (
+              <Link to={`/competitions/~create/post/${competition.id}/announce`} className="uk-margin-small-bottom">
+                <PrimaryButton style={{ width: 'fit-content', padding: '8px 24px' }}>
+                  Post Competition Announcement
+                </PrimaryButton>
+              </Link>
+            )
+          }
+          {
+            // Render competition winner declation post creation button
+            canDeclareWinnersPost && (
+              <Link to={`/competitions/~create/post/${competition.id}/declare_winners`}>
+                <PrimaryButton style={{ width: 'fit-content', padding: '8px 24px' }}>
+                  Post Winner Announcement
+                </PrimaryButton>
+              </Link>
+            )
+          }
+        </div>
 
         {/** Hashtag info */}
         <div className={styles.hashTagText}>
@@ -222,6 +247,8 @@ CompetitionSingle.propTypes = {
   authUsername: PropTypes.string,
   isPostsLoading: PropTypes.bool.isRequired,
   canDeclareResults: PropTypes.bool.isRequired,
+  canAnnounce: PropTypes.bool.isRequired,
+  canDeclareWinnersPost: PropTypes.bool.isRequired,
 };
 
 CompetitionSingle.defaultProps = {
@@ -235,6 +262,8 @@ const mapStateToProps = (state, ownProps) => ({
   authUsername: getAuthUsername(state),
   isPostsLoading: isPostsLoading(state, ownProps.match.params.competitionId),
   canDeclareResults: isWinnerDeclareAllowed(state, ownProps.match.params.competitionId),
+  canAnnounce: isAnnouncePostAllowed(state, ownProps.match.params.competitionId),
+  canDeclareWinnersPost: isDeclareWinnerPostAllowed(state, ownProps.match.params.competitionId),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
