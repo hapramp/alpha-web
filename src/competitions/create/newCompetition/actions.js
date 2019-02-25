@@ -118,7 +118,6 @@ export const createCompetition = () => (dispatch, getState, { haprampAPI, notify
     prizes,
   }).then(({ id }) => {
     notify.success('Competition created!');
-    notify.info('Please write a post to announce your competition on Steem');
     dispatch(push(`/competitions/~create/post/${id}/announce`));
     return dispatch({
       type: actionTypes.createCompetition.done,

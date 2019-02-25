@@ -41,7 +41,7 @@ const NewCompetitionDescription = ({
     <div className={styles.bottomBar}>
       <Link to="/competitions/~create/details">
         <PrimaryButton className={styles.button}>
-          CONTINUE
+          NEXT
         </PrimaryButton>
       </Link>
     </div>

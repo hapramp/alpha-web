@@ -40,7 +40,7 @@ const newCompetitionReducer = (state = initialState, action) => {
     case actionTypes.createCompetition.init:
       return {
         ...state,
-        createContest: {
+        createCompetition: {
           loading: true,
           error: null,
         },
@@ -49,7 +49,7 @@ const newCompetitionReducer = (state = initialState, action) => {
     case actionTypes.createCompetition.done:
       return {
         ...state,
-        createContest: {
+        createCompetition: {
           loading: false,
           error: null,
         },
