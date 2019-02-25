@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import EntryList from './EntryList';
 import ViewContainer from '../../../components/ViewContainer';
+import ConfirmationModal from '../../../components/ConfirmationModal';
 import { getCompetitionById } from '../../actions';
 import { declareWinners as declareCompetitionWinners } from './actions';
 import {
@@ -23,6 +24,7 @@ const DeclareWinners = ({
    * are allowed to announce results
    */
   const [loading, setLoading] = useState(true);
+  const [confirmation, setConfirmation] = useState(false);
   useEffect(
     () => {
       setLoading(true);
@@ -59,17 +61,35 @@ const DeclareWinners = ({
         Declaring winners for {competitionId}.
       </div>
       <EntryList competitionId={competitionId} />
+      {
+        confirmation && (
+          <ConfirmationModal
+            confirmActive={!isDeclaring}
+            cancelActive={!isDeclaring}
+            confirmContent="Create and Continue"
+            cancelContent="Cancel"
+            onConfirm={() => declareWinners(competitionId)}
+            onCancel={() => setConfirmation(false)}
+          >
+            <h2>Declare winners and continue?</h2>
+            <p>
+              Continue to declare the winners. On the next step,
+              you can edit and publish a blog to announce the winners.
+            </p>
+          </ConfirmationModal>
+        )
+      }
       <div>
         <PrimaryButton
           disabled={!isDeclarePossible && !isDeclaring}
-          onClick={() => declareWinners(competitionId)}
+          onClick={() => setConfirmation(true)}
           style={{
             width: 'fit-content',
             padding: '8px 24px',
             marginLeft: 'auto',
           }}
         >
-          Declare Results and Continue
+          Next
         </PrimaryButton>
       </div>
     </ViewContainer>
