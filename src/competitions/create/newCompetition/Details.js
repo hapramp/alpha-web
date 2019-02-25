@@ -55,6 +55,7 @@ const NewCompetitionDetails = (props) => {
         // Decide the props to pass to UserAvatar component
         prefixPropsSelector={judge => ({ username: judge, size: 'small', style: { width: 28, marginRight: 8 } })}
         headerText="Judges"
+        style={{ margin: '0 0 8px 0' }}
       />
 
       {/* Time range selector */}
@@ -178,6 +179,7 @@ const NewCompetitionDetails = (props) => {
             <img
               src={props.image}
               alt=""
+              className="uk-margin-small-bottom"
             />
           )
         }
