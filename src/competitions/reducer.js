@@ -212,6 +212,12 @@ export const hasMore = state => getCompetitionsState(state).competitions.hasMore
 export const isCompetitionAvailable = (state, competitionId) =>
   !!getCompetitionById(state, competitionId);
 
+/**
+ * Returns true if the current logged in user is creator
+ * of the competition
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
 export const isAnnounceAllowed = (state, competitionId) => {
   const currentUser = getAuthUsername(state);
   if (!currentUser) {
@@ -270,4 +276,37 @@ export const isWinnerDeclareAllowed = (state, competitionId) => {
   }
 
   return !isWinnersDeclared(state, competitionId);
+};
+
+/**
+ * Returns true if writing announcement post for the
+ * competition is possible
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
+export const isAnnouncePostAllowed = (state, competitionId) => {
+  if (!isAnnounceAllowed(state, competitionId)) {
+    return false;
+  }
+
+  const competition = getCompetitionById(state, competitionId);
+
+  console.log(competition.announce_permlink);
+
+  return !competition.announce_permlink;
+};
+
+/**
+ * Returns true if writing winner declaration post
+ * for the competition is possible
+ * @param {object} state Current redux state
+ * @param {string} competitionId Competition ID
+ */
+export const isDeclareWinnerPostAllowed = (state, competitionId) => {
+  if (!isAnnounceAllowed(state, competitionId)) {
+    return false;
+  }
+  const competition = getCompetitionById(state, competitionId);
+
+  return competition.winners_announced && !competition.declare_winners_permlink;
 };
