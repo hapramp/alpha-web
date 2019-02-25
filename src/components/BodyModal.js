@@ -13,6 +13,16 @@ const enableParentScroll = () => {
 
 const noOp = () => { };
 
+const defaultStyle = {
+  overlay: {
+    backgroundColor: '#fafafafa',
+    zIndex: 1,
+  },
+  content: {
+    boxShadow: '0 4px 12px rgba(0,0,0,.15)',
+  },
+};
+
 const BodyModal = props => (
   <Modal
     {...props}
@@ -38,6 +48,10 @@ const BodyModal = props => (
       enableParentScroll();
     }}
     parentSelector={parentSelector}
+    style={{
+      ...defaultStyle,
+      ...props.style,
+    }}
   />
 );
 
@@ -50,15 +64,7 @@ BodyModal.propTypes = {
 BodyModal.defaultProps = {
   onAfterOpen: noOp,
   onAfterClose: noOp,
-  style: { // Default style
-    overlay: {
-      backgroundColor: '#fafafafa',
-      zIndex: 1,
-    },
-    content: {
-      boxShadow: '0 4px 12px rgba(0,0,0,.15)',
-    },
-  },
+  style: {},
 };
 
 export default BodyModal;
