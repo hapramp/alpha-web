@@ -131,7 +131,9 @@ export const fillAnnouncementPost = (competitionId, mode) =>
     const realMode = mode === 'declare_winners' ? 'winners' : mode;
     const state = getState();
     const competition = getCompetitionById(state, competitionId);
-    dispatch(setTitle(competition.title));
+    if (competition) {
+      dispatch(setTitle(competition.title));
+    }
     return haprampAPI.v2.competitions.getCompetitionPostBody(competitionId, realMode)
       .then(result => dispatch(setPostContent(result.body)));
   };

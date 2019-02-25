@@ -12,12 +12,12 @@ import {
   isDeclareInProgress,
   isDeclarePossible as isAllRanksSelected,
 } from './reducer';
-import { isWinnerDeclareAllowed } from '../../reducer';
+import { isWinnerDeclareAllowed, getCompetitionById as getCompetition } from '../../reducer';
 import PrimaryButton from '../../../components/buttons/PrimaryButton';
 
 const DeclareWinners = ({
   competitionId, fetchCompetition, isAnnounceAllowed, isDeclarePossible,
-  isDeclaring, declareWinners,
+  isDeclaring, declareWinners, competition,
 }) => {
   /**
    * Load competition details and check if we
@@ -58,7 +58,7 @@ const DeclareWinners = ({
   return (
     <ViewContainer>
       <div>
-        Declaring winners for {competitionId}.
+        Declaring winners for {`"${competition.title}"`}.
       </div>
       <EntryList competitionId={competitionId} />
       {
@@ -66,7 +66,7 @@ const DeclareWinners = ({
           <ConfirmationModal
             confirmActive={!isDeclaring}
             cancelActive={!isDeclaring}
-            confirmContent="Create and Continue"
+            confirmContent="Declare and Continue"
             cancelContent="Cancel"
             onConfirm={() => declareWinners(competitionId)}
             onCancel={() => setConfirmation(false)}
@@ -103,12 +103,18 @@ DeclareWinners.propTypes = {
   isDeclarePossible: PropTypes.bool.isRequired,
   isDeclaring: PropTypes.bool.isRequired,
   declareWinners: PropTypes.func.isRequired,
+  competition: PropTypes.shape(),
+};
+
+DeclareWinners.defaultProps = {
+  competition: {},
 };
 
 const mapStateToProps = (state, ownProps) => ({
   isAnnounceAllowed: isWinnerDeclareAllowed(state, ownProps.competitionId),
   isDeclarePossible: isAllRanksSelected(state, ownProps.competitionId),
   isDeclaring: isDeclareInProgress(state, ownProps.competitionId),
+  competition: getCompetition(state, ownProps.competitionId),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
