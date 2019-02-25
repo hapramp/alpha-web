@@ -21,11 +21,23 @@ import {
 } from '../../reducer';
 import { getCompetitionById } from '../../actions';
 
+const getInstructionString = (mode, competition) => {
+  const { title } = competition;
+  if (mode === 'declare_winners') {
+    return `Publish the contest announcement blog for "${title}".`;
+  }
+  if (mode === 'declare_winners') {
+    return `Publish the winner announcement blog for "${title}".`;
+  }
+  return 'Publish competition blog.';
+};
+
 const AnnouncementPost = ({
   mode, competitionId, doesCompetitionExist,
   isAnnounceAllowed, fetchCompetition, postContent,
   setPostContent, tags, setTags, title, setTitle,
   fillAnnouncementPost, isRegistering, register,
+  competition,
 }) => {
   /**
    * Fetch competition and use loading variable
@@ -70,9 +82,9 @@ const AnnouncementPost = ({
    */
   return (
     <ViewContainer>
-      <div>
-        Writing {mode} post for competition with ID {competitionId}
-      </div>
+      <h2 style={{ padding: 24 }}>
+        {getInstructionString(mode, competition)}
+      </h2>
       <div>
         <Input
           placeholder="Title"
@@ -120,9 +132,11 @@ AnnouncementPost.propTypes = {
   fillAnnouncementPost: PropTypes.func.isRequired,
   isRegistering: PropTypes.bool.isRequired,
   register: PropTypes.func.isRequired,
+  competition: PropTypes.shape(),
 };
 
 AnnouncementPost.defaultProps = {
+  competition: {},
 };
 
 const mapStateToProps = (state, ownProps) => ({
