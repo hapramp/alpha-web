@@ -128,7 +128,7 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
  */
 export const fillAnnouncementPost = (competitionId, mode) =>
   async (dispatch, getState, { haprampAPI }) => {
-    const realMode = mode === 'declare_winners' ? 'winners' : mode;
+    const realMode = mode === 'declare-winners' ? 'winners' : mode;
     const state = getState();
     const competition = getCompetitionById(state, competitionId);
     if (competition) {

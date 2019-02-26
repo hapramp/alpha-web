@@ -60,7 +60,7 @@ const NewCompetitionDetails = (props) => {
 
       {/* Time range selector */}
       <div className={styles.dateRangeContainer}>
-        <div className={styles.header}>Timings</div>
+        <div className={styles.header}>Timings (24 hour format)</div>
         <div className="uk-grid uk-margin-top">
           {/* Start time */}
           <div className="uk-flex">

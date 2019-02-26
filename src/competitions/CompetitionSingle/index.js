@@ -171,7 +171,7 @@ const CompetitionSingle = ({
           {
             // Render competition winner declation post creation button
             canDeclareWinnersPost && (
-              <Link to={`/competitions/~create/post/${competition.id}/declare_winners`}>
+              <Link to={`/competitions/~create/post/${competition.id}/declare-winners`}>
                 <PrimaryButton style={{ width: 'fit-content', padding: '8px 24px' }}>
                   Post Winner Announcement
                 </PrimaryButton>

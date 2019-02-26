@@ -288,11 +288,7 @@ export const isAnnouncePostAllowed = (state, competitionId) => {
   if (!isAnnounceAllowed(state, competitionId)) {
     return false;
   }
-
   const competition = getCompetitionById(state, competitionId);
-
-  console.log(competition.announce_permlink);
-
   return !competition.announce_permlink;
 };
 
