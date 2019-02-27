@@ -110,7 +110,7 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
        * get a message asking not to retry.
        */
       const errorText = 'There was some error registering the post. If already posted to Steem, do not retry and contact @the1ramp.';
-      console.error('[Unable to register post', reason, errorText);
+      console.error('Unable to register post', reason, errorText);
       notify.danger('There was some error registering the post. If already posted to Steem, do not retry and contact @the1ramp.');
       return dispatch({
         type: actionTypes.registerAndCreatePost.error,
@@ -128,7 +128,7 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
  */
 export const fillAnnouncementPost = (competitionId, mode) =>
   async (dispatch, getState, { haprampAPI }) => {
-    const realMode = mode === 'declare-winners' ? 'winners' : mode;
+    const realMode = mode === 'declare_winners' ? 'winners' : mode;
     const state = getState();
     const competition = getCompetitionById(state, competitionId);
     if (competition) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Description from './newCompetition/Description';
 import Details from './newCompetition/Details';
@@ -25,6 +25,12 @@ export default () => (
       render={({ match }) => {
         const { params } = match;
         const { competitionId, mode } = params;
+
+        // Announcement can be one of these only
+        if (!['declare_winners', 'announce'].find(i => i === mode)) {
+          return <Redirect to="/competitions" />;
+        }
+
         return <AnnouncementPost competitionId={competitionId} mode={mode} />;
       }}
     />,

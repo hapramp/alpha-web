@@ -26,7 +26,7 @@ const getInstructionString = (mode, competition) => {
   if (mode === 'announce') {
     return `Publish the contest announcement blog for "${title}".`;
   }
-  if (mode === 'declare-winners') {
+  if (mode === 'declare_winners') {
     return `Publish the winner announcement blog for "${title}".`;
   }
   return 'Publish competition blog.';
