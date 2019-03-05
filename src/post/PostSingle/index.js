@@ -1,17 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Loadable from 'react-loadable';
 
 import { fixUser } from '../../utils/defaultFixUtils';
 import indexStyles from '../../styles/globals.scss';
 import CustomTags from '../CustomTags';
 import ActionBar from '../ActionBar';
-import Replies from '../Replies/RootReplies';
 import PostUserMeta from '../PostUserMeta';
 import { getCommunitiesForPost } from '../../utils/communityUtils';
 import PostBody from '../PostBody';
 import styles from './styles.scss';
+import Loader from '../../helpers';
 import PostMetaTags from './PostMetaTags';
+
+const Replies = Loadable({
+  loader: () => import('../Replies/RootReplies'),
+  loading: Loader,
+});
 
 class PostSingle extends React.Component {
   componentDidMount() {
