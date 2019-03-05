@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Loadable from 'react-loadable';
 import PropTypes from 'prop-types';
 
 import { loadReplies } from './actions';
@@ -8,12 +7,7 @@ import styles from './styles.scss';
 // import PendingReply from './PendingReply';
 // import { getRepliesForPermlink } from './reducer';
 import { getPostByPermlink } from '../reducer';
-import Loader from '../../helpers';
-
-const Reply = Loadable({
-  loader: () => import('./Reply'),
-  loading: Loader,
-});
+import Reply from './Reply';
 
 class Replies extends React.Component {
   static propTypes = {
