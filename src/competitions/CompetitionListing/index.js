@@ -1,25 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet-async';
+import InfiniteScroller from 'react-infinite-scroller';
 
 import {
   getAllCompetitions as getAllCompetitionsSelector,
-  isCompetitionsFetching,
+  isCompetitionsFetching, hasMore as hasMoreCompetitions,
 } from '../reducer';
 import { getAllCompetitions as getAllCompetitionsAction } from '../actions';
 import styles from './styles.scss';
 import CompetitionCard from '../CompetitionCard';
 import Leaderboard from '../Leaderboard';
+import PostLoading from '../../post/PostLoading';
 
-const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) => {
-  useEffect(() => {
-    if (!isFetching) {
-      getAllCompetitions();
-    }
-  }, true);
-
+const CompetitionListing = ({
+  isFetching, competitions, getAllCompetitions, hasMore,
+}) => {
+  const [hasFetchedOnce, setFetchedOnce] = useState(false);
   return (
     <div className={`${styles.container}`}>
       <Helmet>
@@ -35,7 +34,19 @@ const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) =>
       <div>
         <Leaderboard />
       </div>
-      <div className="uk-grid">
+      <InfiniteScroller
+        pageStart={0}
+        loadMore={() => {
+          if (!isFetching) {
+            // Reload if fetching for the first time
+            getAllCompetitions(!hasFetchedOnce);
+            setFetchedOnce(true);
+          }
+        }}
+        hasMore={hasMore}
+        className="uk-grid"
+        loader={<div className="uk-width-1-2@m"><PostLoading /></div>}
+      >
         {
           competitions.map(competition => (
             <div key={competition.id} className={`uk-width-1-2@m ${styles.competitionCardContainer}`}>
@@ -43,7 +54,7 @@ const CompetitionListing = ({ isFetching, competitions, getAllCompetitions }) =>
             </div>
           ))
         }
-      </div>
+      </InfiniteScroller>
     </div>
   );
 };
@@ -52,11 +63,13 @@ CompetitionListing.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   competitions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   getAllCompetitions: PropTypes.func.isRequired,
+  hasMore: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   competitions: getAllCompetitionsSelector(state),
   isFetching: isCompetitionsFetching(state),
+  hasMore: hasMoreCompetitions(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

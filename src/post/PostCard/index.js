@@ -66,7 +66,10 @@ const Post = (props) => {
   /* Render */
   return (
     <LazyLoad height={800} once>
-      <div className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer}`}>
+      <div
+        className={`uk-margin-bottom ${props.border ? styles.postContainerBorder : ''} ${indexStyles.white} ${styles.postContainer} ${props.className}`}
+        style={props.style}
+      >
         {
           props.showPrize
           && props.post.rank
@@ -104,6 +107,8 @@ Post.propTypes = {
   maintainAspectRatio: PropTypes.bool,
   showPrize: PropTypes.bool,
   showPercentByUser: PropTypes.string,
+  style: PropTypes.shape(),
+  className: PropTypes.string,
 };
 
 Post.defaultProps = {
@@ -112,6 +117,8 @@ Post.defaultProps = {
   maintainAspectRatio: false,
   showPrize: false,
   showPercentByUser: null,
+  style: {},
+  className: '',
 };
 
 const mapStateToProps = (state, ownProps) => {

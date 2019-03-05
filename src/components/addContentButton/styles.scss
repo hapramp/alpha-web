@@ -59,11 +59,20 @@
   line-height: 48px;
   background: #FFFFFF;
   box-shadow: 0 0 4px 0 rgba(0,0,0,0.12), 0 4px 4px 0 rgba(0,0,0,0.12);
+  text-align: center;
+  a {
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
+    span {
+      width: 100%;
+    }
+  }
 }
 
 .iconContainer {
-  width: 48px;
-  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   background-color: $primary-color;
   border-radius: 50%;
   line-height: 48px;

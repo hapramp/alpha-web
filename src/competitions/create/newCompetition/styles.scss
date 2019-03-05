@@ -1,0 +1,83 @@
+@import '../../../styles/variables';
+
+.bottomBar {
+  background: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  .button {
+    padding: 8px 24px;
+    margin-left: 16px;
+  }
+  padding: 24px;
+}
+
+.header {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: bold;
+}
+
+.dateRangeContainer {
+  padding: 8px;
+  margin-bottom: 16px;
+  .inputsContainer {
+    width: 160px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.38);
+    > div {
+      align-items: end;
+    }
+    .label {
+      width: 96px;
+    }
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid rgba(99, 69, 69, 0.38);
+      text-align: center;
+      padding-bottom: 4px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    input:hover, input:focus {
+      border-bottom: 1px solid $primary-color;
+    }
+  }
+}
+
+.prizesEntry {
+  padding: 8px;
+  .importantMark {
+    color: red;
+  }
+  input {
+    margin-left: 8px;
+    border: none;
+    border-bottom: 1px solid rgba(99, 69, 69, 0.38);
+    padding-bottom: 4px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  input:hover, input:focus {
+    border-bottom: 1px solid $primary-color;
+  }
+  .prizeLabel {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.7);
+    width: 72px;
+  }
+}
+
+.imageContainer {
+  padding: 8px;
+  .button {
+    width: max-content;
+    padding: 8px 24px;
+  }
+}

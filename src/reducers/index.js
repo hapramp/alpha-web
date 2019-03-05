@@ -17,7 +17,6 @@ import registerReducer from '../register/reducer';
 import competitionsReducer from '../competitions/reducer';
 import microCommunitiesReducer from '../microCommunities/reducer';
 import onboardReducer from '../onboard/reducer';
-import competitionsLeaderboardReducer from '../competitions/Leaderboard/reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -37,5 +36,4 @@ export default combineReducers({
   competitions: competitionsReducer,
   microCommunities: microCommunitiesReducer,
   onboard: onboardReducer,
-  competitionsLeaderboard: competitionsLeaderboardReducer,
 });

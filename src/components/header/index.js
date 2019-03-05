@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import logo from './logo.png';
 import { loadCommunities } from '../../actions/communityActions';
+import { getAllMicroCommunities } from '../../microCommunities/actions';
 import UserAvatar from '../UserAvatar';
 import SignInButton from '../buttons/SignInButton';
 
 class Header extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadCommunities();
+    this.props.getAllMicroCommunities();
   }
 
   getNavbarRight() {
@@ -85,6 +87,7 @@ Header.propTypes = {
   isLoggedIn: PropTypes.bool,
   loadCommunities: PropTypes.func,
   username: PropTypes.string,
+  getAllMicroCommunities: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {
@@ -100,5 +103,5 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(connect(mapStateToProps, {
-  loadCommunities,
+  loadCommunities, getAllMicroCommunities,
 })(Header));

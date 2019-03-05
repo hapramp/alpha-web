@@ -10,6 +10,11 @@ export default class TagsSelector extends React.Component {
     addTag: PropTypes.func,
     removeTag: PropTypes.func,
     className: PropTypes.string,
+    PrefixComponent: PropTypes.func,
+    prefixPropsSelector: PropTypes.func,
+    headerText: PropTypes.string,
+    disabled: PropTypes.bool,
+    style: PropTypes.shape(),
   }
 
   static defaultProps = {
@@ -17,6 +22,11 @@ export default class TagsSelector extends React.Component {
     addTag: () => { },
     removeTag: () => { },
     className: '',
+    PrefixComponent: () => '#',
+    prefixPropsSelector: () => ({}),
+    headerText: 'Tags',
+    disabled: false,
+    style: {},
   }
 
   constructor(props) {
@@ -37,7 +47,7 @@ export default class TagsSelector extends React.Component {
       const { tagInputText } = this.state;
       const { addTag } = this.props;
 
-      if (tagInputText.length > 0) {
+      if (tagInputText.length > 0 && !this.props.disabled) {
         addTag(tagInputText);
       }
 
@@ -48,12 +58,15 @@ export default class TagsSelector extends React.Component {
   removeTag = tag => () => this.props.removeTag(tag);
 
   render() {
-    const { tags } = this.props;
+    const {
+      tags, PrefixComponent, prefixPropsSelector, headerText,
+      disabled, style,
+    } = this.props;
     const { tagInputText } = this.state;
     return (
-      <div className={`${this.props.className} uk-container`}>
+      <div style={style} className={`${this.props.className} uk-container`}>
         <div className="uk-margin-small-bottom">
-          <span>Tags</span>
+          <span>{headerText}</span>
         </div>
 
         <div className="uk-grid">
@@ -68,7 +81,7 @@ export default class TagsSelector extends React.Component {
                 tabIndex={-1}
               >
                 <span className={styles.tagContainer}>
-                  #{tag}
+                  <PrefixComponent {...prefixPropsSelector(tag)} />{tag}
                   <img
                     className={styles.cancelButton}
                     src={getIcon('cancel', 'outline')}
@@ -79,12 +92,16 @@ export default class TagsSelector extends React.Component {
             ))
           }
           <div>
-            <input
-              className={styles.inputContainer}
-              value={tagInputText}
-              onChange={this.handleTagInputChange}
-              onKeyUp={this.handleTagInputKeyUp}
-            />
+            {
+              !disabled && (
+                <input
+                  className={styles.inputContainer}
+                  value={tagInputText}
+                  onChange={this.handleTagInputChange}
+                  onKeyUp={this.handleTagInputKeyUp}
+                />
+              )
+            }
           </div>
         </div>
       </div>

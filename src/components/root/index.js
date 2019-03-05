@@ -80,16 +80,21 @@ const MicroCommunitySingle = Loadable({
   loader: () => import('../../microCommunities/MicroCommunitySingle'),
   loading: Loading,
 });
+const CreateCompetitionsRoute = Loadable({
+  loader: () => import('../../competitions/create/routes'),
+  loading: Loading,
+});
 
 const bottomBarWhitelistURLs = [
   '^/feed/.*$',
   '^/@.*$',
   '^/competitions.*$',
 ];
-
 const bottomBarBlacklistURLs = [
   '^/@.*?/.*$',
+  '^/competitions/~create.*$',
 ];
+
 const showBottomBar = (location, authUsername) => {
   // Special case for not showing bottom bar on other's profiles
   if (
@@ -180,6 +185,15 @@ const Root = ({
       <Route exact path="/profile/edit" component={authRequiredComponent(EditProfile)} />
 
       <Route exact path="/competitions" component={CompetitionListing} />
+      <Route
+        path="/competitions/~create"
+        render={(props) => {
+          if (isLoggedIn) {
+            return <CreateCompetitionsRoute {...props} />;
+          }
+          return <Redirect to="/competitions" />;
+        }}
+      />
       <Route exact path="/competitions/:competitionId" component={CompetitionSingle} />
 
       <Route exact path="/community/:tag" component={MicroCommunitySingle} />

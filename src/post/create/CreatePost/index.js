@@ -63,7 +63,7 @@ class CreatePost extends React.Component {
       return <Redirect to={`/@${this.props.fullPermlink}`} />;
     }
 
-    const { communities, activeCommunity, hashtags } = this.props;
+    const { activeCommunity, hashtags } = this.props;
 
     return (
       <div className={['uk-flex', 'uk-flex-center'].join(' ')}>
@@ -88,7 +88,6 @@ class CreatePost extends React.Component {
 
           {/* Community section */}
           <CommunitySelector
-            communities={communities}
             selectedCommunities={activeCommunity}
             onClick={c => this.props.changeCommunity(c.id)}
             style={{ marginBottom: 24 }}
@@ -104,10 +103,6 @@ CreatePost.propTypes = {
   resetPostCreate: PropTypes.func,
   postCreated: PropTypes.bool,
   fullPermlink: PropTypes.string,
-  communities: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    tag: PropTypes.string,
-  })),
   setHashtags: PropTypes.func,
   clearError: PropTypes.func,
   username: PropTypes.string.isRequired,
@@ -127,7 +122,6 @@ CreatePost.defaultProps = {
   resetPostCreate: () => {},
   postCreated: false,
   fullPermlink: '',
-  communities: [],
   setHashtags: () => {},
   clearError: () => {},
   activeCommunity: [],
@@ -141,7 +135,6 @@ CreatePost.defaultProps = {
 const mapStateToProps = state => ({
   userFullName: state.authUser.name,
   username: state.authUser.username,
-  communities: state.communities.communities,
   activeCommunity: state.createPost.community,
   media: state.createPost.media,
   hashtags: state.createPost.hashtags,

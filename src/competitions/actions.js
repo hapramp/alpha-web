@@ -2,32 +2,69 @@ import { push } from 'connected-react-router';
 
 import { addPosts } from '../post/actions';
 import { addTag as addArticleTag } from '../post/create/CreateArticle/actions';
+import { getLastCompetitionId } from './reducer';
 
+const competitionListLoadCatchSize = 6;
 const baseName = '@competitions';
 
 export const actionTypes = {
   getAll: {
-    init: `${baseName}/get_all/init`,
-    done: `${baseName}/get_all/done`,
-    error: `${baseName}/get_all/error`,
+    init: `${baseName}/getAll/init`,
+    done: `${baseName}/getAll/done`,
+    error: `${baseName}/getAll/error`,
   },
   getPosts: {
-    init: `${baseName}/get_posts/init`,
-    done: `${baseName}/get_posts/done`,
-    error: `${baseName}/get_posts/error`,
+    init: `${baseName}/getPosts/init`,
+    done: `${baseName}/getPosts/done`,
+    error: `${baseName}/getPosts/error`,
   },
   getWinners: {
-    init: `${baseName}/get_winners/init`,
-    done: `${baseName}/get_winners/done`,
-    error: `${baseName}/get_winners/error`,
+    init: `${baseName}/getWinners/init`,
+    done: `${baseName}/getWinners/done`,
+    error: `${baseName}/getWinners/error`,
+  },
+  getCompetition: {
+    init: `${baseName}/getCompetition/init`,
+    done: `${baseName}/getCompetition/done`,
+    error: `${baseName}/getCompetition/error`,
   },
 };
 
-export const getAllCompetitions = () => (dispatch, getState, { haprampAPI }) => {
-  dispatch({ type: actionTypes.getAll.init });
-  return haprampAPI.v2.competitions.getAll()
-    .then(results => dispatch({ type: actionTypes.getAll.done, results }))
-    .catch(reason => dispatch({ type: actionTypes.getAll.error, reason }));
+export const getAllCompetitions = (reload = true) => (dispatch, getState, { haprampAPI }) => {
+  const state = getState();
+  dispatch({ type: actionTypes.getAll.init, reload });
+  let lastId;
+  if (!reload) {
+    lastId = getLastCompetitionId(state);
+  }
+  return haprampAPI.v2.competitions.getCompetitions(competitionListLoadCatchSize, lastId)
+    .then(result => dispatch({
+      type: actionTypes.getAll.done,
+      results: result.competitions,
+      reload,
+    }))
+    .catch(reason => dispatch({ type: actionTypes.getAll.error, reason, reload }));
+};
+
+export const getCompetitionById = competitionId => (dispatch, getState, { haprampAPI }) => {
+  dispatch({
+    type: actionTypes.getCompetition.init,
+    competitionId,
+  });
+  return haprampAPI.v2.competitions.getCompetition(competitionId)
+    .then(result => dispatch({
+      type: actionTypes.getCompetition.done,
+      competitionId,
+      result,
+    }))
+    .catch((reason) => {
+      console.error('[Get Competition] Error fetching competition', reason);
+      return dispatch({
+        type: actionTypes.getCompetition.error,
+        competitionId,
+        reason,
+      });
+    });
 };
 
 export const getPostsForCompetition = competitionId => (dispatch, getState, { haprampAPI }) => {
