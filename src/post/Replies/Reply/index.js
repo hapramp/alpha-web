@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TimeAgo from 'react-time-ago';
-import Loadable from 'react-loadable';
 import { bindActionCreators } from 'redux';
 
 import UserAvatar from '../../../components/UserAvatar';
@@ -12,17 +11,8 @@ import { fixUser } from '../../../utils/defaultFixUtils';
 import styles from './styles.scss';
 import { getAuthUsername } from '../../../reducers/authUserReducer';
 import { getCompleteHTML } from '../../utils';
-import Loader from '../../../helpers';
-
-const CreateReply = Loadable({
-  loader: () => import('../CreateReply'),
-  loading: Loader,
-});
-
-const Replies = Loadable({
-  loader: () => import('../'),
-  loading: Loader,
-});
+import CreateReply from '../CreateReply';
+import Replies from '../';
 
 class Reply extends React.Component {
   static propTypes = {
