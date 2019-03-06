@@ -195,10 +195,10 @@ const CompetitionSingle = ({
           <h4>JUDGES</h4>
           <div className="uk-grid">
             {
-              competition.judges.map(judge => (
-                <div className={styles.judgeMeta} key={judge.username}>
-                  <UserAvatar username={judge.username} size="small" />
-                  <div>{judge.username}</div>
+              competition.judge_usernames.map(judge => (
+                <div className={styles.judgeMeta} key={judge}>
+                  <UserAvatar username={judge} size="small" />
+                  <div>{judge}</div>
                 </div>
               ))
             }
