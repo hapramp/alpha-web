@@ -140,7 +140,7 @@ const NewCompetitionDetails = (props) => {
           </div>
           <div className="uk-flex uk-margin-small-bottom">
             <div className={styles.prizeLabel}>
-              3<sup>nd</sup> Prize:
+              2<sup>nd</sup> Prize:
             </div>
             <div>
               <input
