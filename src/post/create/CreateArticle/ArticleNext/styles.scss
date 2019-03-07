@@ -1,3 +1,16 @@
+.articleNextWrapper {
+  background-color: white;
+  width: 100vw;
+  min-height: calc(100vh - 72px);
+  @media screen and (max-width: 1297px) {
+    min-height: calc(100vh - 48px);
+  }
+}
+
+.articleNextContainer {
+  max-width: 800px;
+}
+
 .communitySelectorContainer {
   margin-bottom: 56px;
 

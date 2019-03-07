@@ -1,12 +1,13 @@
 
 .viewWrapper {
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 92px);
   background-color: white;
   padding-top: 40px;
 
   @media screen and (max-width: 1297px) {
     margin-top: -20px;
+    min-height: calc(100vh - 48px);
   }
 }
 

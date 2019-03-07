@@ -1,7 +1,19 @@
 @import "../../../styles/_variables.scss";
 
+.editorWrapper {
+  background-color: white;
+  width: 100vw;
+  min-height: calc(100vh - 72px);
+  @media screen and (max-width: 1297px) {
+    margin-top: -24px;
+    min-height: calc(100vh - 48px);
+  }
+}
+
 .editorContainer {
   background-color: white;
+  padding-top: 40px;
+  max-width: 800px;
   @media screen and (max-width: 530px) {
     padding-left: 0 !important;
     padding-right: 0 !important;

@@ -66,7 +66,7 @@ class CreatePost extends React.Component {
     const { activeCommunity, hashtags } = this.props;
 
     return (
-      <div className={['uk-flex', 'uk-flex-center'].join(' ')}>
+      <div className={[styles.createPostModalWrapper, 'uk-flex', 'uk-flex-center'].join(' ')}>
         <div className={styles.createPostModal}>
           {/* Avatar and editor section */}
           <div className="uk-flex">
