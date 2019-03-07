@@ -1,10 +1,19 @@
 @import "../../../styles/_variables.scss";
 
+.createPostModalWrapper {
+  background-color: white;
+  width: 100vw;
+  min-height: calc(100vh - 72px);
+  @media screen and (max-width: 1297px) {
+    min-height: calc(100vh - 48px);
+  }
+}
+
 .createPostModal {
   background: white;
   max-width: 1020px;
   padding: 56px;
-  margin-top: 16px;
+  margin-top: 40px;
   width: 100vw;
   box-sizing: border-box;
 

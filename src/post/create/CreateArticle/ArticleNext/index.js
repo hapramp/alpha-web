@@ -29,32 +29,34 @@ class ArticleNext extends React.Component {
 
   render() {
     return (
-      <div className={`uk-container uk-padding ${indexStyles.white}`}>
-        <CommunitySelector
-          selectedCommunities={this.props.selectedCommunities}
-          onClick={c => this.props.changeCommunity(c.id)}
-          className={styles.communitySelectorContainer}
-        />
-        <TagsSelector
-          tags={this.props.tags}
-          addTag={this.props.addTag}
-          removeTag={this.props.removeTag}
-          className={styles.tagsSelectorContainer}
-        />
-        <div className="uk-flex uk-flex-right">
-          <Link to="/create/article">
-            <DefaultButton
-              className="uk-margin-small-right"
+      <div className={styles.articleNextWrapper}>
+        <div className={`uk-container uk-padding ${indexStyles.white} ${styles.articleNextContainer}`}>
+          <CommunitySelector
+            selectedCommunities={this.props.selectedCommunities}
+            onClick={c => this.props.changeCommunity(c.id)}
+            className={styles.communitySelectorContainer}
+          />
+          <TagsSelector
+            tags={this.props.tags}
+            addTag={this.props.addTag}
+            removeTag={this.props.removeTag}
+            className={styles.tagsSelectorContainer}
+          />
+          <div className="uk-flex uk-flex-right">
+            <Link to="/create/article">
+              <DefaultButton
+                className="uk-margin-small-right"
+              >
+                Back
+              </DefaultButton>
+            </Link>
+            <PrimaryButton
+              disabled={!this.props.isPublishEnabled}
+              onClick={this.props.createArticle}
             >
-              Back
-            </DefaultButton>
-          </Link>
-          <PrimaryButton
-            disabled={!this.props.isPublishEnabled}
-            onClick={this.props.createArticle}
-          >
-            Publish
-          </PrimaryButton>
+              Publish
+            </PrimaryButton>
+          </div>
         </div>
       </div>
     );
