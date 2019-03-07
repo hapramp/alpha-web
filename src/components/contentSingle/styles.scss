@@ -1,6 +1,11 @@
 .contentSingleContainer {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
+  width: 100vw;
+  min-height: calc(100vh - 72px);
+  background-color: white;
+  @media screen and (max-width: 1297px) {
+    margin-top: -24px;
+  }
 }
