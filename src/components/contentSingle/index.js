@@ -18,7 +18,7 @@ class ContentSingle extends React.Component {
     }
 
     return (
-      <div className={`uk-margin-small-top ${styles.contentSingleContainer}`}>
+      <div className={`${styles.contentSingleContainer}`}>
         <PostSingle postPermlink={`${this.props.post.author}/${this.props.post.permlink}`} />
       </div>
     );
