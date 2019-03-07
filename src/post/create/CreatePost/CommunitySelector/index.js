@@ -53,7 +53,7 @@ CommunitySelector.defaultProps = {
   selectedCommunities: [],
   onClick: () => {},
   className: '',
-  backgroundColor: 'rgba(0, 0, 0, 0.38)',
+  backgroundColor: '#f5f5f5',
   interestBackground: 'white',
 };
 

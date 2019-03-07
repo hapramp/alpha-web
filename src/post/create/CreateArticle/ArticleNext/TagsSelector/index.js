@@ -64,7 +64,7 @@ export default class TagsSelector extends React.Component {
     } = this.props;
     const { tagInputText } = this.state;
     return (
-      <div style={style} className={`${this.props.className} uk-container`}>
+      <div style={style} className={`${this.props.className}`}>
         <div className="uk-margin-small-bottom">
           <span>{headerText}</span>
         </div>
