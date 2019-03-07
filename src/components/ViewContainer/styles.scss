@@ -1,12 +1,34 @@
+
+.viewWrapper {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: white;
+  padding-top: 40px;
+
+  @media screen and (max-width: 1297px) {
+    margin-top: -20px;
+  }
+}
+
 .viewContainer {
   max-width: 800px;
   width: 100vw;
-  margin: 36px auto;
+  margin-left: auto;
+  margin-right: auto;
   background: white;
 
-  > div {
-    @media screen and (min-width: 700px) {
+  > div:not(:last-child) {
+    @media screen and (min-width: 800px) {
       padding: 24px;
+    }
+
+    @media screen and (max-width: 800px) {
+      padding: 40px;
+    }
+
+    @media screen and (max-width: 500px) {
+      padding: 24px;
+      margin-left: 0 !important;
     }
   }
 }
