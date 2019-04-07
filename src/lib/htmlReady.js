@@ -169,6 +169,15 @@ function img(state, child) {
   }
 }
 
+/**
+ * Returns a proxy URL for the image.
+ *
+ * In this case, we will simply use the original
+ * image URL
+ * @param {string} url URL for the image
+ */
+const getProxyImageURL = url => url;
+
 // For all img elements with non-local URLs, prepend the proxy URL (e.g. `https://img0.steemit.com/0x0/`)
 function proxifyImages(doc) {
   if (!doc) return;
