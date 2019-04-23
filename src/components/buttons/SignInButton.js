@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getLoginURL as getLoginURLAction } from '../../actions/loginActions';
+import { showSignIn as showSignInAction } from '../../onboard/actions';
 import DefaultButton from './DefaultButton';
 
 /**
@@ -15,14 +15,12 @@ import DefaultButton from './DefaultButton';
  * for SteemConnect
  */
 const SignInButton = ({
-  location, children, getLoginURL, ButtonComponent,
-  ...props
+  location, children, ButtonComponent,
+  showSignIn, ...props
 }) => (
-  <a href={getLoginURL(location.pathname)}>
-    <ButtonComponent {...props}>
-      {children}
-    </ButtonComponent>
-  </a>
+  <ButtonComponent onClick={showSignIn} {...props}>
+    {children}
+  </ButtonComponent>
 );
 
 SignInButton.propTypes = {
@@ -34,8 +32,8 @@ SignInButton.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]),
-  getLoginURL: PropTypes.func.isRequired,
   ButtonComponent: PropTypes.func,
+  showSignIn: PropTypes.func.isRequired,
 };
 
 SignInButton.defaultProps = {
@@ -44,7 +42,7 @@ SignInButton.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getLoginURL: getLoginURLAction,
+  showSignIn: showSignInAction,
 }, dispatch);
 
 export default withRouter(connect(null, mapDispatchToProps)(SignInButton));
