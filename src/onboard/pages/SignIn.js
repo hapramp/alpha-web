@@ -1,14 +1,22 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 
 import PrimaryButton from '../.././components/buttons/PrimaryButton';
 import SignInButton from '../.././components/buttons/SignInButton';
+import { getLoginURL } from '../../actions/loginActions';
 
-export default () => (
+const SignInModal = props => (
   <div className={`uk-text-center uk-padding ${styles.signIn}`}>
     <div className={styles.title}>Start using 1Ramp!</div>
-    <SignInButton ButtonComponent={PrimaryButton} className={`uk-align-center ${styles.signInButton}`}>
+    <SignInButton
+      ButtonComponent={PrimaryButton}
+      className={`uk-align-center ${styles.signInButton}`}
+      onClick={() => { window.location = props.getLoginURL(); }}
+    >
       Sign in using SteemConnect
     </SignInButton>
     <div className={styles.signUpHelp}>
@@ -27,3 +35,14 @@ export default () => (
     </div>
   </div>
 );
+
+SignInModal.propTypes = {
+  getLoginURL: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  { getLoginURL },
+  dispatch,
+);
+
+export default connect(null, mapDispatchToProps)(SignInModal);
