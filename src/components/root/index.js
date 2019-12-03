@@ -17,6 +17,7 @@ import { getAuthUsername } from '../../reducers/authUserReducer';
 import Header from '../header';
 import BottomBar from '../bottomBar';
 import Onboard from '../../onboard/Onboard';
+import Footer from '../Footer';
 
 const Loading = () => <div className="uk-text-center">Loading...</div>;
 
@@ -203,6 +204,7 @@ const Root = ({
     </Switch>
     {bottomBarVisible && <BottomBar />}
     <Onboard />
+    <Footer />
   </div>
 );
 
