@@ -6,6 +6,7 @@ import steem from 'steem';
 import Promise from 'bluebird';
 import extend from 'lodash/extend';
 import getSlug from 'speakingurl';
+import hivesigner from 'hivesigner';
 
 import sc2 from '../lib/sc2';
 import constants from './constants';
@@ -384,5 +385,59 @@ SteemAPI.sc2Operations = {
 };
 
 SteemAPI.steem = steem;
+
+SteemAPI.hivesignerClient = hivesigner.Initialize(constants.HIVESIGNER.CONFIG);
+SteemAPI.hivesignerOperations = {
+  getLoginURL: state => SteemAPI.hivesignerClient.getLoginURL(state || {}),
+
+  vote: (voter, author, permlink, power) => new Promise((resolve, reject) =>
+    SteemAPI.hivesignerClient.vote(
+      voter, author, permlink,
+      power * 100, getSteemResolver(resolve, reject),
+    )),
+
+  createReply: (parentAuthor, parentPermlink, author, body) => new Promise((resolve, reject) => {
+    const jsonMetadata = { app: appName };
+    const permlink = getCommentPermlink(parentAuthor, parentAuthor);
+    SteemAPI.hivesignerClient.comment(
+      parentAuthor, parentPermlink, author,
+      permlink, '', body, jsonMetadata, getSteemResolver(resolve, reject),
+    );
+  }),
+
+  createPost: (author, body, tags, content, permlink, title = '') =>
+    new Promise((resolve, reject) => {
+      const commentObj = {
+        parentAuthor: '',
+        parentPermlink: 'the1ramp',
+        author,
+        permlink,
+        title,
+        body,
+        jsonMetadata: {
+          tags,
+          app: appName,
+          // content,
+        },
+      };
+      SteemAPI.hivesignerClient.comment(
+        commentObj.parentAuthor, commentObj.parentPermlink, commentObj.author,
+        commentObj.permlink, commentObj.title, commentObj.body, commentObj.jsonMetadata,
+        getSteemResolver(resolve, reject),
+      );
+    }),
+
+  follow: (follower, following, unfollow = false) => new Promise((resolve, reject) => (
+    unfollow ? (
+      SteemAPI.hivesignerClient
+        .unfollow(follower, following, getSteemResolver(resolve, reject))
+    )
+      : (
+        SteemAPI.hivesignerClient
+          .follow(follower, following, getSteemResolver(resolve, reject))
+      )
+  )),
+};
+
 
 export default SteemAPI;

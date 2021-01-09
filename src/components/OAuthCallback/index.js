@@ -14,7 +14,7 @@ const OAuthCallback = (props) => {
   const expiresIn = parseInt(params.get('expires_in'), 10) / 60 / 60 / 24; // Convert seconds to days
   Cookie.set('access_token', accessToken, { expires: expiresIn });
   Cookie.set('username', username, { expires: expiresIn });
-  steemAPI.sc2Api.setAccessToken(accessToken);
+  steemAPI.hivesignerClient.setAccessToken(accessToken);
   getStore().dispatch(fakeLogin());
   // state is passed by the application when initiating sign in, redirect to the same path
   const state = params.get('state') || '';

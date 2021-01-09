@@ -109,7 +109,7 @@ export const createPost = post => async (dispatch, getState, { steemAPI, hapramp
 
   enhancedPost = addFooter(enhancedPost, author, permlink);
 
-  return steemAPI.sc2Operations.createPost(author, enhancedPost, tags, post, permlink)
+  return steemAPI.hivesignerOperations.createPost(author, enhancedPost, tags, post, permlink)
     .then(() => dispatch({ type: actionTypes.POST_CREATED, fullPermlink }))
     .catch((e) => {
       console.error('Steem error', e);

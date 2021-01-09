@@ -24,7 +24,7 @@ const store = getStore();
 const accessToken = Cookie.get('access_token');
 if (accessToken) {
   getStore().dispatch(fakeLogin());
-  steemAPI.sc2Api.setAccessToken(accessToken);
+  steemAPI.hivesignerClient.setAccessToken(accessToken);
 }
 
 ReactDOM.render(

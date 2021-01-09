@@ -79,7 +79,7 @@ export const registerAndCreatePost = (competitionId, announcementMode) =>
     const permlink = await steemAPI.createPermlink(title, author, '', '');
 
     // Start creating post
-    return steemAPI.sc2Operations.createPost(
+    return steemAPI.hivesignerClient.createPost(
       author, body, tags, null, permlink,
       title,
     ).then(() => {

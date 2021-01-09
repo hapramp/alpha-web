@@ -15,7 +15,7 @@ const getUserIcon = (isLoggedIn, authUsername) => {
   if (isLoggedIn) {
     return <Link to={`/@${authUsername}`}>{UserButton}</Link>;
   }
-  return <a href={steemAPI.sc2Operations.getLoginURL()}>{UserButton}</a>;
+  return <a href={steemAPI.hivesignerClient.getLoginURL()}>{UserButton}</a>;
 };
 
 const BottomBar = props => (

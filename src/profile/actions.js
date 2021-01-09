@@ -59,7 +59,7 @@ export const getUserFeeds = username => (dispatch, getState, { haprampAPI }) => 
 };
 
 export const updateProfile = data => (dispatch, getState, { steemAPI }) => {
-  const url = steemAPI.sc2Api.sign(
+  const url = steemAPI.hivesignerClient.sign(
     'profile-update',
     data,
   );

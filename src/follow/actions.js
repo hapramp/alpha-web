@@ -48,7 +48,7 @@ export const follow = username => (dispatch, getState, { steemAPI, notify }) => 
   }
 
   dispatch({ type: actionTypes.FOLLOW_INIT, following: username, follower: currentUser });
-  return steemAPI.sc2Operations.follow(currentUser, username)
+  return steemAPI.hivesignerClient.follow(currentUser, username)
     .then(() => dispatch({
       type: actionTypes.FOLLOW_DONE,
       following: username,
@@ -70,7 +70,7 @@ export const unfollow = username => (dispatch, getState, { steemAPI, notify }) =
   }
 
   dispatch({ type: actionTypes.UNFOLLOW_INIT, following: username, follower: currentUser });
-  return steemAPI.sc2Operations.follow(localStorage.getItem('username'), username, true)
+  return steemAPI.hivesignerClient.follow(localStorage.getItem('username'), username, true)
     .then(() => dispatch({
       type: actionTypes.UNFOLLOW_DONE,
       following: username,

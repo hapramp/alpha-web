@@ -37,7 +37,7 @@ export const addReply = (parentAuthor, parentPermlink, body) =>
     dispatch({
       type: actionTypes.ADD_REPLY_INIT, parentAuthor, parentPermlink, body, username,
     });
-    return steemAPI.sc2Operations.createReply(parentAuthor, parentPermlink, username, body)
+    return steemAPI.hivesignerClient.createReply(parentAuthor, parentPermlink, username, body)
       .then(result => dispatch({
         type: actionTypes.ADD_REPLY_DONE, parentAuthor, parentPermlink, body, result, username,
       }))

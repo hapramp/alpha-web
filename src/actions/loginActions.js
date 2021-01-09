@@ -78,8 +78,8 @@ export const logout = () => (dispatch, getState, { steemAPI }) => {
   Cookie.remove('access_token');
   Cookie.remove('1ramp_token');
   dispatch({ type: actionTypes.LOG_OUT_DONE });
-  return steemAPI.sc2Api.revokeToken();
+  return steemAPI.hivesignerClient.revokeToken();
 };
 
 export const getLoginURL = state =>
-  (dispatch, getState, { steemAPI }) => steemAPI.sc2Api.getLoginURL(state);
+  (dispatch, getState, { steemAPI }) => steemAPI.hivesignerClient.getLoginURL(state);

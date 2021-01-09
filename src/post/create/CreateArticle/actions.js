@@ -71,7 +71,7 @@ export const createArticle = () => async (dispatch, getState, { steemAPI, notify
     getMarkdownText(state) : stateToHTML(articleContent.getCurrentContent());
   const contentHTMLWithFooter = addFooter(contentHTML, author, permlink);
 
-  return steemAPI.sc2Operations.createPost(
+  return steemAPI.hivesignerOperations.createPost(
     author, contentHTMLWithFooter, allTags,
     articleContent, permlink, title,
   ).then(() => {

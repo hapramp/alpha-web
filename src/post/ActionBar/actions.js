@@ -17,7 +17,7 @@ export const ratePost = (author, permlink, vote) => (dispatch, getState, { steem
   dispatch({
     type: actionTypes.VOTE_POST_INIT, author, permlink, vote,
   });
-  return steemAPI.sc2Operations.vote(username, author, permlink, vote * 20)
+  return steemAPI.hivesignerClient.vote(username, author, permlink, vote * 20)
     .then(() => {
       dispatch({ type: actionTypes.VOTE_POST_DONE, author, permlink });
     }).catch((reason) => {
