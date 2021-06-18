@@ -53,7 +53,7 @@
     "sjcl": "^1.0.7",
     "speakingurl": "^14.0.1",
     "steem": "^0.7.1",
-    "striptags": "2.2.1",
+    "striptags": "3.2.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "text-ellipsis": "^1.0.3",
     "twitter-text": "^2.0.4",
