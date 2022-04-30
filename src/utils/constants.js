@@ -28,6 +28,13 @@ export default {
       scope: ['comment', 'vote', 'delete_comment', 'comment_options', 'custom_json'],
     },
   },
+  HIVESIGNER: {
+    CONFIG: {
+      app: 'the1ramp',
+      callbackURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/_oauth/' : 'https://alpha.hapramp.com/_oauth/',
+      scope: ['comment', 'vote', 'delete_comment', 'comment_options', 'custom_json'],
+    },
+  },
 };
 
 export const ownUrl = /^(localhost|alpha\.1ramp\.io)$/;

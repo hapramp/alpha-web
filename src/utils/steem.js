@@ -6,8 +6,9 @@ import steem from 'steem';
 import Promise from 'bluebird';
 import extend from 'lodash/extend';
 import getSlug from 'speakingurl';
+import { Client } from 'hivesigner';
 
-import sc2 from '../lib/sc2';
+// import sc2 from '../lib/sc2';
 import constants from './constants';
 
 const appVersion = require('../../package.json').version;
@@ -335,7 +336,16 @@ class SteemAPI {
   }
 }
 
-SteemAPI.sc2Api = sc2.Initialize(constants.SC2.CONFIG);
+/**
+ * The following section bluntly replaces Steem Connect 2 SDK
+ * functionalities with Hivesigner.
+ * Not all the functions have been tested entirely, and will
+ * have to be checked before finalizing everything.
+ */
+// SteemAPI.sc2Api = sc2.Initialize(constants.SC2.CONFIG);
+SteemAPI.sc2Api = new Client(constants.HIVESIGNER.CONFIG);
+
+
 SteemAPI.sc2Operations = {
   // Getting URL for logging in to the app. Opens SteemConnect OAuth page
   getLoginURL: state => SteemAPI.sc2Api.getLoginURL(state || {}),
