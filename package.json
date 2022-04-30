@@ -58,7 +58,7 @@
     "text-ellipsis": "^1.0.3",
     "twitter-text": "^2.0.4",
     "whatwg-fetch": "2.0.3",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.6.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
